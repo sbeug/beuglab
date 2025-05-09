@@ -60,7 +60,6 @@ onBeforeUnmount(() => {
         <div class="line" id="line-one"></div>
         <div class="line" id="line-two"></div>
       </div>
-      <div></div>
       <div id="dropdown-menu-filter"></div>
       <div id="dropdown-menu">
         <div id="menu-list">
@@ -152,7 +151,6 @@ onBeforeUnmount(() => {
 }
 #menu-button {
   z-index: 10;
-  position: absolute;
   top: 0;
   right: 0;
   display: flex;
