@@ -3,7 +3,7 @@ import { onMounted, onBeforeUnmount } from 'vue'
 // import { heroSpline } from '@/assets/js/splines'
 
 onMounted(() => {
-  // heroSpline()
+  //heroSpline()
 })
 onBeforeUnmount(() => {})
 </script>

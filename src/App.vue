@@ -1,5 +1,6 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
+import SiteFooter from './components/SiteFooter.vue'
 // Gsap
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -165,6 +166,7 @@ const leave = (el, done) => {
           <component :is="Component" key="$route.fullPath" />
         </transition>
       </router-view>
+      <SiteFooter />
     </div>
   </VueLenis>
 </template>
@@ -172,5 +174,11 @@ const leave = (el, done) => {
 <style scoped>
 header {
   z-index: 9;
+}
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100%;
 }
 </style>

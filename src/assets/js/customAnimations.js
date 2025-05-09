@@ -127,7 +127,7 @@ export function DesktopSubmenuAnimation() {
           opacity: 1,
           y: 0,
           stagger: 0.05,
-          duration: 0.2,
+          duration: 0.5,
           ease: 'power2.out',
         },
         '-=0.15',
