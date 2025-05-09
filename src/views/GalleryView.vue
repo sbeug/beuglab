@@ -1,7 +1,5 @@
 <script setup></script>
-
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div></div>
 </template>
+<style scoped></style>
