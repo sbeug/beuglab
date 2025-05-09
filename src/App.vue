@@ -8,6 +8,8 @@ gsap.registerPlugin(ScrollTrigger)
 import { VueLenis, useLenis } from 'lenis/vue'
 import { useRoute } from 'vue-router'
 import { watch, nextTick, onMounted, onUnmounted } from 'vue'
+// Meta Head
+import { useHead } from '@vueuse/head'
 // Stores ticker function for proper cleanup
 let rafCallback = null
 
@@ -76,6 +78,35 @@ watch(
     }, 1000) // Add delay before scroll reset
   },
 )
+
+// METADATA
+useHead({
+  title: 'Beug Lab | Innovative Research',
+  meta: [
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: '982studios® | Driven by Curiosity, Guided by Science' },
+    {
+      property: 'og:description',
+      content:
+        'The Beug Lab investigates the molecular mechanisms underlying human disease to identify new therapeutic strategies. Led by Dr. Shawn Beug, the lab bridges fundamental research with clinical application to improve health outcomes.',
+    },
+    {
+      property: 'og:image',
+      content: '',
+    },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: '982studios® | Driven by Curiosity, Guided by Science' },
+    {
+      name: 'twitter:description',
+      content:
+        'The Beug Lab investigates the molecular mechanisms underlying human disease to identify new therapeutic strategies. Led by Dr. Shawn Beug, the lab bridges fundamental research with clinical application to improve health outcomes.',
+    },
+    {
+      name: 'twitter:image',
+      content: '',
+    },
+  ],
+})
 </script>
 <template>
   <VueLenis

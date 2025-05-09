@@ -2,11 +2,13 @@
 import { onMounted, onBeforeUnmount } from 'vue'
 import {
   DropDownMenuAnimation,
+  DesktopSubmenuAnimation,
   SublistAnimation,
   menuUnderline,
 } from '@/assets/js/customAnimations'
 onMounted(() => {
   DropDownMenuAnimation()
+  DesktopSubmenuAnimation()
   SublistAnimation()
   menuUnderline()
 })
@@ -32,10 +34,24 @@ onBeforeUnmount(() => {
           </router-link>
         </li>
         <li>
-          <router-link to="/about" class="menu-link">
+          <router-link to="/about" class="menu-link" id="menu-link-about">
             About
             <div class="menu-underline"></div>
           </router-link>
+          <ul class="sub-menu-about">
+            <li>
+              <router-link to="/about/team" class="">Team</router-link>
+            </li>
+            <li>
+              <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
+            </li>
+            <li>
+              <router-link to="/about/research" class="">Research</router-link>
+            </li>
+            <li>
+              <router-link to="/about/grants-and-partners" class="">Grants & Partners</router-link>
+            </li>
+          </ul>
         </li>
         <li>
           <router-link to="/publications" class="menu-link">
@@ -69,13 +85,21 @@ onBeforeUnmount(() => {
             </li>
             <li>
               <router-link to="/about" class="menu-link-2" id="about">About</router-link>
-              <div id="sub-list-about">
-                <router-link to="/about/team" class="sub-link">Team</router-link>
-                <router-link to="/about/dr-beug" class="sub-link">Dr. Beug</router-link>
-                <router-link to="/about/research" class="sub-link">Research</router-link>
-                <router-link to="/about/grants-and-partners" class="sub-link"
-                  >Grants & Partners</router-link
-                >
+              <div id="sub-list-about" class="sub-list">
+                <li>
+                  <router-link to="/about/team" class="sub-link">Team</router-link>
+                </li>
+                <li>
+                  <router-link to="/about/dr-beug" class="sub-link">Dr. Beug</router-link>
+                </li>
+                <li>
+                  <router-link to="/about/research" class="sub-link">Research</router-link>
+                </li>
+                <li>
+                  <router-link to="/about/grants-and-partners" class="sub-link"
+                    >Grants & Partners</router-link
+                  >
+                </li>
               </div>
             </li>
             <li>
@@ -85,13 +109,13 @@ onBeforeUnmount(() => {
             </li>
             <li>
               <router-link to="/gallery" class="menu-link-2" id="gallery">Gallery</router-link>
-              <div id="sub-list-gallery">
+              <div id="sub-list-gallery" class="sub-list">
                 <router-link to="/gallery/asteroids" class="sub-link">Asteroids</router-link>
               </div>
             </li>
             <li>
               <router-link to="/contact" class="menu-link-2" id="contact">Contact</router-link>
-              <div id="sub-list-contact">
+              <div id="sub-list-contact" class="sub-list">
                 <router-link to="/contact/careers" class="sub-link">Careers</router-link>
               </div>
             </li>
@@ -136,7 +160,7 @@ onBeforeUnmount(() => {
   position: fixed;
   left: 0;
   top: 0;
-  transform: translateY(-100%);
+  transform: translateX(100%);
   will-change: transform, opacity, visibility;
   background: transparent;
 }
@@ -147,9 +171,9 @@ onBeforeUnmount(() => {
   position: fixed;
   top: 0;
   left: 0;
-  transform: translateY(-100%);
-  background-color: rgba(248, 248, 248, 1);
-  backdrop-filter: blur(10px);
+  transform: translateX(100%);
+  background-color: rgba(248, 248, 248, 0.5);
+  backdrop-filter: blur(15px);
 }
 #menu-button {
   z-index: 10;
@@ -160,8 +184,9 @@ onBeforeUnmount(() => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 4em;
+  width: fit-content;
   height: 2.5em;
+  transform: translateY(3px);
 }
 .line {
   width: 2.5em;
@@ -171,11 +196,11 @@ onBeforeUnmount(() => {
   transition: all 0.3s ease-in-out;
 }
 #menu {
+  display: none;
   list-style: none;
 }
 #menu li {
   margin-right: 3em;
-  overflow: hidden;
   height: 100%;
 }
 .menu-link {
@@ -185,7 +210,6 @@ onBeforeUnmount(() => {
   letter-spacing: normal;
   color: #181818;
   opacity: 100%;
-  overflow: hidden;
   position: relative;
 }
 a {
@@ -193,8 +217,11 @@ a {
 }
 #logo h1 {
   color: #181818;
-  font-size: 1em;
+  font-size: 1.5em;
   text-transform: uppercase;
+}
+.sub-menu-about {
+  display: none;
 }
 #menu-list {
   position: relative;
@@ -203,34 +230,116 @@ a {
 }
 #menu-list ul {
   list-style: none;
-  padding: 0;
   padding-top: 6em;
-  padding-right: 4em;
+  padding-right: 1.5em;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-start;
   height: 100%;
+  width: 100vw;
 }
 #menu-list ul li {
   text-align: right;
+  margin: 0;
 }
 #menu-list ul li a {
   margin: 0;
 }
 .menu-link-2 {
+  font-size: 3em;
   font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
   color: #181818;
-  margin-right: 3em;
+  margin: 0;
   opacity: 100%;
   text-transform: uppercase;
   line-height: 1em;
 }
-/* DESKTOP 1 */
+.sub-list {
+  font-display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 0.5em;
+}
+.sublist li {
+  height: fit-content;
+  width: fit-content;
+}
+.sub-link {
+  font-size: 1.5em;
+  font-family: new-science-extended, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #181818;
+  opacity: 100%;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.5em;
+}
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  #navbar {
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+}
+/* TABLET 3 [GLOBAL] */
+@media (min-width: 1180px) {
+  #navbar {
+    z-index: 9;
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+  #menu {
+    display: flex;
+  }
+  .sub-menu-about {
+    z-index: 1;
+    position: fixed;
+    top: 7%;
+    left: 46.5%;
+    transform: translate(-50%, -50%);
+    min-width: fit-content;
+    display: none;
+    padding: 0;
+  }
+
+  .sub-menu-about li {
+    margin: 0;
+    padding: 0.5em;
+    padding-left: 1em;
+    white-space: nowrap;
+    opacity: 0;
+    list-style: none;
+    border: 1px solid #181818;
+    border-top: none;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+  }
+  .sub-menu-about li a {
+    color: #181818;
+    font-family: new-science-extended, sans-serif;
+    font-weight: 500;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .sub-menu-about li a:hover {
+    color: #555;
+  }
+  #menu li {
+    position: relative;
+    overflow: hidden;
+  }
+}
+/* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   .menu-underline {
     position: absolute;
@@ -244,11 +353,19 @@ a {
     padding-left: 8em;
     padding-right: 8em;
   }
-  #menu {
-    display: flex;
+}
+/* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
+@media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+  .menu-underline {
+    height: 1px;
+    bottom: -1px;
+  }
+  #navbar {
+    padding-left: 6em;
+    padding-right: 6em;
   }
 }
-/* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
+/* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
   #navbar {
     padding-left: 8em;
@@ -263,10 +380,9 @@ a {
   }
   .menu-link-2 {
     font-size: 8em;
+    margin-right: 3em;
   }
-  #sub-list-about,
-  #sub-list-gallery,
-  #sub-list-contact {
+  .sub-list {
     height: fit-content;
     overflow: hidden;
     position: fixed;
@@ -291,13 +407,6 @@ a {
   }
   .sub-link {
     font-size: 3em;
-    font-family: new-science-extended, sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    letter-spacing: normal;
-    color: #181818;
-    opacity: 100%;
-    text-transform: uppercase;
     border-top: solid 2px #181818;
     text-wrap: nowrap;
   }

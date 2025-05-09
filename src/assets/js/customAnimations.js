@@ -46,7 +46,7 @@ export function DropDownMenuAnimation() {
   dropDownTimeline.to(
     '#dropdown-menu',
     {
-      yPercent: 100,
+      xPercent: -100,
       ease: Expo.easeInOut,
       duration: 0.5,
     },
@@ -55,18 +55,26 @@ export function DropDownMenuAnimation() {
   dropDownTimeline.to(
     '#dropdown-menu-filter',
     {
-      yPercent: 100,
+      xPercent: -100,
       ease: Expo.easeInOut,
       duration: 0.5,
     },
     0.15,
   )
+  dropDownTimeline.set(
+    '#menu-list ul li',
+    {
+      x: 75,
+      opacity: '0%',
+    },
+    0,
+  )
   dropDownTimeline.to(
     '#menu-list ul li',
     {
-      x: -100,
+      x: 0,
       opacity: '100%',
-      stagger: 0.15,
+      stagger: 0.1,
       ease: Expo.easeInOut,
     },
     0.5,
@@ -90,6 +98,71 @@ export function DropDownMenuAnimation() {
   })
 }
 
+export function DesktopSubmenuAnimation() {
+  // For the About submenu in desktop nav
+  const aboutLinkElement = document.querySelector('#menu-link-about')
+  const aboutSubmenu = document.querySelector('.sub-menu-about')
+
+  if (aboutLinkElement && aboutSubmenu) {
+    gsap.set(aboutSubmenu, {
+      opacity: 0,
+      visibility: 'hidden',
+      y: -10,
+      display: 'block',
+    })
+
+    const aboutSubmenuTimeline = gsap.timeline({ paused: true })
+
+    aboutSubmenuTimeline
+      .to(aboutSubmenu, {
+        opacity: 1,
+        visibility: 'visible',
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      })
+      .to(
+        aboutSubmenu.querySelectorAll('li'),
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          duration: 0.2,
+          ease: 'power2.out',
+        },
+        '-=0.15',
+      )
+    // Create a flag to track if we're hovering over either element
+    let isMenuHovered = false
+
+    aboutLinkElement.addEventListener('mouseenter', () => {
+      isMenuHovered = true
+      aboutSubmenuTimeline.play()
+    })
+
+    aboutSubmenu.addEventListener('mouseenter', () => {
+      isMenuHovered = true
+    })
+
+    aboutLinkElement.addEventListener('mouseleave', () => {
+      isMenuHovered = false
+      setTimeout(() => {
+        if (!isMenuHovered) {
+          aboutSubmenuTimeline.reverse()
+        }
+      }, 150)
+    })
+
+    aboutSubmenu.addEventListener('mouseleave', () => {
+      isMenuHovered = false
+      setTimeout(() => {
+        if (!isMenuHovered) {
+          aboutSubmenuTimeline.reverse()
+        }
+      }, 150)
+    })
+  }
+}
 export function SublistAnimation() {
   const sublistTimelineAbout = new gsap.timeline({
     paused: true,
