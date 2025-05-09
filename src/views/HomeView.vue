@@ -1,7 +1,5 @@
 <script setup></script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="main-content"></div>
 </template>

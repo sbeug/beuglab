@@ -1,0 +1,42 @@
+@import './base.css';
+
+#app {
+  margin: 0;
+}
+
+h1 {
+  font-family: new-science-extended, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+}
+h2 {
+  font-family: new-science-extended, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: normal;
+}
+h3 {
+  font-family: new-science-extended, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+}
+h4 {
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: normal;
+}
+h5 {
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+}
+h6 {
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+}
