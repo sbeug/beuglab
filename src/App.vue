@@ -98,8 +98,23 @@ watch(
       <header>
         <NavBar> </NavBar>
       </header>
+      <router-view v-slot="{ Component }">
+        <transition
+          :css="false"
+          mode="out-in"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+        >
+          <component :is="Component" key="$route.fullPath" />
+        </transition>
+      </router-view>
     </div>
   </VueLenis>
 </template>
 
-<style scoped></style>
+<style scoped>
+header {
+  z-index: 9;
+}
+</style>

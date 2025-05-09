@@ -10,18 +10,24 @@
   </div>
 </template>
 <style scoped>
+#main-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 #hero-section {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 }
 #hero-heading {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 #hero-heading h1 {
-  font-size: 5em;
+  font-size: 8em;
   color: #181818;
 }
 </style>

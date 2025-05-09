@@ -104,6 +104,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 #navbar-blur {
+  z-index: 9;
   position: fixed;
   top: 0;
   left: 0;
@@ -113,6 +114,7 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(10px);
 }
 #navbar {
+  z-index: 9;
   position: fixed;
   top: 0;
   left: 0;
@@ -247,7 +249,6 @@ a {
   }
   #menu {
     display: flex;
-    margin-right: 4em;
   }
   #logo h1 {
     font-size: 1.5em;
