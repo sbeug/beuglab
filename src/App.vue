@@ -107,6 +107,32 @@ useHead({
     },
   ],
 })
+
+// TRANSITIONS
+const beforeEnter = (el) => {
+  gsap.set(el, {
+    opacity: 0,
+  })
+}
+
+const enter = (el, done) => {
+  gsap.to(el, {
+    opacity: 1,
+    duration: 1,
+    ease: 'power4.inOut',
+    onComplete: done,
+  })
+}
+
+const leave = (el, done) => {
+  gsap.to(el, {
+    opacity: 0,
+    duration: 1,
+    ease: 'power4.inOut',
+    filter: 'blur(1.5em)',
+    onComplete: done,
+  })
+}
 </script>
 <template>
   <VueLenis
@@ -129,7 +155,15 @@ useHead({
         <NavBar> </NavBar>
       </header>
       <router-view v-slot="{ Component }">
-        <component :is="Component" key="$route.fullPath" />
+        <transition
+          :css="false"
+          mode="out-in"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+        >
+          <component :is="Component" key="$route.fullPath" />
+        </transition>
       </router-view>
     </div>
   </VueLenis>
