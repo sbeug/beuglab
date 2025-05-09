@@ -1,9 +1,14 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
-import { DropDownMenuAnimation, SublistAnimation } from '@/assets/js/customAnimations'
+import {
+  DropDownMenuAnimation,
+  SublistAnimation,
+  menuUnderline,
+} from '@/assets/js/customAnimations'
 onMounted(() => {
   DropDownMenuAnimation()
   SublistAnimation()
+  menuUnderline()
 })
 onBeforeUnmount(() => {
   // Cleanup code here
@@ -21,19 +26,34 @@ onBeforeUnmount(() => {
       </div>
       <div id="menu">
         <li>
-          <router-link to="/" class="menu-link">Home</router-link>
+          <router-link to="/" class="menu-link">
+            Home
+            <div class="menu-underline"></div>
+          </router-link>
         </li>
         <li>
-          <router-link to="/about" class="menu-link">About</router-link>
+          <router-link to="/about" class="menu-link">
+            About
+            <div class="menu-underline"></div>
+          </router-link>
         </li>
         <li>
-          <router-link to="/publications" class="menu-link">Publications</router-link>
+          <router-link to="/publications" class="menu-link">
+            Publications
+            <div class="menu-underline"></div>
+          </router-link>
         </li>
         <li>
-          <router-link to="/gallery" class="menu-link">Gallery</router-link>
+          <router-link to="/gallery" class="menu-link">
+            Gallery
+            <div class="menu-underline"></div>
+          </router-link>
         </li>
         <li>
-          <router-link to="/contact" class="menu-link">Contact</router-link>
+          <router-link to="/contact" class="menu-link">
+            Contact
+            <div class="menu-underline"></div>
+          </router-link>
         </li>
       </div>
       <div id="menu-button">
@@ -151,11 +171,12 @@ onBeforeUnmount(() => {
   transition: all 0.3s ease-in-out;
 }
 #menu {
-  display: none;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: row;
   list-style: none;
+}
+#menu li {
+  margin-right: 3em;
+  overflow: hidden;
+  height: 100%;
 }
 .menu-link {
   font-family: new-science-extended, sans-serif;
@@ -163,8 +184,9 @@ onBeforeUnmount(() => {
   font-style: normal;
   letter-spacing: normal;
   color: #181818;
-  margin-right: 3em;
   opacity: 100%;
+  overflow: hidden;
+  position: relative;
 }
 a {
   text-decoration: none;
@@ -207,6 +229,17 @@ a {
   opacity: 100%;
   text-transform: uppercase;
   line-height: 1em;
+}
+/* DESKTOP 1 */
+@media (min-width: 1280px) {
+  .menu-underline {
+    position: absolute;
+    bottom: 0%;
+    width: 0%;
+    height: 1.5px;
+    background-color: #181818;
+    will-change: width;
+  }
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
 @media only screen and (min-width: 1920px) {

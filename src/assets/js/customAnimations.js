@@ -178,3 +178,36 @@ export function SublistAnimation() {
     })
   }
 }
+
+export function menuUnderline() {
+  const underLineWrapper = document.querySelectorAll('#menu li')
+  underLineWrapper.forEach((el) => {
+    const thisUnderline = el.querySelector('.menu-underline')
+
+    if (thisUnderline) {
+      const mouseEnter = () => {
+        gsap.to(thisUnderline, {
+          width: '100%',
+          duration: 0.5,
+          ease: 'power4.out',
+        })
+      }
+      const mouseLeave = () => {
+        gsap.to(thisUnderline, {
+          width: '100%',
+          duration: 0.5,
+          x: '110%',
+          ease: 'power4.out',
+          onComplete: () => {
+            gsap.set(thisUnderline, {
+              x: '0%',
+              width: '0%',
+            })
+          },
+        })
+      }
+      el.addEventListener('mouseenter', mouseEnter)
+      el.addEventListener('mouseleave', mouseLeave)
+    }
+  })
+}
