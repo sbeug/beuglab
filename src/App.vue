@@ -1,6 +1,5 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
-
 // Gsap
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -82,8 +81,8 @@ watch(
   <VueLenis
     root
     :options="{
-      duration: 1,
-      lerp: 1,
+      duration: 1.25,
+      lerp: 1.25,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       wheelMultiplier: 1,
       touchMultiplier: 1,
@@ -94,20 +93,12 @@ watch(
       infinite: false,
     }"
   >
-    <div id="app-container">
+    <div id="app">
       <header>
         <NavBar> </NavBar>
       </header>
       <router-view v-slot="{ Component }">
-        <transition
-          :css="false"
-          mode="out-in"
-          @before-enter="beforeEnter"
-          @enter="enter"
-          @leave="leave"
-        >
-          <component :is="Component" key="$route.fullPath" />
-        </transition>
+        <component :is="Component" key="$route.fullPath" />
       </router-view>
     </div>
   </VueLenis>

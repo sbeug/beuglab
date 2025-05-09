@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@splinetool/runtime": "^1.9.92",
     "@splinetool/viewer": "^1.9.92",
     "@storyblok/vue": "^2.1.2",
     "gsap": "^3.13.0",

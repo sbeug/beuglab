@@ -240,15 +240,19 @@ a {
     background-color: #181818;
     will-change: width;
   }
-}
-/* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
-@media only screen and (min-width: 1920px) {
   #navbar {
     padding-left: 8em;
     padding-right: 8em;
   }
   #menu {
     display: flex;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
+@media only screen and (min-width: 1920px) {
+  #navbar {
+    padding-left: 8em;
+    padding-right: 8em;
   }
   #logo h1 {
     font-size: 1.5em;

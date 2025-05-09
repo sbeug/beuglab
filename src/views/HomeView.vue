@@ -1,10 +1,24 @@
-<script setup></script>
+<script setup>
+import { onMounted, onBeforeUnmount } from 'vue'
+import { heroSpline } from '@/assets/js/splines'
+
+onMounted(() => {
+  heroSpline()
+})
+onBeforeUnmount(() => {})
+</script>
 
 <template>
   <div id="main-content">
+    <canvas id="hero-spline"></canvas>
     <div id="hero-section">
       <div id="hero-heading">
         <h1>Beug Lab</h1>
+      </div>
+    </div>
+    <div id="mission-section">
+      <div id="mission-heading">
+        <h1>Our Objective</h1>
       </div>
     </div>
   </div>
@@ -20,6 +34,13 @@
   width: 100vw;
   height: 100vh;
 }
+#hero-spline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
 #hero-heading {
   display: flex;
   align-items: center;
@@ -29,5 +50,10 @@
 #hero-heading h1 {
   font-size: 8em;
   color: #181818;
+}
+#mission-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 </style>

@@ -6,7 +6,7 @@ import DrBeug from '@/views/about/DrBeugView.vue'
 import GrantsAndPartners from '../views/about/GrantsAndPartnersView.vue'
 import Research from '@/views/about/ResearchView.vue'
 import Publications from '@/views/PublicationsView.vue'
-import Gallery from '@/views/GalleryView.vue'
+// import Gallery from '@/views/GalleryView.vue'
 import Asteroids from '@/views/gallery/AsteroidsView.vue'
 import Contact from '@/views/ContactView.vue'
 import Careers from '@/views/contact/CareersView.vue'
@@ -48,11 +48,6 @@ const router = createRouter({
       path: '/publications',
       name: 'publications',
       component: Publications,
-    },
-    {
-      path: '/gallery',
-      name: 'gallery',
-      component: Gallery,
     },
     {
       path: '/gallery/asteroids',
