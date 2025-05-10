@@ -40,18 +40,16 @@ onBeforeUnmount(() => {
           </router-link>
           <ul class="sub-menu-about">
             <li>
-              <router-link to="/about/team" class="">↳ Team</router-link>
+              <router-link to="/about/team" class="">Team</router-link>
             </li>
             <li>
-              <router-link to="/about/dr-beug" class="">↳ Dr. Beug</router-link>
+              <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
             </li>
             <li>
-              <router-link to="/about/research" class="">↳ Research</router-link>
+              <router-link to="/about/research" class="">Research</router-link>
             </li>
             <li>
-              <router-link to="/about/grants-and-partners" class=""
-                >↳ Grants & Partners</router-link
-              >
+              <router-link to="/about/grants-and-partners" class="">Grants & Partners</router-link>
             </li>
           </ul>
         </li>
@@ -250,7 +248,7 @@ a {
   margin: 0;
 }
 .menu-link-2 {
-  font-size: 3em;
+  font-size: 2em;
   font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -272,7 +270,7 @@ a {
   width: fit-content;
 }
 .sub-link {
-  font-size: 1.5em;
+  font-size: 1em;
   font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
