@@ -206,8 +206,8 @@ onBeforeUnmount(() => {
   height: 100%;
 }
 .menu-link {
-  font-family: new-science-extended, sans-serif;
-  font-weight: 500;
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
   color: #181818;
@@ -311,25 +311,26 @@ a {
     display: none;
     padding: 0;
   }
-
   .sub-menu-about li {
-    margin: 0;
+    margin: 0 !important;
     padding: 0.5em;
     padding-left: 1em;
+    padding-right: 1em;
     white-space: nowrap;
     opacity: 0;
     list-style: none;
     border: 1px solid #181818;
     border-top: none;
-    width: 100%;
+    width: fit-content;
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
   }
   .sub-menu-about li a {
     color: #181818;
-    font-family: new-science-extended, sans-serif;
-    font-weight: 500;
-    font-size: 0.9em;
+    font-family: akzidenz-grotesk-next-pro, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1em;
     text-decoration: none;
     transition: color 0.2s ease;
   }

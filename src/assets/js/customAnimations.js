@@ -64,7 +64,7 @@ export function DropDownMenuAnimation() {
   dropDownTimeline.set(
     '#menu-list ul li',
     {
-      x: 75,
+      y: 75,
       opacity: '0%',
     },
     0,
@@ -72,7 +72,7 @@ export function DropDownMenuAnimation() {
   dropDownTimeline.to(
     '#menu-list ul li',
     {
-      x: 0,
+      y: 0,
       opacity: '100%',
       stagger: 0.1,
       ease: Expo.easeInOut,
@@ -108,7 +108,7 @@ export function DesktopSubmenuAnimation() {
       opacity: 0,
       visibility: 'hidden',
       y: -10,
-      display: 'block',
+      display: 'flex',
     })
 
     const aboutSubmenuTimeline = gsap.timeline({ paused: true })
