@@ -1,8 +1,11 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
 import '@splinetool/viewer'
+import { homePageLoadAnimation } from '@/assets/js/customAnimations'
 
-onMounted(() => {})
+onMounted(() => {
+  homePageLoadAnimation()
+})
 onBeforeUnmount(() => {})
 </script>
 
@@ -13,8 +16,8 @@ onBeforeUnmount(() => {})
         url="https://prod.spline.design/JYUfwdcwcFHWn9N9/scene.splinecode"
       ></spline-viewer>
     </div>
-    <div id="hero-section" class="df-pad">
-      <div id="hero-heading">
+    <div id="hero-section">
+      <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
       </div>
       <div id="hero-img"></div>
@@ -76,6 +79,7 @@ onBeforeUnmount(() => {})
   position: relative;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 #hero-spline {
   position: fixed;
@@ -89,11 +93,18 @@ onBeforeUnmount(() => {})
   align-items: center;
   justify-content: center;
   height: fit-content;
+  overflow: hidden;
 }
 #hero-heading h1 {
   font-size: 2em;
   color: #f8f8f8;
   text-transform: uppercase;
+}
+#hero-heading {
+  font-family: new-science-extended, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
 }
 .section {
   position: relative;
@@ -137,9 +148,13 @@ onBeforeUnmount(() => {})
     font-size: 10em;
   }
   #hero-img {
-    width: 100%;
-    height: 70vh;
+    width: 92%;
+    height: 70%;
     background-color: #181818;
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .section {
     margin-bottom: 24em;
