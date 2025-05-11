@@ -10,18 +10,59 @@ onBeforeUnmount(() => {})
   <div id="main-content">
     <div id="hero-spline">
       <spline-viewer
-        url="https://prod.spline.design/wTEYGtQaHWugxvMZ/scene.splinecode"
+        url="https://prod.spline.design/JYUfwdcwcFHWn9N9/scene.splinecode"
       ></spline-viewer>
     </div>
-    <div id="hero-section">
+    <div id="hero-section" class="df-pad">
       <div id="hero-heading">
         <h1>Beug Lab</h1>
       </div>
+      <div id="hero-img"></div>
     </div>
-    <div id="mission-section">
-      <div id="mission-heading">
-        <h1>Our Objective</h1>
+    <div id="obj-section" class="section df-pad">
+      <div class="section-heading">
+        <p>01</p>
+        <h6>Our Objective</h6>
       </div>
+      <div class="section-statement">
+        <h6>Through innovative science, we aim to improve diagnosis, treatment, and outcomes.</h6>
+      </div>
+    </div>
+    <div id="ourwork-section" class="section df-pad">
+      <div class="section-heading">
+        <p>02</p>
+        <h6>Our Work</h6>
+      </div>
+      <div id="ourwork-statement" class="section-statement">
+        <h6>
+          We conduct innovative cancer research aimed at uncovering the underlying mechanisms of
+          cancer.
+        </h6>
+      </div>
+    </div>
+    <div id="team-section" class="section df-pad">
+      <div class="section-heading">
+        <p>01</p>
+        <h6>Team</h6>
+      </div>
+      <div id="team-statement" class="section-statement">
+        <h6>Meet the Dedicated Team Driving Our Research Forward.</h6>
+      </div>
+      <div id="team-description" class="description">
+        <p>
+          Beug Lab is made up of a diverse team of students, professionals, and doctors, all
+          dedicated to advancing cancer research. With a blend of fresh perspectives and expertise,
+          we work together to drive impactful discoveries that improve treatment and outcomes.
+        </p>
+      </div>
+      <div id="team-c2a">
+        <router-link to="/about/team" class="button">
+          <p>Meet the Team</p>
+          <div class="circle"></div>
+          <div class="dot"></div>
+        </router-link>
+      </div>
+      <div id="team-drag-section"></div>
     </div>
   </div>
 </template>
@@ -37,7 +78,7 @@ onBeforeUnmount(() => {})
   height: 100vh;
 }
 #hero-spline {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -47,15 +88,102 @@ onBeforeUnmount(() => {})
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: fit-content;
 }
 #hero-heading h1 {
-  font-size: 8em;
-  color: #181818;
+  font-size: 2em;
+  color: #f8f8f8;
+  text-transform: uppercase;
 }
-#mission-section {
+.section {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  margin-bottom: 4em;
+}
+.section-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.section-heading p {
+  font-family: new-science-extended, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+}
+.section p,
+.section h6 {
+  color: #f8f8f8;
+}
+.description {
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: normal;
+}
+
+/* DESKTOP 1 [GLOBAL] */
+@media (min-width: 1280px) {
+  #hero-heading {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 2em;
+  }
+  #hero-heading {
+    padding-top: 2em;
+  }
+  #hero-heading h1 {
+    font-size: 10em;
+  }
+  #hero-img {
+    width: 100%;
+    height: 70vh;
+    background-color: #181818;
+  }
+  .section {
+    margin-bottom: 24em;
+  }
+  .section-heading p {
+    font-size: 1em;
+    line-height: 1em;
+  }
+  .section-heading h6 {
+    font-size: 2em;
+    line-height: 1em;
+    padding-left: 3em;
+  }
+  .section-statement {
+    padding-top: 4em;
+    padding-left: 8em;
+  }
+  .section-statement h6 {
+    font-size: 8em;
+    line-height: 1em;
+    width: 75%;
+  }
+  .description {
+    font-size: 1.5em;
+    line-height: 1.2em;
+    width: 35%;
+  }
+  #obj-section {
+    padding-top: 10em;
+  }
+  #ourwork-statement h6,
+  #team-statement h6 {
+    font-size: 6em;
+  }
+  #team-description {
+    padding-top: 4em;
+    padding-left: 5.5em;
+  }
+  #team-c2a {
+    padding-top: 4em;
+    padding-left: 8em;
+  }
+  #team-c2a p {
+    font-size: 1.5em;
+  }
 }
 </style>

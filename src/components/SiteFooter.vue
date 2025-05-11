@@ -53,6 +53,7 @@ import ContactButton from '@/components/ContactButton.vue'
   grid-template-rows: repeat(12, 1fr);
 }
 #default-background {
+  display: none;
   z-index: 0;
   position: absolute;
   top: 0;

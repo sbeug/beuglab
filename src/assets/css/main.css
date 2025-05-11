@@ -41,3 +41,51 @@ h6 {
   font-style: normal;
   letter-spacing: normal;
 }
+
+/* DEFAULT STYLES */
+.df-pad {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.button {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #f8f8f8;
+  border-radius: 50px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  width: fit-content;
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.circle {
+  width: 1em;
+  height: 1em;
+  border: 1px solid #f8f8f8;
+  border-radius: 50%;
+  margin-left: 1em;
+}
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: #f8f8f8;
+  border-radius: 50%;
+  margin-left: 0.5em;
+}
+
+@media (min-width: 1280px) {
+  .df-pad {
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+  .circle {
+    width: 1.5em;
+    height: 1.5em;
+    border-width: 2px;
+  }
+}

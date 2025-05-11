@@ -134,7 +134,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100vw;
   height: 7vh;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(83, 35, 35, 0.322);
   backdrop-filter: blur(10px);
 }
 #navbar {
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
   align-items: center;
   padding-left: 1em;
   padding-right: 1em;
-  border-bottom: solid 1px #181818;
+  border-bottom: solid 1px #f8f8f8;
   background: transparent;
 }
 #dropdown-menu {
@@ -163,6 +163,8 @@ onBeforeUnmount(() => {
   transform: translateX(100%);
   will-change: transform, opacity, visibility;
   background: transparent;
+  animation: dropmenu-enter 2s ease-in-out forwards;
+  opacity: 0%;
 }
 #dropdown-menu-filter {
   z-index: 8;
@@ -172,8 +174,21 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   transform: translateX(100%);
-  background-color: rgba(248, 248, 248, 0.5);
+  background-color: rgba(83, 35, 35, 0.4);
   backdrop-filter: blur(15px);
+  animation: dropmenu-enter 2s ease-in-out forwards;
+  opacity: 0%;
+}
+@keyframes dropmenu-enter {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
 #menu-button {
   z-index: 10;
@@ -191,7 +206,7 @@ onBeforeUnmount(() => {
 .line {
   width: 2.5em;
   height: 3px;
-  background-color: #181818;
+  background-color: #f8f8f8;
   margin-bottom: 0.5em;
   transition: all 0.3s ease-in-out;
 }
@@ -208,15 +223,16 @@ onBeforeUnmount(() => {
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
-  color: #181818;
+  color: #f8f8f8;
   opacity: 100%;
   position: relative;
+  text-transform: uppercase;
 }
 a {
   text-decoration: none;
 }
 #logo h1 {
-  color: #181818;
+  color: #f8f8f8;
   font-size: 1.5em;
   text-transform: uppercase;
 }
@@ -253,7 +269,7 @@ a {
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
-  color: #181818;
+  color: #f8f8f8;
   margin: 0;
   opacity: 100%;
   text-transform: uppercase;
@@ -351,8 +367,8 @@ a {
     will-change: width;
   }
   #navbar {
-    padding-left: 8em;
-    padding-right: 8em;
+    padding-left: 4em;
+    padding-right: 4em;
   }
 }
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
@@ -369,8 +385,8 @@ a {
 /* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
   #navbar {
-    padding-left: 8em;
-    padding-right: 8em;
+    padding-left: 4em;
+    padding-right: 4em;
   }
   #logo h1 {
     font-size: 1.5em;
