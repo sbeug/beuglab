@@ -1,16 +1,18 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
-// import { heroSpline } from '@/assets/js/splines'
+import '@splinetool/viewer'
 
-onMounted(() => {
-  //heroSpline()
-})
+onMounted(() => {})
 onBeforeUnmount(() => {})
 </script>
 
 <template>
   <div id="main-content">
-    <canvas id="hero-spline"></canvas>
+    <div id="hero-spline">
+      <spline-viewer
+        url="https://prod.spline.design/wTEYGtQaHWugxvMZ/scene.splinecode"
+      ></spline-viewer>
+    </div>
     <div id="hero-section">
       <div id="hero-heading">
         <h1>Beug Lab</h1>
