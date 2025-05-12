@@ -40,7 +40,7 @@ onBeforeUnmount(() => {})
     </div>
     <div id="team-section" class="section df-pad">
       <div class="section-heading">
-        <p>01</p>
+        <p>03</p>
         <h6>Team</h6>
       </div>
       <div id="team-statement" class="section-statement">

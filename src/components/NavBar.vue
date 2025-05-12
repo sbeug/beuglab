@@ -242,8 +242,8 @@ a {
   top: 50%;
   left: 0%;
   transform: translate(-50%, -50%);
-  width: 3em;
-  height: 3em;
+  width: 1.5em;
+  height: 1.5em;
 }
 #logo h3 {
   color: #f8f8f8;
@@ -327,6 +327,10 @@ a {
     padding-left: 4em;
     padding-right: 4em;
   }
+  #logo img {
+    width: 2.5em;
+    height: 2.5em;
+  }
   #menu {
     display: flex;
   }
@@ -334,7 +338,7 @@ a {
     z-index: 1;
     position: fixed;
     top: 7%;
-    left: 46.5%;
+    left: 45%;
     transform: translate(-50%, -50%);
     min-width: fit-content;
     display: none;
@@ -348,14 +352,14 @@ a {
     white-space: nowrap;
     opacity: 0;
     list-style: none;
-    border: 1px solid #181818;
+    border: 1px solid #f8f8f8;
     border-top: none;
     width: fit-content;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(83, 35, 35, 0.4);
     backdrop-filter: blur(10px);
   }
   .sub-menu-about li a {
-    color: #181818;
+    color: #f8f8f8;
     font-family: akzidenz-grotesk-next-pro, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -378,7 +382,7 @@ a {
     bottom: 0%;
     width: 0%;
     height: 1.5px;
-    background-color: #181818;
+    background-color: #f8f8f8;
     will-change: width;
   }
   #navbar {
@@ -439,7 +443,7 @@ a {
   }
   .sub-link {
     font-size: 3em;
-    border-top: solid 2px #181818;
+    border-top: solid 2px #f8f8f8;
     text-wrap: nowrap;
   }
 }
