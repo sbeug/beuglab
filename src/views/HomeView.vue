@@ -1,10 +1,16 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
 import '@splinetool/viewer'
-import { homePageLoadAnimation } from '@/assets/js/customAnimations'
+import { useTeamStore } from '@/stores/team.js'
+import { homePageLoadAnimation, dragToScroll } from '@/assets/js/customAnimations'
+
+const teamStore = useTeamStore()
 
 onMounted(() => {
   homePageLoadAnimation()
+  setTimeout(() => {
+    dragToScroll()
+  }, 1000)
 })
 onBeforeUnmount(() => {})
 </script>
@@ -46,21 +52,32 @@ onBeforeUnmount(() => {})
       <div id="team-statement" class="section-statement">
         <h6>Meet the Dedicated Team Driving Our Research Forward.</h6>
       </div>
-      <div id="team-description" class="description">
-        <p>
-          Beug Lab is made up of a diverse team of students, professionals, and doctors, all
-          dedicated to advancing cancer research. With a blend of fresh perspectives and expertise,
-          we work together to drive impactful discoveries that improve treatment and outcomes.
-        </p>
+      <div id="team-content">
+        <div id="team-description" class="description">
+          <p>
+            Beug Lab is made up of a diverse team of students, professionals, and doctors, all
+            dedicated to advancing cancer research. With a blend of fresh perspectives and
+            expertise, we work together to drive impactful discoveries that improve treatment and
+            outcomes.
+          </p>
+        </div>
+        <div id="team-c2a" class="clickable">
+          <router-link to="/about/team" class="button">
+            <p>Meet the Team</p>
+            <div class="circle"></div>
+            <div class="dot"></div>
+          </router-link>
+        </div>
+        <div id="team-members-section" class="clickable">
+          <div id="members-track" class="clickable">
+            <div v-for="member in teamStore.members" :key="member.id" class="team-member clickable">
+              <img :src="member.photo" :alt="member.name" class="member-photo" />
+              <h6>{{ member.name }}</h6>
+              <p>{{ member.title }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="team-c2a" class="clickable">
-        <router-link to="/about/team" class="button">
-          <p>Meet the Team</p>
-          <div class="circle"></div>
-          <div class="dot"></div>
-        </router-link>
-      </div>
-      <div id="team-drag-section"></div>
     </div>
   </div>
 </template>
@@ -121,6 +138,27 @@ onBeforeUnmount(() => {})
   font-style: normal;
   letter-spacing: normal;
 }
+#team-members-section {
+  position: relative;
+  width: 100%;
+  overflow-x: visible;
+}
+#members-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: max-content;
+  will-change: transform;
+}
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 2em;
+  width: fit-content;
+  height: fit-content;
+}
 
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -168,7 +206,7 @@ onBeforeUnmount(() => {})
   .description {
     font-size: 1.5em;
     line-height: 1.2em;
-    width: 35%;
+    width: 30%;
   }
   #obj-section {
     padding-top: 10em;
@@ -187,6 +225,37 @@ onBeforeUnmount(() => {})
   }
   #team-c2a p {
     font-size: 1.5em;
+  }
+  #team-content {
+    position: relative;
+  }
+  #team-members-section {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    overflow-x: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    cursor: grab;
+  }
+  .team-member {
+    margin-right: 4em;
+    margin-top: 6em;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) */
+@media only screen and (min-width: 1920px) {
+  .description {
+    width: 35%;
+  }
+  #team-members-section {
+    left: 45%;
+  }
+  .member-photo {
+    width: 20em;
+    height: 25em;
+    border: 1px solid #f8f8f8;
   }
 }
 </style>

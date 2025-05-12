@@ -19,8 +19,9 @@ storyblokInit({
 */
 const app = createApp(App)
 const head = createHead()
+const pinia = createPinia()
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 // app.use(StoryblokVue)
 app.use(head)

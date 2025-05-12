@@ -333,3 +333,53 @@ export function menuUnderline() {
     }
   })
 }
+
+export function dragToScroll() {
+  const container = document.getElementById('team-members-section')
+  const track = document.getElementById('members-track')
+
+  let isDragging = false
+  let startX = 0
+  let currentTranslate = 0
+  let prevTranslate = 0
+
+  const clamp = (num, min, max) => Math.max(min, Math.min(num, max))
+
+  function setTranslate(x) {
+    track.style.transform = `translate3d(${x}px, 0, 0)`
+  }
+
+  function onStart(e) {
+    isDragging = true
+    startX = (e.type.includes('mouse') ? e.pageX : e.touches[0].clientX) - prevTranslate
+    container.style.cursor = 'grabbing'
+  }
+
+  function onMove(e) {
+    if (!isDragging) return
+    const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX
+    currentTranslate = x - startX
+
+    const maxTranslate = 0
+    const minTranslate = container.offsetWidth - track.scrollWidth
+
+    currentTranslate = clamp(currentTranslate, minTranslate, maxTranslate)
+    setTranslate(currentTranslate)
+  }
+
+  function onEnd() {
+    isDragging = false
+    prevTranslate = currentTranslate
+    container.style.cursor = 'grab'
+  }
+
+  // Mouse events
+  container.addEventListener('mousedown', onStart)
+  window.addEventListener('mousemove', onMove)
+  window.addEventListener('mouseup', onEnd)
+
+  // Touch events
+  container.addEventListener('touchstart', onStart)
+  container.addEventListener('touchmove', onMove)
+  container.addEventListener('touchend', onEnd)
+}
