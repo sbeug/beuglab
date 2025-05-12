@@ -335,6 +335,29 @@ export function menuUnderline() {
 }
 
 export function dragToScroll() {
+  const dragStart = new gsap.timeline({
+    paused: true,
+    duration: 1,
+  })
+  dragStart.to(
+    '#team-description',
+    {
+      opacity: 0,
+      filter: 'blur(10px)',
+      ease: 'power2.out',
+    },
+    0,
+  )
+  dragStart.to(
+    '#team-c2a',
+    {
+      opacity: 0,
+      filter: 'blur(10px)',
+      ease: 'power2.out',
+    },
+    0.1,
+  )
+
   const container = document.getElementById('team-members-section')
   const track = document.getElementById('members-track')
 
@@ -353,6 +376,7 @@ export function dragToScroll() {
     isDragging = true
     startX = (e.type.includes('mouse') ? e.pageX : e.touches[0].clientX) - prevTranslate
     container.style.cursor = 'grabbing'
+    dragStart.play()
   }
 
   function onMove(e) {
