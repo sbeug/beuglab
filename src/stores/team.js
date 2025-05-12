@@ -41,7 +41,7 @@ export const useTeamStore = defineStore('team', () => {
     },
     {
       id: 5,
-      name: 'Jordan Yin',
+      name: 'Five',
       edu: 'MSc',
       title: 'Researcher',
       photo: 'insertLinkHere',
@@ -50,7 +50,7 @@ export const useTeamStore = defineStore('team', () => {
     },
     {
       id: 6,
-      name: 'Jordan Yin',
+      name: 'Six',
       edu: 'MSc',
       title: 'Researcher',
       photo: 'insertLinkHere',

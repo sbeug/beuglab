@@ -232,7 +232,7 @@ onBeforeUnmount(() => {})
   #team-members-section {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 0;
     overflow-x: visible;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
@@ -250,7 +250,7 @@ onBeforeUnmount(() => {})
     width: 35%;
   }
   #team-members-section {
-    left: 45%;
+    left: 50%;
   }
   .member-photo {
     width: 20em;

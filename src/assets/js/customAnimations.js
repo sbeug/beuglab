@@ -361,7 +361,7 @@ export function dragToScroll() {
     currentTranslate = x - startX
 
     const maxTranslate = 0
-    const minTranslate = container.offsetWidth - track.scrollWidth
+    const minTranslate = container.offsetWidth - (track.scrollWidth + window.innerWidth * 0.5)
 
     currentTranslate = clamp(currentTranslate, minTranslate, maxTranslate)
     setTranslate(currentTranslate)
