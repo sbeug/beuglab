@@ -152,6 +152,11 @@ const leave = (el, done) => {
     }"
   >
     <div id="app">
+      <div id="spline">
+        <spline-viewer
+          url="https://prod.spline.design/JYUfwdcwcFHWn9N9/scene.splinecode"
+        ></spline-viewer>
+      </div>
       <header>
         <NavBar> </NavBar>
       </header>
@@ -180,5 +185,12 @@ header {
   padding: 0;
   width: 100vw;
   height: 100%;
+}
+#spline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 </style>

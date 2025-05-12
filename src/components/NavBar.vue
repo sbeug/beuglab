@@ -23,7 +23,8 @@ onBeforeUnmount(() => {
     <div id="navbar">
       <div id="logo">
         <router-link to="/">
-          <h1>B_Lab</h1>
+          <img src="../assets/BEUG LAB - Logo Concept 2.png" alt="Logo" id="logo-img" />
+          <h3>Beug Lab</h3>
         </router-link>
       </div>
       <div id="menu">
@@ -231,9 +232,23 @@ onBeforeUnmount(() => {
 a {
   text-decoration: none;
 }
-#logo h1 {
+#logo {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+#logo-img {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 3em;
+  height: 3em;
+}
+#logo h3 {
   color: #f8f8f8;
-  font-size: 1.5em;
+  font-size: 1em;
+  margin-left: 2.5em;
   text-transform: uppercase;
 }
 .sub-menu-about {

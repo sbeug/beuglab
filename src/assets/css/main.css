@@ -47,6 +47,12 @@ h6 {
   padding-left: 1em;
   padding-right: 1em;
 }
+.main-content {
+  pointer-events: none;
+}
+.main-content .clickable {
+  pointer-events: auto;
+}
 .button {
   text-decoration: none;
   display: flex;

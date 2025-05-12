@@ -10,12 +10,7 @@ onBeforeUnmount(() => {})
 </script>
 
 <template>
-  <div id="main-content">
-    <div id="hero-spline">
-      <spline-viewer
-        url="https://prod.spline.design/JYUfwdcwcFHWn9N9/scene.splinecode"
-      ></spline-viewer>
-    </div>
+  <div id="main-content" class="main-content">
     <div id="hero-section">
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
@@ -58,7 +53,7 @@ onBeforeUnmount(() => {})
           we work together to drive impactful discoveries that improve treatment and outcomes.
         </p>
       </div>
-      <div id="team-c2a">
+      <div id="team-c2a" class="clickable">
         <router-link to="/about/team" class="button">
           <p>Meet the Team</p>
           <div class="circle"></div>
@@ -80,13 +75,6 @@ onBeforeUnmount(() => {})
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-#hero-spline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
 }
 #hero-heading {
   display: flex;
