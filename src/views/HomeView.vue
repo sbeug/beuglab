@@ -159,7 +159,19 @@ onBeforeUnmount(() => {})
   width: fit-content;
   height: fit-content;
 }
-
+.team-member h6 {
+  font-family: new-science-extended, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+}
+.team-member h6 {
+  font-size: 1em;
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: normal;
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #hero-heading {
@@ -242,6 +254,36 @@ onBeforeUnmount(() => {})
   .team-member {
     margin-right: 4em;
     margin-top: 6em;
+  }
+  .team-member h6 {
+    font-size: 2em;
+  }
+  .team-member p {
+    font-size: 1.25em;
+  }
+}
+/* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
+@media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+  .section-statement h6 {
+    font-size: 7em;
+    line-height: 1em;
+    width: 80%;
+  }
+  #ourwork-statement h6,
+  #team-statement h6 {
+    font-size: 5em;
+  }
+  .description {
+    width: 40%;
+  }
+  #team-members-section {
+    top: -0%;
+    left: 50%;
+  }
+  .member-photo {
+    width: 25em;
+    height: 30em;
+    border: 1px solid #f8f8f8;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */
