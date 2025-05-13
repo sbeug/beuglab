@@ -383,7 +383,9 @@ export function dragToScroll() {
     isDragging = true
     startX = (e.type.includes('mouse') ? e.pageX : e.touches[0].clientX) - prevTranslate
     container.style.cursor = 'grabbing'
+    if (screen.width > 768) {
     dragStart.play()
+    }
   }
 
   function onMove(e) {
@@ -402,7 +404,9 @@ export function dragToScroll() {
     isDragging = false
     prevTranslate = currentTranslate
     container.style.cursor = 'grab'
-    reverseTimelineIfAtStart()
+    if (screen.width > 768) {
+      reverseTimelineIfAtStart()
+    }
   }
 
 

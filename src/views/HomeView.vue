@@ -99,38 +99,63 @@ onBeforeUnmount(() => {})
   justify-content: center;
   height: fit-content;
   overflow: hidden;
+  padding-top: 4em;
 }
 #hero-heading h1 {
-  font-size: 2em;
-  color: #f8f8f8;
-  text-transform: uppercase;
-}
-#hero-heading {
   font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
+  font-size: 2em;
+  color: #f8f8f8;
+  text-transform: uppercase;
 }
 .section {
   position: relative;
   width: 100vw;
   height: 100%;
-  margin-bottom: 4em;
+  margin-bottom: 18em;
 }
 .section-heading {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
+}
+.section-heading h6 {
+  font-size: 2em;
+  line-height: 1em;
+  padding-left: .5em;
 }
 .section-heading p {
   font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
+  font-size: 1em;
 }
 .section p,
 .section h6 {
   color: #f8f8f8;
+}
+.section-statement {
+  padding-top: 2em;
+}
+.section-statement h6{
+  font-size: 2.75em;
+  line-height: 1em;
+}
+#ourwork-statement h6,
+#team-statement h6 {
+  font-size: 2em;
+}
+#team-description {
+  padding-top: 2em;
+  font-size: 1.25em;
+  line-height: 1.2em;
+}
+#team-c2a {
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 .description {
   font-family: akzidenz-grotesk-next-pro, sans-serif;
@@ -142,6 +167,7 @@ onBeforeUnmount(() => {})
   position: relative;
   width: 100%;
   overflow-x: visible;
+  padding-top: 1em;
 }
 #members-track {
   display: flex;
@@ -155,9 +181,9 @@ onBeforeUnmount(() => {})
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 2em;
   width: fit-content;
   height: fit-content;
+  margin-right: 2em;
 }
 .team-member h6 {
   font-family: new-science-extended, sans-serif;
@@ -177,6 +203,11 @@ onBeforeUnmount(() => {})
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
+}
+.member-photo {
+  width: 18em;
+  height: 25em;
+  border: 1px solid #f8f8f8;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -203,13 +234,15 @@ onBeforeUnmount(() => {})
   .section {
     margin-bottom: 24em;
   }
+  .section-heading {
+    align-items: center;
+  }
   .section-heading p {
     font-size: 1em;
     line-height: 1em;
   }
   .section-heading h6 {
     font-size: 2em;
-    line-height: 1em;
     padding-left: 3em;
   }
   .section-statement {
@@ -218,7 +251,6 @@ onBeforeUnmount(() => {})
   }
   .section-statement h6 {
     font-size: 8em;
-    line-height: 1em;
     width: 75%;
   }
   .description {
@@ -283,6 +315,7 @@ onBeforeUnmount(() => {})
     width: 40%;
   }
   #team-members-section {
+    padding: 0;
     top: -0%;
     left: 50%;
   }

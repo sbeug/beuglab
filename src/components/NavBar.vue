@@ -149,7 +149,7 @@ onBeforeUnmount(() => {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 1em;
+  padding-left: 1.5em;
   padding-right: 1em;
   border-bottom: solid 1px #f8f8f8;
   background: transparent;
@@ -198,15 +198,15 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   cursor: pointer;
   width: fit-content;
   height: 2.5em;
   transform: translateY(3px);
 }
 .line {
-  width: 2.5em;
-  height: 3px;
+  width: 2em;
+  height: 2px;
   background-color: #f8f8f8;
   margin-bottom: 0.5em;
   transition: all 0.3s ease-in-out;
@@ -248,7 +248,7 @@ a {
 #logo h3 {
   color: #f8f8f8;
   font-size: 1em;
-  margin-left: 2.5em;
+  margin-left: 1.5em;
   text-transform: uppercase;
 }
 .sub-menu-about {
@@ -333,6 +333,10 @@ a {
   }
   #menu {
     display: flex;
+  }
+  .line {
+    width: 2.5em;
+    height: 3px;
   }
   .sub-menu-about {
     z-index: 1;

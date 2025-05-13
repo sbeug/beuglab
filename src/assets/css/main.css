@@ -48,7 +48,7 @@ h6 {
   padding-right: 1em;
 }
 .main-content {
-  pointer-events: none;
+  pointer-events: auto;
 }
 .main-content .clickable {
   pointer-events: auto;
@@ -85,6 +85,9 @@ h6 {
 }
 
 @media (min-width: 1280px) {
+  .main-content {
+    pointer-events: none;
+  }
   .df-pad {
     padding-left: 4em;
     padding-right: 4em;
