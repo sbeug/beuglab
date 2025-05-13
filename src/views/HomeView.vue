@@ -73,7 +73,7 @@ onBeforeUnmount(() => {})
             <div v-for="member in teamStore.members" :key="member.id" class="team-member clickable">
               <img :src="member.photo" :alt="member.name" class="member-photo" />
               <h6>{{ member.name }}</h6>
-              <p>{{ member.title }}</p>
+              <p>"{{ member.title }}"</p>
             </div>
           </div>
         </div>
@@ -192,11 +192,12 @@ onBeforeUnmount(() => {})
   letter-spacing: normal;
 }
 .team-member h6 {
-  font-size: 1em;
+  font-size: 1.5em;
   font-family: akzidenz-grotesk-next-pro, sans-serif;
-  font-weight: 300;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
+  padding-top: .5em;
 }
 .team-member p {
   font-family: akzidenz-grotesk-next-pro, sans-serif;
@@ -294,6 +295,7 @@ onBeforeUnmount(() => {})
     margin-top: 6em;
   }
   .team-member h6 {
+    padding: 0;
     font-size: 2em;
   }
   .team-member p {
