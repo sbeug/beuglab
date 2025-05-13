@@ -212,6 +212,7 @@ export function DesktopSubmenuAnimation() {
     })
   }
 }
+
 export function SublistAnimation() {
   const sublistTimelineAbout = new gsap.timeline({
     paused: true,
@@ -337,7 +338,7 @@ export function menuUnderline() {
 export function dragToScroll() {
   const dragStart = new gsap.timeline({
     paused: true,
-    duration: 1,
+    duration: .5,
   })
   dragStart.to(
     '#team-description',
@@ -357,6 +358,12 @@ export function dragToScroll() {
     },
     0.1,
   )
+
+  function reverseTimelineIfAtStart() {
+    if (currentTranslate === 0) {
+      dragStart.reverse();
+    }
+  }
 
   const container = document.getElementById('team-members-section')
   const track = document.getElementById('members-track')
@@ -395,14 +402,15 @@ export function dragToScroll() {
     isDragging = false
     prevTranslate = currentTranslate
     container.style.cursor = 'grab'
+    reverseTimelineIfAtStart()
   }
 
-  // Mouse events
+
   container.addEventListener('mousedown', onStart)
   window.addEventListener('mousemove', onMove)
   window.addEventListener('mouseup', onEnd)
 
-  // Touch events
+
   container.addEventListener('touchstart', onStart)
   container.addEventListener('touchmove', onMove)
   container.addEventListener('touchend', onEnd)

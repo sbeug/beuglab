@@ -172,6 +172,12 @@ onBeforeUnmount(() => {})
   font-style: normal;
   letter-spacing: normal;
 }
+.team-member p {
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #hero-heading {
