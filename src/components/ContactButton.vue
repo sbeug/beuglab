@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #5a5a5a;
+  border: 1px solid #f8f8f8;
   border-radius: 25px;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
