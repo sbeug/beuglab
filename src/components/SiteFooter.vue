@@ -65,7 +65,7 @@ import ContactButton from '@/components/ContactButton.vue'
   z-index: 1;
   position: relative;
   grid-column: 1 / span 4;
-  grid-row: 5 / span 6;
+  grid-row: 4 / span 6;
   display: flex;
   justify-content: center;
 }
@@ -73,7 +73,7 @@ import ContactButton from '@/components/ContactButton.vue'
   z-index: 1;
   position: relative;
   grid-column: 1 / span 4;
-  grid-row: 9;
+  grid-row: 8;
   display: flex;
   justify-content: center;
   align-items: center;

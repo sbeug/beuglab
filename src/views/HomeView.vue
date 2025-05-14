@@ -72,8 +72,8 @@ onBeforeUnmount(() => {})
           <div id="members-track" class="clickable">
             <div v-for="member in teamStore.members" :key="member.id" class="team-member clickable">
               <img :src="member.photo" :alt="member.name" class="member-photo" />
-              <h6>{{ member.name }}</h6>
-              <p>"{{ member.title }}"</p>
+              <h3>{{ member.name }}</h3>
+              <p>{{ member.title }}</p>
             </div>
           </div>
         </div>
@@ -82,11 +82,6 @@ onBeforeUnmount(() => {})
   </div>
 </template>
 <style scoped>
-#main-content {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 #hero-section {
   position: relative;
   width: 100vw;
@@ -124,7 +119,7 @@ onBeforeUnmount(() => {})
 .section-heading h6 {
   font-size: 2em;
   line-height: 1em;
-  padding-left: .5em;
+  padding-left: 0.5em;
 }
 .section-heading p {
   font-family: new-science-extended, sans-serif;
@@ -140,7 +135,7 @@ onBeforeUnmount(() => {})
 .section-statement {
   padding-top: 2em;
 }
-.section-statement h6{
+.section-statement h6 {
   font-size: 2.75em;
   line-height: 1em;
 }
@@ -185,19 +180,11 @@ onBeforeUnmount(() => {})
   height: fit-content;
   margin-right: 2em;
 }
-.team-member h6 {
-  font-family: new-science-extended, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: normal;
-}
-.team-member h6 {
+.team-member h3 {
   font-size: 1.5em;
-  font-family: akzidenz-grotesk-next-pro, sans-serif;
-  font-weight: 700;
-  font-style: normal;
   letter-spacing: normal;
-  padding-top: .5em;
+  padding-top: 0.5em;
+  color: #f8f8f8;
 }
 .team-member p {
   font-family: akzidenz-grotesk-next-pro, sans-serif;
@@ -268,7 +255,7 @@ onBeforeUnmount(() => {})
   }
   #team-description {
     padding-top: 4em;
-    padding-left: 5.5em;
+    padding-left: 7em;
   }
   #team-c2a {
     padding-top: 4em;
@@ -283,7 +270,7 @@ onBeforeUnmount(() => {})
   #team-members-section {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
     overflow-x: visible;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
@@ -330,14 +317,14 @@ onBeforeUnmount(() => {})
 /* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
   .description {
-    width: 35%;
+    width: 30%;
   }
   #team-members-section {
     left: 50%;
   }
   .member-photo {
-    width: 20em;
-    height: 25em;
+    width: 22.5em;
+    height: 30em;
     border: 1px solid #f8f8f8;
   }
 }

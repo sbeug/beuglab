@@ -381,6 +381,9 @@ a {
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
+  #logo h3 {
+    margin-left: 2em;
+  }
   .menu-underline {
     position: absolute;
     bottom: 0%;

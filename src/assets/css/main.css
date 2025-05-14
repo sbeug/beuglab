@@ -6,19 +6,19 @@
 }
 
 h1 {
-  font-family: avenir-next-world, sans-serif;
+  font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
 }
 h2 {
-  font-family: avenir-next-world, sans-serif;
+  font-family: new-science, sans-serif;
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   letter-spacing: normal;
 }
 h3 {
-  font-family: avenir-next-world, sans-serif;
+  font-family: new-science, sans-serif;
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
@@ -41,13 +41,22 @@ h6 {
   font-style: normal;
   letter-spacing: normal;
 }
+p {
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+}
 
 /* DEFAULT STYLES */
 .df-pad {
   padding-left: 1em;
   padding-right: 1em;
 }
-.main-content {
+#main-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   pointer-events: auto;
 }
 .main-content .clickable {
