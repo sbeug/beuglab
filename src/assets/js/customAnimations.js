@@ -1,6 +1,9 @@
 import gsap from 'gsap'
 import Expo from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SplitType from 'split-type'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function homePageLoadAnimation() {
   new SplitType('#hero-heading', { types: 'chars' })
@@ -338,7 +341,7 @@ export function menuUnderline() {
 export function dragToScroll() {
   const dragStart = new gsap.timeline({
     paused: true,
-    duration: .5,
+    duration: 0.5,
   })
   dragStart.to(
     '#team-description',
@@ -361,7 +364,7 @@ export function dragToScroll() {
 
   function reverseTimelineIfAtStart() {
     if (currentTranslate === 0) {
-      dragStart.reverse();
+      dragStart.reverse()
     }
   }
 
@@ -384,7 +387,7 @@ export function dragToScroll() {
     startX = (e.type.includes('mouse') ? e.pageX : e.touches[0].clientX) - prevTranslate
     container.style.cursor = 'grabbing'
     if (screen.width > 768) {
-    dragStart.play()
+      dragStart.play()
     }
   }
 
@@ -409,13 +412,33 @@ export function dragToScroll() {
     }
   }
 
-
   container.addEventListener('mousedown', onStart)
   window.addEventListener('mousemove', onMove)
   window.addEventListener('mouseup', onEnd)
 
-
   container.addEventListener('touchstart', onStart)
   container.addEventListener('touchmove', onMove)
   container.addEventListener('touchend', onEnd)
+}
+
+export function teamViewAnimations() {
+  // Get the sidebar and footer elements
+  const sidebar = document.querySelector('#side-bar')
+  const footer = document.querySelector('#footer')
+
+  if (!sidebar || !footer) return
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  // Create animation that hides sidebar when footer comes into view
+  gsap.to(sidebar, {
+    scrollTrigger: {
+      trigger: footer,
+      start: 'top 95%',
+      toggleActions: 'play none none reverse',
+    },
+    opacity: 0,
+    duration: 0.5,
+    ease: 'power1.out',
+  })
 }

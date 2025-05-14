@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import { useTeamStore } from '@/stores/team.js'
 import TeamSideBar from '@/components/TeamSidebar.vue'
 import TeamMember from '@/components/TeamMember.vue'
 import TeamMobileNav from '@/components/TeamMobileNav.vue'
+import { teamViewAnimations } from '@/assets/js/customAnimations'
 
 const teamStore = useTeamStore()
 const selectedMember = ref(teamStore.members[0])
@@ -11,6 +13,11 @@ const selectedMember = ref(teamStore.members[0])
 const selectMember = (member) => {
   selectedMember.value = member
 }
+
+onMounted(() => {
+  teamViewAnimations()
+})
+onBeforeUnmount(() => {})
 </script>
 <template>
   <div id="main-content" class="main-content">
@@ -63,12 +70,13 @@ const selectMember = (member) => {
     grid-template-rows: repeat(10, 1fr);
   }
   #side-bar {
+    position: fixed;
     grid-column: 9 / span 12;
-    grid-row: 3;
+    top: 20%;
   }
   #team-member-container {
     grid-column: 1 / span 8;
-    grid-row: 3 / span 10;
+    grid-row: 2 / span 10;
   }
 }
 </style>
