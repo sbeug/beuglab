@@ -25,13 +25,35 @@ const selectMember = (member) => {
       />
     </div>
     <div id="team-member-container">
-      <TeamMember :member="selectedMember" />
+      <transition name="member-fade" mode="out-in">
+        <TeamMember :member="selectedMember" :key="selectedMember.id" />
+      </transition>
     </div>
   </div>
 </template>
 <style scoped>
 #main-content {
-  height: 100vh;
+  position: relative;
+  width: 100vw;
+  height: 125vh;
+  will-change: height;
+  transition: all 0.5s ease;
+}
+.member-fade-enter-active {
+  transition: all 0.6s ease-out;
+}
+.member-fade-leave-active {
+  transition: all 0.4s ease-in;
+}
+.member-fade-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(5px);
+}
+.member-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+  filter: blur(5px);
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -42,7 +64,7 @@ const selectMember = (member) => {
   }
   #side-bar {
     grid-column: 9 / span 12;
-    grid-row: 5;
+    grid-row: 3;
   }
   #team-member-container {
     grid-column: 1 / span 8;

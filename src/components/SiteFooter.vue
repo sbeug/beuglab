@@ -3,6 +3,7 @@ import ContactButton from '@/components/ContactButton.vue'
 </script>
 <template>
   <div id="footer">
+    <div id="divider" class="df-pad"></div>
     <img id="default-background" src="@/assets/content/images/defaultBackground.png" />
     <div id="footer-title">
       <h6>Understanding Cancer and Immunity to Inform Tomorrow's Therapies.</h6>
@@ -51,6 +52,13 @@ import ContactButton from '@/components/ContactButton.vue'
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(12, 1fr);
+}
+#divider {
+  z-index: 1;
+  position: relative;
+  grid-column: 1 / span 4;
+  height: 1px;
+  background-color: #f8f8f87c;
 }
 #default-background {
   display: none;
