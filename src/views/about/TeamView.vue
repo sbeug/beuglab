@@ -15,7 +15,7 @@ const selectMember = (member) => {
 <template>
   <div id="main-content" class="main-content">
     <aside id="side-bar">
-      <TeamSideBar :members="teamStore.members" @select="selectMember" />
+      <TeamSideBar :members="teamStore.members" @select="selectMember" :selected="selectedMember" />
     </aside>
     <div>
       <TeamMobileNav
