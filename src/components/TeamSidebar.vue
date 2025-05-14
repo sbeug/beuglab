@@ -26,7 +26,7 @@ const emit = defineEmits(['select'])
   width: 100%;
   height: 100%;
   list-style: none;
-  line-height: 5em;
+  line-height: 4.5em;
   padding: 0;
 }
 .member-link {
@@ -36,9 +36,13 @@ const emit = defineEmits(['select'])
   color: #f8f8f8;
 }
 .member-link h3 {
-  font-size: 2em;
+  font-size: 1.5em;
   margin: 0;
   padding: 0;
+  transition: 0.5s ease;
+}
+.member-link h3:hover {
+  text-shadow: #f8f8f8 0px 0px 5px;
 }
 .number {
   border: 1px solid #f8f8f8;

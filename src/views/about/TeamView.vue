@@ -17,16 +17,16 @@ const selectMember = (member) => {
     <aside id="side-bar">
       <TeamSideBar :members="teamStore.members" @select="selectMember" />
     </aside>
-    <div id="member-info-container">
-      <div>
-        <TeamMobileNav
-          :members="teamStore.members"
-          :selected="selectedMember"
-          @select="selectMember"
-        />
-      </div>
+    <div>
+      <TeamMobileNav
+        :members="teamStore.members"
+        :selected="selectedMember"
+        @select="selectMember"
+      />
     </div>
-    <TeamMember :member="selectedMember" />
+    <div id="team-member-container">
+      <TeamMember :member="selectedMember" />
+    </div>
   </div>
 </template>
 <style scoped>
@@ -42,7 +42,11 @@ const selectMember = (member) => {
   }
   #side-bar {
     grid-column: 9 / span 12;
-    grid-row: 4;
+    grid-row: 5;
+  }
+  #team-member-container {
+    grid-column: 1 / span 8;
+    grid-row: 3 / span 10;
   }
 }
 </style>
