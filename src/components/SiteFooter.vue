@@ -59,6 +59,7 @@ import ContactButton from '@/components/ContactButton.vue'
   grid-column: 1 / span 4;
   height: 1px;
   background-color: #f8f8f87c;
+  display: none;
 }
 #default-background {
   display: none;

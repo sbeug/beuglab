@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+// IMAGES
+import ShawnBeug from '@/assets/content/images/team/ShawnBeug.jpeg'
 
 export const useTeamStore = defineStore('team', () => {
   const members = ref([
@@ -9,10 +11,10 @@ export const useTeamStore = defineStore('team', () => {
       edu: 'PhD',
       title: 'Principal Investigator, Scientist',
       photo: 'insertLinkHere',
-      headshot: 'insertLinkHere',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      headshot: ShawnBeug,
+      bio: 'Dr. Shawn Beug obtained his BSc degree with Honours in Biology from the University of Regina. He went on to the University of Ottawa to pursue a MSc degree  in Cellular and Molecular Medicine with Dr. Catherine Tsilfidis where he identified factors involved in salamander forelimb regeneration. Dr. Beug obtained his PhD in Biochemistry based on his research with Dr. Valerie Wallace, studying the mechanism of morphogen trafficking in the developing and adult mouse eye. He then pursued postdoctoral training with Dr. Robert Korneluk at the CHEO Research Institute in the area of cancer and immunotherapy. Now a Scientist at the CHEO RI, Dr. Beug and his team are using cutting-edge and complementary approaches to understand cancer and immunity. ',
       linkedin: 'https://www.linkedin.com/',
-      socialLink: '',
+      cheo: '',
     },
     {
       id: 2,
@@ -22,7 +24,7 @@ export const useTeamStore = defineStore('team', () => {
       photo: 'insertLinkHere',
       bio: 'Dr. Eric LaCasse is an innovator and cancer researcher. He obtained his PhD in Biochemistry (uOttawa) and completed his post-doctoral training at the Ontario Cancer Institute (Toronto). He was previously Head of Oncology at the biotechnology company Aegera Therapeutics (Montreal). In 2004, Dr. LaCasse developed the first inhibitor-of-apoptosis (IAP) targeting drug, an antisense oligonucleotide to the X-linked IAP, to enter clinical trials and to show clinical activity. This validated the IAPs as cancer targets and launched small-molecule development campaigns to inhibit the IAPs. This resulted in Aegera entering the first ever bivalent IAP antagonist, known as a dimeric Smac mimetic, and coincidentally the first clinical homo-PROTAC or targeted protein degrader, into cancer trials in 2008. This provided in vivo proof-of-concept for a novel class of conjugate drugs capable of targeting proteins for ubiquitin- and proteasome-mediated degradation.',
       linkedin: 'https://www.linkedin.com/',
-      socialLink: '',
+      cheo: 'https://www.cheoresearch.ca/research/find-a-researcher/eric-lacasse/',
     },
     {
       id: 3,

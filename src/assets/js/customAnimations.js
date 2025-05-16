@@ -434,11 +434,12 @@ export function teamViewAnimations() {
   gsap.to(sidebar, {
     scrollTrigger: {
       trigger: footer,
-      start: 'top 95%',
-      toggleActions: 'play none none reverse',
+      start: 'top 100%',
+      end: 'top 10%',
+      scrub: true,
     },
     opacity: 0,
-    duration: 0.5,
-    ease: 'power1.out',
+    duration: 0.25,
+    ease: 'power4.out',
   })
 }
