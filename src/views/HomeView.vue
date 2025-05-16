@@ -1,13 +1,40 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import '@splinetool/viewer'
 import { useTeamStore } from '@/stores/team.js'
+import { sanity } from '@/assets/js/sanity.js'
 import { homePageLoadAnimation, dragToScroll } from '@/assets/js/customAnimations'
 
 const teamStore = useTeamStore()
 
-onMounted(() => {
+// Reactive sanity variables
+const sectionOneTitle = ref('')
+const sectionOneText = ref('')
+const sectionTwoTitle = ref('')
+const sectionTwoText = ref('')
+const teamDescription = ref('')
+
+onMounted(async () => {
   homePageLoadAnimation()
+  try {
+    const query = `*[_type == "homePage"][0] {
+      sectionOneTitle,
+      sectionOneText,
+      sectionTwoTitle,
+      sectionTwoText,
+      teamDescription,
+    }`
+    const data = await sanity.fetch(query)
+    sectionOneTitle.value = data.sectionOneTitle
+    sectionOneText.value = data.sectionOneText
+    sectionTwoTitle.value = data.sectionTwoTitle
+    sectionTwoText.value = data.sectionTwoText
+    teamDescription.value = data.teamDescription
+  } catch (error) {
+    console.error('Sanity fetch failed:', error.message)
+    error.value = 'Failed to load live content. Showing default info.'
+  }
+
   setTimeout(() => {
     dragToScroll()
   }, 1000)
@@ -26,19 +53,25 @@ onBeforeUnmount(() => {})
     <div id="obj-section" class="section df-pad">
       <div class="section-heading">
         <p>01</p>
-        <h6>Our Objective</h6>
+        <h6>{{ sectionOneTitle }}</h6>
+        <h6 v-if="error">Our Objective</h6>
       </div>
       <div class="section-statement">
-        <h6>Through innovative science, we aim to improve diagnosis, treatment, and outcomes.</h6>
+        <h6>{{ sectionOneText }}</h6>
+        <h6 v-if="error">
+          Through innovative science, we aim to improve diagnosis, treatment, and outcomes.
+        </h6>
       </div>
     </div>
     <div id="ourwork-section" class="section df-pad">
       <div class="section-heading">
         <p>02</p>
-        <h6>Our Work</h6>
+        <h6>{{ sectionTwoTitle }}</h6>
+        <h6 v-if="error">Our Work</h6>
       </div>
       <div id="ourwork-statement" class="section-statement">
-        <h6>
+        <h6>{{ sectionTwoText }}</h6>
+        <h6 v-if="error">
           We conduct innovative cancer research aimed at uncovering the underlying mechanisms of
           cancer.
         </h6>
@@ -54,7 +87,8 @@ onBeforeUnmount(() => {})
       </div>
       <div id="team-content">
         <div id="team-description" class="description">
-          <p>
+          <p>{{ teamDescription }}</p>
+          <p v-if="error">
             Beug Lab is made up of a diverse team of students, professionals, and doctors, all
             dedicated to advancing cancer research. With a blend of fresh perspectives and
             expertise, we work together to drive impactful discoveries that improve treatment and
