@@ -83,43 +83,112 @@ onBeforeUnmount(() => {
           <ul>
             <li>
               <router-link to="/" class="menu-link-2">Home</router-link>
+              <img
+                class="nav-arrow"
+                src="../assets/content/icons/right-arrow-white.png"
+                alt="right-arrow"
+              />
             </li>
-            <li>
-              <router-link to="/about" class="menu-link-2" id="about">About</router-link>
-              <div id="sub-list-about" class="sub-list">
-                <li>
-                  <router-link to="/about/team" class="sub-link">Team</router-link>
-                </li>
-                <li>
-                  <router-link to="/about/dr-beug" class="sub-link">Dr. Beug</router-link>
-                </li>
-                <li>
-                  <router-link to="/about/research" class="sub-link">Research</router-link>
-                </li>
-                <li>
-                  <router-link to="/about/grants-and-partners" class="sub-link"
-                    >Grants & Partners</router-link
-                  >
-                </li>
-              </div>
+            <li id="about">
+              <router-link to="/about" class="menu-link-2">About</router-link>
+              <img
+                class="nav-arrow"
+                src="../assets/content/icons/right-arrow-white.png"
+                alt="right-arrow"
+              />
             </li>
+            <div id="sub-list-about" class="sub-list">
+              <li>
+                <router-link to="/about/team" class="sub-link"
+                  >Team
+                  <img
+                    class="circle-arrow"
+                    src="../assets/content/icons/circle-arrow.png"
+                    alt="circle-arrow"
+                  />
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/about/dr-beug" class="sub-link">
+                  Dr. Beug
+                  <img
+                    class="circle-arrow"
+                    src="../assets/content/icons/circle-arrow.png"
+                    alt="circle-arrow"
+                  />
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/about/research" class="sub-link">
+                  Research
+                  <img
+                    class="circle-arrow"
+                    src="../assets/content/icons/circle-arrow.png"
+                    alt="circle-arrow"
+                  />
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/about/grants-and-partners" class="sub-link">
+                  Grants & Partners
+                  <img
+                    class="circle-arrow"
+                    src="../assets/content/icons/circle-arrow.png"
+                    alt="circle-arrow"
+                  />
+                </router-link>
+              </li>
+            </div>
             <li>
               <router-link to="/publications" class="menu-link-2" id="publications"
                 >Publications</router-link
               >
+              <img
+                class="nav-arrow"
+                src="../assets/content/icons/right-arrow-white.png"
+                alt="right-arrow"
+              />
             </li>
-            <li>
-              <router-link to="/gallery" class="menu-link-2" id="gallery">Gallery</router-link>
-              <div id="sub-list-gallery" class="sub-list">
-                <router-link to="/gallery/asteroids" class="sub-link">Asteroids</router-link>
-              </div>
+            <li id="gallery">
+              <router-link to="/gallery" class="menu-link-2">Gallery</router-link>
+              <img
+                class="nav-arrow"
+                src="../assets/content/icons/right-arrow-white.png"
+                alt="right-arrow"
+              />
             </li>
-            <li>
-              <router-link to="/contact" class="menu-link-2" id="contact">Contact</router-link>
-              <div id="sub-list-contact" class="sub-list">
-                <router-link to="/contact/careers" class="sub-link">Careers</router-link>
-              </div>
+            <div id="sub-list-gallery" class="sub-list">
+              <li>
+                <router-link to="/gallery/asteroids" class="sub-link">
+                  Immuno Defender
+                  <img
+                    class="circle-arrow"
+                    src="../assets/content/icons/circle-arrow.png"
+                    alt="circle-arrow"
+                  />
+                </router-link>
+              </li>
+            </div>
+            <li id="contact">
+              <router-link to="/contact" class="menu-link-2">Contact</router-link>
+              <img
+                class="nav-arrow"
+                src="../assets/content/icons/right-arrow-white.png"
+                alt="right-arrow"
+              />
             </li>
+            <div id="sub-list-contact" class="sub-list">
+              <li>
+                <router-link to="/contact/careers" class="sub-link">
+                  Careers
+                  <img
+                    class="circle-arrow"
+                    src="../assets/content/icons/circle-arrow.png"
+                    alt="circle-arrow"
+                  />
+                </router-link>
+              </li>
+            </div>
           </ul>
         </div>
       </div>
@@ -220,19 +289,19 @@ onBeforeUnmount(() => {
   height: 100%;
 }
 .menu-link {
-  font-family: akzidenz-grotesk-next-pro, sans-serif;
-  font-weight: 400;
+  font-family: new-science, sans-serif;
+  font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
   color: #f8f8f8;
   opacity: 100%;
   position: relative;
-  text-transform: uppercase;
 }
 a {
   text-decoration: none;
 }
 #logo {
+  z-index: 10;
   position: relative;
   width: fit-content;
   height: fit-content;
@@ -261,57 +330,86 @@ a {
 }
 #menu-list ul {
   list-style: none;
-  padding-top: 6em;
-  padding-right: 1.5em;
+  padding-top: 5.5em;
+  padding-right: 2em;
+  padding-left: 2em;
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
   height: 100%;
-  width: 100vw;
+  width: 100%;
 }
 #menu-list ul li {
-  text-align: right;
+  text-align: left;
   margin: 0;
+  margin-bottom: 1.25em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
 }
 #menu-list ul li a {
   margin: 0;
 }
+.nav-arrow {
+  width: 1.3em;
+  height: 1.3em;
+  transform: translateY(-3px);
+}
 .menu-link-2 {
   font-size: 2em;
-  font-family: new-science-extended, sans-serif;
-  font-weight: 700;
+  font-family: new-science, sans-serif;
+  font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
   color: #f8f8f8;
   margin: 0;
   opacity: 100%;
-  text-transform: uppercase;
   line-height: 1em;
 }
 .sub-list {
+  width: 96%;
   font-display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
+  justify-content: flex-start;
   padding-right: 0.5em;
+  padding-bottom: 1em;
 }
-.sublist li {
-  height: fit-content;
-  width: fit-content;
+.sub-list li {
+  margin-bottom: 0.5em !important;
+  border-bottom: 1px dashed #f8f8f86f;
 }
 .sub-link {
   font-size: 1em;
-  font-family: new-science-extended, sans-serif;
-  font-weight: 700;
+  font-family: new-science, sans-serif;
+  font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
-  color: #181818;
+  color: #f8f8f8;
   opacity: 100%;
-  text-transform: uppercase;
   margin: 0;
   padding: 0;
-  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.circle-arrow {
+  width: 1.1em;
+  height: 1.1em;
+  transform: rotate(135deg);
+  opacity: 50%;
+}
+#about img,
+#gallery img,
+#contact img {
+  transform: rotate(90deg);
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
