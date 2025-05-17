@@ -48,7 +48,7 @@ const emit = defineEmits(['select'])
   transition: 0.5s ease;
   color: #f8f8f87c;
   transition: 0.5s ease;
-  height: 1.75em;
+  height: 1.5em;
 }
 .member-link h3:hover {
   color: #f8f8f8;

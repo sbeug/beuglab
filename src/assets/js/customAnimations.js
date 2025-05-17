@@ -426,6 +426,7 @@ export function teamViewAnimations() {
   const sidebar = document.querySelector('#side-bar')
   const mobileButton = document.querySelector('#mobile-btn')
   const footer = document.querySelector('#footer')
+  const arrow = document.querySelector('#arrow')
 
   if (window.innerWidth < 768) {
     const memberMenuTimeline = new gsap.timeline({
@@ -440,6 +441,33 @@ export function teamViewAnimations() {
         left: '0%',
       },
       0,
+    )
+    memberMenuTimeline.to(
+      arrow,
+      {
+        ease: Expo.easeInOut,
+        duration: 0.1,
+        opacity: 0,
+      },
+      0,
+    )
+    memberMenuTimeline.to(
+      arrow,
+      {
+        ease: Expo.easeInOut,
+        duration: 0.1,
+        transform: 'scaleX(-1)',
+      },
+      0.1,
+    )
+    memberMenuTimeline.to(
+      arrow,
+      {
+        ease: Expo.easeInOut,
+        duration: 0.25,
+        opacity: 1,
+      },
+      0.2,
     )
     let isMenuOpen = false
     if (mobileButton) {

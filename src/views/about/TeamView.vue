@@ -64,7 +64,7 @@ onBeforeUnmount(() => {})
 #mobile-btn {
   z-index: 2;
   position: absolute;
-  top: 6em;
+  top: 6.5em;
   left: 1.5em;
   margin-left: 1em;
   background-color: transparent;
@@ -98,7 +98,7 @@ onBeforeUnmount(() => {})
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: rgba(82, 35, 35, 0.5);
+  background-color: rgba(82, 35, 35, 0.6);
   backdrop-filter: blur(20px);
 }
 #team-member-container {
@@ -124,6 +124,7 @@ onBeforeUnmount(() => {})
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     transform: translateY(0%);
+    padding: 0;
   }
   #team-member-container {
     padding: 0;
