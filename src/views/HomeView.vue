@@ -162,7 +162,15 @@ onBeforeUnmount(() => {})
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
-  font-size: 1em;
+  font-size: 0.5em;
+  border: 1px dashed #f8f8f8;
+  border-radius: 100%;
+  height: 5em;
+  width: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-15px);
 }
 .section p,
 .section h6 {
@@ -264,6 +272,11 @@ onBeforeUnmount(() => {})
   .section-heading p {
     font-size: 1em;
     line-height: 1em;
+    border: none;
+    display: unset;
+    height: auto;
+    width: auto;
+    transform: translateY(0);
   }
   .section-heading h6 {
     font-size: 2em;
