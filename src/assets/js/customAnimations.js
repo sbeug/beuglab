@@ -126,7 +126,7 @@ export function DropDownMenuAnimation() {
     {
       y: 0,
       opacity: '100%',
-      stagger: 0.1,
+      stagger: 0.05,
       ease: Expo.easeInOut,
     },
     0.5,
