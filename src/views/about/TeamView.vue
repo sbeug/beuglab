@@ -21,7 +21,8 @@ onBeforeUnmount(() => {})
 <template>
   <div id="main-content" class="main-content">
     <button id="mobile-btn" class="clickable">
-      <p>team members</p>
+      <p>members</p>
+      <img id="arrow" src="../../assets/content/icons/right-arrow-white.png" alt="right-arrow" />
     </button>
     <aside id="side-bar">
       <TeamSideBar :members="teamStore.members" @select="selectMember" :selected="selectedMember" />
@@ -66,12 +67,16 @@ onBeforeUnmount(() => {})
   top: 6em;
   left: 1.5em;
   margin-left: 1em;
-  background-color: #454545c3;
+  background-color: transparent;
   margin: 0;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  height: 3em;
-  border-radius: 25px;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 1.5em;
+  height: 2.5em;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #mobile-btn p {
   color: #f8f8f8;
@@ -80,6 +85,12 @@ onBeforeUnmount(() => {})
   margin: 0;
   padding: 0;
 }
+#arrow {
+  width: 1em;
+  height: 1em;
+  aspect-ratio: 1;
+  margin-left: 0.5em;
+}
 #side-bar {
   z-index: 1;
   position: fixed;
@@ -87,9 +98,8 @@ onBeforeUnmount(() => {})
   left: -100%;
   width: 100%;
   height: 100%;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(15px);
+  background-color: rgba(82, 35, 35, 0.5);
+  backdrop-filter: blur(20px);
 }
 #team-member-container {
   grid-row: 1 / span 8;
@@ -100,16 +110,17 @@ onBeforeUnmount(() => {})
   #main-content {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    height: 125vh;
+    height: 110vh;
   }
   #mobile-btn {
     display: none;
   }
   #side-bar {
-    position: fixed;
+    position: relative;
     grid-column: 9 / span 12;
-    top: 20%;
-    left: 65%;
+    grid-row: 3 / span 10;
+    top: 0%;
+    left: 0%;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     transform: translateY(0%);

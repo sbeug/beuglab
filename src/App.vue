@@ -185,6 +185,8 @@ header {
   padding: 0;
   width: 100vw;
   height: 100%;
+  transition: all 0.5s ease;
+  will-change: height;
 }
 #spline {
   position: fixed;
