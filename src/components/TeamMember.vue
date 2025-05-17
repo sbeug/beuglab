@@ -2,20 +2,24 @@
 defineProps(['member'])
 </script>
 <template>
-  <div id="team-member" class="df-pad" v-if="member">
-    <div class="member-wrapper">
-      <div id="top-section">
-        <div class="member-img-container">
-          <img :src="member.headshot" :alt="member.name" class="member-img" />
+  <div id="team-member" v-if="member">
+    <div class="member-wrapper df-pad">
+      <div class="reverse">
+        <div id="top-section">
+          <div class="member-img-container">
+            <img :src="member.headshot" :alt="member.name" class="member-img" />
+          </div>
+          <div id="edu-links">
+            <h6>{{ member.edu }}</h6>
+            <a :href="member.linkedin">Linkedin</a>
+            <a :href="member.cheo">Cheo RI</a>
+          </div>
         </div>
-        <div id="edu-links">
-          <h6>{{ member.edu }}</h6>
-          <a :href="member.linkedin">Linkedin</a>
-          <a :href="member.cheo">Cheo RI</a>
+        <div>
+          <h1 class="member-name">{{ member.name }}</h1>
+          <h3 class="member-title">{{ member.title }}</h3>
         </div>
       </div>
-      <h1 class="member-name">{{ member.name }}</h1>
-      <h3 class="member-title">{{ member.title }}</h3>
       <p class="member-bio">{{ member.bio }}</p>
     </div>
   </div>
@@ -30,15 +34,14 @@ defineProps(['member'])
   width: 100%;
   height: 100%;
   color: #f8f8f8;
-  padding-right: 2em;
 }
 .member-img-container {
   position: relative;
-  width: 10em;
-  height: 10em;
+  width: 100%;
+  height: 40vh;
   aspect-ratio: 1;
-  border-radius: 100%;
   overflow: hidden;
+  border-radius: 25px;
 }
 .member-img {
   background-color: #f8f8f8;
@@ -51,16 +54,36 @@ defineProps(['member'])
 }
 #top-section {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+}
+.member-name {
+  text-transform: uppercase;
+  font-size: 2.5em;
+  line-height: 1.2em;
+  padding-bottom: 0.5em;
+}
+.member-title {
+  font-size: 1.25em;
+  margin-bottom: 1.5em;
+}
+.member-bio {
+  font-size: 1.25em;
+  line-height: 1.5em;
+  padding-top: 2em;
+  padding-bottom: 2.5em;
 }
 #edu-links {
-  grid-column: 2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: space-between;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 #edu-links h6 {
+  display: none;
   line-height: 1.2em;
 }
 #edu-links a {
@@ -73,31 +96,55 @@ defineProps(['member'])
   font-style: normal;
   letter-spacing: normal;
 }
+.reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #team-member {
     padding-right: 12em;
   }
   .member-img-container {
+    border-radius: 100%;
     width: 26em;
     height: 26em;
   }
+  #top-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
   .member-name {
     font-size: 4em;
+    padding-top: 0.5em;
   }
   .member-title {
     font-size: 2em;
     margin-bottom: 1.5em;
   }
   .member-bio {
+    padding: 0;
     font-size: 1.5em;
     line-height: 1.5em;
+  }
+  #edu-links {
+    position: relative;
+    bottom: 0;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
   }
   #edu-links a {
     font-size: 2em;
   }
   #edu-links h6 {
     font-size: 2em;
+  }
+  .reverse {
+    display: unset;
   }
 }
 </style>

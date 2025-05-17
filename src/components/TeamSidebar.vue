@@ -22,15 +22,18 @@ const emit = defineEmits(['select'])
 </template>
 <style scoped>
 #team-sidebar {
+  z-index: 2;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   width: 100%;
   height: 100%;
   list-style: none;
   line-height: 4.5em;
   padding: 0;
+  padding-left: 2em;
 }
 .member-link {
   cursor: pointer;
@@ -39,12 +42,13 @@ const emit = defineEmits(['select'])
   color: #f8f8f8;
 }
 .member-link h3 {
-  font-size: 1.5em;
+  font-size: 2em;
   margin: 0;
   padding: 0;
   transition: 0.5s ease;
   color: #f8f8f87c;
   transition: 0.5s ease;
+  height: 1.75em;
 }
 .member-link h3:hover {
   color: #f8f8f8;
@@ -62,25 +66,42 @@ const emit = defineEmits(['select'])
 .number {
   border: 1px solid #f8f8f87c;
   border-radius: 50%;
-  width: 1.25em;
-  height: 1.25em;
-  display: flex;
+  width: 1.5em;
+  height: 1.5em;
+  display: none;
   align-items: center;
   justify-content: center;
-  margin-left: 0.25em;
   transition: 0.5s ease;
 }
 .number p {
   color: #f8f8f87c;
-  font-size: 0.5em;
+  font-size: 0.75em;
   margin: 0;
   padding: 0;
   transition: 0.5s ease;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
+  #team-sidebar {
+    padding: 0em;
+    justify-content: flex-start;
+  }
   .member-link {
     font-size: 2em;
+  }
+  .member-link h3 {
+    font-size: 1.5em;
+    height: 1.5em;
+  }
+  .number {
+    display: flex;
+    transform: translateY(0px);
+    width: 1.25em;
+    height: 1.25em;
+    margin-left: 0.25em;
+  }
+  .number p {
+    font-size: 0.5em;
   }
 }
 </style>

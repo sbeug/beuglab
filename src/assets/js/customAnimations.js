@@ -424,22 +424,58 @@ export function dragToScroll() {
 export function teamViewAnimations() {
   // Get the sidebar and footer elements
   const sidebar = document.querySelector('#side-bar')
+  const mobileButton = document.querySelector('#mobile-btn')
   const footer = document.querySelector('#footer')
 
-  if (!sidebar || !footer) return
+  if (window.innerWidth < 768) {
+    const memberMenuTimeline = new gsap.timeline({
+      paused: true,
+      duration: 0.5,
+    })
+    memberMenuTimeline.to(
+      sidebar,
+      {
+        ease: Expo.easeInOut,
+        duration: 0.5,
+        left: '0%',
+      },
+      0,
+    )
+    let isMenuOpen = false
+    if (mobileButton) {
+      mobileButton.addEventListener('click', () => {
+        console.log('clicked')
+        if (isMenuOpen) {
+          memberMenuTimeline.reverse()
+        } else {
+          memberMenuTimeline.play()
+        }
+        isMenuOpen = !isMenuOpen
+      })
+    }
+    const memberLinks = document.querySelectorAll('.member-link')
+    memberLinks.forEach((member) => {
+      member.addEventListener('click', () => {
+        memberMenuTimeline.reverse()
+        isMenuOpen = false
+      })
+    })
+  }
+  if (window.innerWidth > 768) {
+    if (!sidebar || !footer) return
 
-  gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger)
 
-  // Create animation that hides sidebar when footer comes into view
-  gsap.to(sidebar, {
-    scrollTrigger: {
-      trigger: footer,
-      start: 'top 100%',
-      end: 'top 10%',
-      scrub: true,
-    },
-    opacity: 0,
-    duration: 0.25,
-    ease: 'power4.out',
-  })
+    gsap.to(sidebar, {
+      scrollTrigger: {
+        trigger: footer,
+        start: 'top 100%',
+        end: 'top 10%',
+        scrub: true,
+      },
+      opacity: 0,
+      duration: 0.25,
+      ease: 'power4.out',
+    })
+  }
 }
