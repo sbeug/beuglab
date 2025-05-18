@@ -195,7 +195,7 @@ export function subMenuHover(menuSelector = '.sub-drop') {
     subMenuTl.from(
       '.sub-link',
       {
-        y: 20,
+        x: 20,
         opacity: 0,
         stagger: 0.05,
         duration: 0.5,
@@ -214,11 +214,11 @@ export function subMenuHover(menuSelector = '.sub-drop') {
     )
     let isOpen = false
     item.addEventListener('click', () => {
-      if (isOpen === false) {
+      if (!isOpen) {
         gsap.set(subMenu, { display: 'flex' })
         subMenuTl.play()
         isOpen = true
-      } else if (isOpen === true) {
+      } else {
         subMenuTl.reverse()
         isOpen = false
       }
