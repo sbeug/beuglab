@@ -88,6 +88,7 @@ onBeforeUnmount(() => {
                 <router-link to="/about" class="menu-link-2">About</router-link>
                 <img
                   class="nav-arrow"
+                  id="nav-arrow-about"
                   src="../assets/content/icons/right-arrow-white.png"
                   alt="right-arrow"
                 />

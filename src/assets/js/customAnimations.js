@@ -174,7 +174,7 @@ export function subMenuHover(menuSelector = '.sub-drop') {
       0,
     )
     subMenuTl.to(
-      '.nav-arrow',
+      '#nav-arrow-about',
       {
         rotate: 90,
         duration: 1,
