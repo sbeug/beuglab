@@ -159,25 +159,67 @@ export function subMenuHover(menuSelector = '.sub-drop') {
     if (!subMenu) return
     gsap.set(subMenu, { height: 0, opacity: 0 })
 
+    const subMenuTl = new gsap.timeline({
+      paused: true,
+      duration: 1,
+    })
+    subMenuTl.to(
+      subMenu,
+      {
+        height: 'auto',
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    subMenuTl.to(
+      '.nav-arrow',
+      {
+        rotate: 90,
+        duration: 1,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    subMenuTl.from(
+      '.sub-list li',
+      {
+        y: 50,
+        opacity: 0,
+        stagger: 0.05,
+        ease: 'power2.out',
+      },
+      0.1,
+    )
+    subMenuTl.from(
+      '.sub-link',
+      {
+        y: 20,
+        opacity: 0,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      0.35,
+    )
+    subMenuTl.to(
+      '.circle-arrow',
+      {
+        rotate: 135,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      0.35,
+    )
     let isOpen = false
     item.addEventListener('click', () => {
       if (isOpen === false) {
         gsap.set(subMenu, { display: 'flex' })
-
-        gsap.to(subMenu, {
-          height: 'auto',
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-        })
+        subMenuTl.play()
         isOpen = true
       } else if (isOpen === true) {
-        gsap.to(subMenu, {
-          height: 0,
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        })
+        subMenuTl.reverse()
         isOpen = false
       }
     })

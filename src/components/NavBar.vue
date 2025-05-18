@@ -380,7 +380,7 @@ a {
   justify-content: flex-start;
   padding-right: 0.5em;
   margin-top: 1em;
-  padding-bottom: 1em;
+  margin-bottom: 2em;
 }
 .sub-list li {
   margin-bottom: 0.5em !important;
@@ -419,11 +419,6 @@ a {
   width: 1.1em;
   height: 1.1em;
   opacity: 50%;
-}
-#about img,
-#gallery img,
-#contact img {
-  transform: rotate(90deg);
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
