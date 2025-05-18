@@ -150,161 +150,39 @@ export function DropDownMenuAnimation() {
   })
 }
 
-export function DesktopSubmenuAnimation() {
-  // For the About submenu in desktop nav
-  const aboutLinkElement = document.querySelector('#menu-link-about')
-  const aboutSubmenu = document.querySelector('.sub-menu-about')
+export function subMenuHover(menuSelector = '.sub-drop') {
+  const menuItems = document.querySelectorAll(menuSelector)
 
-  if (aboutLinkElement && aboutSubmenu) {
-    gsap.set(aboutSubmenu, {
-      opacity: 0,
-      visibility: 'hidden',
-      y: -10,
-      display: 'flex',
-    })
+  menuItems.forEach((item) => {
+    const subMenu = item.querySelector('.sub-list')
 
-    const aboutSubmenuTimeline = gsap.timeline({ paused: true })
+    if (!subMenu) return
+    gsap.set(subMenu, { height: 0, opacity: 0 })
 
-    aboutSubmenuTimeline
-      .to(aboutSubmenu, {
-        opacity: 1,
-        visibility: 'visible',
-        y: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-      .to(
-        aboutSubmenu.querySelectorAll('li'),
-        {
+    let isOpen = false
+    item.addEventListener('click', () => {
+      if (isOpen === false) {
+        gsap.set(subMenu, { display: 'flex' })
+
+        gsap.to(subMenu, {
+          height: 'auto',
           opacity: 1,
-          y: 0,
-          stagger: 0.05,
           duration: 0.5,
           ease: 'power2.out',
-        },
-        '-=0.15',
-      )
-    // Create a flag to track if we're hovering over either element
-    let isMenuHovered = false
-
-    aboutLinkElement.addEventListener('mouseenter', () => {
-      isMenuHovered = true
-      aboutSubmenuTimeline.play()
+        })
+        isOpen = true
+      } else if (isOpen === true) {
+        gsap.to(subMenu, {
+          height: 0,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+        })
+        isOpen = false
+      }
     })
-
-    aboutSubmenu.addEventListener('mouseenter', () => {
-      isMenuHovered = true
-    })
-
-    aboutLinkElement.addEventListener('mouseleave', () => {
-      isMenuHovered = false
-      setTimeout(() => {
-        if (!isMenuHovered) {
-          aboutSubmenuTimeline.reverse()
-        }
-      }, 150)
-    })
-
-    aboutSubmenu.addEventListener('mouseleave', () => {
-      isMenuHovered = false
-      setTimeout(() => {
-        if (!isMenuHovered) {
-          aboutSubmenuTimeline.reverse()
-        }
-      }, 150)
-    })
-  }
+  })
 }
-
-export function SublistAnimation() {
-  const sublistTimelineAbout = new gsap.timeline({
-    paused: true,
-    defaults: { duration: 0.5 },
-  })
-
-  const about = document.getElementById('sub-list-about')
-
-  sublistTimelineAbout.to(
-    about,
-    {
-      opacity: 1,
-      ease: Expo.easeInOut,
-      duration: 0.75,
-    },
-    0,
-  )
-
-  const sublistTimelineGallery = new gsap.timeline({
-    paused: true,
-    defaults: { duration: 0.5 },
-  })
-
-  const gallery = document.getElementById('sub-list-gallery')
-
-  sublistTimelineGallery.to(
-    gallery,
-    {
-      opacity: 1,
-      ease: Expo.easeInOut,
-      duration: 0.75,
-    },
-    0,
-  )
-
-  const sublistTimelineContact = new gsap.timeline({
-    paused: true,
-    defaults: { duration: 0.5 },
-  })
-
-  const contact = document.getElementById('sub-list-contact')
-
-  sublistTimelineContact.to(
-    contact,
-    {
-      opacity: 1,
-      ease: Expo.easeInOut,
-      duration: 0.75,
-    },
-    0,
-  )
-
-  const aboutElement = document.getElementById('about')
-
-  if (aboutElement) {
-    aboutElement.addEventListener('mouseenter', () => {
-      sublistTimelineGallery.reverse()
-      sublistTimelineContact.reverse()
-      setTimeout(() => {
-        sublistTimelineAbout.play()
-      }, 1000)
-    })
-  }
-
-  const galleryElement = document.getElementById('gallery')
-
-  if (galleryElement) {
-    galleryElement.addEventListener('mouseenter', () => {
-      sublistTimelineContact.reverse()
-      sublistTimelineAbout.reverse()
-      setTimeout(() => {
-        sublistTimelineGallery.play()
-      }, 1000)
-    })
-  }
-
-  const contactElement = document.getElementById('contact')
-
-  if (contactElement) {
-    contactElement.addEventListener('mouseenter', () => {
-      sublistTimelineGallery.reverse()
-      sublistTimelineAbout.reverse()
-      setTimeout(() => {
-        sublistTimelineContact.play()
-      }, 1000)
-    })
-  }
-}
-
 export function menuUnderline() {
   const underLineWrapper = document.querySelectorAll('#menu li')
   underLineWrapper.forEach((el) => {

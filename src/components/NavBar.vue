@@ -1,15 +1,9 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
-import {
-  DropDownMenuAnimation,
-  DesktopSubmenuAnimation,
-  SublistAnimation,
-  menuUnderline,
-} from '@/assets/js/customAnimations'
+import { DropDownMenuAnimation, subMenuHover, menuUnderline } from '@/assets/js/customAnimations'
 onMounted(() => {
   DropDownMenuAnimation()
-  DesktopSubmenuAnimation()
-  SublistAnimation()
+  subMenuHover()
   menuUnderline()
 })
 onBeforeUnmount(() => {
@@ -89,56 +83,58 @@ onBeforeUnmount(() => {
                 alt="right-arrow"
               />
             </li>
-            <li id="about">
-              <router-link to="/about" class="menu-link-2">About</router-link>
-              <img
-                class="nav-arrow"
-                src="../assets/content/icons/right-arrow-white.png"
-                alt="right-arrow"
-              />
+            <li id="about" class="sub-drop">
+              <div class="menu-link-wrapper">
+                <router-link to="/about" class="menu-link-2">About</router-link>
+                <img
+                  class="nav-arrow"
+                  src="../assets/content/icons/right-arrow-white.png"
+                  alt="right-arrow"
+                />
+              </div>
+              <div id="sub-list-about" class="sub-list">
+                <li>
+                  <router-link to="/about/team" class="sub-link"
+                    >Team
+                    <img
+                      class="circle-arrow"
+                      src="../assets/content/icons/circle-arrow.png"
+                      alt="circle-arrow"
+                    />
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/about/dr-beug" class="sub-link">
+                    Dr. Beug
+                    <img
+                      class="circle-arrow"
+                      src="../assets/content/icons/circle-arrow.png"
+                      alt="circle-arrow"
+                    />
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/about/research" class="sub-link">
+                    Research
+                    <img
+                      class="circle-arrow"
+                      src="../assets/content/icons/circle-arrow.png"
+                      alt="circle-arrow"
+                    />
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/about/grants-and-partners" class="sub-link">
+                    Grants & Partners
+                    <img
+                      class="circle-arrow"
+                      src="../assets/content/icons/circle-arrow.png"
+                      alt="circle-arrow"
+                    />
+                  </router-link>
+                </li>
+              </div>
             </li>
-            <div id="sub-list-about" class="sub-list">
-              <li>
-                <router-link to="/about/team" class="sub-link"
-                  >Team
-                  <img
-                    class="circle-arrow"
-                    src="../assets/content/icons/circle-arrow.png"
-                    alt="circle-arrow"
-                  />
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/about/dr-beug" class="sub-link">
-                  Dr. Beug
-                  <img
-                    class="circle-arrow"
-                    src="../assets/content/icons/circle-arrow.png"
-                    alt="circle-arrow"
-                  />
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/about/research" class="sub-link">
-                  Research
-                  <img
-                    class="circle-arrow"
-                    src="../assets/content/icons/circle-arrow.png"
-                    alt="circle-arrow"
-                  />
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/about/grants-and-partners" class="sub-link">
-                  Grants & Partners
-                  <img
-                    class="circle-arrow"
-                    src="../assets/content/icons/circle-arrow.png"
-                    alt="circle-arrow"
-                  />
-                </router-link>
-              </li>
-            </div>
             <li>
               <router-link to="/publications" class="menu-link-2" id="publications"
                 >Publications</router-link
@@ -149,46 +145,50 @@ onBeforeUnmount(() => {
                 alt="right-arrow"
               />
             </li>
-            <li id="gallery">
-              <router-link to="/gallery" class="menu-link-2">Gallery</router-link>
-              <img
-                class="nav-arrow"
-                src="../assets/content/icons/right-arrow-white.png"
-                alt="right-arrow"
-              />
+            <li id="gallery" class="sub-drop">
+              <div class="menu-link-wrapper">
+                <router-link to="/gallery" class="menu-link-2">Gallery</router-link>
+                <img
+                  class="nav-arrow"
+                  src="../assets/content/icons/right-arrow-white.png"
+                  alt="right-arrow"
+                />
+              </div>
+              <div id="sub-list-gallery" class="sub-list">
+                <li>
+                  <router-link to="/gallery/asteroids" class="sub-link">
+                    Immuno Defender
+                    <img
+                      class="circle-arrow"
+                      src="../assets/content/icons/circle-arrow.png"
+                      alt="circle-arrow"
+                    />
+                  </router-link>
+                </li>
+              </div>
             </li>
-            <div id="sub-list-gallery" class="sub-list">
-              <li>
-                <router-link to="/gallery/asteroids" class="sub-link">
-                  Immuno Defender
-                  <img
-                    class="circle-arrow"
-                    src="../assets/content/icons/circle-arrow.png"
-                    alt="circle-arrow"
-                  />
-                </router-link>
-              </li>
-            </div>
-            <li id="contact">
-              <router-link to="/contact" class="menu-link-2">Contact</router-link>
-              <img
-                class="nav-arrow"
-                src="../assets/content/icons/right-arrow-white.png"
-                alt="right-arrow"
-              />
+            <li id="contact" class="sub-drop">
+              <div class="menu-link-wrapper">
+                <router-link to="/contact" class="menu-link-2">Contact</router-link>
+                <img
+                  class="nav-arrow"
+                  src="../assets/content/icons/right-arrow-white.png"
+                  alt="right-arrow"
+                />
+              </div>
+              <div id="sub-list-contact" class="sub-list">
+                <li>
+                  <router-link to="/contact/careers" class="sub-link">
+                    Careers
+                    <img
+                      class="circle-arrow"
+                      src="../assets/content/icons/circle-arrow.png"
+                      alt="circle-arrow"
+                    />
+                  </router-link>
+                </li>
+              </div>
             </li>
-            <div id="sub-list-contact" class="sub-list">
-              <li>
-                <router-link to="/contact/careers" class="sub-link">
-                  Careers
-                  <img
-                    class="circle-arrow"
-                    src="../assets/content/icons/circle-arrow.png"
-                    alt="circle-arrow"
-                  />
-                </router-link>
-              </li>
-            </div>
           </ul>
         </div>
       </div>
@@ -340,6 +340,7 @@ a {
   justify-content: flex-start;
   height: 100%;
   width: 100%;
+  will-change: height;
 }
 #menu-list ul li {
   text-align: left;
@@ -371,12 +372,14 @@ a {
   line-height: 1em;
 }
 .sub-list {
-  width: 96%;
-  font-display: flex;
+  width: 100%;
+  height: 0;
+  max-height: fit-content;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   padding-right: 0.5em;
+  margin-top: 1em;
   padding-bottom: 1em;
 }
 .sub-list li {
@@ -393,17 +396,28 @@ a {
   opacity: 100%;
   margin: 0;
   padding: 0;
-  padding-bottom: 0.5em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
+.menu-link-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-drop {
+  display: flex;
+  justify-content: flex-start !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+}
 .circle-arrow {
   width: 1.1em;
   height: 1.1em;
-  transform: rotate(135deg);
   opacity: 50%;
 }
 #about img,
@@ -494,6 +508,16 @@ a {
     padding-left: 4em;
     padding-right: 4em;
   }
+  #menu-list ul {
+    width: 50%;
+  }
+  .sub-list {
+    width: 100%;
+    padding: 0;
+  }
+  .menu-link-2 {
+    font-size: 4em;
+  }
 }
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
 @media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
@@ -520,36 +544,11 @@ a {
     right: 8em;
   }
   .menu-link-2 {
-    font-size: 8em;
+    font-size: 6em;
     margin-right: 3em;
   }
-  .sub-list {
-    height: fit-content;
-    overflow: hidden;
-    position: fixed;
-    width: fit-content !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    opacity: 0;
-    will-change: opacity;
-  }
-  #sub-list-about {
-    top: 275%;
-    left: -250%;
-  }
-  #sub-list-gallery {
-    top: 75%;
-    left: -162%;
-  }
-  #sub-list-contact {
-    top: 37%;
-    left: -158.5%;
-  }
   .sub-link {
-    font-size: 3em;
-    border-top: solid 2px #f8f8f8;
-    text-wrap: nowrap;
+    font-size: 1.5em;
   }
 }
 </style>
