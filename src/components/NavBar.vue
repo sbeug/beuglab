@@ -166,27 +166,7 @@ onBeforeUnmount(() => {
               </ul>
             </li>
             <li id="contact" class="sub-toggle menu-item">
-              <div class="menu-link-wrapper">
-                <router-link to="/contact" class="menu-link-2">Contact</router-link>
-                <img
-                  id="nav-arrow-contact"
-                  class="nav-arrow"
-                  src="../assets/content/icons/right-arrow-white.png"
-                  alt="right-arrow"
-                />
-              </div>
-              <ul id="sub-list-contact" class="sub-list">
-                <li>
-                  <router-link to="/contact/careers" class="sub-link">
-                    Careers
-                    <img
-                      class="circle-arrow"
-                      src="../assets/content/icons/circle-arrow.png"
-                      alt="circle-arrow"
-                    />
-                  </router-link>
-                </li>
-              </ul>
+              <router-link to="/contact" class="menu-link-2">Contact</router-link>
             </li>
           </ul>
         </div>
