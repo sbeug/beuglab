@@ -150,81 +150,49 @@ export function DropDownMenuAnimation() {
   })
 }
 
-export function subMenuHover(menuSelector = '.sub-drop') {
-  const menuItems = document.querySelectorAll(menuSelector)
+export function subMenuDrop() {
+  const toggles = document.querySelectorAll('.sub-toggle')
 
-  menuItems.forEach((item) => {
-    const subMenu = item.querySelector('.sub-list')
-
-    if (!subMenu) return
-    gsap.set(subMenu, { height: 0, opacity: 0 })
+  toggles.forEach((toggle) => {
+    let isOpen = false
+    const subMenu = toggle.querySelector('.sub-list')
 
     const subMenuTl = new gsap.timeline({
       paused: true,
-      duration: 1,
+      duration: 0.5,
     })
-    subMenuTl.to(
+    subMenuTl.fromTo(
       subMenu,
+      { height: 0, opacity: 0, overflow: 'hidden' },
       {
         height: 'auto',
         opacity: 1,
-        duration: 0.5,
         ease: 'power2.out',
+        onComplete: () => (subMenu.style.overflow = 'visible'),
       },
       0,
-    )
-    subMenuTl.to(
-      '#nav-arrow-about',
-      {
-        rotate: 90,
-        duration: 1,
-        ease: 'power2.out',
-      },
-      0,
-    )
-    subMenuTl.from(
-      '.sub-list li',
-      {
-        y: 50,
-        opacity: 0,
-        stagger: 0.05,
-        ease: 'power2.out',
-      },
-      0.1,
-    )
-    subMenuTl.from(
-      '.sub-link',
-      {
-        x: 20,
-        opacity: 0,
-        stagger: 0.05,
-        duration: 0.5,
-        ease: 'power2.out',
-      },
-      0.35,
     )
     subMenuTl.to(
       '.circle-arrow',
       {
-        rotate: 135,
-        duration: 0.5,
+        rotation: 135,
         ease: 'power2.out',
+        duration: 0.5,
       },
-      0.35,
+      0,
     )
-    let isOpen = false
-    item.addEventListener('click', () => {
-      if (!isOpen) {
-        gsap.set(subMenu, { display: 'flex' })
-        subMenuTl.play()
-        isOpen = true
-      } else {
+    toggle.addEventListener('click', () => {
+      if (isOpen) {
         subMenuTl.reverse()
-        isOpen = false
+      } else {
+        subMenu.style.overflow = 'hidden'
+        subMenuTl.play()
       }
+      isOpen = !isOpen
     })
   })
 }
+
 export function menuUnderline() {
   const underLineWrapper = document.querySelectorAll('#menu li')
   underLineWrapper.forEach((el) => {

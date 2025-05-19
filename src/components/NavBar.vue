@@ -1,9 +1,9 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
-import { DropDownMenuAnimation, subMenuHover, menuUnderline } from '@/assets/js/customAnimations'
+import { DropDownMenuAnimation, subMenuDrop, menuUnderline } from '@/assets/js/customAnimations'
 onMounted(() => {
   DropDownMenuAnimation()
-  subMenuHover()
+  subMenuDrop()
   menuUnderline()
 })
 onBeforeUnmount(() => {
@@ -75,15 +75,10 @@ onBeforeUnmount(() => {
       <div id="dropdown-menu">
         <div id="menu-list">
           <ul>
-            <li>
+            <li class="menu-item">
               <router-link to="/" class="menu-link-2">Home</router-link>
-              <img
-                class="nav-arrow"
-                src="../assets/content/icons/right-arrow-white.png"
-                alt="right-arrow"
-              />
             </li>
-            <li id="about" class="sub-drop">
+            <li id="about" class="sub-toggle menu-item">
               <div class="menu-link-wrapper">
                 <router-link to="/about" class="menu-link-2">About</router-link>
                 <img
@@ -93,7 +88,7 @@ onBeforeUnmount(() => {
                   alt="right-arrow"
                 />
               </div>
-              <div id="sub-list-about" class="sub-list">
+              <ul id="sub-list-about" class="sub-list">
                 <li>
                   <router-link to="/about/team" class="sub-link"
                     >Team
@@ -134,28 +129,24 @@ onBeforeUnmount(() => {
                     />
                   </router-link>
                 </li>
-              </div>
+              </ul>
             </li>
-            <li>
+            <li class="menu-item">
               <router-link to="/publications" class="menu-link-2" id="publications"
                 >Publications</router-link
               >
-              <img
-                class="nav-arrow"
-                src="../assets/content/icons/right-arrow-white.png"
-                alt="right-arrow"
-              />
             </li>
-            <li id="gallery" class="sub-drop">
+            <li id="gallery" class="sub-toggle menu-item">
               <div class="menu-link-wrapper">
                 <router-link to="/gallery" class="menu-link-2">Gallery</router-link>
                 <img
                   class="nav-arrow"
+                  id="nav-arrow-gallery"
                   src="../assets/content/icons/right-arrow-white.png"
                   alt="right-arrow"
                 />
               </div>
-              <div id="sub-list-gallery" class="sub-list">
+              <ul id="sub-list-gallery" class="sub-list">
                 <li>
                   <router-link to="/gallery/asteroids" class="sub-link">
                     Immuno Defender
@@ -166,9 +157,9 @@ onBeforeUnmount(() => {
                     />
                   </router-link>
                 </li>
-              </div>
+              </ul>
             </li>
-            <li id="contact" class="sub-drop">
+            <li id="contact" class="sub-toggle menu-item">
               <div class="menu-link-wrapper">
                 <router-link to="/contact" class="menu-link-2">Contact</router-link>
                 <img
@@ -177,7 +168,7 @@ onBeforeUnmount(() => {
                   alt="right-arrow"
                 />
               </div>
-              <div id="sub-list-contact" class="sub-list">
+              <ul id="sub-list-contact" class="sub-list">
                 <li>
                   <router-link to="/contact/careers" class="sub-link">
                     Careers
@@ -188,7 +179,7 @@ onBeforeUnmount(() => {
                     />
                   </router-link>
                 </li>
-              </div>
+              </ul>
             </li>
           </ul>
         </div>
@@ -343,15 +334,23 @@ a {
   width: 100%;
   will-change: height;
 }
-#menu-list ul li {
+.menu-item {
   text-align: left;
   margin: 0;
-  margin-bottom: 1.25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.menu-link-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
-  width: 100%;
+  align-items: center;
+  margin-bottom: 1em;
 }
 #menu-list ul li a {
   margin: 0;
@@ -373,17 +372,19 @@ a {
   line-height: 1em;
 }
 .sub-list {
-  width: 100%;
+  width: 100% !important;
   height: 0;
   max-height: fit-content;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  padding: 0 !important;
   padding-right: 0.5em;
-  margin-top: 1em;
-  margin-bottom: 2em;
+  margin: 0;
+  display: none;
 }
 .sub-list li {
+  width: 100%;
   margin-bottom: 0.5em !important;
   border-bottom: 1px dashed #f8f8f86f;
 }
@@ -402,19 +403,6 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-}
-.menu-link-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.sub-drop {
-  display: flex;
-  justify-content: flex-start !important;
-  flex-direction: column !important;
-  margin: 0 !important;
 }
 .circle-arrow {
   width: 1.1em;
@@ -446,42 +434,6 @@ a {
     width: 2.5em;
     height: 3px;
   }
-  .sub-menu-about {
-    z-index: 1;
-    position: fixed;
-    top: 7%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    min-width: fit-content;
-    display: none;
-    padding: 0;
-  }
-  .sub-menu-about li {
-    margin: 0 !important;
-    padding: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
-    white-space: nowrap;
-    opacity: 0;
-    list-style: none;
-    border: 1px solid #f8f8f8;
-    border-top: none;
-    width: fit-content;
-    background-color: rgba(83, 35, 35, 0.4);
-    backdrop-filter: blur(10px);
-  }
-  .sub-menu-about li a {
-    color: #f8f8f8;
-    font-family: akzidenz-grotesk-next-pro, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1em;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .sub-menu-about li a:hover {
-    color: #555;
-  }
   #menu li {
     position: relative;
     overflow: hidden;
@@ -505,7 +457,8 @@ a {
     padding-right: 4em;
   }
   #menu-list ul {
-    width: 50%;
+    padding-left: 3em;
+    width: 40%;
   }
   .sub-list {
     width: 100%;
@@ -513,6 +466,14 @@ a {
   }
   .menu-link-2 {
     font-size: 4em;
+  }
+  .nav-arrow {
+    width: 2em;
+    height: 2em;
+    transform: translateY(3px);
+  }
+  .sub-link {
+    font-size: 1.5em;
   }
 }
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
