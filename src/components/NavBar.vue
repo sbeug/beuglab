@@ -341,16 +341,6 @@ a {
   width: 100%;
   will-change: height;
 }
-#menu-list ul li {
-  text-align: left;
-  margin: 0;
-  margin-bottom: 1.25em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  width: 100%;
-}
 .menu-item {
   text-align: left;
   margin: 0;
