@@ -1,9 +1,15 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
-import { DropDownMenuAnimation, subMenuDrop, menuUnderline } from '@/assets/js/customAnimations'
+import {
+  DropDownMenuAnimation,
+  subMenuDrop,
+  DesktopSubmenuAnimation,
+  menuUnderline,
+} from '@/assets/js/customAnimations'
 onMounted(() => {
   DropDownMenuAnimation()
   subMenuDrop()
+  DesktopSubmenuAnimation()
   menuUnderline()
 })
 onBeforeUnmount(() => {
@@ -335,6 +341,16 @@ a {
   width: 100%;
   will-change: height;
 }
+#menu-list ul li {
+  text-align: left;
+  margin: 0;
+  margin-bottom: 1.25em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
 .menu-item {
   text-align: left;
   margin: 0;
@@ -434,6 +450,42 @@ a {
   .line {
     width: 2.5em;
     height: 3px;
+  }
+  .sub-menu-about {
+    z-index: 1;
+    position: fixed;
+    top: 7%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    min-width: fit-content;
+    display: none;
+    padding: 0;
+  }
+  .sub-menu-about li {
+    margin: 0 !important;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    white-space: nowrap;
+    opacity: 0;
+    list-style: none;
+    border: 1px solid #f8f8f8;
+    border-top: none;
+    width: fit-content;
+    background-color: rgba(83, 35, 35, 0.4);
+    backdrop-filter: blur(10px);
+  }
+  .sub-menu-about li a {
+    color: #f8f8f8;
+    font-family: akzidenz-grotesk-next-pro, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1em;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .sub-menu-about li a:hover {
+    color: #555;
   }
   #menu li {
     position: relative;

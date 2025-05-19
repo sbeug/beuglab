@@ -277,6 +277,147 @@ export function subMenuDrop() {
   })
 }
 
+export function DesktopSubmenuAnimation() {
+  // For the About submenu in desktop nav
+  const aboutLinkElement = document.querySelector('#menu-link-about')
+  const aboutSubmenu = document.querySelector('.sub-menu-about')
+
+  if (aboutLinkElement && aboutSubmenu) {
+    gsap.set(aboutSubmenu, {
+      opacity: 0,
+      visibility: 'hidden',
+      y: -10,
+      display: 'flex',
+    })
+
+    const aboutSubmenuTimeline = gsap.timeline({ paused: true })
+
+    aboutSubmenuTimeline
+      .to(aboutSubmenu, {
+        opacity: 1,
+        visibility: 'visible',
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      })
+      .to(
+        aboutSubmenu.querySelectorAll('li'),
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: 'power2.out',
+        },
+        '-=0.15',
+      )
+    // Create a flag to track if we're hovering over either element
+    let isMenuHovered = false
+
+    aboutLinkElement.addEventListener('mouseenter', () => {
+      isMenuHovered = true
+      aboutSubmenuTimeline.play()
+    })
+
+    aboutSubmenu.addEventListener('mouseenter', () => {
+      isMenuHovered = true
+    })
+
+    aboutLinkElement.addEventListener('mouseleave', () => {
+      isMenuHovered = false
+      setTimeout(() => {
+        if (!isMenuHovered) {
+          aboutSubmenuTimeline.reverse()
+        }
+      }, 150)
+    })
+
+    aboutSubmenu.addEventListener('mouseleave', () => {
+      isMenuHovered = false
+      setTimeout(() => {
+        if (!isMenuHovered) {
+          aboutSubmenuTimeline.reverse()
+        }
+      }, 150)
+    })
+  }
+}
+
+export function subMenuHover(menuSelector = '.sub-drop') {
+  const menuItems = document.querySelectorAll(menuSelector)
+
+  menuItems.forEach((item) => {
+    const subMenu = item.querySelector('.sub-list')
+
+    if (!subMenu) return
+    gsap.set(subMenu, { height: 0, opacity: 0 })
+
+    const subMenuTl = new gsap.timeline({
+      paused: true,
+      duration: 1,
+    })
+    subMenuTl.to(
+      subMenu,
+      {
+        height: 'auto',
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    subMenuTl.to(
+      '#nav-arrow-about',
+      {
+        rotate: 90,
+        duration: 1,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    subMenuTl.from(
+      '.sub-list li',
+      {
+        y: 50,
+        opacity: 0,
+        stagger: 0.05,
+        ease: 'power2.out',
+      },
+      0.1,
+    )
+    subMenuTl.from(
+      '.sub-link',
+      {
+        x: 20,
+        opacity: 0,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      0.35,
+    )
+    subMenuTl.to(
+      '.circle-arrow',
+      {
+        rotate: 135,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      0.35,
+    )
+    let isOpen = false
+    item.addEventListener('click', () => {
+      if (!isOpen) {
+        gsap.set(subMenu, { display: 'flex' })
+        subMenuTl.play()
+        isOpen = true
+      } else {
+        subMenuTl.reverse()
+        isOpen = false
+      }
+    })
+  })
+}
 export function menuUnderline() {
   const underLineWrapper = document.querySelectorAll('#menu li')
   underLineWrapper.forEach((el) => {
