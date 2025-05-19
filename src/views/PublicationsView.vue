@@ -1,5 +1,7 @@
 <script setup></script>
 <template>
-  <div></div>
+  <div id="main-content" class="main-content">
+    <div></div>
+  </div>
 </template>
 <style scoped></style>

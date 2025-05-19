@@ -105,9 +105,9 @@ onBeforeUnmount(() => {})
         <div id="team-members-section" class="clickable">
           <div id="members-track" class="clickable">
             <div v-for="member in teamStore.members" :key="member.id" class="team-member clickable">
-              <router-link to="/about/team" class="member-photo">
+              <div class="member-photo">
                 <img :src="member.photo" :alt="member.name" />
-              </router-link>
+              </div>
               <h3>{{ member.name }}</h3>
               <p>{{ member.title }}</p>
             </div>

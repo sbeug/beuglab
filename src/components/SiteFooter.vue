@@ -122,6 +122,9 @@ import ContactButton from '@/components/ContactButton.vue'
   grid-row: 12;
   grid-column: 1 / span 4;
 }
+#bottom-bar a {
+  transition: all 0.5s ease;
+}
 #column-1,
 #column-2,
 #column-3 {
@@ -143,6 +146,11 @@ import ContactButton from '@/components/ContactButton.vue'
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 300;
   font-style: normal;
+  transition: all 0.5s ease;
+}
+#credits a:hover,
+#bottom-bar a:hover {
+  color: #f8f8f86f;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
