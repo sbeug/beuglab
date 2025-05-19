@@ -163,6 +163,7 @@ onBeforeUnmount(() => {
               <div class="menu-link-wrapper">
                 <router-link to="/contact" class="menu-link-2">Contact</router-link>
                 <img
+                  id="nav-arrow-contact"
                   class="nav-arrow"
                   src="../assets/content/icons/right-arrow-white.png"
                   alt="right-arrow"

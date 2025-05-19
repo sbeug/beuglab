@@ -191,6 +191,90 @@ export function subMenuDrop() {
       isOpen = !isOpen
     })
   })
+
+  const aboutFlair = new gsap.timeline({
+    paused: true,
+    duration: 0.5,
+  })
+  const galleryFlair = new gsap.timeline({
+    paused: true,
+    duration: 0.5,
+  })
+  const contactFlair = new gsap.timeline({
+    paused: true,
+    duration: 0.5,
+  })
+  aboutFlair.to(
+    '#nav-arrow-about',
+    {
+      rotation: 90,
+      ease: 'power2.out',
+      duration: 0.5,
+    },
+    0,
+  )
+  galleryFlair.to(
+    '#nav-arrow-gallery',
+    {
+      rotation: 90,
+      ease: 'power2.out',
+      duration: 0.5,
+    },
+    0,
+  )
+  contactFlair.to(
+    '#nav-arrow-contact',
+    {
+      rotation: 90,
+      ease: 'power2.out',
+      duration: 0.5,
+    },
+    0,
+  )
+  aboutFlair.from(
+    '#sub-list-about li',
+    {
+      x: 50,
+      opacity: 0,
+      ease: 'power2.out',
+      stagger: 0.05,
+    },
+    0,
+  )
+
+  const aboutToggle = document.getElementById('about')
+  let isAboutOpen = false
+  aboutToggle.addEventListener('click', () => {
+    if (isAboutOpen === false) {
+      aboutFlair.play()
+      isAboutOpen = true
+    } else if (isAboutOpen === true) {
+      aboutFlair.reverse()
+      isAboutOpen = false
+    }
+  })
+  const galleryToggle = document.getElementById('gallery')
+  let isGalleryOpen = false
+  galleryToggle.addEventListener('click', () => {
+    if (isGalleryOpen === false) {
+      galleryFlair.play()
+      isGalleryOpen = true
+    } else if (isGalleryOpen === true) {
+      galleryFlair.reverse()
+      isGalleryOpen = false
+    }
+  })
+  const contactToggle = document.getElementById('contact')
+  let isContactOpen = false
+  contactToggle.addEventListener('click', () => {
+    if (isContactOpen === false) {
+      contactFlair.play()
+      isContactOpen = true
+    } else if (isContactOpen === true) {
+      contactFlair.reverse()
+      isContactOpen = false
+    }
+  })
 }
 
 export function menuUnderline() {
