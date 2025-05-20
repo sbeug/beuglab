@@ -70,10 +70,10 @@ onBeforeUnmount(() => {
             </router-link>
           </li>
           <li>
-            <router-link to="/contact" class="menu-link">
+            <a class="menu-link">
               Contact
               <div class="menu-underline"></div>
-            </router-link>
+            </a>
           </li>
         </div>
       </div>
