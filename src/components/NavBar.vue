@@ -345,10 +345,10 @@ a {
 .nav-arrow {
   width: 1.3em;
   height: 1.3em;
-  transform: translateY(-3px);
+  transform: translateY(3px);
 }
 .menu-link-2 {
-  font-size: 2em;
+  font-size: 2.5em;
   font-family: new-science, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -376,7 +376,7 @@ a {
   border-bottom: 1px dashed #f8f8f86f;
 }
 .sub-link {
-  font-size: 1em;
+  font-size: 1.25em;
   font-family: new-science, sans-serif;
   font-weight: 500;
   font-style: normal;
