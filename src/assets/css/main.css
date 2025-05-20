@@ -95,7 +95,7 @@ p {
 
 @media (min-width: 1280px) {
   .main-content {
-    pointer-events: none;
+    pointer-events: none !important;
   }
   .df-pad {
     padding-left: 4em;

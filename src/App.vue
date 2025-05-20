@@ -1,6 +1,7 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
 import SiteFooter from './components/SiteFooter.vue'
+import Contact from './components/ContactForm.vue'
 // Gsap
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -13,6 +14,8 @@ import { watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useHead } from '@vueuse/head'
 // Stores ticker function for proper cleanup
 let rafCallback = null
+// Global Animations
+import { ContactForm } from './assets/js/customAnimations'
 
 const lenis = useLenis(() => {
   // ?
@@ -39,6 +42,8 @@ onMounted(() => {
     updateLenis()
     ScrollTrigger.refresh()
   })
+
+  ContactForm()
 })
 
 // Cleanup function
@@ -171,6 +176,11 @@ const leave = (el, done) => {
           <component :is="Component" key="$route.fullPath" />
         </transition>
       </router-view>
+      <div id="contact-container">
+        <div id="contact-wrapper">
+          <Contact />
+        </div>
+      </div>
       <SiteFooter />
     </div>
   </VueLenis>
@@ -194,5 +204,26 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+#contact-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+#contact-wrapper {
+  width: 100vw;
+  height: 0%;
+  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
 }
 </style>

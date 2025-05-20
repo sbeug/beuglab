@@ -620,3 +620,42 @@ export function teamViewAnimations() {
     })
   }
 }
+
+export function ContactForm() {
+  const contactOpen = document.querySelectorAll('.contact-open')
+  const contactContainer = document.querySelector('#contact-container')
+  const contactWrapper = document.querySelector('#contact-wrapper')
+  const contactClose = document.querySelector('.contact-close')
+
+  const contactTimeline = new gsap.timeline({
+    paused: true,
+    duration: 0.5,
+  })
+  contactTimeline.set(
+    contactWrapper,
+    {
+      visibility: 'visible',
+    },
+    0,
+  )
+  contactTimeline.to(
+    contactWrapper,
+    {
+      height: '100vh',
+      ease: 'power4.out',
+      duration: 1,
+    },
+    0,
+  )
+
+  contactOpen.forEach((el) => {
+    el.addEventListener('click', () => {
+      contactTimeline.play()
+      contactContainer.style.pointerEvents = 'auto'
+    })
+  })
+  contactClose.addEventListener('click', () => {
+    contactTimeline.reverse()
+    contactContainer.style.pointerEvents = 'none'
+  })
+}

@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
             </router-link>
           </li>
           <li>
-            <a class="menu-link">
+            <a class="menu-link contact-open">
               Contact
               <div class="menu-underline"></div>
             </a>
@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
               </ul>
             </li>
             <li id="contact" class="sub-toggle menu-item">
-              <router-link to="/contact" class="menu-link-2">Contact</router-link>
+              <a class="menu-link-2 contact-open">Contact</a>
             </li>
           </ul>
         </div>
@@ -275,6 +275,9 @@ onBeforeUnmount(() => {
 #menu li {
   margin-right: 0.5em;
   height: 100%;
+}
+#menu a {
+  cursor: pointer;
 }
 .menu-link {
   font-size: 1.25em;
