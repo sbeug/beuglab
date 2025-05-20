@@ -455,7 +455,7 @@ a {
     transition: color 0.2s ease;
   }
   .sub-menu-about li a:hover {
-    color: #555;
+    color: var(--font-color-hover);
   }
   #menu li {
     position: relative;

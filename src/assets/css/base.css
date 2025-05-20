@@ -52,7 +52,7 @@
 */
 :root {
   --font-color-main: #f8f8f8;
-  --font-color-light: #666;
+  --font-color-hover: #f8f8f86f;
   --bg-color: #ffffff;
   --accent-color: #3478f6;
 }

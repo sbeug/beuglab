@@ -150,7 +150,7 @@ import ContactButton from '@/components/ContactButton.vue'
 }
 #credits a:hover,
 #bottom-bar a:hover {
-  color: #f8f8f86f;
+  color: var(--font-color-hover);
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
