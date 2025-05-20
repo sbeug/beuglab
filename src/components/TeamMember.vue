@@ -33,7 +33,7 @@ defineProps(['member'])
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  color: #f8f8f8;
+  color: var(--font-color-main);
 }
 .member-img-container {
   position: relative;
@@ -89,7 +89,7 @@ defineProps(['member'])
 #edu-links a {
   font-size: 1.5em;
   line-height: 1.2em;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   text-decoration: none;
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 400;

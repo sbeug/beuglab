@@ -89,14 +89,14 @@ import ContactButton from '@/components/ContactButton.vue'
 }
 #footer-title h6 {
   font-size: 2.5em;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   line-height: 1.1em;
   text-align: center;
   width: 90%;
 }
 #contact h6 {
   font-size: 1.75em;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 300;
 }
@@ -108,7 +108,7 @@ import ContactButton from '@/components/ContactButton.vue'
 #column-2 a,
 #column-3 a {
   font-size: 1.25em;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 300;
   font-style: normal;
@@ -141,7 +141,7 @@ import ContactButton from '@/components/ContactButton.vue'
 }
 #credits p,
 #credits a {
-  color: #f8f8f8;
+  color: var(--font-color-main);
   text-decoration: none;
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 300;

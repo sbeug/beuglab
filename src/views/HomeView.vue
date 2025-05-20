@@ -138,7 +138,7 @@ onBeforeUnmount(() => {})
   font-style: normal;
   letter-spacing: normal;
   font-size: 2em;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   text-transform: uppercase;
 }
 .section {
@@ -174,7 +174,7 @@ onBeforeUnmount(() => {})
 }
 .section p,
 .section h6 {
-  color: #f8f8f8;
+  color: var(--font-color-main);
 }
 .section-statement {
   padding-top: 2em;
@@ -228,7 +228,7 @@ onBeforeUnmount(() => {})
   font-size: 1.5em;
   letter-spacing: normal;
   padding-top: 0.5em;
-  color: #f8f8f8;
+  color: var(--font-color-main);
 }
 .team-member p {
   font-family: akzidenz-grotesk-next-pro, sans-serif;

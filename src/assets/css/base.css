@@ -1,3 +1,4 @@
+/*
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
@@ -19,8 +20,8 @@
   --vt-c-text-dark-1: rgba(13, 13, 13, 1);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
-
-/* semantic color variables for this project */
+*/
+/* semantic color variables for this project 
 :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
@@ -48,6 +49,13 @@
     --color-text: var(--vt-c-text-dark-1);
   }
 }
+*/
+:root {
+  --font-color-main: #f8f8f8;
+  --font-color-light: #666;
+  --bg-color: #ffffff;
+  --accent-color: #3478f6;
+}
 
 *,
 *::before,
@@ -59,7 +67,7 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  color: var(--font-color-main);
   background: var(--color-background);
   transition:
     color 0.5s,

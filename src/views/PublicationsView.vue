@@ -14,7 +14,7 @@ import PubmedPublications from '@/components/PubmedPublications.vue'
 }
 #main-content h1 {
   position: relative;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   font-size: 2.5em;
   padding-top: 1.5em;
   text-align: center;

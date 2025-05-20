@@ -39,7 +39,7 @@ const emit = defineEmits(['select'])
   cursor: pointer;
   display: flex;
   align-items: flex-start;
-  color: #f8f8f8;
+  color: var(--font-color-main);
 }
 .member-link h3 {
   font-size: 2em;
@@ -51,17 +51,17 @@ const emit = defineEmits(['select'])
   height: 1.5em;
 }
 .member-link h3:hover {
-  color: #f8f8f8;
+  color: var(--font-color-main);
   text-shadow: #f8f8f8 0px 0px 5px;
 }
 .active {
-  color: #f8f8f8 !important;
+  color: var(--font-color-main) !important;
 }
 .activecircle {
-  border-color: #f8f8f8 !important;
+  border-color: var(--font-color-main) !important;
 }
 .activenumber {
-  color: #f8f8f8 !important;
+  color: var(--font-color-main) !important;
 }
 .number {
   border: 1px solid #f8f8f87c;

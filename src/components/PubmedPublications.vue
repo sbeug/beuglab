@@ -40,7 +40,7 @@ onMounted(async () => {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  color: #f8f8f8;
+  color: var(--font-color-main);
 }
 #publications-list {
   list-style-type: none;
@@ -58,7 +58,7 @@ onMounted(async () => {
   transition: all 0.5s ease;
 }
 a {
-  color: #f8f8f8;
+  color: var(--font-color-main);
 }
 a:hover {
   color: #f8f8f86f;

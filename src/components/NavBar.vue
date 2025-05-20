@@ -272,7 +272,7 @@ onBeforeUnmount(() => {
   font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   opacity: 100%;
   position: relative;
 }
@@ -294,7 +294,7 @@ a {
   height: 1.5em;
 }
 #logo h3 {
-  color: #f8f8f8;
+  color: var(--font-color-main);
   font-size: 1em;
   margin-left: 1.5em;
   text-transform: uppercase;
@@ -353,7 +353,7 @@ a {
   font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   margin: 0;
   opacity: 100%;
   line-height: 1em;
@@ -381,7 +381,7 @@ a {
   font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
-  color: #f8f8f8;
+  color: var(--font-color-main);
   opacity: 100%;
   margin: 0;
   padding: 0;
@@ -446,7 +446,7 @@ a {
     backdrop-filter: blur(10px);
   }
   .sub-menu-about li a {
-    color: #f8f8f8;
+    color: var(--font-color-main);
     font-family: akzidenz-grotesk-next-pro, sans-serif;
     font-weight: 400;
     font-style: normal;
