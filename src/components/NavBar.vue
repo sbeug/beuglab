@@ -204,8 +204,8 @@ onBeforeUnmount(() => {
 }
 #dropdown-menu {
   z-index: 9;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   left: 0;
   top: 0;
@@ -217,8 +217,8 @@ onBeforeUnmount(() => {
 }
 #dropdown-menu-filter {
   z-index: 8;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -395,6 +395,10 @@ a {
   width: 1.1em;
   height: 1.1em;
   opacity: 50%;
+}
+#about,
+#gallery {
+  margin: 0;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
