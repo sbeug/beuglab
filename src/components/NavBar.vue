@@ -21,57 +21,61 @@ onBeforeUnmount(() => {
   <div>
     <div id="navbar-blur"></div>
     <div id="navbar">
-      <div id="logo">
-        <router-link to="/">
-          <img src="../assets/BEUG LAB - Logo Concept 2.png" alt="Logo" id="logo-img" />
-          <h3>Beug Lab</h3>
-        </router-link>
-      </div>
-      <div id="menu">
-        <li>
-          <router-link to="/" class="menu-link">
-            Home
-            <div class="menu-underline"></div>
+      <div id="nav-group">
+        <div id="logo">
+          <router-link to="/">
+            <img src="../assets/BEUG LAB - Logo Concept 2.png" alt="Logo" id="logo-img" />
+            <h3>Beug Lab</h3>
           </router-link>
-        </li>
-        <li>
-          <router-link to="/about" class="menu-link" id="menu-link-about">
-            About
-            <div class="menu-underline"></div>
-          </router-link>
-          <ul class="sub-menu-about">
-            <li>
-              <router-link to="/about/team" class="">Team</router-link>
-            </li>
-            <li>
-              <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
-            </li>
-            <li>
-              <router-link to="/about/research" class="">Research</router-link>
-            </li>
-            <li>
-              <router-link to="/about/grants-and-partners" class="">Grants & Partners</router-link>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <router-link to="/publications" class="menu-link">
-            Publications
-            <div class="menu-underline"></div>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/gallery" class="menu-link">
-            Gallery
-            <div class="menu-underline"></div>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/contact" class="menu-link">
-            Contact
-            <div class="menu-underline"></div>
-          </router-link>
-        </li>
+        </div>
+        <div id="menu">
+          <li>
+            <router-link to="/" class="menu-link">
+              Home,
+              <div class="menu-underline"></div>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/about" class="menu-link" id="menu-link-about">
+              About,
+              <div class="menu-underline"></div>
+            </router-link>
+            <ul class="sub-menu-about">
+              <li>
+                <router-link to="/about/team" class="">Team</router-link>
+              </li>
+              <li>
+                <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
+              </li>
+              <li>
+                <router-link to="/about/research" class="">Research</router-link>
+              </li>
+              <li>
+                <router-link to="/about/grants-and-partners" class=""
+                  >Grants & Partners</router-link
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <router-link to="/publications" class="menu-link">
+              Publications,
+              <div class="menu-underline"></div>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/gallery" class="menu-link">
+              Gallery,
+              <div class="menu-underline"></div>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/contact" class="menu-link">
+              Contact
+              <div class="menu-underline"></div>
+            </router-link>
+          </li>
+        </div>
       </div>
       <div id="menu-button">
         <div class="line" id="line-one"></div>
@@ -202,6 +206,11 @@ onBeforeUnmount(() => {
   border-bottom: solid 1px #f8f8f8;
   background: transparent;
 }
+#nav-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 #dropdown-menu {
   z-index: 9;
   width: 100%;
@@ -264,10 +273,11 @@ onBeforeUnmount(() => {
   list-style: none;
 }
 #menu li {
-  margin-right: 3em;
+  margin-right: 0.5em;
   height: 100%;
 }
 .menu-link {
+  font-size: 1.25em;
   font-family: new-science, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -284,6 +294,7 @@ a {
   position: relative;
   width: fit-content;
   height: fit-content;
+  margin-right: 4em;
 }
 #logo-img {
   position: absolute;
@@ -297,7 +308,7 @@ a {
   color: var(--font-color-main);
   font-size: 1em;
   margin-left: 1.5em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .sub-menu-about {
   display: none;
@@ -429,7 +440,7 @@ a {
     z-index: 1;
     position: fixed;
     top: 7%;
-    left: 45%;
+    left: 21%;
     transform: translate(-50%, -50%);
     min-width: fit-content;
     display: none;
@@ -469,6 +480,7 @@ a {
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #logo h3 {
+    font-size: 1.25em;
     margin-left: 2em;
   }
   .menu-underline {
@@ -485,7 +497,7 @@ a {
   }
   #menu-list ul {
     padding-left: 3em;
-    width: 40%;
+    width: 50%;
   }
   .sub-list {
     width: 100%;
@@ -519,6 +531,9 @@ a {
   #navbar {
     padding-left: 4em;
     padding-right: 4em;
+  }
+  #logo {
+    margin-right: 6em;
   }
   #logo h1 {
     font-size: 1.5em;
