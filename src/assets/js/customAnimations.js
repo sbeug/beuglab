@@ -629,7 +629,7 @@ export function ContactForm() {
 
   const contactTimeline = new gsap.timeline({
     paused: true,
-    duration: 0.5,
+    duration: 1,
   })
   contactTimeline.set(
     contactWrapper,
@@ -643,9 +643,74 @@ export function ContactForm() {
     {
       height: '100vh',
       ease: 'power4.out',
-      duration: 1,
+      duration: 1.5,
     },
     0,
+  )
+  contactTimeline.to(
+    '#contact-spline',
+    {
+      opacity: '100%',
+      ease: 'power1.out',
+      duration: 1,
+    },
+    0.25,
+  )
+  contactTimeline.to(
+    '.contact-close',
+    {
+      opacity: '100%',
+      yPercent: 0,
+      ease: 'power3.out',
+      duration: 0.5,
+    },
+    0.25,
+  )
+  contactTimeline.to(
+    '#contact-form-header',
+    {
+      opacity: '100%',
+      yPercent: 0,
+      ease: 'power3.out',
+      duration: 1,
+    },
+    0.5,
+  )
+  contactTimeline.to(
+    '#description',
+    {
+      opacity: '100%',
+      ease: 'power3.out',
+      duration: 1,
+    },
+    0.75,
+  )
+  contactTimeline.to(
+    '#links',
+    {
+      opacity: '100%',
+      ease: 'power3.out',
+      duration: 1,
+    },
+    1,
+  )
+  contactTimeline.to(
+    '#local',
+    {
+      opacity: '100%',
+      ease: 'power3.out',
+      duration: 1,
+    },
+    1,
+  )
+  contactTimeline.to(
+    '#contact-form',
+    {
+      opacity: '100%',
+      ease: 'power3.out',
+      duration: 1,
+    },
+    1.5,
   )
 
   contactOpen.forEach((el) => {

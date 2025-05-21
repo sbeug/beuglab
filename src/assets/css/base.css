@@ -51,9 +51,9 @@
 }
 */
 :root {
-  --font-color-main: #f8f8f8;
+  --font-color-main: #222222;
   --font-color-hover: #f8f8f86f;
-  --bg-color: #ffffff;
+  --font-color-dark: #222222;
   --accent-color: #3478f6;
 }
 

@@ -1,63 +1,155 @@
-<script setup></script>
+<script setup>
+import { updateLocalTime } from '@/assets/js/utils'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  updateLocalTime()
+  const localTimeElement = document.getElementById('local-time')
+  if (localTimeElement) {
+    setInterval(() => {
+      updateLocalTime()
+    }, 1000)
+  }
+})
+</script>
 <template>
-  <div id="contact" class="clickable">
+  <div id="contact-spline">
+    <spline-viewer
+      url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
+    ></spline-viewer>
+  </div>
+  <div id="contact" class="clickable df-pad">
     <div class="contact-close">
       <h2>Close</h2>
       <div id="x"></div>
     </div>
     <div id="contact-form-header">
-      <h2>Contact.</h2>
+      <h1>Contact.</h1>
     </div>
     <div id="description">
-      <p>Whether you're a fellow researcher, a clinician, a potential collaborator, or someone interested in our work, we’re here to connect. Reach out using the form or via email — we’re always open to new conversations that help push cancer research forward.</p>
+      <p>
+        Whether you're a fellow researcher, a clinician, a potential collaborator, or someone
+        interested in our work, we’re here to connect. Reach out using the form or via email — we’re
+        always open to new conversations that help push cancer research forward.
+      </p>
       <h2>shawn@arc.cheo.ca</h2>
+    </div>
+    <div id="links">
+      <h2>
+        <a href="">CheoRI,</a>
+        <a href="">Uottawa,</a>
+        <a href=""> Linkedin,</a>
+        <a href=""> PubMed,</a>
+        <a href="">OrcId</a>
+      </h2>
+    </div>
+    <div id="local">
+      <h3>Ottawa ON, Canada</h3>
+      <h1 id="local-time"></h1>
     </div>
     <div id="form-container">
       <form id="contact-form">
-      <div id="name-container" class="form-field">
-        <label for="name">Name*</label>
-        <input 
-        type="text" 
-        id="name" 
-        name="name" 
-        autocomplete="on" 
-        required
-        v-model="name">
-      </div>
-      <div id="number-container" class="form-field">
-        <label for="number">Number</label>
-        <input 
-        type="text" 
-        id="number" 
-        name="number" 
-        autocomplete="on"
-        v-model="number">
-      </div>
-      <div id="email-container" class="form-field">
-        <label for="number">Email*</label>
-        <input 
-        type="text" 
-        id="email" 
-        name="email" 
-        autocomplete="on" 
-        required
-        v-model="email">
-      </div>
-      <div id="message-container" class="form-field">
-        <label for="message">Message*</label>
-        <textarea type="message" id="message" name="message" autocomplete="off" required>
-        </textarea>
-      </div>
+        <div id="name-container" class="form-field">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            autocomplete="on"
+            required
+            v-model="name"
+            placeholder="Full name"
+          />
+        </div>
+        <div id="row">
+          <div id="phone-container" class="form-field">
+            <input
+              type="text"
+              id="phone"
+              name="number"
+              autocomplete="on"
+              v-model="number"
+              placeholder="Phone"
+            />
+          </div>
+          <div id="email-container" class="form-field">
+            <input
+              type="text"
+              id="email"
+              name="email"
+              autocomplete="on"
+              required
+              v-model="email"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <div id="message-container" class="form-field">
+          <textarea
+            type="message"
+            id="message"
+            name="message"
+            autocomplete="off"
+            v-model="message"
+            required
+            placeholder="Message"
+          >
+          </textarea>
+        </div>
+        <div id="submit-container">
+          <button id="submit">Send message</button>
+          <p>
+            By submitting this form, you consent to Beug Lab storing your information for the
+            purpose of responding to your inquiry. We do not offer medical advice or consultations.
+          </p>
+        </div>
       </form>
     </div>
   </div>
 </template>
 <style scoped>
-#contact{
-  color: black;
+#contact-spline {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+#contact {
+  z-index: 1;
+  position: relative;
+  color: var(--font-color-dark);
 }
 .contact-close {
   cursor: pointer;
+  z-index: 2;
+}
+#links {
+  display: none;
+  flex-direction: row;
+  text-wrap: wrap;
+}
+.contact-close,
+#description,
+#links,
+#local {
+  opacity: 0;
+  y: 50px;
+}
+#links a {
+  color: var(--font-color-dark);
+}
+#description h2,
+#links h2 {
+  margin: 0;
+}
+#contact-form-header {
+  position: relative;
+  opacity: 0;
+}
+#local h1 {
+  height: fit-content;
 }
 #form-container {
   width: 100%;
@@ -67,13 +159,24 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
-#form-container label {
+#contact-form {
+  opacity: 0;
+}
+#form-container input,
+#form-container textarea {
   font-family: akzidenz-grotesk-next-pro, sans-serif;
-  font-weight: 400;
+  font-weight: 100;
   font-style: normal;
   letter-spacing: normal;
-  font-size: 1em;
-  color: black;
+  width: 100%;
+  background: transparent;
+  border: 1px solid #22222254;
+  padding: 1em;
+  border-radius: 10px;
+}
+#form-container textarea {
+  min-width: 100%;
+  resize: none;
 }
 .form-field {
   display: flex;
@@ -83,6 +186,24 @@
   width: 100%;
   height: fit-content;
   margin-bottom: 1em;
+}
+#submit {
+  background-color: var(--font-color-dark);
+  color: var(--font-color-main);
+  font-family: akzidenz-grotesk-next-pro, sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  border-radius: 50px;
+  border: none;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+#submit-container p {
+  line-height: 1.5em;
+  color: #22222272;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -96,33 +217,100 @@
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
     height: 100%;
+    padding-right: 0em !important;
   }
   #contact-form-header {
     grid-column: 1 / span 4;
     grid-row: 2;
-  } 
-  #contact-form-header h2{
-    font-size: 12em;
+  }
+  #contact-form-header h1 {
+    font-size: 10em;
   }
   #description {
     grid-column: 1 / span 4;
-    grid-row: 3 / span 4;
+    grid-row: 3 / span 2;
     font-size: 1.25em;
     line-height: 1.3em;
-    padding-right: 2em;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  #links {
+    grid-column: 4 / span 3;
+    grid-row: 3;
+    padding-top: 0.5em;
+    padding-left: 4em;
+    padding-bottom: 1em;
+    border-radius: 25px;
+    transition: all 0.5s ease;
+  }
+  #links:hover {
+    backdrop-filter: blur(5px);
+    box-shadow: 5px 5px 5px 5px #e9e9e9af;
+  }
+  #description p {
+    font-size: 1.25em;
+    line-height: 1.3em;
   }
   #description h2 {
+    font-size: 1.25em;
     padding-top: 1em;
   }
+  #local {
+    grid-column: 1 / span 3;
+    grid-row: 8 / span 2;
+    padding-left: 1em;
+  }
+  #local {
+    line-height: 2.5em;
+  }
+  #local h1 {
+    font-size: 3.25em;
+  }
   #form-container {
-    grid-column: 8 / span 12;
-    grid-row: 5 / span 8;
+    grid-column: 7 / span 4;
+    grid-row: 1 / span 12;
+    backdrop-filter: blur(10px);
+    background-color: #2222220a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #contact-form {
+    width: 100%;
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+  #row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+  }
+  #form-container input,
+  #form-container textarea {
+    font-size: 1em;
+  }
+  #submit-container {
+    padding-top: 1em;
+  }
+  #submit {
+    font-size: 1em;
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
     padding-left: 2em;
     padding-right: 2em;
-    padding-top: 2em;
-    padding-bottom: 2em;
+  }
+  #submit-container p {
+    width: 75%;
+    padding-top: 1.5em;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) */
+@media only screen and (min-width: 1920px) {
+  #contact-form-header h1 {
+    font-size: 7.5em;
   }
 }
 </style>
