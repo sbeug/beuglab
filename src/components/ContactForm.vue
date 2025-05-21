@@ -1,12 +1,16 @@
 <script setup></script>
 <template>
-  <div id="contact-form" class="clickable">
+  <div id="contact" class="clickable">
     <div class="contact-close">
       <h2>Close</h2>
       <div id="x"></div>
     </div>
     <div id="contact-form-header">
       <h2>Contact.</h2>
+    </div>
+    <div id="description">
+      <p>Whether you're a fellow researcher, a clinician, a potential collaborator, or someone interested in our work, we’re here to connect. Reach out using the form or via email — we’re always open to new conversations that help push cancer research forward.</p>
+      <h2>shawn@arc.cheo.ca</h2>
     </div>
     <div id="form-container">
       <form id="contact-form">
@@ -49,7 +53,7 @@
   </div>
 </template>
 <style scoped>
-#contact-form {
+#contact{
   color: black;
 }
 .contact-close {
@@ -58,6 +62,10 @@
 #form-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 #form-container label {
   font-family: akzidenz-grotesk-next-pro, sans-serif;
@@ -83,8 +91,38 @@
     top: 2em;
     right: 2em;
   }
+  #contact {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    height: 100%;
+  }
+  #contact-form-header {
+    grid-column: 1 / span 4;
+    grid-row: 2;
+  } 
   #contact-form-header h2{
-    font-size: 10em;
+    font-size: 12em;
+  }
+  #description {
+    grid-column: 1 / span 4;
+    grid-row: 3 / span 4;
+    font-size: 1.25em;
+    line-height: 1.3em;
+    padding-right: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+  #description h2 {
+    padding-top: 1em;
+  }
+  #form-container {
+    grid-column: 8 / span 12;
+    grid-row: 5 / span 8;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
 }
 </style>

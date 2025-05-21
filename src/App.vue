@@ -221,9 +221,6 @@ header {
   width: 100vw;
   height: 0%;
   background-color: aliceblue;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   visibility: hidden;
 }
 </style>
