@@ -29,7 +29,7 @@ import ContactButton from '@/components/ContactButton.vue'
         <router-link to="/about">Gallery</router-link>
       </div>
       <div id="column-3">
-        <router-link to="/contact">Contact</router-link>
+        <a class="contact-open">Contact</a>
         <router-link to="/careers">Join us</router-link>
         <router-link to="/asteroids">Asteroids</router-link>
       </div>
