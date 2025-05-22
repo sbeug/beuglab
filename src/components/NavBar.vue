@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100vw;
   height: 7vh;
-  background-color: rgba(83, 35, 35, 0.322);
+  background-color: #e9e9e98a;
   backdrop-filter: blur(10px);
 }
 #navbar {
@@ -203,7 +203,7 @@ onBeforeUnmount(() => {
   align-items: center;
   padding-left: 1.5em;
   padding-right: 1em;
-  border-bottom: solid 1px #f8f8f8;
+  border-bottom: solid 1px var(--nero);
   background: transparent;
 }
 #nav-group {
@@ -232,7 +232,7 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   transform: translateX(100%);
-  background-color: rgba(83, 35, 35, 0.4);
+  background-color: #e9e9e98a;
   backdrop-filter: blur(15px);
   animation: dropmenu-enter 2s ease-in-out forwards;
   opacity: 0%;
@@ -264,7 +264,7 @@ onBeforeUnmount(() => {
 .line {
   width: 2em;
   height: 2px;
-  background-color: #f8f8f8;
+  background-color: var(--nero);
   margin-bottom: 0.5em;
   transition: all 0.3s ease-in-out;
 }
@@ -273,7 +273,7 @@ onBeforeUnmount(() => {
   list-style: none;
 }
 #menu li {
-  margin-right: 0.5em;
+  margin-right: 2em;
   height: 100%;
 }
 #menu a {
@@ -457,10 +457,10 @@ a {
     white-space: nowrap;
     opacity: 0;
     list-style: none;
-    border: 1px solid #f8f8f8;
+    border: 1px solid var(--nero);
     border-top: none;
     width: fit-content;
-    background-color: rgba(83, 35, 35, 0.4);
+    background-color: #e9e9e98a;
     backdrop-filter: blur(10px);
   }
   .sub-menu-about li a {
@@ -491,7 +491,7 @@ a {
     bottom: 0%;
     width: 0%;
     height: 1.5px;
-    background-color: #f8f8f8;
+    background-color: var(--nero);
     will-change: width;
   }
   #navbar {

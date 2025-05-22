@@ -46,13 +46,13 @@ const emit = defineEmits(['select'])
   margin: 0;
   padding: 0;
   transition: 0.5s ease;
-  color: #f8f8f87c;
+  color: #2222227e;
   transition: 0.5s ease;
   height: 1.5em;
 }
 .member-link h3:hover {
   color: var(--font-color-main);
-  text-shadow: #f8f8f8 0px 0px 5px;
+  text-shadow: #222222 0px 0px 5px;
 }
 .active {
   color: var(--font-color-main) !important;

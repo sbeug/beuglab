@@ -110,7 +110,9 @@ onBeforeUnmount(() => {})
   #main-content {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    height: 110vh;
+    min-height: 100%;
+    height: 100%;
+    padding-bottom: 6em;
   }
   #mobile-btn {
     display: none;

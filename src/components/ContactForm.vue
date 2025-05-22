@@ -188,8 +188,8 @@ onMounted(() => {
   margin-bottom: 1em;
 }
 #submit {
-  background-color: var(--font-color-dark);
-  color: var(--font-color-main);
+  background-color: var(--nero);
+  color: var(--blanco);
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 100;
   font-style: normal;
@@ -221,14 +221,14 @@ onMounted(() => {
   }
   #contact-form-header {
     grid-column: 1 / span 4;
-    grid-row: 2;
+    grid-row: 3;
   }
   #contact-form-header h1 {
     font-size: 10em;
   }
   #description {
     grid-column: 1 / span 4;
-    grid-row: 3 / span 2;
+    grid-row: 4 / span 2;
     font-size: 1.25em;
     line-height: 1.3em;
     padding-left: 1em;

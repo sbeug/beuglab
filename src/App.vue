@@ -2,6 +2,7 @@
 import NavBar from './components/NavBar.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import Contact from './components/ContactForm.vue'
+import '@splinetool/viewer'
 // Gsap
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -159,7 +160,7 @@ const leave = (el, done) => {
     <div id="app">
       <div id="spline">
         <spline-viewer
-          url="https://prod.spline.design/JYUfwdcwcFHWn9N9/scene.splinecode"
+          url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
         ></spline-viewer>
       </div>
       <header>
@@ -200,6 +201,7 @@ header {
 }
 #spline {
   position: fixed;
+  z-index: 0;
   top: 0;
   left: 0;
   width: 100vw;

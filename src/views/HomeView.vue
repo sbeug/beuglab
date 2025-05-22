@@ -1,9 +1,8 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import '@splinetool/viewer'
 import { useTeamStore } from '@/stores/team.js'
 import { sanity } from '@/assets/js/sanity.js'
-import { homePageLoadAnimation, dragToScroll } from '@/assets/js/customAnimations'
+import { homePageLoadAnimation, dragToScroll, textColorIn } from '@/assets/js/customAnimations'
 
 const teamStore = useTeamStore()
 
@@ -16,6 +15,7 @@ const teamDescription = ref('')
 
 onMounted(async () => {
   homePageLoadAnimation()
+  textColorIn()
   try {
     const query = `*[_type == "homePage"][0] {
       sectionOneTitle,
@@ -57,8 +57,10 @@ onBeforeUnmount(() => {})
         <h6 v-if="error">Our Objective</h6>
       </div>
       <div class="section-statement">
-        <h6>{{ sectionOneText }}</h6>
-        <h6 v-if="error">
+        <h6 class="split-type" data-bg-color="e9e9e9" data-fg-color="#222222">
+          {{ sectionOneText }}
+        </h6>
+        <h6 class="split-type" v-if="error" data-bg-color="#e9e9e9af" data-fg-color="#222222">
           Through innovative science, we aim to improve diagnosis, treatment, and outcomes.
         </h6>
       </div>
@@ -140,6 +142,8 @@ onBeforeUnmount(() => {})
   font-size: 2em;
   color: var(--font-color-main);
   text-transform: uppercase;
+  width: 100%;
+  text-align: center;
 }
 .section {
   position: relative;
@@ -244,19 +248,18 @@ onBeforeUnmount(() => {})
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #hero-heading {
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     padding-top: 2em;
-  }
-  #hero-heading {
-    padding-top: 2em;
+    height: 100vh;
   }
   #hero-heading h1 {
-    font-size: 10em;
+    font-size: 12em;
   }
   #hero-img {
+    display: none;
     width: 92%;
-    height: 70%;
+    height: 30%;
     background-color: #181818;
     position: absolute;
     top: 62%;

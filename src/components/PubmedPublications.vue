@@ -63,9 +63,6 @@ a {
 a:hover {
   color: #f8f8f86f;
 }
-.paper-title {
-  text-transform: capitalize;
-}
 #spinner-container {
   position: relative;
   display: flex;

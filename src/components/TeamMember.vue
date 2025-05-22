@@ -11,8 +11,8 @@ defineProps(['member'])
           </div>
           <div id="edu-links">
             <h6>{{ member.edu }}</h6>
-            <a :href="member.linkedin">Linkedin</a>
-            <a :href="member.cheo">Cheo RI</a>
+            <a :href="member.linkedin">LinkedIn</a>
+            <a :href="member.cheo">CHEO RI</a>
           </div>
         </div>
         <div>
@@ -109,6 +109,7 @@ defineProps(['member'])
     border-radius: 100%;
     width: 26em;
     height: 26em;
+    border: 4px solid var(--nero);
   }
   #top-section {
     display: grid;

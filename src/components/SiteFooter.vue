@@ -52,6 +52,8 @@ import ContactButton from '@/components/ContactButton.vue'
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(12, 1fr);
+  backdrop-filter: blur(10px);
+  background-color: #2222220a;
 }
 #divider {
   z-index: 1;

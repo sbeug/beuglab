@@ -418,6 +418,7 @@ export function subMenuHover(menuSelector = '.sub-drop') {
     })
   })
 }
+
 export function menuUnderline() {
   const underLineWrapper = document.querySelectorAll('#menu li')
   underLineWrapper.forEach((el) => {
@@ -722,5 +723,35 @@ export function ContactForm() {
   contactClose.addEventListener('click', () => {
     contactTimeline.reverse()
     contactContainer.style.pointerEvents = 'none'
+  })
+}
+
+export function textColorIn() {
+  const splitTypes = document.querySelectorAll('split-type')
+
+  splitTypes.forEach((char) => {
+    const bg = char.dataset.bgColor
+    const fg = char.dataset.fgColor
+
+    const text = new SplitType(char, { types: 'words chars' })
+
+    gsap.fromTo(
+      text.chars,
+      {
+        color: bg,
+      },
+      {
+        color: fg,
+        duration: 0.3,
+        stagger: 0.02,
+        scrollTrigger: {
+          trigger: char,
+          start: 'top 90%',
+          end: 'top 25%',
+          scrub: true,
+          toggleActions: 'play play reverse reverse',
+        },
+      },
+    )
   })
 }
