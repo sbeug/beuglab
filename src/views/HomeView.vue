@@ -104,11 +104,11 @@ onBeforeUnmount(() => {})
             <div class="dot"></div>
           </router-link>
         </div>
-        <div id="team-members-section" class="clickable">
+        <div id="team-members-section">
           <div id="members-track" class="clickable">
             <div v-for="member in teamStore.members" :key="member.id" class="team-member clickable">
               <div class="member-photo">
-                <img :src="member.photo" :alt="member.name" />
+                <img :src="member.headshot" :alt="member.name" />
               </div>
               <h3>{{ member.name }}</h3>
               <p>{{ member.title }}</p>
@@ -125,14 +125,9 @@ onBeforeUnmount(() => {})
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-#hero-heading {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: fit-content;
-  overflow: hidden;
-  padding-top: 4em;
 }
 #hero-heading h1 {
   font-family: new-science-extended, sans-serif;
@@ -239,19 +234,25 @@ onBeforeUnmount(() => {})
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
+  line-height: 1.3em;
 }
 .member-photo {
   width: 18em;
   height: 25em;
+  border-radius: 10px;
   border: 1px solid #f8f8f8;
+}
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  pointer-events: none;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #hero-heading {
-    align-items: center;
-    justify-content: center;
-    padding-top: 2em;
-    height: 100vh;
+    transform: translateY(-1em);
   }
   #hero-heading h1 {
     font-size: 12em;
@@ -363,7 +364,6 @@ onBeforeUnmount(() => {})
   .member-photo {
     width: 25em;
     height: 30em;
-    border: 1px solid #f8f8f8;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */
@@ -377,7 +377,6 @@ onBeforeUnmount(() => {})
   .member-photo {
     width: 22.5em;
     height: 30em;
-    border: 1px solid #f8f8f8;
   }
 }
 </style>

@@ -387,7 +387,7 @@ a {
 .sub-list li {
   width: 100%;
   margin-bottom: 0.5em !important;
-  border-bottom: 1px dashed #f8f8f86f;
+  border-bottom: 1px dashed #2222225e;
 }
 .sub-link {
   font-size: 1.25em;
