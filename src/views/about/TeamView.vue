@@ -110,9 +110,11 @@ onBeforeUnmount(() => {})
   #main-content {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    min-height: 100%;
+    min-height: 100vh;
     height: 100%;
     padding-bottom: 6em;
+    will-change: height;
+    transition: all 0.5s ease;
   }
   #mobile-btn {
     display: none;
@@ -120,13 +122,15 @@ onBeforeUnmount(() => {})
   #side-bar {
     position: relative;
     grid-column: 9 / span 12;
-    grid-row: 3 / span 10;
+    grid-row: 2 / span 8;
     top: 0%;
     left: 0%;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     transform: translateY(0%);
-    padding: 0;
+    padding-top: 4em;
+    height: 100%;
+    min-height: 100vh;
   }
   #team-member-container {
     padding: 0;
