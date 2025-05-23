@@ -224,5 +224,6 @@ header {
   height: 0%;
   background-color: #e9e9e9;
   visibility: hidden;
+  overflow-y: auto;
 }
 </style>

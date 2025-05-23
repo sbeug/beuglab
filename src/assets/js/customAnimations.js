@@ -687,15 +687,6 @@ export function ContactForm() {
     0.75,
   )
   contactTimeline.to(
-    '#links',
-    {
-      opacity: '100%',
-      ease: 'power3.out',
-      duration: 1,
-    },
-    1,
-  )
-  contactTimeline.to(
     '#local',
     {
       opacity: '100%',
@@ -711,7 +702,7 @@ export function ContactForm() {
       ease: 'power3.out',
       duration: 1,
     },
-    1.5,
+    1.25,
   )
 
   contactOpen.forEach((el) => {

@@ -163,7 +163,7 @@ onBeforeUnmount(() => {})
   font-style: normal;
   letter-spacing: normal;
   font-size: 0.5em;
-  border: 1px dashed #f8f8f8;
+  border: 1px dashed var(--nero);
   border-radius: 100%;
   height: 5em;
   width: 5em;
@@ -185,6 +185,7 @@ onBeforeUnmount(() => {})
 }
 #ourwork-statement h6,
 #team-statement h6 {
+  line-height: 1.2em;
   font-size: 2em;
 }
 #team-description {
@@ -205,7 +206,8 @@ onBeforeUnmount(() => {})
 #team-members-section {
   position: relative;
   width: 100%;
-  overflow-x: visible;
+  overflow-x: scroll;
+  scrollbar-width: none;
   padding-top: 1em;
 }
 #members-track {
@@ -215,6 +217,10 @@ onBeforeUnmount(() => {})
   justify-content: flex-start;
   width: max-content;
   will-change: transform;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  transition: all 0.1s ease;
+  user-select: none;
 }
 .team-member {
   display: flex;
@@ -235,13 +241,13 @@ onBeforeUnmount(() => {})
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
-  line-height: 1.3em;
+  line-height: 1.5em;
 }
 .member-photo {
   width: 18em;
   height: 25em;
   border-radius: 10px;
-  border: 1px solid #f8f8f8;
+  border: none;
 }
 .member-photo img {
   width: 100%;

@@ -34,19 +34,11 @@ onMounted(() => {
       </p>
       <h2>shawn@arc.cheo.ca</h2>
     </div>
-    <div id="links">
-      <h2>
-        <a href="">CheoRI,</a>
-        <a href="">Uottawa,</a>
-        <a href=""> Linkedin,</a>
-        <a href=""> PubMed,</a>
-        <a href="">OrcId</a>
-      </h2>
-    </div>
     <div id="local">
       <h3>Ottawa ON, Canada</h3>
       <h1 id="local-time"></h1>
     </div>
+    <div id="divider"></div>
     <div id="form-container">
       <form id="contact-form">
         <div id="name-container" class="form-field">
@@ -120,10 +112,17 @@ onMounted(() => {
   z-index: 1;
   position: relative;
   color: var(--font-color-dark);
+  height: 100%;
 }
 .contact-close {
   cursor: pointer;
   z-index: 2;
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+}
+.contact-close h2 {
+  font-size: 1.25em;
 }
 #links {
   display: none;
@@ -147,6 +146,22 @@ onMounted(() => {
 #contact-form-header {
   position: relative;
   opacity: 0;
+  padding-top: 4em;
+  padding-bottom: 1em;
+}
+#contact-form-header h1 {
+  font-size: 4em;
+}
+#description {
+  padding-bottom: 0em;
+  font-size: 1.25em;
+}
+#description p {
+  line-height: 1.5em;
+  padding-bottom: 0.5em;
+}
+#local {
+  padding-top: 2em;
 }
 #local h1 {
   height: fit-content;
@@ -161,6 +176,7 @@ onMounted(() => {
 }
 #contact-form {
   opacity: 0;
+  width: 100%;
 }
 #form-container input,
 #form-container textarea {
@@ -171,11 +187,13 @@ onMounted(() => {
   width: 100%;
   background: transparent;
   border: 1px solid #22222254;
-  padding: 1em;
+  padding: 0.75em;
   border-radius: 10px;
+  font-size: 1em;
 }
 #form-container textarea {
   min-width: 100%;
+  min-height: 8em;
   resize: none;
 }
 .form-field {
@@ -187,6 +205,10 @@ onMounted(() => {
   height: fit-content;
   margin-bottom: 1em;
 }
+#submit-container {
+  width: fit-content;
+  padding-top: 1em;
+}
 #submit {
   background-color: var(--nero);
   color: var(--blanco);
@@ -194,23 +216,34 @@ onMounted(() => {
   font-weight: 100;
   font-style: normal;
   letter-spacing: normal;
+  font-size: 1em;
   border-radius: 50px;
   border: none;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
 }
 #submit-container p {
   line-height: 1.5em;
   color: #22222272;
+  padding-top: 1.5em;
+}
+#divider {
+  width: 100%;
+  height: 1px;
+  background-color: #22222254;
+  margin-top: 3em;
+  margin-bottom: 4em;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   .contact-close {
-    position: absolute;
-    top: 2em;
+    top: 1em;
     right: 2em;
+  }
+  .contact-close h2 {
+    font-size: 1.5em;
   }
   #contact {
     display: grid;
@@ -220,6 +253,7 @@ onMounted(() => {
     padding-right: 0em !important;
   }
   #contact-form-header {
+    padding: 0;
     grid-column: 1 / span 4;
     grid-row: 3;
   }
@@ -230,23 +264,9 @@ onMounted(() => {
     grid-column: 1 / span 4;
     grid-row: 4 / span 2;
     font-size: 1.25em;
-    line-height: 1.3em;
     padding-left: 1em;
     padding-top: 1em;
     padding-bottom: 1em;
-  }
-  #links {
-    grid-column: 4 / span 3;
-    grid-row: 3;
-    padding-top: 0.5em;
-    padding-left: 4em;
-    padding-bottom: 1em;
-    border-radius: 25px;
-    transition: all 0.5s ease;
-  }
-  #links:hover {
-    backdrop-filter: blur(5px);
-    box-shadow: 5px 5px 5px 5px #e9e9e9af;
   }
   #description p {
     font-size: 1.25em;
@@ -257,6 +277,7 @@ onMounted(() => {
     padding-top: 1em;
   }
   #local {
+    display: unset;
     grid-column: 1 / span 3;
     grid-row: 8 / span 2;
     padding-left: 1em;
@@ -290,10 +311,11 @@ onMounted(() => {
   }
   #form-container input,
   #form-container textarea {
+    padding: 1em;
     font-size: 1em;
   }
-  #submit-container {
-    padding-top: 1em;
+  #form-container textarea {
+    min-height: 100%;
   }
   #submit {
     font-size: 1em;
@@ -303,8 +325,12 @@ onMounted(() => {
     padding-right: 2em;
   }
   #submit-container p {
-    width: 75%;
+    display: block;
+    width: 100%;
     padding-top: 1.5em;
+  }
+  #divider {
+    display: none;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */
