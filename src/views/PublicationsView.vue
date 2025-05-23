@@ -11,6 +11,7 @@ import PubmedPublications from '@/components/PubmedPublications.vue'
 #main-content {
   position: relative;
   min-height: 100vh;
+  padding-bottom: 4em;
 }
 #main-content h1 {
   position: relative;

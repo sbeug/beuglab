@@ -11,11 +11,11 @@ import ContactButton from '@/components/ContactButton.vue'
     <ContactButton id="button" />
     <div id="bottom-bar">
       <div id="contact">
-        <h6>johnsmith@gmail.com</h6>
+        <h6>shawn@arc.cheo.ca</h6>
         <h6>45.4006474 - 75.6521784</h6>
         <div id="socials">
-          <a href="https://www.linkedin.com/" target="_blank">Linkedin ↗</a>
-          <a href="https://www.instagram.com/" target="_blank">Linkedin ↗</a>
+          <a href="https://www.linkedin.com/" target="_blank">LinkedIn ↗</a>
+          <a href="https://www.instagram.com/" target="_blank">CHEO RI ↗</a>
         </div>
       </div>
       <div id="column-1">
@@ -30,8 +30,8 @@ import ContactButton from '@/components/ContactButton.vue'
       </div>
       <div id="column-3">
         <a class="contact-open">Contact</a>
-        <router-link to="/careers">Join us</router-link>
-        <router-link to="/asteroids">Asteroids</router-link>
+        <a class="contact-open">Join us</a>
+        <router-link to="/asteroids">Defender</router-link>
       </div>
       <div id="credits">
         <p>© 2025 Beug Lab | All rights reserved</p>

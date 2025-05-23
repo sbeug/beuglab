@@ -44,6 +44,7 @@ onBeforeUnmount(() => {})
   will-change: height;
   transition: all 0.5s ease;
   overflow: visible;
+  padding-bottom: 4em;
 }
 .member-fade-enter-active {
   transition: all 0.6s ease-out;
@@ -67,19 +68,21 @@ onBeforeUnmount(() => {})
   top: 6.5em;
   left: 1.5em;
   margin-left: 1em;
-  background-color: transparent;
+  background-color: #22222210;
+  backdrop-filter: blur(10px);
   margin: 0;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   padding-left: 1.5em;
   height: 2.5em;
+  border: 1px solid var(--nero);
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 #mobile-btn p {
-  color: #f8f8f8;
+  color: var(--font-color-main);
   text-transform: uppercase;
   font-size: 1em;
   margin: 0;
@@ -98,7 +101,7 @@ onBeforeUnmount(() => {})
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: rgba(82, 35, 35, 0.6);
+  background-color: #e9e9e98a;
   backdrop-filter: blur(20px);
 }
 #team-member-container {

@@ -61,7 +61,8 @@ onBeforeUnmount(() => {})
           {{ sectionOneText }}
         </h6>
         <h6 class="split-type" v-if="error" data-bg-color="#e9e9e9af" data-fg-color="#222222">
-          Through innovative science, we aim to improve diagnosis, treatment, and outcomes.
+          We decode immune-cancer interactions and leverage immune-based therapies to enhance
+          anti-tumor responses.
         </h6>
       </div>
     </div>
@@ -74,8 +75,8 @@ onBeforeUnmount(() => {})
       <div id="ourwork-statement" class="section-statement">
         <h6>{{ sectionTwoText }}</h6>
         <h6 v-if="error">
-          We conduct innovative cancer research aimed at uncovering the underlying mechanisms of
-          cancer.
+          Investigating the inhibitor of apoptosis proteins (IAPs) and their control of cell death,
+          inflammation, and anti-tumour immunity.
         </h6>
       </div>
     </div>
@@ -91,10 +92,10 @@ onBeforeUnmount(() => {})
         <div id="team-description" class="description">
           <p>{{ teamDescription }}</p>
           <p v-if="error">
-            Beug Lab is made up of a diverse team of students, professionals, and doctors, all
-            dedicated to advancing cancer research. With a blend of fresh perspectives and
-            expertise, we work together to drive impactful discoveries that improve treatment and
-            outcomes.
+            The Beug Lab is a collaborative team of trainees, postdocs, and associate scientists at
+            the Children's Hospital of Eastern Ontario Research Institute (CHEO RI). Our team is
+            interested in programmed cell death, inflammation, cancer immunology, and the
+            development of cancer immunotherapies
           </p>
         </div>
         <div id="team-c2a" class="clickable">
@@ -291,7 +292,7 @@ onBeforeUnmount(() => {})
     padding-left: 8em;
   }
   .section-statement h6 {
-    font-size: 8em;
+    font-size: 7em;
     width: 75%;
   }
   .description {

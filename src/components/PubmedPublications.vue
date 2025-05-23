@@ -53,7 +53,7 @@ onMounted(async () => {
   padding-bottom: 1em;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  background-color: #f8f8f810;
+  background-color: #22222210;
   border-radius: 20px;
   transition: all 0.5s ease;
 }
@@ -61,7 +61,7 @@ a {
   color: var(--font-color-main);
 }
 a:hover {
-  color: #f8f8f86f;
+  color: #2222228e;
 }
 #spinner-container {
   position: relative;

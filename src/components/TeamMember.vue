@@ -117,6 +117,7 @@ defineProps(['member'])
   }
   .member-name {
     font-size: 4em;
+    padding: 0;
     padding-top: 0.5em;
   }
   .member-title {
@@ -138,9 +139,7 @@ defineProps(['member'])
     align-items: flex-start;
     padding: 0;
   }
-  #edu-links a {
-    font-size: 2em;
-  }
+  #edu-links a,
   #edu-links h6 {
     font-size: 2em;
   }

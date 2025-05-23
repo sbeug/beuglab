@@ -44,7 +44,7 @@ export const useTeamStore = defineStore('team', () => {
       title: 'Postdoctoral Fellow',
       photo: 'insertLinkHere',
       headshot: 'insertLinkHere',
-      bio: 'Kyle is Kyle.',
+      bio: 'Noah joined the lab as an Honours student in 2021. Under the co-supervision of Dr. Shawn Beug and Dr. Alp Oran, he investigated a candidate target identified through proteomic and ubiquitomic screening, focusing on its role in NF-κB signaling in T cells. He subsequently transitioned into a Master’s of Microbiology and Immunology program, co-supervised by Dr. Beug and Dr. Robert Korneluk, where he explored the therapeutic potential of IAP antagonists for treating Duchenne muscular dystrophy using the D2.mdx mouse model. Outside of the lab, Noah enjoys skiing, road or mountain biking and soccer.',
       linkedin: 'https://www.linkedin.com/in/kyle-malone-0a545a181/',
       socialLink: 'https://www.researchgate.net/profile/Kyle-Malone?ev=hdr_xprf',
     },
