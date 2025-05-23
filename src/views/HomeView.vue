@@ -45,10 +45,30 @@ onBeforeUnmount(() => {})
 <template>
   <div id="main-content" class="main-content">
     <div id="hero-section">
-      <div id="hero-heading" class="df-pad">
-        <h1>Beug Lab</h1>
+      <div id="hero-heading-wrapper">
+        <div id="hero-heading" class="df-pad">
+          <h1>Beug Lab</h1>
+        </div>
       </div>
       <div id="hero-img"></div>
+      <div id="cell">
+        <spline-viewer
+          url="https://prod.spline.design/wTEYGtQaHWugxvMZ/scene.splinecode"
+        ></spline-viewer>
+      </div>
+      <div id="hero-bottom" class="df-pad">
+        <div id="jump-to">
+          <router-link to="/about">
+            <p>Learn more</p>
+          </router-link>
+          <router-link to="/about">
+            <p>Our Team</p>
+          </router-link>
+          <router-link to="/about">
+            <p>Immuno Defender</p>
+          </router-link>
+        </div>
+      </div>
     </div>
     <div id="obj-section" class="section df-pad">
       <div class="section-heading">
@@ -125,7 +145,6 @@ onBeforeUnmount(() => {})
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,6 +159,11 @@ onBeforeUnmount(() => {})
   text-transform: uppercase;
   width: 100%;
   text-align: center;
+}
+#jump-to a {
+  color: var(--font-color-main);
+  text-decoration: none;
+  text-align: right;
 }
 .section {
   position: relative;
@@ -258,8 +282,17 @@ onBeforeUnmount(() => {})
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
+  #hero-section {
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+  }
+  #hero-heading-wrapper {
+    width: 100vw;
+    height: 40vh;
+  }
   #hero-heading {
-    transform: translateY(-1em);
+    padding-top: 2em;
   }
   #hero-heading h1 {
     font-size: 12em;
@@ -273,6 +306,36 @@ onBeforeUnmount(() => {})
     top: 62%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  #cell {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50em;
+    height: 50em;
+    z-index: 2;
+    opacity: 1;
+  }
+  #hero-bottom {
+    width: 100vw;
+    height: 60vh;
+    background-color: #22222215;
+    backdrop-filter: blur(5px);
+    border-radius: 35px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+  #jump-to {
+    grid-column: 12 / span 11;
+    grid-row: 2;
+  }
+  #jump-to p {
+    font-size: 1em;
+    color: var(--font-color-hover);
+    text-align: right;
   }
   .section {
     margin-bottom: 24em;
@@ -375,6 +438,12 @@ onBeforeUnmount(() => {})
 }
 /* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
+  #hero-heading {
+    padding-top: 1em;
+  }
+  #hero-heading h1 {
+    font-size: 15em;
+  }
   .description {
     width: 30%;
   }
