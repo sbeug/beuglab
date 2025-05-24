@@ -45,10 +45,12 @@ onBeforeUnmount(() => {})
 <template>
   <div id="main-content" class="main-content">
     <div id="hero-section">
+      <div id="hero-bg">
+        <img class="hero-img" src="../assets/content/images/hero-base.png" alt="hero image" />
+      </div>
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
       </div>
-      <div id="hero-img"></div>
     </div>
     <div id="obj-section" class="section df-pad">
       <div class="section-heading">
@@ -129,6 +131,18 @@ onBeforeUnmount(() => {})
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#hero-bg {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.hero-img {
+  position: relative;
+  object-fit: cover;
 }
 #hero-heading h1 {
   font-family: new-science-extended, sans-serif;
@@ -375,6 +389,9 @@ onBeforeUnmount(() => {})
 }
 /* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
+  #hero-heading h1 {
+    font-size: 14em;
+  }
   .description {
     width: 30%;
   }
