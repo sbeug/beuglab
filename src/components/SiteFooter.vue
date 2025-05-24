@@ -37,6 +37,9 @@ import ContactButton from '@/components/ContactButton.vue'
         <p>© 2025 Beug Lab | All rights reserved</p>
         <p>Website by — <a href="https://www.982studios.ca/">982studios®</a></p>
       </div>
+      <div id="logos">
+        <img src="../assets/content/icons/Cheo-logo-black.png" alt="Cheo Logo" id="cheo-logo" />
+      </div>
     </div>
   </div>
 </template>
@@ -154,6 +157,9 @@ import ContactButton from '@/components/ContactButton.vue'
 #bottom-bar a:hover {
   color: var(--font-color-hover);
 }
+#logos {
+  display: none;
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #footer {
@@ -210,6 +216,17 @@ import ContactButton from '@/components/ContactButton.vue'
   }
   #credits p {
     font-size: 1.25em;
+  }
+  #logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    grid-column: 6 / span 12;
+    grid-row: 4;
+  }
+  #cheo-logo {
+    width: auto;
+    height: 2em;
   }
 }
 </style>
