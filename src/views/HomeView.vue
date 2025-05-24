@@ -45,11 +45,19 @@ onBeforeUnmount(() => {})
 <template>
   <div id="main-content" class="main-content">
     <div id="hero-section">
-      <div id="hero-bg">
-        <img class="hero-img" src="../assets/content/images/hero-base.png" alt="hero image" />
+      <div class="hero-bg">
+        <spline-viewer
+          url="https://prod.spline.design/FCbn4L9mentHyEzd/scene.splinecode"
+          id="hero-spline"
+        >
+        </spline-viewer>
       </div>
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
+        <h3 id="mobile-heading">
+          Advancing cancer research through collaboration, curiosity, and scientific excellence.
+        </h3>
+        <div id="hero-c2a" class="button">Learn more</div>
       </div>
     </div>
     <div id="obj-section" class="section df-pad">
@@ -124,6 +132,7 @@ onBeforeUnmount(() => {})
 </template>
 <style scoped>
 #hero-section {
+  z-index: 1;
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -132,9 +141,8 @@ onBeforeUnmount(() => {})
   align-items: center;
   justify-content: center;
 }
-#hero-bg {
-  z-index: 2;
-  position: absolute;
+.hero-bg {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -143,23 +151,50 @@ onBeforeUnmount(() => {})
 .hero-img {
   position: relative;
   object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+#top-layer {
+  z-index: 2;
+}
+#hero-spline {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 100%;
+  pointer-events: auto !important;
 }
 #hero-heading h1 {
   font-family: new-science-extended, sans-serif;
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
-  font-size: 2em;
+  font-size: 5em;
   color: var(--font-color-main);
   text-transform: uppercase;
   width: 100%;
-  text-align: center;
+  text-align: left;
+  line-height: 1em;
+}
+#mobile-heading {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  font-size: 1.25em;
+  line-height: 1.5em;
+}
+#obj-section {
+  background: linear-gradient(180deg, rgba(233, 233, 233, 0) 0%, rgba(233, 233, 233, 1) 100%);
 }
 .section {
+  z-index: 1;
   position: relative;
   width: 100vw;
   height: 100%;
-  margin-bottom: 18em;
+  padding-bottom: 18em;
+  background: #e9e9e9;
 }
 .section-heading {
   display: flex;
@@ -272,11 +307,22 @@ onBeforeUnmount(() => {})
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
+  #hero-section {
+    align-items: center;
+    pointer-events: none;
+  }
   #hero-heading {
     transform: translateY(-1em);
+    padding: 0;
   }
   #hero-heading h1 {
     font-size: 12em;
+  }
+  #mobile-heading {
+    display: none !important;
+  }
+  #hero-c2a {
+    display: none !important;
   }
   #hero-img {
     display: none;
@@ -289,7 +335,7 @@ onBeforeUnmount(() => {})
     transform: translate(-50%, -50%);
   }
   .section {
-    margin-bottom: 24em;
+    padding-bottom: 24em;
   }
   .section-heading {
     align-items: center;
