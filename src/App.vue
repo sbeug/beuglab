@@ -158,7 +158,7 @@ const leave = (el, done) => {
     }"
   >
     <div id="app">
-      <div id="spline">
+      <div id="spline" v-if="route.path !== '/'">
         <spline-viewer
           url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
         ></spline-viewer>

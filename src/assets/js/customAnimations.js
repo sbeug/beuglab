@@ -12,33 +12,6 @@ export function homePageLoadAnimation() {
     paused: false,
     duration: 2,
   })
-  homePageTimeline.set(
-    '#hero-heading',
-    {
-      display: 'none',
-      visibility: 'hidden',
-    },
-    0,
-  )
-  homePageTimeline.from(
-    '#hero-img',
-    {
-      top: '50%',
-      width: '100%',
-      height: '100%',
-      ease: 'power2.out',
-      duration: 1,
-    },
-    0.5,
-  )
-  homePageTimeline.set(
-    '#hero-heading',
-    {
-      display: 'block',
-      visibility: 'visible',
-    },
-    1,
-  )
   homePageTimeline.from(
     '#hero-heading h1 div',
     {
@@ -47,6 +20,28 @@ export function homePageLoadAnimation() {
       ease: 'power3.out',
       stagger: 0.1,
       duration: 1.5,
+      filter: 'blur(10px)',
+    },
+    0,
+  )
+  homePageTimeline.from(
+    '#mobile-heading',
+    {
+      opacity: 0,
+      y: 50,
+      ease: 'power3.out',
+      duration: 1,
+      filter: 'blur(10px)',
+    },
+    1,
+  )
+  homePageTimeline.from(
+    '#hero-c2a',
+    {
+      opacity: 0,
+      y: 50,
+      ease: 'power3.out',
+      duration: 1,
       filter: 'blur(10px)',
     },
     1.25,

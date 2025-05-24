@@ -55,9 +55,9 @@ onBeforeUnmount(() => {})
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
         <h3 id="mobile-heading">
-          Advancing cancer research through collaboration, curiosity, and scientific excellence.
+          Advancing cancer research through - collaboration, curiosity, and scientific excellence.
         </h3>
-        <div id="hero-c2a" class="button">Learn more</div>
+        <router-link id="hero-c2a" class="button" to="/about">Learn more</router-link>
       </div>
     </div>
     <div id="obj-section" class="section df-pad">
@@ -180,6 +180,7 @@ onBeforeUnmount(() => {})
   padding-bottom: 2em;
   font-size: 1.25em;
   line-height: 1.5em;
+  text-wrap: wrap;
 }
 #obj-section {
   background: linear-gradient(180deg, rgba(233, 233, 233, 0) 0%, rgba(233, 233, 233, 1) 100%);
@@ -329,10 +330,8 @@ onBeforeUnmount(() => {})
   .section-heading p {
     font-size: 1em;
     line-height: 1em;
-    border: none;
-    display: unset;
-    height: auto;
-    width: auto;
+    height: 5em;
+    width: 5em;
     transform: translateY(0);
   }
   .section-heading h6 {
