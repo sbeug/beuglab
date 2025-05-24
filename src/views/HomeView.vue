@@ -58,28 +58,6 @@ onBeforeUnmount(() => {})
           Advancing cancer research through collaboration, curiosity, and scientific excellence.
         </h3>
         <div id="hero-c2a" class="button">Learn more</div>
-      <div id="hero-heading-wrapper">
-        <div id="hero-heading" class="df-pad">
-          <h1>Beug Lab</h1>
-        </div>
-      </div>
-      <div id="cell">
-        <spline-viewer
-          url="https://prod.spline.design/wTEYGtQaHWugxvMZ/scene.splinecode"
-        ></spline-viewer>
-      </div>
-      <div id="hero-bottom" class="df-pad">
-        <div id="jump-to">
-          <router-link to="/about">
-            <p>Learn more</p>
-          </router-link>
-          <router-link to="/about">
-            <p>Our Team</p>
-          </router-link>
-          <router-link to="/about">
-            <p>Immuno Defender</p>
-          </router-link>
-        </div>
       </div>
     </div>
     <div id="obj-section" class="section df-pad">
@@ -174,9 +152,6 @@ onBeforeUnmount(() => {})
   object-fit: cover;
   width: 100%;
   height: 100%;
-}
-#top-layer {
-  z-index: 2;
 }
 #hero-spline {
   z-index: 0;
@@ -345,46 +320,6 @@ onBeforeUnmount(() => {})
   #hero-c2a {
     display: none !important;
   }
-  #hero-img {
-    display: none;
-    width: 92%;
-    height: 30%;
-    background-color: #181818;
-    position: absolute;
-    top: 62%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  #cell {
-    position: absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50em;
-    height: 50em;
-    z-index: 2;
-    opacity: 1;
-  }
-  #hero-bottom {
-    width: 100vw;
-    height: 60vh;
-    background-color: #22222215;
-    backdrop-filter: blur(5px);
-    border-radius: 35px;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-  }
-  #jump-to {
-    grid-column: 12 / span 11;
-    grid-row: 2;
-  }
-  #jump-to p {
-    font-size: 1em;
-    color: var(--font-color-hover);
-    text-align: right;
-  }
   .section {
     padding-bottom: 24em;
   }
@@ -486,9 +421,6 @@ onBeforeUnmount(() => {})
 }
 /* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
-  #hero-heading h1 {
-    font-size: 14em;
-  }
   .description {
     width: 30%;
   }
