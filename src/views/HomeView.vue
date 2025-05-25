@@ -39,7 +39,18 @@ onMounted(async () => {
     dragToScroll()
   }, 1000)
 })
-onBeforeUnmount(() => {})
+onBeforeUnmount(() => {
+  const membersTrack = document.getElementById('members-track')
+  if (membersTrack) {
+    membersTrack.removeEventListener('mousedown', null)
+    membersTrack.removeEventListener('mouseleave', null)
+    membersTrack.removeEventListener('mouseup', null)
+    membersTrack.removeEventListener('mousemove', null)
+    membersTrack.removeEventListener('touchstart', null)
+    membersTrack.removeEventListener('touchend', null)
+    membersTrack.removeEventListener('touchmove', null)
+  }
+})
 </script>
 
 <template>

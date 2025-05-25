@@ -11,8 +11,8 @@ defineProps(['member'])
           </div>
           <div id="edu-links">
             <h6>{{ member.edu }}</h6>
-            <a :href="member.linkedin">LinkedIn</a>
-            <a :href="member.cheo">CHEO RI</a>
+            <a :href="member.linkedin">LinkedIn ↗</a>
+            <a :href="member.cheo">CHEO RI ↗</a>
           </div>
         </div>
         <div>
@@ -95,6 +95,12 @@ defineProps(['member'])
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
+  border: 2px solid var(--nero);
+  border-radius: 50px;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 .reverse {
   display: flex;
@@ -134,14 +140,15 @@ defineProps(['member'])
     bottom: 0;
     grid-column: 2;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
     padding: 0;
+    gap: 0.5em;
   }
   #edu-links a,
   #edu-links h6 {
-    font-size: 2em;
+    font-size: 1em;
   }
   .reverse {
     display: unset;

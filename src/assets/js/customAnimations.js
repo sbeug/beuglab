@@ -448,10 +448,21 @@ export function menuUnderline() {
 }
 
 export function dragToScroll() {
+  const container = document.getElementById('team-members-section')
+  const track = document.getElementById('members-track')
+
+  if (!container || !track) return
+
+  let isDragging = false
+  let startX = 0
+  let currentTranslate = 0
+  let prevTranslate = 0
+
   const dragStart = new gsap.timeline({
     paused: true,
     duration: 0.5,
   })
+
   dragStart.to(
     '#team-description',
     {
@@ -461,6 +472,7 @@ export function dragToScroll() {
     },
     0,
   )
+
   dragStart.to(
     '#team-c2a',
     {
@@ -471,37 +483,31 @@ export function dragToScroll() {
     0.1,
   )
 
-  function reverseTimelineIfAtStart() {
+  const clamp = (num, min, max) => Math.max(min, Math.min(num, max))
+
+  const setTranslate = (x) => {
+    track.style.transform = `translate3d(${x}px, 0, 0)`
+  }
+
+  const reverseTimelineIfAtStart = () => {
     if (currentTranslate === 0) {
       dragStart.reverse()
     }
   }
 
-  const container = document.getElementById('team-members-section')
-  const track = document.getElementById('members-track')
-
-  let isDragging = false
-  let startX = 0
-  let currentTranslate = 0
-  let prevTranslate = 0
-
-  const clamp = (num, min, max) => Math.max(min, Math.min(num, max))
-
-  function setTranslate(x) {
-    track.style.transform = `translate3d(${x}px, 0, 0)`
-  }
-
-  function onStart(e) {
+  const onStart = (e) => {
     isDragging = true
     startX = (e.type.includes('mouse') ? e.pageX : e.touches[0].clientX) - prevTranslate
     container.style.cursor = 'grabbing'
+
     if (screen.width > 768) {
       dragStart.play()
     }
   }
 
-  function onMove(e) {
+  const onMove = (e) => {
     if (!isDragging) return
+
     const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX
     currentTranslate = x - startX
 
@@ -512,14 +518,17 @@ export function dragToScroll() {
     setTranslate(currentTranslate)
   }
 
-  function onEnd() {
+  const onEnd = () => {
     isDragging = false
     prevTranslate = currentTranslate
     container.style.cursor = 'grab'
+
     if (screen.width > 768) {
       reverseTimelineIfAtStart()
     }
   }
+
+  container.style.cursor = 'grab'
 
   container.addEventListener('mousedown', onStart)
   window.addEventListener('mousemove', onMove)

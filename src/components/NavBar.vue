@@ -499,7 +499,7 @@ a {
     padding-right: 4em;
   }
   #menu-list ul {
-    padding-left: 3em;
+    padding-left: 4em;
     width: 50%;
   }
   .sub-list {
@@ -525,8 +525,14 @@ a {
     bottom: -1px;
   }
   #navbar {
-    padding-left: 6em;
-    padding-right: 6em;
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+}
+/* DESKTOP 3 (Macbook pro 15 inch display) -----------------------------------------------------------------------------------*/
+@media screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) {
+  .menu-link-2 {
+    font-size: 6em;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */

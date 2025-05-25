@@ -258,7 +258,7 @@ onMounted(() => {
     grid-row: 3;
   }
   #contact-form-header h1 {
-    font-size: 10em;
+    font-size: 6.5em;
   }
   #description {
     grid-column: 1 / span 4;
@@ -269,7 +269,7 @@ onMounted(() => {
     padding-bottom: 1em;
   }
   #description p {
-    font-size: 1.25em;
+    font-size: 1.1em;
     line-height: 1.3em;
   }
   #description h2 {
@@ -337,6 +337,9 @@ onMounted(() => {
 @media only screen and (min-width: 1920px) {
   #contact-form-header h1 {
     font-size: 7.5em;
+  }
+  #description p {
+    font-size: 1.25em;
   }
 }
 </style>
