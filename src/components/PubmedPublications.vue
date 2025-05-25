@@ -37,7 +37,7 @@ onMounted(async () => {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
   color: var(--font-color-main);
