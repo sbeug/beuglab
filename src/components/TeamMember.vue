@@ -9,10 +9,10 @@ defineProps(['member'])
           <div class="member-img-container">
             <img :src="member.headshot" :alt="member.name" class="member-img" />
           </div>
-          <div id="edu-links">
+          <div id="edu-links" class="clickable">
             <h6>{{ member.edu }}</h6>
-            <a :href="member.linkedin">LinkedIn ↗</a>
-            <a :href="member.cheo">CHEO RI ↗</a>
+            <a :href="member.linkedin">LinkedIn</a>
+            <a :href="member.cheo">CHEO RI</a>
           </div>
         </div>
         <div>
@@ -70,7 +70,7 @@ defineProps(['member'])
   font-size: 1.25em;
   line-height: 1.5em;
   padding-top: 2em;
-  padding-bottom: 2.5em;
+  padding-bottom: 4em;
 }
 #edu-links {
   position: absolute;
@@ -78,16 +78,17 @@ defineProps(['member'])
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-left: 1em;
   padding-right: 1em;
+  gap: 0.5em;
 }
 #edu-links h6 {
   display: none;
   line-height: 1.2em;
 }
 #edu-links a {
-  font-size: 1.5em;
+  font-size: 1em;
   line-height: 1.2em;
   color: var(--font-color-main);
   text-decoration: none;
@@ -101,6 +102,7 @@ defineProps(['member'])
   padding-bottom: 0.75em;
   padding-right: 1em;
   padding-left: 1em;
+  backdrop-filter: blur(10px);
 }
 .reverse {
   display: flex;
@@ -146,8 +148,10 @@ defineProps(['member'])
     padding: 0;
     gap: 0.5em;
   }
-  #edu-links a,
   #edu-links h6 {
+    font-size: 1em;
+  }
+  #edu-links a {
     font-size: 1em;
   }
   .reverse {
