@@ -2,7 +2,8 @@ import axios from 'axios'
 import * as cheerio from 'cheerio'
 
 export default async function handler(req, res) {
-  const PUBMED_URL = 'https://pubmed.ncbi.nlm.nih.gov/?term=Beug+S[Author]'
+  const PUBMED_URL =
+    'https://pubmed.ncbi.nlm.nih.gov/?term=Beug+S%5BAuthor%5D&sort=pubdate&size=100'
   try {
     const { data } = await axios.get(PUBMED_URL)
     const $ = cheerio.load(data)
