@@ -2,7 +2,7 @@
 defineProps({
   members: Array,
   selected: Object,
-  alumni: Array,
+  alumnus: Array,
 })
 const emit = defineEmits(['select'])
 </script>
@@ -19,11 +19,8 @@ const emit = defineEmits(['select'])
         <p :class="{ activenumber: selected && selected.id === member.id }">{{ member.id }}</p>
       </div>
     </li>
-    <li
-      @click="emit('select', { isAlumniSection: true, alumni: alumni })"
-      class="member-link clickable"
-    >
-      <h3 :class="{ active: selected && selected.isAlumniSection }">Beug Lab Alumni</h3>
+    <li @click="emit('select', { id: 'alumni', type: 'alumni' })" class="member-link clickable">
+      <h3 :class="{ active: selected && selected.id === 'alumni' }">Beug Lab Alumni</h3>
     </li>
   </ul>
 </template>

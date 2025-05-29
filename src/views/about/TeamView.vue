@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { onMounted, onBeforeUnmount } from 'vue'
-import { useTeamStore } from '@/stores/team.js'
+import { useTeamStore, useAlumniStore } from '@/stores/team.js'
 import TeamSideBar from '@/components/TeamSidebar.vue'
 import TeamMember from '@/components/TeamMember.vue'
 import { teamViewAnimations } from '@/assets/js/customAnimations'
@@ -9,12 +9,23 @@ import { teamViewAnimations } from '@/assets/js/customAnimations'
 const teamStore = useTeamStore()
 const selectedMember = ref(teamStore.members[0])
 
+const alumniStore = useAlumniStore()
+const isAlumniSelected = ref(false)
+
 const selectMember = (member) => {
-  selectedMember.value = member
+  if (member.type === 'alumni') {
+    isAlumniSelected.value = true
+    selectedMember.value = member
+  } else {
+    isAlumniSelected.value = false
+    selectedMember.value = member
+  }
 }
 
 onMounted(() => {
   teamViewAnimations()
+  console.log('Alumni store data:', alumniStore.alumni)
+  console.log('Alumni count:', alumniStore.alumni ? alumniStore.alumni.length : 0)
 })
 onBeforeUnmount(() => {})
 </script>
@@ -25,11 +36,24 @@ onBeforeUnmount(() => {})
       <img id="arrow" src="../../assets/content/icons/right-arrow-white.png" alt="right-arrow" />
     </button>
     <aside id="side-bar">
-      <TeamSideBar :members="teamStore.members" @select="selectMember" :selected="selectedMember" />
+      <TeamSideBar
+        :members="teamStore.members"
+        @select="selectMember"
+        :selected="selectedMember"
+        :alumnus="alumniStore.alumni"
+      />
     </aside>
     <div id="team-member-container">
       <transition name="member-fade" mode="out-in">
-        <TeamMember :member="selectedMember" :key="selectedMember.id" />
+        <TeamMember v-if="!isAlumniSelected" :member="selectedMember" :key="selectedMember.id" />
+        <div v-else id="alumni-list-container" :key="'alumni-list'">
+          <h1 class="alumni-heading">Beug Lab Alumni</h1>
+          <ul class="alumni-list">
+            <li v-for="alumnus in alumniStore.alumni" :key="alumnus.id" class="alumni-item">
+              <h3 class="alumni-name">{{ alumnus.name }}</h3>
+            </li>
+          </ul>
+        </div>
       </transition>
     </div>
   </div>
@@ -107,6 +131,14 @@ onBeforeUnmount(() => {})
 #team-member-container {
   grid-row: 1 / span 8;
   padding-top: 7em;
+}
+#alumni-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {

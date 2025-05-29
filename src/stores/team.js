@@ -110,15 +110,19 @@ export const useTeamStore = defineStore('team', () => {
 export const useAlumniStore = defineStore('alumni', () => {
   const alumni = ref([
     {
+      id: 1,
       name: 'Noah Robert',
     },
     {
+      id: 2,
       name: 'Charles Sinbad',
     },
     {
+      id: 3,
       name: 'John Smith',
     },
     {
+      id: 4,
       name: 'Elizabeth Von Hohenberg',
     },
   ])
