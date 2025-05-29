@@ -59,6 +59,7 @@ onMounted(async () => {
 }
 a {
   color: var(--font-color-main);
+  transition: all 0.5s ease;
 }
 a:hover {
   color: #2222228e;

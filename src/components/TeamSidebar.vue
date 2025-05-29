@@ -18,6 +18,11 @@ const emit = defineEmits(['select'])
         <p :class="{ activenumber: selected && selected.id === member.id }">{{ member.id }}</p>
       </div>
     </li>
+    <li id="alumni">
+      <router-link to="/alumni" class="member-link clickable">
+        <h3>Beug Lab Alumni</h3>
+      </router-link>
+    </li>
   </ul>
 </template>
 <style scoped>
@@ -79,6 +84,9 @@ const emit = defineEmits(['select'])
   margin: 0;
   padding: 0;
   transition: 0.5s ease;
+}
+#alumni a {
+  text-decoration: none;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
