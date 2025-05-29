@@ -106,3 +106,23 @@ export const useTeamStore = defineStore('team', () => {
     members,
   }
 })
+
+export const useAlumniStore = defineStore('alumni', () => {
+  const alumni = ref([
+    {
+      name: 'Noah Robert',
+    },
+    {
+      name: 'Charles Sinbad',
+    },
+    {
+      name: 'John Smith',
+    },
+    {
+      name: 'Elizabeth Von Hohenberg',
+    },
+  ])
+  return {
+    alumni,
+  }
+})

@@ -125,13 +125,13 @@ onBeforeUnmount(() => {})
   #side-bar {
     position: relative;
     grid-column: 9 / span 12;
-    grid-row: 2 / span 8;
+    grid-row: 1 / span 10;
     top: 0%;
     left: 0%;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     transform: translateY(0%);
-    padding-top: 4em;
+    padding-top: 6em;
     height: 100%;
     min-height: 100vh;
   }
