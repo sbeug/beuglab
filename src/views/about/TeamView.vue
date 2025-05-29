@@ -46,7 +46,7 @@ onBeforeUnmount(() => {})
     <div id="team-member-container">
       <transition name="member-fade" mode="out-in">
         <TeamMember v-if="!isAlumniSelected" :member="selectedMember" :key="selectedMember.id" />
-        <div v-else id="alumni-list-container" :key="'alumni-list'">
+        <div v-else id="alumni-list-container" :key="'alumni-list'" class="df-pad">
           <h1 class="alumni-heading">Beug Lab Alumni</h1>
           <ul class="alumni-list">
             <li v-for="alumnus in alumniStore.alumni" :key="alumnus.id" class="alumni-item">
@@ -135,10 +135,15 @@ onBeforeUnmount(() => {})
 #alumni-list-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+.alumni-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -171,6 +176,17 @@ onBeforeUnmount(() => {})
     padding: 0;
     grid-column: 1 / span 8;
     grid-row: 2 / span 10;
+  }
+  #alumni-list-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .alumni-heading {
+    font-size: 6em;
+    grid-column: 1 / span 2;
+  }
+  .alumni-name {
+    font-size: 2em;
   }
 }
 </style>
