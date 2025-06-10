@@ -34,7 +34,7 @@ onMounted(async () => {
     console.error('Sanity fetch failed:', error.message)
     error.value = 'Failed to load live content. Showing default info.'
   }
-
+  teamStore.fetchTeamMembers()
   setTimeout(() => {
     dragToScroll()
   }, 1000)
@@ -128,7 +128,11 @@ onBeforeUnmount(() => {
         </div>
         <div id="team-members-section">
           <div id="members-track" class="clickable">
-            <div v-for="member in teamStore.members" :key="member.id" class="team-member clickable">
+            <div
+              v-for="member in teamStore.members.slice().sort((a, b) => a.id - b.id)"
+              :key="member.id"
+              class="team-member clickable"
+            >
               <div class="member-photo">
                 <img :src="member.headshot" :alt="member.name" />
               </div>
