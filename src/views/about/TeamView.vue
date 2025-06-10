@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { onMounted, onBeforeUnmount } from 'vue'
-import { useTeamStore, useAlumniStore } from '@/stores/team.js'
+import { useTeamStore } from '@/stores/team.js'
+import { useAlumniStore } from '@/stores/alumni.js'
 import TeamSideBar from '@/components/TeamSidebar.vue'
 import TeamMember from '@/components/TeamMember.vue'
 import { teamViewAnimations } from '@/assets/js/customAnimations'
@@ -24,6 +25,7 @@ const selectMember = (member) => {
 
 onMounted(() => {
   teamViewAnimations()
+  alumniStore.fetchAlumni()
   console.log('Alumni store data:', alumniStore.alumni)
   console.log('Alumni count:', alumniStore.alumni ? alumniStore.alumni.length : 0)
 })
@@ -49,8 +51,9 @@ onBeforeUnmount(() => {})
         <div v-else id="alumni-list-container" :key="'alumni-list'" class="df-pad">
           <h1 class="alumni-heading">Beug Lab Alumni</h1>
           <ul class="alumni-list">
-            <li v-for="alumnus in alumniStore.alumni" :key="alumnus.id" class="alumni-item">
+            <li v-for="alumnus in alumniStore.alumni" :key="alumnus._id" class="alumni-item">
               <h3 class="alumni-name">{{ alumnus.name }}</h3>
+              <p class="alumni-role">{{ alumnus.title }}</p>
             </li>
           </ul>
         </div>
@@ -183,6 +186,11 @@ onBeforeUnmount(() => {})
   }
   .alumni-heading {
     font-size: 6em;
+    grid-column: 1 / span 2;
+  }
+  .alumni-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     grid-column: 1 / span 2;
   }
   .alumni-name {
