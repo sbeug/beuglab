@@ -25,10 +25,15 @@ const selectMember = (member) => {
 
 onMounted(() => {
   teamViewAnimations()
+  teamStore.fetchTeamMembers().then(() => {
+    const defaultMember = teamStore.members.find((member) => member.id === 1)
+    if (defaultMember) {
+      selectedMember.value = defaultMember
+    }
+  })
   alumniStore.fetchAlumni()
-  console.log('Alumni store data:', alumniStore.alumni)
-  console.log('Alumni count:', alumniStore.alumni ? alumniStore.alumni.length : 0)
 })
+
 onBeforeUnmount(() => {})
 </script>
 <template>
@@ -47,11 +52,15 @@ onBeforeUnmount(() => {})
     </aside>
     <div id="team-member-container">
       <transition name="member-fade" mode="out-in">
-        <TeamMember v-if="!isAlumniSelected" :member="selectedMember" :key="selectedMember.id" />
+        <TeamMember
+          v-if="!isAlumniSelected"
+          :key="selectedMember?.id || 'team-member'"
+          :member="selectedMember"
+        />
         <div v-else id="alumni-list-container" :key="'alumni-list'" class="df-pad">
           <h1 class="alumni-heading">Beug Lab Alumni</h1>
           <ul class="alumni-list">
-            <li v-for="alumnus in alumniStore.alumni" :key="alumnus._id" class="alumni-item">
+            <li v-for="alumnus in alumniStore.alumni" :key="alumnus.id" class="alumni-item">
               <h3 class="alumni-name">{{ alumnus.name }}</h3>
               <p class="alumni-role">{{ alumnus.title }}</p>
             </li>

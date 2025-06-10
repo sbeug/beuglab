@@ -9,14 +9,31 @@ const emit = defineEmits(['select'])
 <template>
   <ul id="team-sidebar">
     <li
-      v-for="member in members"
+      v-for="member in members.slice().sort((a, b) => a.id - b.id)"
       :key="member.id"
       @click="emit('select', member)"
       class="member-link clickable"
     >
-      <h3 :class="{ active: selected && selected.id === member.id }">{{ member.name }}</h3>
-      <div class="number" :class="{ activecircle: selected && selected.id === member.id }">
-        <p :class="{ activenumber: selected && selected.id === member.id }">{{ member.id }}</p>
+      <h3
+        :class="{
+          active: (selected && selected.id === member.id) || (!selected && member.id === 1),
+        }"
+      >
+        {{ member.name }}
+      </h3>
+      <div
+        class="number"
+        :class="{
+          activecircle: (selected && selected.id === member.id) || (!selected && member.id === 1),
+        }"
+      >
+        <p
+          :class="{
+            activenumber: (selected && selected.id === member.id) || (!selected && member.id === 1),
+          }"
+        >
+          {{ member.id }}
+        </p>
       </div>
     </li>
     <li @click="emit('select', { id: 'alumni', type: 'alumni' })" class="member-link clickable">
@@ -50,7 +67,7 @@ const emit = defineEmits(['select'])
   margin: 0;
   padding: 0;
   transition: 0.5s ease;
-  color: #2222227e;
+  color: #2222224f;
   transition: 0.5s ease;
   height: 1.5em;
 }

@@ -3,7 +3,7 @@ export default {
   title: 'Team Members',
   type: 'document',
   fields: [
-    {name: 'id', title: '#', type: 'number'},
+    {name: 'number', title: '#', type: 'number'},
     {name: 'name', title: 'Name', type: 'string'},
     {name: 'edu', title: 'Education', type: 'string'},
     {name: 'title', title: 'Title', type: 'string'},

@@ -1,108 +1,45 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
-// IMAGES
-import ShawnBeug from '@/assets/content/images/team/ShawnBeug.jpeg'
+import { sanity, urlFor } from '@/assets/js/sanity.js'
 
-export const useTeamStore = defineStore('team', () => {
-  const members = ref([
-    {
-      id: 1,
-      name: 'Dr. Shawn Beug',
-      edu: 'PhD',
-      title: 'Principal Investigator, Scientist',
-      photo: '',
-      headshot: ShawnBeug,
-      bio: 'Dr. Shawn Beug obtained his BSc degree with Honours in Biology from the University of Regina. He went on to the University of Ottawa to pursue a MSc degree  in Cellular and Molecular Medicine with Dr. Catherine Tsilfidis where he identified factors involved in salamander forelimb regeneration. Dr. Beug obtained his PhD in Biochemistry based on his research with Dr. Valerie Wallace, studying the mechanism of morphogen trafficking in the developing and adult mouse eye. He then pursued postdoctoral training with Dr. Robert Korneluk at the CHEO Research Institute in the area of cancer and immunotherapy. Now a Scientist at the CHEO RI, Dr. Beug and his team are using cutting-edge and complementary approaches to understand cancer and immunity. ',
-      linkedin: 'https://www.linkedin.com/',
-      cheo: '',
+export const useTeamStore = defineStore('team', {
+  state: () => ({
+    members: [],
+    loading: false,
+    error: null,
+  }),
+  actions: {
+    async fetchTeamMembers() {
+      this.loading = true
+      this.error = null
+      try {
+        const data = await sanity.fetch(`*[_type == "teamMember"]{
+          _id,
+          number,
+          name,
+          edu,
+          title,
+          headshot,
+          bio,
+          linkedin,
+          cheo
+        }`)
+
+        this.members = data.map((member) => ({
+          id: member.number,
+          name: member.name,
+          edu: member.edu,
+          title: member.title,
+          headshot: urlFor(member.headshot).url(),
+          bio: member.bio,
+          linkedin: member.linkedin,
+          cheo: member.cheo,
+        }))
+      } catch (error) {
+        this.error = error.message
+        console.error('Error fetching team members:', error)
+      } finally {
+        this.loading = false
+      }
     },
-    {
-      id: 2,
-      name: 'Dr. Eric LaCasse',
-      edu: 'PhD',
-      title: 'Principal Investigator, Scientist',
-      photo: '',
-      bio: 'Dr. Eric LaCasse is an innovator and cancer researcher. He obtained his PhD in Biochemistry (uOttawa) and completed his post-doctoral training at the Ontario Cancer Institute (Toronto). He was previously Head of Oncology at the biotechnology company Aegera Therapeutics (Montreal). In 2004, Dr. LaCasse developed the first inhibitor-of-apoptosis (IAP) targeting drug, an antisense oligonucleotide to the X-linked IAP, to enter clinical trials and to show clinical activity. This validated the IAPs as cancer targets and launched small-molecule development campaigns to inhibit the IAPs. This resulted in Aegera entering the first ever bivalent IAP antagonist, known as a dimeric Smac mimetic, and coincidentally the first clinical homo-PROTAC or targeted protein degrader, into cancer trials in 2008. This provided in vivo proof-of-concept for a novel class of conjugate drugs capable of targeting proteins for ubiquitin- and proteasome-mediated degradation.',
-      linkedin: 'https://www.linkedin.com/',
-      cheo: 'https://www.cheoresearch.ca/research/find-a-researcher/eric-lacasse/',
-    },
-    {
-      id: 3,
-      name: 'Dr. Rostyslav Horbay',
-      edu: 'PhD',
-      title: 'Research Associate',
-      photo: 'insertLinkHere',
-      headshot: 'insertLinkHere',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      linkedin: 'https://www.linkedin.com/in/kyle-malone-0a545a181/',
-      socialLink: 'https://www.researchgate.net/profile/Kyle-Malone?ev=hdr_xprf',
-    },
-    {
-      id: 4,
-      name: 'Dr. Kyle Malone',
-      edu: 'PhD',
-      title: 'Postdoctoral Fellow',
-      photo: 'insertLinkHere',
-      headshot: 'insertLinkHere',
-      bio: 'Noah joined the lab as an Honours student in 2021. Under the co-supervision of Dr. Shawn Beug and Dr. Alp Oran, he investigated a candidate target identified through proteomic and ubiquitomic screening, focusing on its role in NF-κB signaling in T cells. He subsequently transitioned into a Master’s of Microbiology and Immunology program, co-supervised by Dr. Beug and Dr. Robert Korneluk, where he explored the therapeutic potential of IAP antagonists for treating Duchenne muscular dystrophy using the D2.mdx mouse model. Outside of the lab, Noah enjoys skiing, road or mountain biking and soccer.',
-      linkedin: 'https://www.linkedin.com/in/kyle-malone-0a545a181/',
-      socialLink: 'https://www.researchgate.net/profile/Kyle-Malone?ev=hdr_xprf',
-    },
-    {
-      id: 5,
-      name: 'Nathalie Earl',
-      edu: 'MSc',
-      title: 'Research Technician',
-      photo: '',
-      headshot: 'insertLinkHere',
-      bio: 'Noah joined the lab as an Honours student in 2021. Under the co-supervision of Dr. Shawn Beug and Dr. Alp Oran, he investigated a candidate target identified through proteomic and ubiquitomic screening, focusing on its role in NF-κB signaling in T cells. He subsequently transitioned into a Master’s of Microbiology and Immunology program, co-supervised by Dr. Beug and Dr. Robert Korneluk, where he explored the therapeutic potential of IAP antagonists for treating Duchenne muscular dystrophy using the D2.mdx mouse model. Outside of the lab, Noah enjoys skiing, road or mountain biking and soccer.',
-      linkedin: 'https://www.linkedin.com/',
-      socialLink: '',
-    },
-    {
-      id: 6,
-      name: 'Kate Daniel',
-      edu: 'MSc',
-      title: 'Research Technician',
-      photo: '',
-      headshot: 'insertLinkHere',
-      bio: 'Noah joined the lab as an Honours student in 2021. Under the co-supervision of Dr. Shawn Beug and Dr. Alp Oran, he investigated a candidate target identified through proteomic and ubiquitomic screening, focusing on its role in NF-κB signaling in T cells. He subsequently transitioned into a Master’s of Microbiology and Immunology program, co-supervised by Dr. Beug and Dr. Robert Korneluk, where he explored the therapeutic potential of IAP antagonists for treating Duchenne muscular dystrophy using the D2.mdx mouse model. Outside of the lab, Noah enjoys skiing, road or mountain biking and soccer.',
-      linkedin: 'https://www.linkedin.com/',
-      socialLink: '',
-    },
-    {
-      id: 7,
-      name: 'Jordan Yin',
-      edu: 'BSc',
-      title: 'Integrated BSc | MSc Student',
-      photo: '',
-      headshot: '',
-      bio: 'Jordan joined the lab as an integrated BSc/MSc student in the Translational and Molecular Medicine / Microbiology and Immunology program in 2024. His current research focuses on the immunomodulatory properties of small extracellular vesicles derived from SMAC mimetic-treated cancer and immune cells. Previously, Jordan has conducted research on nanoparticle drug delivery systems for osteoarthritis. He is particularly passionate about immunotherapy, small extracellular vesicles, and tumour immunology. Outside of research, Jordan is a lifeguard and instructor trainer, a student leader and first responder on campus, as well as an academic writing mentor. In his spare time, he enjoys swimming, hiking, and exploring science communication through student-led projects.',
-      linkedin: 'https://www.linkedin.com/in/jordan-yin-66a37a213/',
-      socialLink: '',
-    },
-    {
-      id: 8,
-      name: 'Heidi Nguyen',
-      edu: 'Student',
-      title: 'Honours Student',
-      photo: '',
-      headshot: '',
-      bio: 'Noah joined the lab as an Honours student in 2021. Under the co-supervision of Dr. Shawn Beug and Dr. Alp Oran, he investigated a candidate target identified through proteomic and ubiquitomic screening, focusing on its role in NF-κB signaling in T cells. He subsequently transitioned into a Master’s of Microbiology and Immunology program, co-supervised by Dr. Beug and Dr. Robert Korneluk, where he explored the therapeutic potential of IAP antagonists for treating Duchenne muscular dystrophy using the D2.mdx mouse model. Outside of the lab, Noah enjoys skiing, road or mountain biking and soccer.',
-      linkedin: 'https://www.linkedin.com/',
-    },
-    {
-      id: 9,
-      name: 'Alyssa Tarnocai',
-      edu: 'Student',
-      title: 'Honours Student',
-      photo: '',
-      headshot: '',
-      bio: 'Noah joined the lab as an Honours student in 2021. Under the co-supervision of Dr. Shawn Beug and Dr. Alp Oran, he investigated a candidate target identified through proteomic and ubiquitomic screening, focusing on its role in NF-κB signaling in T cells. He subsequently transitioned into a Master’s of Microbiology and Immunology program, co-supervised by Dr. Beug and Dr. Robert Korneluk, where he explored the therapeutic potential of IAP antagonists for treating Duchenne muscular dystrophy using the D2.mdx mouse model. Outside of the lab, Noah enjoys skiing, road or mountain biking and soccer.',
-      linkedin: 'https://www.linkedin.com/',
-    },
-  ])
-  return {
-    members,
-  }
+  },
 })

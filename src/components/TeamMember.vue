@@ -1,4 +1,14 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useTeamStore } from '@/stores/team.js'
+
+const teamStore = useTeamStore()
+const { members, fetchTeamMembers } = teamStore
+
+onMounted(() => {
+  if (members.length === 0) fetchTeamMembers()
+})
+
 defineProps(['member'])
 </script>
 <template>
@@ -7,7 +17,7 @@ defineProps(['member'])
       <div class="reverse">
         <div id="top-section">
           <div class="member-img-container">
-            <img :src="member.headshot" :alt="member.name" class="member-img" />
+            <img :src="member.headshot" :alt="member.name" class="member-img" loading="lazy" />
           </div>
           <div id="edu-links" class="clickable">
             <h6>{{ member.edu }}</h6>
@@ -32,8 +42,10 @@ defineProps(['member'])
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
+  min-width: 100%;
   height: 100%;
   color: var(--font-color-main);
+  will-change: height;
 }
 .member-img-container {
   position: relative;
