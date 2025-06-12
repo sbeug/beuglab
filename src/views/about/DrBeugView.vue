@@ -216,7 +216,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     justify-content: center;
   }
   #introduction h1 {
-    font-size: 8em;
+    font-size: 6em;
     line-height: 1.1em;
   }
   #introduction h6 {
@@ -242,6 +242,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     z-index: 1;
     position: absolute;
     top: 2%;
+    transform: translateX(-8%);
     border: 6px solid var(--nero);
     width: 70em;
     height: 70em;
@@ -423,6 +424,15 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   .rec h3 {
     font-size: 1.5em;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
+@media (min-width: 1920px) {
+  #introduction h1 {
+    font-size: 8em;
+  }
+  #pfp-circle {
+    transform: translateX(-0%);
   }
 }
 </style>
