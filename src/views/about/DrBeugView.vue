@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import IconProffessor from '@/components/icons/IconProffessor.vue'
+import IconScience from '@/components/icons/IconScience.vue'
+import IconResearch from '@/components/icons/IconResearch.vue'
+</script>
 <template>
   <div id="main-content" class="main-content">
     <div id="introduction" class="section df-pad">
@@ -12,16 +16,20 @@
           difficult-to-treat cancers. He holds multiple academic and leadership roles across
           top-tier Canadian institutions.
         </h6>
-        <div class="button">
+        <a class="button contact-open clickable">
           <p>Get in touch</p>
-        </div>
-        <div id="connect">
-          <a href="">LinkedIn</a>
-          <a href="">Cheo RI</a>
+        </a>
+        <div id="connect" class="clickable">
+          <a href="https://ca.linkedin.com/in/shawn-beug-9711292b">LinkedIn</a>
+          <a href="https://www.cheoresearch.ca/research/find-a-researcher/shawn-beug-phd/"
+            >Cheo RI</a
+          >
+          <a href="https://www.uottawa.ca/faculty-medicine/dr-shawn-beug">University of Ottawa</a>
         </div>
       </div>
       <div id="pfp-container">
         <div id="pfp-circle">
+          <div id="pfp-overlay"></div>
           <img
             src="../../assets/content/images/team/ShawnBeug.jpeg"
             alt="Dr. Shawn Beug"
@@ -32,7 +40,7 @@
     </div>
     <div id="positions" class="section">
       <div id="pos-1" class="position">
-        <img src="" alt="Prof Icon" class="pos-icon" />
+        <IconProffessor class="pos-icon" />
         <h3>Assistant Prof</h3>
         <p>
           Department of Biochemistry, Microbiology and Immunology, Faculty of Medicine, University
@@ -40,12 +48,12 @@
         </p>
       </div>
       <div id="pos-2" class="position">
-        <img src="" alt="Science Icon" class="pos-icon" />
+        <IconScience class="pos-icon" />
         <h3>Scientist</h3>
         <p>CHEO Research Institute, Cancer Therapeutics Program</p>
       </div>
       <div id="pos-3" class="position">
-        <img src="" alt="Research Icon" class="pos-icon" />
+        <IconResearch class="pos-icon" style="scale: 4.5" />
         <h3>Canada Research Chair</h3>
         <p>(Tier 2) in Cancer Biology and Translational Research</p>
       </div>
@@ -78,8 +86,8 @@
     </div>
     <div id="goal">
       <h3>
-        His ultimate goal is to translate foundational research discoveries into clinically relevant
-        therapies that can improve outcomes for patients with advanced cancers.
+        His labs ultimate goal is to translate foundational research discoveries into clinically
+        relevant therapies that can improve outcomes for patients with advanced cancers.
       </h3>
     </div>
     <div id="education" class="section df-pad">
@@ -102,7 +110,7 @@
         <img src="../../assets/content/images/BeugLab-Still-04.jpg" alt="tbd" />
       </div>
       <div class="section-txt">
-        <h2>Collaborations and Mentorship</h2>
+        <h2>Collaborations & Mentorship</h2>
         <p>
           Dr. Beug is deeply committed to fostering the next generation of biomedical researchers.
           His lab actively mentors undergraduate, graduate, and postdoctoral trainees. He also
@@ -111,20 +119,21 @@
         </p>
       </div>
     </div>
-    <div id="recognition" class="section">
+    <div id="recognition" class="section df-pad">
+      <div class="divider"></div>
       <h2>Recognition</h2>
       <div class="rec">
-        <h3>Canada Research Chair (Tier 2) – Recognizing emerging leaders in health research</h3>
+        <h3>Canada Research Chair (Tier 2) – Recognizing emerging leaders in health research.</h3>
       </div>
       <div class="rec">
         <h3>
           Multiple peer-reviewed grants and fellowships from national agencies, including CIHR and
-          NSERC
+          NSERC.
         </h3>
       </div>
       <div class="rec">
         <h3>
-          Published in leading journals and frequently invited to speak at scientific conferences
+          Published in leading journals and frequently invited to speak at scientific conferences.
         </h3>
       </div>
     </div>
@@ -141,6 +150,7 @@
   min-height: 100vh;
   width: 100%;
   padding-top: 4em;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(233, 233, 233, 1));
 }
 #introduction h1 {
   font-size: 4em;
@@ -165,6 +175,11 @@
   color: var(--blanco);
   text-align: center;
 }
+.pos-icon {
+  width: 10em;
+  height: 10em;
+  margin-bottom: 1em;
+}
 .section-img {
   width: 100%;
   height: 100%;
@@ -177,6 +192,12 @@
   height: 100%;
   object-fit: cover;
   border-radius: 25px;
+}
+.divider {
+  height: 2px;
+  width: 100%;
+  background-color: var(--nero);
+  margin-bottom: 8em;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -230,12 +251,37 @@
     align-items: center;
     justify-content: center;
   }
-  #pfp {
+  #pfp,
+  #pfp-overlay {
     width: 100%;
     height: 100%;
     object-fit: cover;
     padding: 2.5em;
     border-radius: 50%;
+  }
+  #pfp-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0),
+      rgba(233, 233, 233, 0.1),
+      rgba(233, 233, 233, 1)
+    );
+    z-index: 1;
+  }
+  #connect a {
+    font-family: akzidenz-grotesk-next-pro, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: normal;
+    font-size: 1.5em;
+    color: var(--font-color-main);
+    transition: all 0.5s ease;
+  }
+  #connect a:hover {
+    color: var(--font-color-hover);
   }
   #positions {
     border-radius: 50px;
@@ -247,14 +293,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 6em;
+    justify-content: flex-start;
+    padding: 4em;
   }
   .position h3 {
     font-size: 2em;
   }
   .position p {
     font-size: 1.25em;
+  }
+  .pos-icon {
+    width: 10em;
+    height: 10em;
+    margin-bottom: 2em;
   }
   #research {
     padding-top: 4em;
@@ -308,6 +359,10 @@
     justify-content: center;
     border-radius: 20px;
   }
+  .area h3 {
+    font-size: 2em;
+    line-height: 1.25em;
+  }
   #goal {
     width: 100%;
     padding: 8em;
@@ -326,18 +381,18 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 8em;
-    padding-bottom: 8em;
+    padding-top: 4em;
+    padding-bottom: 4em;
   }
   .section-txt h2 {
-    font-size: 5em;
+    font-size: 6em;
     line-height: 1.25em;
     width: 100%;
   }
   .section-txt p {
     font-size: 1.25em;
     line-height: 1.5em;
-    padding-top: 1em;
+    padding-top: 2em;
   }
   #collab,
   #education {
@@ -361,6 +416,13 @@
   }
   #recognition h2 {
     font-size: 5em;
+    padding-bottom: 0.5em;
+  }
+  .rec {
+    padding-top: 1em;
+  }
+  .rec h3 {
+    font-size: 1.5em;
   }
 }
 </style>
