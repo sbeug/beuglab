@@ -8,7 +8,7 @@ import ContactButton from '@/components/ContactButton.vue'
     <div id="footer-title">
       <h6>Understanding Cancer and Immunity to Inform Tomorrow's Therapies.</h6>
     </div>
-    <ContactButton id="button" />
+    <ContactButton id="button" class="contact-open" />
     <div id="bottom-bar">
       <div id="contact">
         <h6>shawn@arc.cheo.ca</h6>

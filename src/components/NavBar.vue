@@ -223,6 +223,7 @@ onBeforeUnmount(() => {
   background: transparent;
   animation: dropmenu-enter 2s ease-in-out forwards;
   opacity: 0%;
+  visibility: hidden;
 }
 #dropdown-menu-filter {
   z-index: 8;
@@ -236,6 +237,7 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(15px);
   animation: dropmenu-enter 2s ease-in-out forwards;
   opacity: 0%;
+  visibility: hidden;
 }
 @keyframes dropmenu-enter {
   0% {

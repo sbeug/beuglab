@@ -268,10 +268,10 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 #team-c2a p {
-  padding-right: 2.5em;
   z-index: 2;
 }
 #beuglab-button {
+  display: none;
   position: absolute;
   width: 100%;
   height: 3em;
@@ -328,6 +328,7 @@ onBeforeUnmount(() => {
   height: 25em;
   border-radius: 10px;
   border: none;
+  box-shadow: 4px 4px 10px #2222221a;
 }
 .member-photo img {
   width: 100%;
@@ -401,10 +402,12 @@ onBeforeUnmount(() => {
     padding-left: 8em;
   }
   #beuglab-button {
+    display: unset;
     scale: 1.2;
   }
   #team-c2a p {
     font-size: 1.5em;
+    padding-right: 2.5em;
   }
   #team-content {
     position: relative;
@@ -423,7 +426,7 @@ onBeforeUnmount(() => {
     margin-right: 4em;
     margin-top: 6em;
   }
-  .team-member h6 {
+  .team-member h3 {
     padding: 0;
     font-size: 2em;
   }

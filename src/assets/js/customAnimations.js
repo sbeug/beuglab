@@ -56,7 +56,7 @@ export function DropDownMenuAnimation() {
   dropDownTimeline.set(
     '#dropdown-menu',
     {
-      display: 'unset',
+      visibility: 'visible',
       opacity: '100%',
     },
     0,
@@ -64,7 +64,7 @@ export function DropDownMenuAnimation() {
   dropDownTimeline.set(
     '#dropdown-menu-filter',
     {
-      display: 'unset',
+      visibility: 'visible',
       opacity: '100%',
     },
     0,
