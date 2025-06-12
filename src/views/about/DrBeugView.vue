@@ -94,12 +94,12 @@
         </p>
       </div>
       <div class="section-img">
-        <img src="" alt="tbd" />
+        <img src="../../assets/content/images/BeugLab-Still-03.jpg" alt="tbd" />
       </div>
     </div>
     <div id="collab" class="section df-pad">
       <div class="section-img">
-        <img src="" alt="tbd" />
+        <img src="../../assets/content/images/BeugLab-Still-04.jpg" alt="tbd" />
       </div>
       <div class="section-txt">
         <h2>Collaborations and Mentorship</h2>
@@ -157,13 +157,26 @@
 }
 #positions {
   z-index: 2;
-  background-color: var(--nero);
+  background-color: #2c2c2c;
   border-radius: 25px;
 }
 .position h3,
 .position p {
   color: var(--blanco);
   text-align: center;
+}
+.section-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 25px;
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -225,7 +238,7 @@
     border-radius: 50%;
   }
   #positions {
-    border-radius: 40px;
+    border-radius: 50px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2em;
@@ -286,13 +299,14 @@
     background-color: #4e4e4ec2;
     backdrop-filter: blur(10px);
     width: 25em;
+    height: 18em;
     padding: 2em;
     color: var(--blanco);
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 25px;
+    border-radius: 20px;
   }
   #goal {
     width: 100%;
@@ -306,6 +320,14 @@
     font-size: 3em;
     text-align: center;
     line-height: 1.5em;
+  }
+  .section-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8em;
+    padding-bottom: 8em;
   }
   .section-txt h2 {
     font-size: 5em;
@@ -327,7 +349,7 @@
     padding-right: 8em;
   }
   #collab .section-txt {
-    padding-right: 8em;
+    padding-left: 8em;
   }
   #recognition {
     padding-top: 14em;

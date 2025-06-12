@@ -50,7 +50,7 @@ defineProps(['member'])
 .member-img-container {
   position: relative;
   width: 100%;
-  height: 40vh;
+  height: 50vh;
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 25px;
@@ -63,6 +63,7 @@ defineProps(['member'])
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
 }
 #top-section {
   display: grid;

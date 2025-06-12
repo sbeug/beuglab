@@ -53,9 +53,18 @@ export function DropDownMenuAnimation() {
     paused: true,
     duration: 1,
   })
-  dropDownTimeline.to(
+  dropDownTimeline.set(
     '#dropdown-menu',
     {
+      display: 'unset',
+      opacity: '100%',
+    },
+    0,
+  )
+  dropDownTimeline.set(
+    '#dropdown-menu-filter',
+    {
+      display: 'unset',
       opacity: '100%',
     },
     0,
@@ -540,7 +549,6 @@ export function dragToScroll() {
 }
 
 export function teamViewAnimations() {
-  // Get the sidebar and footer elements
   const sidebar = document.querySelector('#side-bar')
   const mobileButton = document.querySelector('#mobile-btn')
   const footer = document.querySelector('#footer')

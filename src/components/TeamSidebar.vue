@@ -55,6 +55,7 @@ const emit = defineEmits(['select'])
   line-height: 4.5em;
   padding: 0;
   padding-left: 2em;
+  padding-top: 3em;
 }
 .member-link {
   cursor: pointer;
@@ -63,7 +64,7 @@ const emit = defineEmits(['select'])
   color: var(--font-color-main);
 }
 .member-link h3 {
-  font-size: 2em;
+  font-size: 1.75em;
   margin: 0;
   padding: 0;
   transition: 0.5s ease;

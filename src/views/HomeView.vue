@@ -121,9 +121,14 @@ onBeforeUnmount(() => {
         </div>
         <div id="team-c2a" class="clickable">
           <router-link to="/about/team" class="button">
+            <iframe
+              id="beuglab-button"
+              src="https://my.spline.design/beuglabbutton-fWTez99a1IlaBHjtaJuxIuNU-dmJ/"
+              frameborder="0"
+              width="100%"
+              height="100%"
+            ></iframe>
             <p>Meet the Team</p>
-            <div class="circle"></div>
-            <div class="dot"></div>
           </router-link>
         </div>
         <div id="team-members-section">
@@ -255,8 +260,22 @@ onBeforeUnmount(() => {
   line-height: 1.2em;
 }
 #team-c2a {
+  position: relative;
   padding-top: 2em;
   padding-bottom: 2em;
+}
+.button {
+  overflow: hidden;
+}
+#team-c2a p {
+  padding-right: 2.5em;
+  z-index: 2;
+}
+#beuglab-button {
+  position: absolute;
+  width: 100%;
+  height: 3em;
+  scale: 1;
 }
 .description {
   font-family: akzidenz-grotesk-next-pro, sans-serif;
@@ -380,6 +399,9 @@ onBeforeUnmount(() => {
   #team-c2a {
     padding-top: 4em;
     padding-left: 8em;
+  }
+  #beuglab-button {
+    scale: 1.2;
   }
   #team-c2a p {
     font-size: 1.5em;
