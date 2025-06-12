@@ -74,6 +74,7 @@
   color: var(--blanco);
 }
 .experience-content h1 {
+  font-size: 3em;
   text-transform: uppercase;
 }
 /* DESKTOP 1 [GLOBAL] */

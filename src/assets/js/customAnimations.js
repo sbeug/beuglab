@@ -58,6 +58,7 @@ export function DropDownMenuAnimation() {
     {
       visibility: 'visible',
       opacity: '100%',
+      xPercent: 0,
     },
     0,
   )
@@ -66,6 +67,7 @@ export function DropDownMenuAnimation() {
     {
       visibility: 'visible',
       opacity: '100%',
+      xPercent: 0,
     },
     0,
   )
