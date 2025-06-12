@@ -5,8 +5,8 @@ import IconResearch from '@/components/icons/IconResearch.vue'
 </script>
 <template>
   <div id="main-content" class="main-content">
-    <div id="introduction" class="section df-pad">
-      <div id="intro-txt">
+    <div id="introduction" class="section">
+      <div id="intro-txt" class="df-pad">
         <h1>Dr. Shawn Beug</h1>
         <h6>
           Dr. Shawn Beug is an internationally recognized cancer biologist specializing in the
@@ -53,7 +53,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         <p>CHEO Research Institute, Cancer Therapeutics Program</p>
       </div>
       <div id="pos-3" class="position">
-        <IconResearch class="pos-icon" style="scale: 4.5" />
+        <IconResearch class="pos-icon" id="iconfix" />
         <h3>Canada Research Chair</h3>
         <p>(Tier 2) in Cancer Biology and Translational Research</p>
       </div>
@@ -149,13 +149,20 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   z-index: 1;
   min-height: 100vh;
   width: 100%;
-  padding-top: 4em;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(233, 233, 233, 1));
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column-reverse;
+  padding-bottom: 4em;
+}
+#intro-txt {
+  position: relative;
+  z-index: 2;
 }
 #introduction h1 {
-  font-size: 4em;
+  font-size: 3em;
   line-height: 1em;
-  padding-bottom: 0.5em;
+  padding-bottom: 1em;
 }
 #introduction h6 {
   font-size: 1.25em;
@@ -165,20 +172,101 @@ import IconResearch from '@/components/icons/IconResearch.vue'
 #connect {
   padding-top: 2em;
 }
+#pfp-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+#pfp-circle {
+  z-index: 1;
+}
+#pfp,
+#pfp-overlay {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#pfp-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0),
+    rgba(233, 233, 233, 0.1),
+    rgba(233, 233, 233, 1)
+  );
+}
+#connect {
+  display: none;
+}
 #positions {
   z-index: 2;
-  background-color: #2c2c2c;
   border-radius: 25px;
+}
+.position {
+  background-color: #2c2c2c;
+  border-radius: 50px;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .position h3,
 .position p {
   color: var(--blanco);
   text-align: center;
 }
+.position h3 {
+  font-size: 1.5em;
+  padding-bottom: 0.5em;
+}
 .pos-icon {
-  width: 10em;
-  height: 10em;
+  width: 6em;
+  height: 6em;
   margin-bottom: 1em;
+}
+#research {
+  padding-top: 8em;
+  padding-bottom: 8em;
+}
+#research-txt h2 {
+  font-size: 3em;
+  line-height: 1.25em;
+}
+#research-txt h6{
+  font-size: 1.25em;
+  line-height: 1.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+#goal {
+  width: 100%;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  display: flex;
+  justify-content: center;
+  background-color: #22222220;
+}
+#goal h3 {
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 1.5em;
+}
+.section-txt {
+  padding-top: 8em;
+  padding-bottom: 4em;
+}
+.section-txt h2 {
+  font-size: 2.5em;
+  line-height: 1.25em;
+  padding-bottom: 1em;
 }
 .section-img {
   width: 100%;
@@ -205,8 +293,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     min-height: 100vh;
   }
   #introduction {
-    display: flex;
-    flex-basis: 0;
+    flex-direction: row;
+    padding: 0;
+    padding-top: 4em;
   }
   #intro-txt {
     width: 50%;
@@ -229,17 +318,16 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     font-size: 1.25em;
   }
   #connect {
+    display: unset;
     padding-top: 4em;
   }
   #connect a {
     margin-right: 2em;
   }
   #pfp-container {
-    position: relative;
     width: auto;
   }
   #pfp-circle {
-    z-index: 1;
     position: absolute;
     top: 2%;
     transform: translateX(-8%);
@@ -251,14 +339,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  #pfp,
-  #pfp-overlay {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    padding: 2.5em;
-    border-radius: 50%;
   }
   #pfp-overlay {
     position: absolute;
@@ -272,6 +352,14 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     );
     z-index: 1;
   }
+  #pfp,
+  #pfp-overlay {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 2.5em;
+    border-radius: 50%;
+}
   #connect a {
     font-family: akzidenz-grotesk-next-pro, sans-serif;
     font-weight: 700;
@@ -285,15 +373,15 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     color: var(--font-color-hover);
   }
   #positions {
+    margin: 0;
+    background-color: #2c2c2c;
     border-radius: 50px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2em;
   }
   .position {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: none;
     justify-content: flex-start;
     padding: 4em;
   }
@@ -327,6 +415,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     width: 50%;
     font-size: 1.25em;
     line-height: 1.5em;
+    padding: 0;
     padding-bottom: 2em;
     padding-right: 8em;
   }
