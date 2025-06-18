@@ -18,6 +18,6 @@
   stroke: #e9e9e9;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 12px;
+  stroke-width: 8px;
 }
 </style>

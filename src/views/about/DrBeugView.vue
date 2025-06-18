@@ -238,7 +238,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   font-size: 3em;
   line-height: 1.25em;
 }
-#research-txt h6{
+#research-txt h6 {
   font-size: 1.25em;
   line-height: 1.5em;
   padding-top: 1em;
@@ -359,7 +359,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     object-fit: cover;
     padding: 2.5em;
     border-radius: 50%;
-}
+  }
   #connect a {
     font-family: akzidenz-grotesk-next-pro, sans-serif;
     font-weight: 700;
@@ -513,6 +513,15 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   .rec h3 {
     font-size: 1.5em;
+  }
+}
+/* DESKTOP 4 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
+@media (min-width: 1440px) {
+  #introduction h1 {
+    font-size: 5.5em;
+  }
+  #pfp-circle {
+    transform: translateX(-8%);
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/

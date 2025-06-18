@@ -88,7 +88,7 @@ useHead({
   title: 'Beug Lab | Innovative Research',
   meta: [
     { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: '982studios® | Driven by Curiosity, Guided by Science' },
+    { property: 'og:title', content: 'Beug Lab | Driven by Curiosity, Guided by Science' },
     {
       property: 'og:description',
       content:
@@ -99,7 +99,7 @@ useHead({
       content: '',
     },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: '982studios® | Driven by Curiosity, Guided by Science' },
+    { name: 'twitter:title', content: 'Beug Lab | Driven by Curiosity, Guided by Science' },
     {
       name: 'twitter:description',
       content:

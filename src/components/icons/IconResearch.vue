@@ -21,7 +21,7 @@
   fill: none;
   stroke: #e9e9e9;
   stroke-miterlimit: 10;
-  stroke-width: 12px;
+  stroke-width: 8px;
 }
 
 .cls-2 {
