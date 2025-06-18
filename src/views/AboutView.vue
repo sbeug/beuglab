@@ -62,7 +62,7 @@ onMounted(() => {
       opacity: 0,
       ease: 'power2.inOut',
       duration: 0.5,
-      scale: 3.5,
+      scale: 3,
     },
     1.25,
   )
@@ -182,6 +182,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   color: var(--blanco);
+  will-change: transform, opacity, scale;
 }
 .experience-heading h1 {
   font-size: 3em;
