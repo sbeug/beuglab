@@ -40,6 +40,22 @@ onMounted(async () => {
   }, 1000)
 })
 onBeforeUnmount(() => {
+  if (window.dragToScrollTimeout) {
+    clearTimeout(window.dragToScrollTimeout)
+  }
+
+  window.removeEventListener('resize', null)
+  window.removeEventListener('scroll', null)
+
+  const splineViewer = document.getElementById('hero-spline')
+  if (splineViewer) {
+    splineViewer.remove()
+  }
+
+  if (window.animationFrameId) {
+    cancelAnimationFrame(window.animationFrameId)
+  }
+
   const membersTrack = document.getElementById('members-track')
   if (membersTrack) {
     membersTrack.removeEventListener('mousedown', null)
