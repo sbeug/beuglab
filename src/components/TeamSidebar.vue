@@ -51,6 +51,7 @@ const emit = defineEmits(['select'])
   justify-content: center;
   width: 100%;
   height: 100%;
+  max-height: 100vh;
   list-style: none;
   line-height: 4.5em;
   padding: 0;
@@ -109,10 +110,10 @@ const emit = defineEmits(['select'])
 @media (min-width: 1280px) {
   #team-sidebar {
     padding: 0em;
-    justify-content: flex-start;
+    justify-content: center;
   }
   .member-link {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .member-link h3 {
     font-size: 1.5em;
@@ -127,6 +128,18 @@ const emit = defineEmits(['select'])
   }
   .number p {
     font-size: 0.5em;
+  }
+}
+/* DESKTOP 3 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
+@media (min-width: 1440px) {
+  .member-link {
+    font-size: 1.75em;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
+@media (min-width: 1920px) {
+  .member-link {
+    font-size: 2em;
   }
 }
 </style>

@@ -180,9 +180,9 @@ onBeforeUnmount(() => {})
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     transform: translateY(0%);
-    padding-top: 6em;
-    height: 100%;
+    padding-top: 9em;
     min-height: 100vh;
+    max-height: 100vh;
   }
   #team-member-container {
     padding: 0;
@@ -204,6 +204,12 @@ onBeforeUnmount(() => {})
   }
   .alumni-name {
     font-size: 2em;
+  }
+}
+/* DESKTOP 2 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
+@media (min-width: 1440px) {
+  #side-bar {
+    top: -5%;
   }
 }
 </style>
