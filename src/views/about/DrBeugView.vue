@@ -60,27 +60,27 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     </div>
     <div id="research" class="section df-pad">
       <div id="research-txt">
-        <h2>Research Focus</h2>
+        <h6>Research Focus</h6>
         <h6>
           Dr. Beug’s research centers on understanding how cancer cells evade therapeutic
           intervention and immune detection. His lab explores the dynamic interplay between the
           tumor microenvironment and cellular signaling pathways to uncover novel vulnerabilities in
           aggressive cancers.
         </h6>
-        <h5>Key Areas of Investigation</h5>
+        <h5>Key Areas of Investigation:</h5>
       </div>
       <div id="areas">
         <div class="area">
-          <h3>Mechanisms of therapeutic resistance</h3>
+          <h6>Mechanisms of therapeutic resistance</h6>
         </div>
         <div class="area">
-          <h3>Tumor immune evasion</h3>
+          <h6>Tumor immune evasion</h6>
         </div>
         <div class="area">
-          <h3>Epigenetic and transcriptional reprogramming</h3>
+          <h6>Epigenetic and transcriptional reprogramming</h6>
         </div>
         <div class="area">
-          <h3>Identification of new drug targets</h3>
+          <h6>Identification of new drug targets</h6>
         </div>
       </div>
     </div>
@@ -90,9 +90,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         relevant therapies that can improve outcomes for patients with advanced cancers.
       </h3>
     </div>
-    <div id="education" class="section df-pad">
-      <div class="section-txt">
-        <h2>Education and Training</h2>
+    <div id="education" class="section">
+      <div class="section-txt df-pad">
+        <h6>Education and Training</h6>
         <h6>
           Dr. Beug received his PhD in Pathology from Dalhousie University, where he studied cell
           signaling pathways in cancer development. He completed postdoctoral training at the
@@ -105,12 +105,12 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         <img src="../../assets/content/images/BeugLab-Still-03.jpg" alt="tbd" />
       </div>
     </div>
-    <div id="collab" class="section df-pad">
+    <div id="collab" class="section">
       <div class="section-img">
         <img src="../../assets/content/images/BeugLab-Still-04.jpg" alt="tbd" />
       </div>
-      <div class="section-txt">
-        <h2>Collaborations & Mentorship</h2>
+      <div class="section-txt df-pad">
+        <h6>Collaborations & Mentorship</h6>
         <h6>
           Dr. Beug is deeply committed to fostering the next generation of biomedical researchers.
           His lab actively mentors undergraduate, graduate, and postdoctoral trainees. He also
@@ -121,20 +121,20 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     </div>
     <div id="recognition" class="section df-pad">
       <div class="divider"></div>
-      <h2>Recognition</h2>
+      <h6>Recognition</h6>
       <div class="rec">
-        <h3>Canada Research Chair (Tier 2) – Recognizing emerging leaders in health research.</h3>
+        <h6>Canada Research Chair (Tier 2) – Recognizing emerging leaders in health research.</h6>
       </div>
       <div class="rec">
-        <h3>
+        <h6>
           Multiple peer-reviewed grants and fellowships from national agencies, including CIHR and
           NSERC.
-        </h3>
+        </h6>
       </div>
       <div class="rec">
-        <h3>
+        <h6>
           Published in leading journals and frequently invited to speak at scientific conferences.
-        </h3>
+        </h6>
       </div>
     </div>
   </div>
@@ -226,23 +226,34 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   padding-bottom: 0.5em;
 }
 .pos-icon {
-  width: 6em;
-  height: 6em;
+  width: 5em;
+  height: 5em;
   margin-bottom: 1em;
 }
 #research {
-  padding-top: 8em;
-  padding-bottom: 8em;
+  padding-top: 5em;
+  padding-bottom: 6em;
 }
-#research-txt h2 {
+#research-txt :nth-child(1) {
   font-size: 3em;
-  line-height: 1.25em;
+  line-height: 1.1em;
 }
 #research-txt h6 {
   font-size: 1.25em;
   line-height: 1.5em;
-  padding-top: 1em;
   padding-bottom: 1em;
+}
+#research-txt h5 {
+  font-size: 1.5em;
+  padding-top: 1em;
+}
+.area {
+  padding-top: 1em;
+}
+.area h6 {
+  font-size: 1.25em;
+  line-height: 1.5em;
+  font-style: italic;
 }
 #goal {
   width: 100%;
@@ -260,12 +271,18 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   line-height: 1.5em;
 }
 .section-txt {
-  padding-top: 8em;
+  padding-top: 4em;
   padding-bottom: 4em;
 }
-.section-txt h6 {
-  font-size: 2.5em;
+.section-txt :nth-child(1) {
+  font-size: 3em;
   line-height: 1.25em;
+  width: 100%;
+  padding-bottom: 0.5em;
+}
+.section-txt h6 {
+  font-size: 1.25em;
+  line-height: 1.5em;
   padding-bottom: 1em;
 }
 .section-img {
@@ -279,9 +296,28 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 25px;
+}
+#collab {
+  display: flex;
+  flex-direction: column-reverse;
+}
+#recognition {
+  padding-top: 5em;
+  padding-bottom: 6em;
+}
+#recognition :nth-child(2) {
+  font-size: 3em;
+  line-height: 1.25em;
+}
+.rec {
+  padding-top: 2em;
+}
+.rec h6 {
+  font-size: 1.25em;
+  line-height: 1.5em;
 }
 .divider {
+  display: none;
   height: 2px;
   width: 100%;
   background-color: var(--nero);
@@ -396,10 +432,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     height: 7em;
     margin-bottom: 2em;
   }
-  #research {
-    padding-top: 4em;
-    padding-bottom: 4em;
-  }
   #research-txt {
     display: flex;
     flex-direction: column;
@@ -408,25 +440,21 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-top: 8em;
     padding-bottom: 8em;
   }
-  #research-txt h2 {
+  #research-txt :nth-child(1) {
+    padding: 0 !important;
+    width: 100% !important;
     font-size: 7em;
   }
   #research-txt h6 {
     width: 50%;
     font-size: 1.25em;
     line-height: 1.5em;
-    padding: 0;
+    padding-top: 2em;
     padding-bottom: 2em;
     padding-right: 8em;
   }
   #research-txt h5 {
-    font-size: 1.25em;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
-    border: 2px solid var(--nero);
-    border-radius: 50px;
+    font-size: 2.5em;
   }
   #areas {
     width: 100%;
@@ -449,9 +477,10 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     justify-content: center;
     border-radius: 20px;
   }
-  .area h3 {
+  .area h6 {
     font-size: 2em;
     line-height: 1.25em;
+    font-style: normal;
   }
   #goal {
     width: 100%;
@@ -474,16 +503,25 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-top: 4em;
     padding-bottom: 4em;
   }
-  .section-txt h2 {
-    font-size: 5em;
-    line-height: 1.25em;
+  .section-txt :nth-child(1) {
+    font-size: 5.5em;
+    line-height: 1.25em !important;
     width: 100%;
-    padding: 0;
+    padding: 0 !important;
   }
   .section-txt h6 {
     font-size: 1.25em;
     line-height: 1.5em;
     padding-top: 2em;
+  }
+  .section-img img {
+    border-radius: 25px;
+  }
+  #education img {
+    margin-right: 8em;
+  }
+  #collab img {
+    margin-left: 8em;
   }
   #collab,
   #education {
@@ -508,15 +546,18 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     align-items: center;
     justify-content: center;
   }
-  #recognition h2 {
+  #recognition :nth-child(2) {
     font-size: 5em;
     padding-bottom: 0.5em;
   }
   .rec {
-    padding-top: 1em;
+    padding-top: 2em;
   }
-  .rec h3 {
-    font-size: 1.5em;
+  .rec h6 {
+    font-size: 2em;
+  }
+  .divider {
+    display: block;
   }
 }
 /* DESKTOP 4 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
