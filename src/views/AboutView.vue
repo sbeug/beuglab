@@ -12,6 +12,10 @@ onMounted(() => {
     delay: 0.5,
     duration: 2,
   })
+  gsap.set('#about-us', {
+    opacity: 1,
+    delay: 2.5,
+  })
   const experienceContainerTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#experience-container',
@@ -156,8 +160,12 @@ onMounted(() => {
   text-align: justify;
 }
 #about-us :nth-child(1) {
-  font-size: 1em;
+  font-size: 2em;
   margin-bottom: 0.5em;
+}
+#about-us h6 {
+  font-size: 1.25em;
+  line-height: 1.5;
 }
 .experience-heading {
   position: absolute;
@@ -173,6 +181,7 @@ onMounted(() => {
 }
 .experience-heading h1 {
   font-size: 3em;
+  line-height: 1em;
   text-transform: uppercase;
 }
 /* DESKTOP 1 [GLOBAL] */

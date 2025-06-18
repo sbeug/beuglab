@@ -68,21 +68,18 @@ watch(
     // Reset scroll position
     setTimeout(() => {
       window.scrollTo(0, 0)
-
-      // Then resize Lenis after a small delay
       setTimeout(() => {
         if (lenis.value) {
           lenis.value.resize()
           lenis.value.scrollTo(0, { immediate: true })
 
-          // Final update after everything has settled
           setTimeout(() => {
             ScrollTrigger.refresh(true)
             lenis.value.resize()
           }, 100)
         }
       }, 50)
-    }, 1000) // Add delay before scroll reset
+    }, 1000)
   },
 )
 
