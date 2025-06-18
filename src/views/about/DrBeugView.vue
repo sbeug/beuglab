@@ -383,7 +383,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   .position {
     background-color: none;
     justify-content: flex-start;
-    padding: 4em;
+    padding: 3em;
   }
   .position h3 {
     font-size: 2em;
@@ -392,8 +392,8 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     font-size: 1.25em;
   }
   .pos-icon {
-    width: 10em;
-    height: 10em;
+    width: 7em;
+    height: 7em;
     margin-bottom: 2em;
   }
   #research {
