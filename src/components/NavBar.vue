@@ -6,11 +6,34 @@ import {
   DesktopSubmenuAnimation,
   menuUnderline,
 } from '@/assets/js/customAnimations'
+import { gsap } from 'gsap'
+
 onMounted(() => {
   DropDownMenuAnimation()
   subMenuDrop()
   DesktopSubmenuAnimation()
   menuUnderline()
+  gsap.set('#dropdown-menu', {
+    visibility: 'hidden',
+    opacity: '0%',
+  })
+  gsap.from('#logo img', {
+    opacity: 0,
+    duration: 1,
+    ease: 'power2.inOut',
+  })
+  gsap.from('#logo h3', {
+    opacity: 0,
+    duration: 1,
+    delay: 0.25,
+    ease: 'power2.inOut',
+  })
+  gsap.from('#menu-button', {
+    opacity: 0,
+    duration: 1,
+    delay: 1,
+    ease: 'power2.inOut',
+  })
 })
 onBeforeUnmount(() => {
   // Cleanup code here
@@ -81,7 +104,6 @@ onBeforeUnmount(() => {
         <div class="line" id="line-one"></div>
         <div class="line" id="line-two"></div>
       </div>
-      <div id="dropdown-menu-filter"></div>
       <div id="dropdown-menu">
         <div id="menu-list">
           <ul>
@@ -221,9 +243,10 @@ onBeforeUnmount(() => {
   transform: translateX(100%);
   will-change: transform, opacity, visibility;
   background: transparent;
-  animation: dropmenu-enter 2s ease-in-out forwards;
   opacity: 0%;
   visibility: hidden;
+  background-color: #e9e9e98a;
+  backdrop-filter: blur(15px);
 }
 #dropdown-menu-filter {
   z-index: 8;
@@ -235,20 +258,8 @@ onBeforeUnmount(() => {
   transform: translateX(100%);
   background-color: #e9e9e98a;
   backdrop-filter: blur(15px);
-  animation: dropmenu-enter 2s ease-in-out forwards;
   opacity: 0%;
   visibility: hidden;
-}
-@keyframes dropmenu-enter {
-  0% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 100%;
-  }
 }
 #menu-button {
   z-index: 10;
