@@ -16,9 +16,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
           difficult-to-treat cancers. He holds multiple academic and leadership roles across
           top-tier Canadian institutions.
         </h6>
-        <a class="button contact-open clickable">
+        <div class="button open-contact clickable">
           <p>Get in touch</p>
-        </a>
+        </div>
         <div id="connect" class="clickable">
           <a href="https://ca.linkedin.com/in/shawn-beug-9711292b">LinkedIn</a>
           <a href="https://www.cheoresearch.ca/research/find-a-researcher/shawn-beug-phd/"
@@ -93,13 +93,13 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     <div id="education" class="section df-pad">
       <div class="section-txt">
         <h2>Education and Training</h2>
-        <p>
+        <h6>
           Dr. Beug received his PhD in Pathology from Dalhousie University, where he studied cell
           signaling pathways in cancer development. He completed postdoctoral training at the
           Princess Margaret Cancer Centre (University Health Network) in Toronto, one of Canada’s
           leading cancer research institutions, under the mentorship of world-renowned experts in
           cancer biology and immunology.
-        </p>
+        </h6>
       </div>
       <div class="section-img">
         <img src="../../assets/content/images/BeugLab-Still-03.jpg" alt="tbd" />
@@ -111,12 +111,12 @@ import IconResearch from '@/components/icons/IconResearch.vue'
       </div>
       <div class="section-txt">
         <h2>Collaborations & Mentorship</h2>
-        <p>
+        <h6>
           Dr. Beug is deeply committed to fostering the next generation of biomedical researchers.
           His lab actively mentors undergraduate, graduate, and postdoctoral trainees. He also
           collaborates with clinicians, immunologists, and computational biologists to bridge the
           gap between lab discoveries and patient care
-        </p>
+        </h6>
       </div>
     </div>
     <div id="recognition" class="section df-pad">
@@ -263,7 +263,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   padding-top: 8em;
   padding-bottom: 4em;
 }
-.section-txt h2 {
+.section-txt h6 {
   font-size: 2.5em;
   line-height: 1.25em;
   padding-bottom: 1em;
@@ -332,8 +332,8 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     top: 2%;
     transform: translateX(-8%);
     border: 6px solid var(--nero);
-    width: 70em;
-    height: 70em;
+    width: 75em;
+    height: 75em;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -475,11 +475,12 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-bottom: 4em;
   }
   .section-txt h2 {
-    font-size: 6em;
+    font-size: 5em;
     line-height: 1.25em;
     width: 100%;
+    padding: 0;
   }
-  .section-txt p {
+  .section-txt h6 {
     font-size: 1.25em;
     line-height: 1.5em;
     padding-top: 2em;
@@ -491,6 +492,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-top: 12em;
   }
   #education p {
+    padding-right: 8em;
+  }
+  #education .section-txt {
     padding-right: 8em;
   }
   #collab .section-txt {
@@ -521,7 +525,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     font-size: 5.5em;
   }
   #pfp-circle {
-    transform: translateX(-8%);
+    transform: translate(-12%, -4%);
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
