@@ -7,7 +7,7 @@ import GrantsAndPartners from '../views/about/GrantsAndPartnersView.vue'
 import Research from '@/views/about/ResearchView.vue'
 import Publications from '@/views/PublicationsView.vue'
 import Gallery from '@/views/GalleryView.vue'
-import Asteroids from '@/views/AsteroidsView.vue'
+import ImmunoDefender from '@/views/ImmunoDefenderView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,9 +53,9 @@ const router = createRouter({
       component: Gallery,
     },
     {
-      path: '/asteroids',
-      name: 'gallery',
-      component: Asteroids,
+      path: '/gallery/immuno-defender',
+      name: 'immunodefender',
+      component: ImmunoDefender,
     },
   ],
 })

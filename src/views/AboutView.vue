@@ -12,10 +12,6 @@ onMounted(() => {
     delay: 0.5,
     duration: 2,
   })
-  gsap.set('#about-us', {
-    opacity: 1,
-    delay: 2.5,
-  })
   const experienceContainerTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#experience-container',
@@ -27,6 +23,10 @@ onMounted(() => {
       invalidateOnRefresh: true,
     },
   })
+  experienceContainerTl.set('#about-us', {
+    opacity: 1,
+    delay: 2,
+  })
   experienceContainerTl.to(
     '#about-us',
     {
@@ -34,27 +34,27 @@ onMounted(() => {
       ease: 'power2.inOut',
       duration: 0.5,
     },
-    0,
+    0.1,
   )
   experienceContainerTl.from(
     '#h-top',
     {
       opacity: 0,
       ease: 'power2.inOut',
-      duration: 0.75,
+      duration: 1,
       xPercent: -150,
     },
-    0.5,
+    0.4,
   )
   experienceContainerTl.from(
     '#h-bottom',
     {
       opacity: 0,
       ease: 'power2.inOut',
-      duration: 0.75,
+      duration: 1,
       xPercent: 150,
     },
-    0.5,
+    0.4,
   )
   experienceContainerTl.to(
     '.experience-heading',
@@ -198,6 +198,7 @@ onMounted(() => {
   }
   .experience-heading h1 {
     font-size: 14em;
+    line-height: 1.5em;
   }
   #h-top,
   #h-bottom {

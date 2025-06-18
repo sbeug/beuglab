@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
               </div>
               <ul id="sub-list-gallery" class="sub-list">
                 <li>
-                  <router-link to="/gallery/asteroids" class="sub-link">
+                  <router-link to="/gallery/immuno-defender" class="sub-link">
                     Immuno Defender
                     <img
                       class="circle-arrow"

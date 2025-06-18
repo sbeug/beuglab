@@ -31,7 +31,7 @@ import ContactButton from '@/components/ContactButton.vue'
       <div id="column-3">
         <a class="contact-open">Contact</a>
         <a class="contact-open">Join us</a>
-        <router-link to="/asteroids">Defender</router-link>
+        <router-link to="/immuno-defender">Defender</router-link>
       </div>
       <div id="credits">
         <p>© 2025 Beug Lab | All rights reserved</p>
