@@ -21,16 +21,13 @@ import ContactButton from '@/components/ContactButton.vue'
       <div id="column-1">
         <router-link to="/about">About</router-link>
         <router-link to="/about/team">Team</router-link>
-        <router-link to="/about/dr-beug">Dr. Beug</router-link>
       </div>
       <div id="column-2">
         <router-link to="/about">Publications</router-link>
-        <router-link to="/about/research">Research</router-link>
         <router-link to="/about">Gallery</router-link>
       </div>
       <div id="column-3">
-        <a class="contact-open">Contact</a>
-        <a class="contact-open">Join us</a>
+        <router-link to="/about/dr-beug">Dr. Beug</router-link>
         <router-link to="/immuno-defender">Defender</router-link>
       </div>
       <div id="credits">

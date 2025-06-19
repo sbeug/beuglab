@@ -325,6 +325,81 @@ import IconResearch from '@/components/icons/IconResearch.vue'
 }
 /* TABLET 2 [GLOBAL] */
 @media (min-width: 1000px) {
+  #introduction {
+    flex-direction: row;
+    padding: 0;
+    padding-top: 4em;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+  #intro-txt {
+    width: 100%;
+    padding-top: 2em;
+  }
+  #introduction h1 {
+    font-size: 4em;
+    line-height: 1.1em;
+    padding-bottom: 0.5em;
+  }
+  #intro-txt h6 {
+    font-size: 1em;
+    padding-bottom: 2em;
+  }
+  #pfp-circle {
+    position: absolute;
+    top: 0%;
+    left: -10%;
+    border: 4px solid var(--nero);
+    width: 36em;
+    height: 36em;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #connect {
+    display: block;
+    padding-top: 3em;
+  }
+  #connect a {
+    font-family: akzidenz-grotesk-next-pro, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: normal;
+    font-size: 1em;
+    color: var(--font-color-main);
+    transition: all 0.5s ease;
+    margin-right: 2em;
+  }
+  #positions {
+    display: flex;
+    flex-direction: row;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .position {
+    width: 100%;
+  }
+  #research-txt :nth-child(1) {
+    font-size: 5em;
+    padding-bottom: 0.5em;
+  }
+  #goal h3 {
+    font-size: 2em;
+  }
+  #collab,
+  #education {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #recognition {
+    background-color: #22222220;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -342,10 +417,10 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    padding-top: 0em;
   }
   #introduction h1 {
     font-size: 6em;
-    line-height: 1.1em;
   }
   #introduction h6 {
     font-size: 1.25em;
@@ -357,11 +432,10 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     font-size: 1.25em;
   }
   #connect {
-    display: unset;
     padding-top: 4em;
   }
   #connect a {
-    margin-right: 2em;
+    font-size: 1.5em;
   }
   #pfp-container {
     width: auto;
@@ -398,15 +472,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     object-fit: cover;
     padding: 2.5em;
     border-radius: 50%;
-  }
-  #connect a {
-    font-family: akzidenz-grotesk-next-pro, sans-serif;
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: normal;
-    font-size: 1.5em;
-    color: var(--font-color-main);
-    transition: all 0.5s ease;
   }
   #connect a:hover {
     color: var(--font-color-hover);
@@ -528,8 +593,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #collab,
   #education {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
     padding-top: 12em;
   }
   #education p {
@@ -542,12 +606,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-left: 8em;
   }
   #recognition {
+    background-color: transparent;
     padding-top: 14em;
     padding-bottom: 14em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
   #recognition :nth-child(2) {
     font-size: 5em;
@@ -577,8 +638,15 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   #introduction h1 {
     font-size: 8em;
   }
+  #intro-txt h1 {
+    padding-bottom: 0.5em;
+  }
+  #research-txt h6,
+  .section-txt h6 {
+    font-size: 1.5em;
+  }
   #pfp-circle {
-    transform: translateX(-0%);
+    transform: translate(-5%, -5%);
   }
 }
 </style>
