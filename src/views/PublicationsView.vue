@@ -20,6 +20,14 @@ import PubmedPublications from '@/components/PubmedPublications.vue'
   padding-top: 1.5em;
   text-align: center;
 }
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  #main-content h1 {
+    font-size: 3em;
+    padding-top: 2em;
+    padding-bottom: 0.5em;
+  }
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #main-content h1 {
