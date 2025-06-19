@@ -350,33 +350,61 @@ onBeforeUnmount(() => {
   border-radius: 10px;
   pointer-events: none;
 }
-/* TABLET 2 [GLOBAL] */
-@media (min-width: 1000px) {
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
   #hero-heading {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   #hero-heading h1 {
-    font-size: 8em;
+    font-size: 6em;
     text-align: center;
   }
   #mobile-heading {
-    padding-top: 1.5em;
-    font-size: 1.5em;
-    width: 65%;
+    padding-top: 1em;
+    font-size: 2em;
+    width: 85%;
     text-align: center;
     text-wrap: balance !important;
   }
   #hero-c2a {
     font-size: 1.25em;
   }
-  .section-heading h6 {
+  .section-heading p {
+    font-size: 0.75em;
+  }
+  .section-statement h6 {
+    font-size: 3em;
+    line-height: 1.2em;
+  }
+  #ourwork-statement h6,
+  #team-statement h6 {
     font-size: 2.5em;
     line-height: 1.2em;
   }
-  .section-heading p {
-    font-size: 0.75em;
+  #team-description p {
+    font-size: 1.25em;
+    line-height: 1.25em;
+    width: 100%;
+  }
+  #team-c2a p {
+    font-size: 1.25em;
+  }
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  #hero-heading h1 {
+    font-size: 8em;
+  }
+  #mobile-heading {
+    padding-top: 1.5em;
+    font-size: 1.5em;
+    width: 65%;
+  }
+  .section-heading h6 {
+    font-size: 2.5em;
+    line-height: 1.2em;
   }
   .section-statement h6 {
     font-size: 3.5em;
@@ -389,11 +417,7 @@ onBeforeUnmount(() => {
   }
   #team-description p {
     font-size: 1.25em;
-    line-height: 1.25em;
     width: 70%;
-  }
-  #team-c2a p {
-    font-size: 1.25em;
   }
 }
 /* DESKTOP 1 [GLOBAL] */

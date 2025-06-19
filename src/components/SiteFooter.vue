@@ -157,10 +157,17 @@ import ContactButton from '@/components/ContactButton.vue'
 #logos {
   display: none;
 }
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  #footer-title h6 {
+    font-size: 4em;
+    width: 80%;
+  }
+}
 /* TABLET 2 [GLOBAL] */
 @media (min-width: 1000px) {
   #footer-title h6 {
-    font-size: 4em;
+    font-size: 3.5em;
     width: 80%;
   }
 }
