@@ -36,7 +36,7 @@ onMounted(() => {
   })
 })
 onBeforeUnmount(() => {
-  // Cleanup code here
+  gsap.killTweensOf('*')
 })
 </script>
 
@@ -93,7 +93,6 @@ onBeforeUnmount(() => {
           </a>
         </li>
       </div>
-
       <div id="menu-button">
         <div class="line" id="line-one"></div>
         <div class="line" id="line-two"></div>
@@ -200,7 +199,7 @@ onBeforeUnmount(() => {
   z-index: 9;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 100;
   width: 100vw;
   max-width: 100vw;
   height: 7vh;
