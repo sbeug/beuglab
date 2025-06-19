@@ -14,7 +14,7 @@ onMounted(() => {
   DesktopSubmenuAnimation()
   menuUnderline()
   gsap.set('#dropdown-menu', {
-    opacity: '0%',
+    visibility: 'hidden',
   })
   gsap.from('#logo img', {
     opacity: 0,
@@ -43,59 +43,56 @@ onBeforeUnmount(() => {
   <div>
     <div id="navbar-blur"></div>
     <div id="navbar">
-      <div id="nav-group">
-        <div id="logo">
-          <router-link to="/">
-            <img src="../assets/BEUG LAB - Logo Concept 2.png" alt="Logo" id="logo-img" />
-            <h3>Beug Lab</h3>
-          </router-link>
-        </div>
-        <div id="menu">
-          <li>
-            <router-link to="/" class="menu-link">
-              Home,
-              <div class="menu-underline"></div>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/about" class="menu-link" id="menu-link-about">
-              About,
-              <div class="menu-underline"></div>
-            </router-link>
-            <ul class="sub-menu-about">
-              <li>
-                <router-link to="/about/team" class="">Team</router-link>
-              </li>
-              <li>
-                <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
-              </li>
-              <li>
-                <router-link to="/about/grants-and-partners" class=""
-                  >Grants & Partners</router-link
-                >
-              </li>
-            </ul>
-          </li>
-          <li>
-            <router-link to="/publications" class="menu-link">
-              Publications,
-              <div class="menu-underline"></div>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/gallery" class="menu-link">
-              Gallery,
-              <div class="menu-underline"></div>
-            </router-link>
-          </li>
-          <li>
-            <a class="menu-link contact-open">
-              Contact
-              <div class="menu-underline"></div>
-            </a>
-          </li>
-        </div>
+      <div id="logo">
+        <router-link to="/">
+          <img src="../assets/BEUG LAB - Logo Concept 2.png" alt="Logo" id="logo-img" />
+          <h3>Beug Lab</h3>
+        </router-link>
       </div>
+      <div id="menu">
+        <li>
+          <router-link to="/" class="menu-link">
+            Home
+            <div class="menu-underline"></div>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/about" class="menu-link" id="menu-link-about">
+            About
+            <div class="menu-underline"></div>
+          </router-link>
+          <ul class="sub-menu-about">
+            <li>
+              <router-link to="/about/team" class="">Team</router-link>
+            </li>
+            <li>
+              <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
+            </li>
+            <li>
+              <router-link to="/about/grants-and-partners" class="">Grants & Partners</router-link>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <router-link to="/publications" class="menu-link">
+            Publications
+            <div class="menu-underline"></div>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/gallery" class="menu-link">
+            Gallery
+            <div class="menu-underline"></div>
+          </router-link>
+        </li>
+        <li>
+          <a class="menu-link contact-open">
+            Contact
+            <div class="menu-underline"></div>
+          </a>
+        </li>
+      </div>
+
       <div id="menu-button">
         <div class="line" id="line-one"></div>
         <div class="line" id="line-two"></div>
@@ -204,6 +201,7 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   width: 100vw;
+  max-width: 100vw;
   height: 7vh;
   display: flex;
   flex-direction: row;
@@ -213,11 +211,6 @@ onBeforeUnmount(() => {
   padding-right: 1em;
   border-bottom: solid 1px var(--nero);
   background: transparent;
-}
-#nav-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 #dropdown-menu {
   z-index: 9;
@@ -256,9 +249,11 @@ onBeforeUnmount(() => {
   justify-content: center;
   align-items: flex-end;
   cursor: pointer;
-  width: fit-content;
-  height: 2.5em;
-  transform: translateY(3px);
+  width: 100%;
+  height: 3em;
+}
+#menu-button :nth-child(2) {
+  margin-bottom: 0 !important;
 }
 .line {
   width: 2em;
@@ -270,6 +265,7 @@ onBeforeUnmount(() => {
 #menu {
   display: none;
   list-style: none;
+  width: 100%;
 }
 #menu li {
   margin-right: 2em;
@@ -279,7 +275,7 @@ onBeforeUnmount(() => {
   cursor: pointer;
 }
 .menu-link {
-  font-size: 1.25em;
+  font-size: 1em;
   font-family: new-science, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -294,7 +290,7 @@ a {
 #logo {
   z-index: 10;
   position: relative;
-  width: fit-content;
+  width: 100%;
   height: fit-content;
   margin-right: 4em;
 }
@@ -420,8 +416,8 @@ a {
     padding-right: 3em;
   }
 }
-/* TABLET 3 [GLOBAL] */
-@media (min-width: 1180px) {
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
   #navbar {
     z-index: 9;
     padding-left: 4em;
@@ -442,7 +438,7 @@ a {
     z-index: 1;
     position: fixed;
     top: 7%;
-    left: 21%;
+    left: 40%;
     transform: translate(-50%, -50%);
     min-width: fit-content;
     display: none;
@@ -496,6 +492,9 @@ a {
   #navbar {
     padding-left: 4em;
     padding-right: 4em;
+  }
+  .menu-link {
+    font-size: 1.25em;
   }
   #menu-list ul {
     padding-left: 4em;

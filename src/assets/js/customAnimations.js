@@ -72,16 +72,6 @@ export function DropDownMenuAnimation() {
     0,
   )
   dropDownTimeline.to(
-    '#menu-button',
-    {
-      ease: 'power2.out',
-      rotation: 360,
-      duration: 1,
-      scale: 0.8,
-    },
-    0,
-  )
-  dropDownTimeline.to(
     '#line-one',
     {
       y: 5,
