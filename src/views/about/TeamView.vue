@@ -99,20 +99,20 @@ onBeforeUnmount(() => {})
   filter: blur(5px);
 }
 #mobile-btn {
-  z-index: 2;
-  position: absolute;
+  z-index: 6;
+  position: fixed;
   top: 6.5em;
   left: 1.5em;
   margin-left: 1em;
-  background-color: #22222210;
+  background-color: #e9e9e98a;
   backdrop-filter: blur(10px);
   margin: 0;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-  padding-left: 1.5em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 2em;
   height: 2.5em;
   border: 1px solid var(--nero);
-  border-radius: 5px;
+  border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,20 +129,21 @@ onBeforeUnmount(() => {})
   height: 1em;
   aspect-ratio: 1;
   margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 #side-bar {
-  z-index: 1;
+  z-index: 5;
   position: fixed;
-  top: 0%;
+  top: -5%;
   left: -100%;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #e9e9e98a;
   backdrop-filter: blur(20px);
 }
 #team-member-container {
   grid-row: 1 / span 8;
-  padding-top: 7em;
+  padding-top: 8em;
 }
 #alumni-list-container {
   display: flex;

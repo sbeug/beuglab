@@ -14,7 +14,6 @@ onMounted(() => {
   DesktopSubmenuAnimation()
   menuUnderline()
   gsap.set('#dropdown-menu', {
-    visibility: 'hidden',
     opacity: '0%',
   })
   gsap.from('#logo img', {
