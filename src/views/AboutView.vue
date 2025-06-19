@@ -189,6 +189,12 @@ onBeforeUnmount(() => {
   line-height: 1em;
   text-transform: uppercase;
 }
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  .experience-heading h1 {
+    font-size: 6em;
+  }
+}
 /* TABLET 2 [GLOBAL] */
 @media (min-width: 1000px) {
   .experience-heading h1 {
