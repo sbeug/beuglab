@@ -236,6 +236,57 @@ onMounted(() => {
   margin-top: 3em;
   margin-bottom: 4em;
 }
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  #contact {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    height: 100%;
+    padding-right: 0em !important;
+  }
+  #contact-form-header {
+    padding: 0;
+    grid-column: 1 / span 4;
+    grid-row: 2;
+  }
+  #contact-form-header h1 {
+    font-size: 4.5em;
+  }
+  #description {
+    grid-column: 1 / span 5;
+    grid-row: 3 / span 2;
+    font-size: 1.25em;
+    padding-left: 0.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  #description p {
+    font-size: 1em;
+    line-height: 1.3em;
+  }
+  #local {
+    display: unset;
+    grid-column: 1 / span 3;
+    grid-row: 8 / span 2;
+    padding-left: 1em;
+  }
+  #form-container {
+    grid-column: 7 / span 6;
+    grid-row: 1 / span 12;
+    backdrop-filter: blur(10px);
+    background-color: #2222220a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #contact-form {
+    width: 100%;
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   .contact-close {
@@ -246,11 +297,8 @@ onMounted(() => {
     font-size: 1.5em;
   }
   #contact {
-    display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    height: 100%;
-    padding-right: 0em !important;
   }
   #contact-form-header {
     padding: 0;
@@ -291,15 +339,8 @@ onMounted(() => {
   #form-container {
     grid-column: 7 / span 4;
     grid-row: 1 / span 12;
-    backdrop-filter: blur(10px);
-    background-color: #2222220a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
   #contact-form {
-    width: 100%;
     padding-left: 4em;
     padding-right: 4em;
   }
