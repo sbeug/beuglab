@@ -82,8 +82,8 @@ h2 {
 #support-section {
   padding-top: 2em;
 }
-/* TABLET 2 [GLOBAL] */
-@media (min-width: 1000px) {
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
   #main-content {
     padding-top: 4em;
     align-items: center;
@@ -93,11 +93,24 @@ h2 {
   h2 {
     font-size: 3em;
   }
+  .inst-logo {
+    width: 14em;
+  }
   #logos-container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6em;
+  }
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  h2 {
+    font-size: 3em;
   }
   .inst-logo {
     width: 14em;
+  }
+  #logos-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 /* DESKTOP 1 [GLOBAL] */
