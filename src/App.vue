@@ -17,6 +17,9 @@ import { useHead } from '@vueuse/head'
 let rafCallback = null
 // Global Animations
 import { ContactForm } from './assets/js/customAnimations'
+// Global Utils
+import { useReloadOnBreakpointChange } from './assets/js/utils'
+useReloadOnBreakpointChange()
 
 const lenis = useLenis(() => {
   // ?
