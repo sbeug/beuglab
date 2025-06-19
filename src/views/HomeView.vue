@@ -13,7 +13,11 @@ const sectionTwoTitle = ref('')
 const sectionTwoText = ref('')
 const teamDescription = ref('')
 
+// Add ref to track if component is still mounted
+const isMounted = ref(false)
+
 onMounted(async () => {
+  isMounted.value = true
   homePageLoadAnimation()
   textColorIn()
   try {
@@ -34,18 +38,19 @@ onMounted(async () => {
     console.error('Sanity fetch failed:', error.message)
     error.value = 'Failed to load live content. Showing default info.'
   }
-  teamStore.fetchTeamMembers()
+  await teamStore.fetchTeamMembers()
   setTimeout(() => {
-    dragToScroll()
+    if (isMounted.value) {
+      dragToScroll()
+    }
   }, 1000)
 })
 onBeforeUnmount(() => {
+  isMounted.value = false
+
   if (window.dragToScrollTimeout) {
     clearTimeout(window.dragToScrollTimeout)
   }
-
-  window.removeEventListener('resize', null)
-  window.removeEventListener('scroll', null)
 
   const splineViewer = document.getElementById('hero-spline')
   if (splineViewer) {
@@ -54,17 +59,6 @@ onBeforeUnmount(() => {
 
   if (window.animationFrameId) {
     cancelAnimationFrame(window.animationFrameId)
-  }
-
-  const membersTrack = document.getElementById('members-track')
-  if (membersTrack) {
-    membersTrack.removeEventListener('mousedown', null)
-    membersTrack.removeEventListener('mouseleave', null)
-    membersTrack.removeEventListener('mouseup', null)
-    membersTrack.removeEventListener('mousemove', null)
-    membersTrack.removeEventListener('touchstart', null)
-    membersTrack.removeEventListener('touchend', null)
-    membersTrack.removeEventListener('touchmove', null)
   }
 })
 </script>
@@ -94,10 +88,10 @@ onBeforeUnmount(() => {
         <h6 v-if="error">Our Objective</h6>
       </div>
       <div class="section-statement">
-        <h6 class="split-type" data-bg-color="e9e9e9" data-fg-color="#222222">
+        <h6>
           {{ sectionOneText }}
         </h6>
-        <h6 class="split-type" v-if="error" data-bg-color="#e9e9e9af" data-fg-color="#222222">
+        <h6 v-if="error">
           We decode immune-cancer interactions and leverage immune-based therapies to enhance
           anti-tumor responses.
         </h6>
@@ -311,12 +305,15 @@ onBeforeUnmount(() => {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  width: max-content;
+  width: 100%;
+  max-width: fit-content;
   will-change: transform;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   transition: all 0.1s ease;
   user-select: none;
+  overflow-x: visible;
+  scrollbar-width: none;
 }
 .team-member {
   display: flex;
@@ -352,6 +349,52 @@ onBeforeUnmount(() => {
   object-fit: cover;
   border-radius: 10px;
   pointer-events: none;
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  #hero-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #hero-heading h1 {
+    font-size: 8em;
+    text-align: center;
+  }
+  #mobile-heading {
+    padding-top: 1.5em;
+    font-size: 1.5em;
+    width: 65%;
+    text-align: center;
+    text-wrap: balance !important;
+  }
+  #hero-c2a {
+    font-size: 1.25em;
+  }
+  .section-heading h6 {
+    font-size: 2.5em;
+    line-height: 1.2em;
+  }
+  .section-heading p {
+    font-size: 0.75em;
+  }
+  .section-statement h6 {
+    font-size: 3.5em;
+    line-height: 1.2em;
+  }
+  #ourwork-statement h6,
+  #team-statement h6 {
+    font-size: 3em;
+    line-height: 1.2em;
+  }
+  #team-description p {
+    font-size: 1.25em;
+    line-height: 1.25em;
+    width: 70%;
+  }
+  #team-c2a p {
+    font-size: 1.25em;
+  }
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -394,7 +437,7 @@ onBeforeUnmount(() => {
     padding-left: 8em;
   }
   .section-statement h6 {
-    font-size: 7em;
+    font-size: 6.5em;
     width: 75%;
   }
   .description {
@@ -407,11 +450,16 @@ onBeforeUnmount(() => {
   }
   #ourwork-statement h6,
   #team-statement h6 {
-    font-size: 6em;
+    font-size: 5em;
   }
   #team-description {
     padding-top: 4em;
     padding-left: 7em;
+  }
+  #team-description p {
+    font-size: 1em;
+    line-height: 1.25em;
+    width: 100%;
   }
   #team-c2a {
     padding-top: 4em;

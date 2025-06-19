@@ -42,4 +42,14 @@
   border-radius: 50%;
   margin-left: 0.5em;
 }
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  p {
+    font-size: 1.25em;
+  }
+  .circle {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
 </style>

@@ -61,7 +61,7 @@ p {
   pointer-events: auto;
 }
 .main-content .clickable {
-  pointer-events: auto;
+  pointer-events: visible;
 }
 .button {
   text-decoration: none;
@@ -97,6 +97,13 @@ p {
   background-color: var(--blanco);
   border-radius: 50%;
   margin-left: 0.5em;
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  .df-pad {
+    padding-left: 4em;
+    padding-right: 4em;
+  }
 }
 
 @media (min-width: 1280px) {

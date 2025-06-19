@@ -323,6 +323,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   background-color: var(--nero);
   margin-bottom: 8em;
 }
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #main-content {
