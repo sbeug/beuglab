@@ -165,16 +165,15 @@ export function subMenuDrop() {
 
     const subMenuTl = new gsap.timeline({
       paused: true,
-      duration: 0.5,
+      duration: 1,
     })
     subMenuTl.fromTo(
       subMenu,
-      { height: 0, opacity: 0, overflow: 'hidden' },
+      { height: 0, opacity: 0, overflow: 'visible' },
       {
         height: 'auto',
         opacity: 1,
         ease: 'power2.out',
-        onComplete: () => (subMenu.style.overflow = 'visible'),
       },
       0,
     )
@@ -191,7 +190,6 @@ export function subMenuDrop() {
       if (isOpen) {
         subMenuTl.reverse()
       } else {
-        subMenu.style.overflow = 'hidden'
         subMenuTl.play()
       }
       isOpen = !isOpen

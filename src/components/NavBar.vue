@@ -70,9 +70,6 @@ onBeforeUnmount(() => {
                 <router-link to="/about/dr-beug" class="">Dr. Beug</router-link>
               </li>
               <li>
-                <router-link to="/about/research" class="">Research</router-link>
-              </li>
-              <li>
                 <router-link to="/about/grants-and-partners" class=""
                   >Grants & Partners</router-link
                 >
@@ -133,16 +130,6 @@ onBeforeUnmount(() => {
                 <li>
                   <router-link to="/about/dr-beug" class="sub-link">
                     Dr. Beug
-                    <img
-                      class="circle-arrow"
-                      src="../assets/content/icons/circle-arrow.png"
-                      alt="circle-arrow"
-                    />
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/about/research" class="sub-link">
-                    Research
                     <img
                       class="circle-arrow"
                       src="../assets/content/icons/circle-arrow.png"
@@ -527,7 +514,7 @@ a {
     transform: translateY(3px);
   }
   .sub-link {
-    font-size: 1.5em;
+    font-size: 1.75em !important;
   }
 }
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/

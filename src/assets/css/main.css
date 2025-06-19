@@ -98,6 +98,9 @@ p {
   border-radius: 50%;
   margin-left: 0.5em;
 }
+.contact-open {
+  cursor: pointer !important;
+}
 /* TABLET 2 [GLOBAL] */
 @media (min-width: 1000px) {
   .df-pad {
