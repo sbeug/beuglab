@@ -15,6 +15,7 @@ onMounted(() => {
   menuUnderline()
   gsap.set('#dropdown-menu', {
     visibility: 'hidden',
+    xPercent: 100,
   })
   gsap.from('#logo img', {
     opacity: 0,

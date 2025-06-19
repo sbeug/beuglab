@@ -48,6 +48,10 @@
 #main-content {
   position: relative;
   min-height: 100vh;
+  padding-top: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 #affiliation-links a {
   color: var(--font-color-main);
@@ -60,12 +64,28 @@
 #affiliation-links a:hover {
   color: var(--font-color-hover);
 }
+h2 {
+  font-size: 2.5em;
+}
+#logos-container {
+  padding-top: 2em;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5em;
+}
+.inst-logo {
+  width: 10em;
+  height: auto;
+  place-self: center;
+}
+#support-section {
+  padding-top: 2em;
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #main-content {
-    padding-top: 4em;
-    display: flex;
-    flex-direction: column;
+    padding-top: 0em;
     align-items: center;
     justify-content: center;
   }
@@ -90,20 +110,21 @@
   h2 {
     font-size: 4em;
   }
+  #support-section {
+    padding: 0;
+  }
   #support-section h2 {
     font-size: 4em;
     text-align: center;
   }
   #logos-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-row: repeat(2, 1fr);
-    gap: 6em;
+    gap: 4em;
     padding-top: 4em;
   }
   .inst-logo {
     width: 18em;
-    height: auto;
   }
 }
 </style>

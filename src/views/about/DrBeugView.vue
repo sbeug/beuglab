@@ -160,7 +160,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   z-index: 2;
 }
 #introduction h1 {
-  font-size: 3em;
+  font-size: 3.5em;
   line-height: 1em;
   padding-bottom: 1em;
 }
