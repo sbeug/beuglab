@@ -82,12 +82,28 @@ h2 {
 #support-section {
   padding-top: 2em;
 }
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  #main-content {
+    padding-top: 4em;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
+  h2 {
+    font-size: 3em;
+  }
+  #logos-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .inst-logo {
+    width: 14em;
+  }
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #main-content {
-    padding-top: 0em;
-    align-items: center;
-    justify-content: center;
+    padding-top: 6em;
   }
   #affiliations-section {
     padding-bottom: 8em;
