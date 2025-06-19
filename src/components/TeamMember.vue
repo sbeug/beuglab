@@ -122,6 +122,49 @@ defineProps(['member'])
   display: flex;
   flex-direction: column-reverse;
 }
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  .member-name {
+    font-size: 4em;
+  }
+  .member-title {
+    font-size: 1.5em;
+  }
+  .member-img-container {
+    height: 50em;
+  }
+  .member-bio {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    padding-top: 3em;
+  }
+  #edu-links {
+    padding-left: 3em;
+  }
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  .member-name {
+    padding-top: 1em;
+    font-size: 2.5em;
+  }
+  .member-img-container {
+    border-radius: 100%;
+    width: 20em;
+    height: 20em;
+    border: 4px solid var(--nero);
+  }
+  .reverse {
+    display: unset;
+  }
+  .member-bio {
+    padding-top: 0em;
+    font-size: 1em;
+  }
+  #edu-links {
+    padding-left: 4em;
+  }
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #team-member {
@@ -167,9 +210,6 @@ defineProps(['member'])
   }
   #edu-links a {
     font-size: 1em;
-  }
-  .reverse {
-    display: unset;
   }
 }
 </style>

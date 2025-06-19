@@ -42,7 +42,7 @@ onBeforeUnmount(() => {})
       <p>members</p>
       <img id="arrow" src="../../assets/content/icons/right-arrow-white.png" alt="right-arrow" />
     </button>
-    <aside id="side-bar">
+    <aside id="side-bar" class="clickable">
       <TeamSideBar
         :members="teamStore.members"
         @select="selectMember"
@@ -157,6 +157,43 @@ onBeforeUnmount(() => {})
   list-style: none;
   margin: 0;
   padding: 0;
+}
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  #mobile-btn {
+    top: 8em;
+  }
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 768px) {
+  #mobile-btn {
+    display: none;
+  }
+  #main-content {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    min-height: 100vh;
+    height: 100%;
+    padding-bottom: 6em;
+    will-change: height;
+    transition: all 0.5s ease;
+  }
+  #side-bar {
+    position: fixed;
+    top: -10%;
+    left: 60%;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    padding-top: 0em;
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+  #team-member-container {
+    padding: 0;
+    grid-column: 1 / span 8;
+    grid-row: 2 / span 10;
+    padding-right: 4em;
+  }
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
