@@ -14,8 +14,12 @@ import ContactButton from '@/components/ContactButton.vue'
         <h6>shawn@arc.cheo.ca</h6>
         <h6>45.4006474 - 75.6521784</h6>
         <div id="socials">
-          <a href="https://www.linkedin.com/" target="_blank">LinkedIn ↗</a>
-          <a href="https://www.instagram.com/" target="_blank">CHEO RI ↗</a>
+          <a href="https://ca.linkedin.com/in/shawn-beug-9711292b" target="_blank">LinkedIn ↗</a>
+          <a
+            href="https://www.cheoresearch.ca/research/find-a-researcher/shawn-beug-phd/"
+            target="_blank"
+            >CHEO RI ↗</a
+          >
         </div>
       </div>
       <div id="column-1">

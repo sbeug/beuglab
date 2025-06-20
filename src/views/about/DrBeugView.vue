@@ -20,11 +20,13 @@ import IconResearch from '@/components/icons/IconResearch.vue'
           <p>Get in touch</p>
         </div>
         <div id="connect" class="clickable">
-          <a href="https://ca.linkedin.com/in/shawn-beug-9711292b">LinkedIn</a>
+          <a href="https://ca.linkedin.com/in/shawn-beug-9711292b">LinkedIn ↗</a>
           <a href="https://www.cheoresearch.ca/research/find-a-researcher/shawn-beug-phd/"
-            >CHEO RI</a
+            >CHEO RI ↗</a
           >
-          <a href="https://www.uottawa.ca/faculty-medicine/dr-shawn-beug">University of Ottawa</a>
+          <a href="https://www.uottawa.ca/faculty-medicine/dr-shawn-beug"
+            >University of Ottawa ↗</a
+          >
         </div>
       </div>
       <div id="pfp-container">
@@ -369,12 +371,13 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #connect a {
     font-family: akzidenz-grotesk-next-pro, sans-serif;
-    font-weight: 500;
+    font-weight: 200;
     letter-spacing: normal;
     font-size: 1em;
     color: var(--font-color-main);
     transition: all 0.5s ease;
-    margin-right: 2em;
+    margin-right: 1.5em;
+    text-decoration: none;
   }
   #positions {
     display: flex;
@@ -424,7 +427,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-top: 0em;
   }
   #name {
-    font-size: 6em !important;
+    font-size: 4em !important;
   }
   #introduction h6 {
     font-size: 1.25em;
@@ -447,10 +450,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   #pfp-circle {
     position: absolute;
     top: 0%;
-    transform: translateX(-10%);
     border: 6px solid var(--nero);
-    width: 55em;
-    height: 55em;
+    width: 48em;
+    height: 48em;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -486,7 +488,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     border-radius: 50px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2em;
+    gap: 0em;
   }
   .position {
     background-color: none;
@@ -494,7 +496,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding: 3em;
   }
   .position h3 {
-    font-size: 2em;
+    font-size: 1.75em;
   }
   .position p {
     font-size: 1.25em;
@@ -527,6 +529,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #research-txt :nth-child(3) {
     font-size: 2.5em;
+    width: 100% !important;
   }
   #areas {
     width: 100%;
@@ -576,7 +579,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-bottom: 4em;
   }
   .section-txt :nth-child(1) {
-    font-size: 4.5em;
+    font-size: 3em;
     line-height: 1.25em !important;
     width: 100%;
     padding: 0 !important;
@@ -615,7 +618,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-bottom: 14em;
   }
   #recognition :nth-child(2) {
-    font-size: 5em;
+    font-size: 3em;
     padding-bottom: 0.5em;
   }
   .rec {
@@ -656,6 +659,12 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #pfp-circle {
     transform: translate(-0%, 2%);
+    width: 55em;
+    height: 55em;
+  }
+  .section-txt :nth-child(1),
+  #recognition :nth-child(2) {
+    font-size: 4em;
   }
 }
 </style>
