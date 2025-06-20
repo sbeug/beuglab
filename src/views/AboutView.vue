@@ -101,17 +101,17 @@ onBeforeUnmount(() => {
           <h6>About us.</h6>
           <h6>
             We are interested in cancer biology with respect to understanding cell death mechanisms
-            and immunity. In particular, we focus on a group of proteins called the Inhibitor of
+            and immunity. In particular, we focus on a group of proteins called the Inhibitors of
             Apoptosis. We investigate how this group of proteins shape cancer development and
             regulate immune responses.
           </h6>
         </div>
         <div class="experience-heading">
           <div id="h-top">
-            <h1>We are</h1>
+            <h1>Beug Lab</h1>
           </div>
           <div id="h-bottom">
-            <h1>Beug Lab</h1>
+            <h1>CHEO RI</h1>
           </div>
         </div>
       </div>

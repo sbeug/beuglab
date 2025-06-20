@@ -7,7 +7,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   <div id="main-content" class="main-content">
     <div id="introduction" class="section">
       <div id="intro-txt" class="df-pad">
-        <h1>Dr. Shawn Beug</h1>
+        <h1 id="name">Dr. Shawn Beug</h1>
         <h6>
           Dr. Shawn Beug is an internationally recognized cancer biologist specializing in the
           molecular mechanisms of tumor progression, metastasis, and treatment resistance. With a
@@ -22,7 +22,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         <div id="connect" class="clickable">
           <a href="https://ca.linkedin.com/in/shawn-beug-9711292b">LinkedIn</a>
           <a href="https://www.cheoresearch.ca/research/find-a-researcher/shawn-beug-phd/"
-            >Cheo RI</a
+            >CHEO RI</a
           >
           <a href="https://www.uottawa.ca/faculty-medicine/dr-shawn-beug">University of Ottawa</a>
         </div>
@@ -60,14 +60,14 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     </div>
     <div id="research" class="section df-pad">
       <div id="research-txt">
-        <h6>Research Focus</h6>
+        <h1>Research Focus</h1>
         <h6>
           Dr. Beug’s research centers on understanding how cancer cells evade therapeutic
           intervention and immune detection. His lab explores the dynamic interplay between the
           tumor microenvironment and cellular signaling pathways to uncover novel vulnerabilities in
           aggressive cancers.
         </h6>
-        <h5>Key Areas of Investigation:</h5>
+        <h6>Key Areas of Investigation:</h6>
       </div>
       <div id="areas">
         <div class="area">
@@ -75,9 +75,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         </div>
         <div class="area">
           <h6>Tumor immune evasion</h6>
-        </div>
-        <div class="area">
-          <h6>Epigenetic and transcriptional reprogramming</h6>
         </div>
         <div class="area">
           <h6>Identification of new drug targets</h6>
@@ -92,7 +89,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     </div>
     <div id="education" class="section">
       <div class="section-txt df-pad">
-        <h6>Education and Training</h6>
+        <h1>Education & Training</h1>
         <h6>
           Dr. Beug received his PhD in Pathology from Dalhousie University, where he studied cell
           signaling pathways in cancer development. He completed postdoctoral training at the
@@ -110,7 +107,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         <img src="../../assets/content/images/BeugLab-Still-04.jpg" alt="tbd" />
       </div>
       <div class="section-txt df-pad">
-        <h6>Collaborations & Mentorship</h6>
+        <h1>Collaborations & Mentorship</h1>
         <h6>
           Dr. Beug is deeply committed to fostering the next generation of biomedical researchers.
           His lab actively mentors undergraduate, graduate, and postdoctoral trainees. He also
@@ -121,7 +118,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     </div>
     <div id="recognition" class="section df-pad">
       <div class="divider"></div>
-      <h6>Recognition</h6>
+      <h1>Recognition</h1>
       <div class="rec">
         <h6>Canada Research Chair (Tier 2) – Recognizing emerging leaders in health research.</h6>
       </div>
@@ -159,15 +156,17 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   position: relative;
   z-index: 2;
 }
-#introduction h1 {
-  font-size: 3.5em;
+#name {
+  font-size: 2.75em;
   line-height: 1em;
   padding-bottom: 1em;
+  text-transform: uppercase;
 }
 #introduction h6 {
   font-size: 1.25em;
   line-height: 1.5em;
   padding-bottom: 2em;
+  text-align: justify;
 }
 #connect {
   padding-top: 2em;
@@ -235,17 +234,20 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   padding-bottom: 6em;
 }
 #research-txt :nth-child(1) {
-  font-size: 3em;
+  font-size: 2.5em;
   line-height: 1.1em;
+  text-transform: uppercase;
 }
 #research-txt h6 {
   font-size: 1.25em;
   line-height: 1.5em;
+  padding-top: 2em;
   padding-bottom: 1em;
 }
-#research-txt h5 {
+#research-txt :nth-child(3) {
   font-size: 1.5em;
   padding-top: 1em;
+  padding-bottom: 0;
 }
 .area {
   padding-top: 1em;
@@ -275,14 +277,16 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   padding-bottom: 4em;
 }
 .section-txt :nth-child(1) {
-  font-size: 3em;
+  font-size: 1.75em;
   line-height: 1.25em;
   width: 100%;
   padding-bottom: 0.5em;
+  text-transform: uppercase;
 }
 .section-txt h6 {
   font-size: 1.25em;
   line-height: 1.5em;
+  padding-top: 1em;
   padding-bottom: 1em;
 }
 .section-img {
@@ -306,8 +310,9 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   padding-bottom: 6em;
 }
 #recognition :nth-child(2) {
-  font-size: 3em;
+  font-size: 2em;
   line-height: 1.25em;
+  text-transform: uppercase;
 }
 .rec {
   padding-top: 2em;
@@ -336,10 +341,10 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     width: 100%;
     padding-top: 2em;
   }
-  #introduction h1 {
-    font-size: 4em;
-    line-height: 1.1em;
-    padding-bottom: 0.5em;
+  #name {
+    font-size: 4em !important;
+    line-height: 1.1em !important;
+    padding-bottom: 0.5em !important;
   }
   #intro-txt h6 {
     font-size: 1em;
@@ -364,8 +369,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #connect a {
     font-family: akzidenz-grotesk-next-pro, sans-serif;
-    font-weight: 700;
-    font-style: italic;
+    font-weight: 500;
     letter-spacing: normal;
     font-size: 1em;
     color: var(--font-color-main);
@@ -419,8 +423,8 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     justify-content: center;
     padding-top: 0em;
   }
-  #introduction h1 {
-    font-size: 6em;
+  #name {
+    font-size: 6em !important;
   }
   #introduction h6 {
     font-size: 1.25em;
@@ -442,11 +446,11 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #pfp-circle {
     position: absolute;
-    top: 2%;
-    transform: translateX(-8%);
+    top: 0%;
+    transform: translateX(-10%);
     border: 6px solid var(--nero);
-    width: 75em;
-    height: 75em;
+    width: 55em;
+    height: 55em;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -511,7 +515,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   #research-txt :nth-child(1) {
     padding: 0 !important;
     width: 100% !important;
-    font-size: 7em;
+    font-size: 5em;
   }
   #research-txt h6 {
     width: 50%;
@@ -521,7 +525,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-bottom: 2em;
     padding-right: 8em;
   }
-  #research-txt h5 {
+  #research-txt :nth-child(3) {
     font-size: 2.5em;
   }
   #areas {
@@ -572,7 +576,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-bottom: 4em;
   }
   .section-txt :nth-child(1) {
-    font-size: 5.5em;
+    font-size: 4.5em;
     line-height: 1.25em !important;
     width: 100%;
     padding: 0 !important;
@@ -626,7 +630,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
 }
 /* DESKTOP 4 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
 @media (min-width: 1440px) {
-  #introduction h1 {
+  #name {
     font-size: 5.5em;
   }
   #pfp-circle {
@@ -635,18 +639,23 @@ import IconResearch from '@/components/icons/IconResearch.vue'
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
 @media (min-width: 1920px) {
-  #introduction h1 {
-    font-size: 8em;
+  #name {
+    font-size: 5.5em !important;
+    text-align: left !important;
   }
   #intro-txt h1 {
     padding-bottom: 0.5em;
+  }
+  #intro-txt h6 {
+    font-size: 1.25em;
+    padding-bottom: 2em;
   }
   #research-txt h6,
   .section-txt h6 {
     font-size: 1.5em;
   }
   #pfp-circle {
-    transform: translate(-5%, -5%);
+    transform: translate(-0%, 2%);
   }
 }
 </style>
