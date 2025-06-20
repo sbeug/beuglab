@@ -183,7 +183,7 @@ import ContactButton from '@/components/ContactButton.vue'
     grid-row: 3 / span 3;
   }
   #footer-title h6 {
-    font-size: 6em;
+    font-size: 4em;
     text-align: center;
     width: 60%;
   }
@@ -238,6 +238,12 @@ import ContactButton from '@/components/ContactButton.vue'
   #cheo-logo {
     width: auto;
     height: 2em;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) */
+@media (min-width: 1920px) {
+  #footer-title h6 {
+    font-size: 6em;
   }
 }
 </style>

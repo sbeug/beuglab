@@ -116,7 +116,7 @@ const emit = defineEmits(['select'])
     font-size: 1.5em;
   }
   .member-link h3 {
-    font-size: 1.5em;
+    font-size: 1.25em;
     height: 1.5em;
   }
   .number {
@@ -132,12 +132,18 @@ const emit = defineEmits(['select'])
 }
 /* DESKTOP 3 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
 @media (min-width: 1440px) {
+  .member-link h3 {
+    font-size: 1.25em;
+  }
   .member-link {
     font-size: 1.75em;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
 @media (min-width: 1920px) {
+  .member-link h3 {
+    font-size: 1.5em;
+  }
   .member-link {
     font-size: 2em;
   }

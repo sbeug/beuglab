@@ -181,7 +181,7 @@ defineProps(['member'])
     grid-template-columns: repeat(2, 1fr);
   }
   .member-name {
-    font-size: 4em;
+    font-size: 2.5em;
     padding: 0;
     padding-top: 0.5em;
   }
@@ -191,7 +191,7 @@ defineProps(['member'])
   }
   .member-bio {
     padding: 0;
-    font-size: 1.5em;
+    font-size: 1.25em;
     line-height: 1.5em;
   }
   #edu-links {
@@ -210,6 +210,15 @@ defineProps(['member'])
   }
   #edu-links a {
     font-size: 1em;
+  }
+}
+/* DESKTOP 4 (Standard pc Monitor) */
+@media (min-width: 1920px) {
+  .member-name {
+    font-size: 4em;
+  }
+  .member-bio {
+    font-size: 1.5em;
   }
 }
 </style>

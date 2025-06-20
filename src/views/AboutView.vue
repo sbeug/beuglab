@@ -214,8 +214,8 @@ onBeforeUnmount(() => {
     line-height: 1.5;
   }
   .experience-heading h1 {
-    font-size: 14em;
-    line-height: 1.5em;
+    font-size: 9em;
+    line-height: 2.25em;
   }
   #h-top,
   #h-bottom {
@@ -228,6 +228,13 @@ onBeforeUnmount(() => {
   #h-bottom {
     bottom: 20%;
     right: 2.5%;
+  }
+}
+/* DESKTOP 4 [GLOBAL] */
+@media (min-width: 1920px) {
+  .experience-heading h1 {
+    font-size: 10em;
+    line-height: 2em;
   }
 }
 </style>

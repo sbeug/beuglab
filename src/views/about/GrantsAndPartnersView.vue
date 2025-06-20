@@ -116,7 +116,7 @@ h2 {
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #main-content {
-    padding-top: 6em;
+    padding-top: 4em;
   }
   #affiliations-section {
     padding-bottom: 8em;
@@ -147,13 +147,23 @@ h2 {
     text-align: center;
   }
   #logos-container {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-row: repeat(2, 1fr);
     gap: 4em;
     padding-top: 4em;
   }
   .inst-logo {
     width: 18em;
+  }
+}
+/* DESKTOP 4 [GLOBAL] */
+@media (min-width: 1920px) {
+  #main-content {
+    padding-top: 8em;
+  }
+  #logos-container {
+    grid-template-columns: repeat(5, 1fr);
+    grid-row: repeat(2, 1fr);
   }
 }
 </style>
