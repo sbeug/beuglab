@@ -1,6 +1,6 @@
 <script setup>
 import { updateLocalTime } from '@/assets/js/utils'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 onMounted(() => {
   updateLocalTime()
@@ -11,6 +11,27 @@ onMounted(() => {
     }, 1000)
   }
 })
+
+const name = ref('')
+const number = ref('')
+const email = ref('')
+const message = ref('')
+
+async function submitForm() {
+  const res = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name.value, email: email.value, message: message.value }),
+  })
+
+  const result = await res.json()
+  if (res.ok) {
+    alert('Message sent!')
+    name.value = email.value = message.value = ''
+  } else {
+    alert(result.error || 'Error submitting form')
+  }
+}
 </script>
 <template>
   <div id="contact-spline">
@@ -88,7 +109,7 @@ onMounted(() => {
           </textarea>
         </div>
         <div id="submit-container">
-          <button id="submit">Send message</button>
+          <button id="submit" @click.prevent="submitForm">Send message</button>
           <p>
             By submitting this form, you consent to Beug Lab storing your information for the
             purpose of responding to your inquiry. We do not offer medical advice or consultations.
