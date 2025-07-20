@@ -223,17 +223,17 @@ onBeforeUnmount(() => {
   }
   #h-top {
     top: 20%;
-    left: 2.5%;
+    left: 5%;
   }
   #h-bottom {
     bottom: 20%;
-    right: 2.5%;
+    right: 5%;
   }
 }
 /* DESKTOP 4 [GLOBAL] */
 @media (min-width: 1920px) {
   .experience-heading h1 {
-    font-size: 10em;
+    font-size: 13em;
     line-height: 2em;
   }
 }
