@@ -217,7 +217,7 @@ onBeforeUnmount(() => {})
     left: 0%;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
-    transform: translateY(0%);
+    transform: translateY(-10%);
     padding-top: 9em;
     min-height: 100vh;
     max-height: 100vh;
@@ -232,7 +232,7 @@ onBeforeUnmount(() => {})
     grid-template-columns: repeat(2, 1fr);
   }
   .alumni-heading {
-    font-size: 6em;
+    font-size: 4em;
     grid-column: 1 / span 2;
   }
   .alumni-list {
@@ -246,8 +246,11 @@ onBeforeUnmount(() => {})
 }
 /* DESKTOP 2 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
 @media (min-width: 1440px) {
+  .alumni-heading {
+    font-size: 6em;
+  }
   #side-bar {
-    top: -5%;
+    transform: translateY(-6%);
   }
 }
 </style>

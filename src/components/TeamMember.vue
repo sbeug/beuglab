@@ -117,6 +117,7 @@ defineProps(['member'])
   padding-right: 1em;
   padding-left: 1em;
   backdrop-filter: blur(10px);
+  text-wrap: nowrap;
 }
 .reverse {
   display: flex;
