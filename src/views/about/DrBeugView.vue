@@ -2,13 +2,80 @@
 import IconProffessor from '@/components/icons/IconProffessor.vue'
 import IconScience from '@/components/icons/IconScience.vue'
 import IconResearch from '@/components/icons/IconResearch.vue'
+import { onMounted, ref } from 'vue'
+import { sanity } from '@/assets/js/sanity.js'
+
+// Reactive sanity variables
+const bio = ref('')
+const positionOneH3 = ref('')
+const positionOneText = ref('')
+const positionTwoH3 = ref('')
+const positionTwoText = ref('')
+const positionThreeH3 = ref('')
+const positionThreeText = ref('')
+const researchHeading = ref('')
+const researchText = ref('')
+const areaOne = ref('')
+const areaTwo = ref('')
+const areaThree = ref('')
+const goal = ref('')
+const sectionHeadingOne = ref('')
+const sectionTextOne = ref('')
+const sectionHeadingTwo = ref('')
+const sectionTextTwo = ref('')
+
+onMounted(async () => {
+  try {
+    const query = `*[_type == "drBeugPage"][0]{
+      bio,
+      positionOneH3,
+      positionOneText,
+      positionTwoH3,
+      positionTwoText,
+      positionThreeH3,
+      positionThreeText,
+      researchHeading,
+      researchText,
+      areaOne,
+      areaTwo,
+      areaThree,
+      goal,
+      sectionHeadingOne,
+      sectionTextOne,
+      sectionHeadingTwo,
+      sectionTextTwo,
+    }`
+    const data = await sanity.fetch(query)
+    bio.value = data.bio
+    positionOneH3.value = data.positionOneH3
+    positionOneText.value = data.positionOneText
+    positionTwoH3.value = data.positionTwoH3
+    positionTwoText.value = data.positionTwoText
+    positionThreeH3.value = data.positionThreeH3
+    positionThreeText.value = data.positionThreeText
+    researchHeading.value = data.researchHeading
+    researchText.value = data.researchText
+    areaOne.value = data.areaOne
+    areaTwo.value = data.areaTwo
+    areaThree.value = data.areaThree
+    goal.value = data.goal
+    sectionHeadingOne.value = data.sectionHeadingOne
+    sectionTextOne.value = data.sectionTextOne
+    sectionHeadingTwo.value = data.sectionHeadingTwo
+    sectionTextTwo.value = data.sectionTextTwo
+  } catch (error) {
+    console.error('Error fetching Dr. Beug data:', error)
+    error.value = 'Failed to load data'
+  }
+})
 </script>
 <template>
   <div id="main-content" class="main-content">
     <div id="introduction" class="section">
       <div id="intro-txt" class="df-pad">
         <h1 id="name">Dr. Shawn Beug</h1>
-        <h6>
+        <h6>{{ bio }}</h6>
+        <h6 v-if="error">
           Dr. Shawn Beug is an internationally recognized cancer biologist specializing in the
           molecular mechanisms of tumor progression, metastasis, and treatment resistance. With a
           strong foundation in cell signaling, immune modulation, and cancer epigenetics, Dr. Beug
@@ -43,27 +110,35 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     <div id="positions" class="section">
       <div id="pos-1" class="position">
         <IconProffessor class="pos-icon" />
-        <h3>Assistant Prof</h3>
-        <p>
+        <h3>{{ positionOneH3 }}</h3>
+        <h3 v-if="error">Assistant Prof</h3>
+        <p>{{ positionOneText }}</p>
+        <p v-if="error">
           Department of Biochemistry, Microbiology and Immunology, Faculty of Medicine, University
           of Ottawa
         </p>
       </div>
       <div id="pos-2" class="position">
         <IconScience class="pos-icon" />
-        <h3>Scientist</h3>
-        <p>CHEO Research Institute, Cancer Therapeutics Program</p>
+        <h3>{{ positionTwoH3 }}</h3>
+        <h3 v-if="error">Scientist</h3>
+        <p>{{ positionTwoText }}</p>
+        <p v-if="error">CHEO Research Institute, Cancer Therapeutics Program</p>
       </div>
       <div id="pos-3" class="position">
         <IconResearch class="pos-icon" id="iconfix" />
-        <h3>Canada Research Chair</h3>
-        <p>(Tier 2) in Cancer Biology and Translational Research</p>
+        <h3>{{ positionThreeH3 }}</h3>
+        <h3 v-if="error">Canada Research Chair</h3>
+        <p>{{ positionThreeText }}</p>
+        <p v-if="error">(Tier 2) in Cancer Biology and Translational Research</p>
       </div>
     </div>
     <div id="research" class="section df-pad">
       <div id="research-txt">
-        <h1>Research Focus</h1>
-        <h6>
+        <h1>{{ researchHeading }}</h1>
+        <h1 v-if="error">Research Focus</h1>
+        <h6>{{ researchText }}</h6>
+        <h6 v-if="error">
           Dr. Beug’s research centers on understanding how cancer cells evade therapeutic
           intervention and immune detection. His lab explores the dynamic interplay between the
           tumor microenvironment and cellular signaling pathways to uncover novel vulnerabilities in
@@ -73,26 +148,32 @@ import IconResearch from '@/components/icons/IconResearch.vue'
       </div>
       <div id="areas">
         <div class="area">
-          <h6>Mechanisms of therapeutic resistance</h6>
+          <h6>{{ areaOne }}</h6>
+          <h6 v-if="error">Mechanisms of therapeutic resistance</h6>
         </div>
         <div class="area">
-          <h6>Tumor immune evasion</h6>
+          <h6>{{ areaTwo }}</h6>
+          <h6 v-if="error">Tumor immune evasion</h6>
         </div>
         <div class="area">
-          <h6>Identification of new drug targets</h6>
+          <h6>{{ areaThree }}</h6>
+          <h6 v-if="error">Identification of new drug targets</h6>
         </div>
       </div>
     </div>
     <div id="goal">
-      <h3>
+      <h3>{{ goal }}</h3>
+      <h3 v-if="error">
         His labs ultimate goal is to translate foundational research discoveries into clinically
         relevant therapies that can improve outcomes for patients with advanced cancers.
       </h3>
     </div>
     <div id="education" class="section">
       <div class="section-txt df-pad">
-        <h1>Education & Training</h1>
-        <h6>
+        <h1>{{ sectionHeadingOne }}</h1>
+        <h1 v-if="error">Education & Training</h1>
+        <h6>{{ sectionTextOne }}</h6>
+        <h6 v-if="error">
           Dr. Beug received his PhD in Pathology from Dalhousie University, where he studied cell
           signaling pathways in cancer development. He completed postdoctoral training at the
           Princess Margaret Cancer Centre (University Health Network) in Toronto, one of Canada’s
@@ -109,8 +190,10 @@ import IconResearch from '@/components/icons/IconResearch.vue'
         <img src="../../assets/content/images/BeugLab-Still-04.jpg" alt="tbd" />
       </div>
       <div class="section-txt df-pad">
-        <h1>Collaborations & Mentorship</h1>
-        <h6>
+        <h1>{{ sectionHeadingTwo }}</h1>
+        <h1 v-if="error">Collaborations & Mentorship</h1>
+        <h6>{{ sectionTextTwo }}</h6>
+        <h6 v-if="error">
           Dr. Beug is deeply committed to fostering the next generation of biomedical researchers.
           His lab actively mentors undergraduate, graduate, and postdoctoral trainees. He also
           collaborates with clinicians, immunologists, and computational biologists to bridge the
@@ -375,9 +458,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     flex-direction: row;
     padding-left: 1em;
     padding-right: 1em;
-  }
-  .position {
-    width: 100%;
   }
   #research-txt :nth-child(1) {
     font-size: 5em;
