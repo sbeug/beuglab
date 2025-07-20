@@ -707,12 +707,22 @@ export function ContactForm() {
     1.25,
   )
 
+  // Handle existing .contact-open elements
   contactOpen.forEach((el) => {
     el.addEventListener('click', () => {
       contactTimeline.play()
       contactContainer.style.pointerEvents = 'auto'
     })
   })
+
+  // Use event delegation to handle both .open-contact and any future .contact-open elements
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.open-contact') || e.target.closest('.contact-open')) {
+      contactTimeline.play()
+      contactContainer.style.pointerEvents = 'auto'
+    }
+  })
+
   contactClose.addEventListener('click', () => {
     contactTimeline.reverse()
     contactContainer.style.pointerEvents = 'none'

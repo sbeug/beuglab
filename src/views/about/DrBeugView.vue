@@ -148,7 +148,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   z-index: 1;
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(233, 233, 233, 1));
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(233, 233, 233, 1));
   display: flex;
   flex-basis: 0;
   flex-direction: column-reverse;
@@ -484,16 +484,17 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #positions {
     margin: 0;
-    background-color: #2c2c2c;
     border-radius: 50px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0em;
+    gap: 4em;
   }
   .position {
-    background-color: none;
+    background-color: #2c2c2c80;
+    backdrop-filter: blur(10px);
     justify-content: flex-start;
     padding: 3em;
+    border: 2px solid var(--blanco);
   }
   .position h3 {
     font-size: 1.75em;
@@ -622,10 +623,12 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     padding-bottom: 0.5em;
   }
   .rec {
+    width: 50%;
     padding-top: 2em;
   }
   .rec h6 {
     font-size: 2em;
+    text-align: center;
   }
   .divider {
     display: block;
