@@ -354,16 +354,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #pfp-circle {
     position: absolute;
-    top: 0%;
-    left: -10%;
-    border: 4px solid var(--nero);
-    width: 36em;
-    height: 36em;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
   }
   #connect {
     display: block;
@@ -414,17 +405,19 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     min-height: 100vh;
   }
   #introduction {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     padding: 0;
-    padding-top: 4em;
+    min-height: 100vh;
   }
   #intro-txt {
-    width: 50%;
+    grid-column: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 0em;
+    padding-top: 4em;
   }
   #name {
     font-size: 4em !important;
@@ -445,16 +438,13 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     font-size: 1.5em;
   }
   #pfp-container {
-    width: auto;
+    position: relative;
+    grid-column: 2;
+    width: 100%;
   }
   #pfp-circle {
-    position: absolute;
-    top: 0%;
-    border: 6px solid var(--nero);
-    width: 48em;
-    height: 48em;
-    border-radius: 50%;
-    overflow: hidden;
+    width: 100%;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -465,9 +455,10 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     left: 0;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0),
-      rgba(233, 233, 233, 0.1),
-      rgba(233, 233, 233, 1)
+      rgba(233, 233, 233, 1) 0%,
+      rgba(233, 233, 233, 0.1) 15%,
+      rgba(233, 233, 233, 0.1) 50%,
+      rgba(233, 233, 233, 1) 90%
     );
     z-index: 1;
   }
@@ -476,8 +467,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
     width: 100%;
     height: 100%;
     object-fit: cover;
-    padding: 2.5em;
-    border-radius: 50%;
   }
   #connect a:hover {
     color: var(--font-color-hover);
@@ -517,7 +506,7 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   }
   #research-txt :nth-child(1) {
     padding: 0 !important;
-    width: 100% !important;
+    width: 50% !important;
     font-size: 5em;
   }
   #research-txt h6 {
@@ -603,6 +592,8 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   #education {
     margin: 0;
     padding-top: 12em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
   #education p {
     padding-right: 8em;
@@ -639,9 +630,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   #name {
     font-size: 5.5em;
   }
-  #pfp-circle {
-    transform: translate(-12%, -4%);
-  }
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
 @media (min-width: 1920px) {
@@ -659,11 +647,6 @@ import IconResearch from '@/components/icons/IconResearch.vue'
   #research-txt h6,
   .section-txt h6 {
     font-size: 1.5em;
-  }
-  #pfp-circle {
-    transform: translate(-0%, 2%);
-    width: 55em;
-    height: 55em;
   }
   .section-txt :nth-child(1),
   #recognition :nth-child(2) {
