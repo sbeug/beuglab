@@ -174,7 +174,7 @@ const leave = (el, done) => {
           @enter="enter"
           @leave="leave"
         >
-          <component :is="Component" key="$route.fullPath" />
+          <component :is="Component" :key="$route.fullPath" />
         </transition>
       </router-view>
       <div id="contact-container">
