@@ -117,7 +117,9 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <div id="section-2">
-
+      <div class="img-container">
+        <img src="../assets/content/images/teamPhoto.jpg" alt="Team Photo" />
+      </div>
     </div>
   </div>
 </template>
@@ -191,6 +193,31 @@ onBeforeUnmount(() => {
   font-size: 3em;
   line-height: 1em;
   text-transform: uppercase;
+}
+#section-2 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-container img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
