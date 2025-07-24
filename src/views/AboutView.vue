@@ -116,6 +116,9 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
+    <div id="section-2">
+
+    </div>
   </div>
 </template>
 
@@ -214,7 +217,7 @@ onBeforeUnmount(() => {
     line-height: 1.5;
   }
   .experience-heading h1 {
-    font-size: 9em;
+    font-size: 9rem;
     line-height: 2.25em;
   }
   #h-top,
@@ -228,6 +231,13 @@ onBeforeUnmount(() => {
   #h-bottom {
     bottom: 20%;
     right: 5%;
+  }
+}
+/* DESKTOP 3 [GLOBAL] */
+@media (min-width: 1728px) {
+  .experience-heading h1 {
+    font-size: 12rem;
+    line-height: 2.25em;
   }
 }
 /* DESKTOP 4 [GLOBAL] */
