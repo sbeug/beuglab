@@ -253,4 +253,13 @@ onBeforeUnmount(() => {})
     transform: translateY(-6%);
   }
 }
+/* DESKTOP 3 [GLOBAL] */
+@media (min-width: 1728px) {
+  #side-bar {
+    transform: translate(-5%, -4%);
+  }
+  .alumni-heading {
+    font-size: 8em;
+  }
+}
 </style>

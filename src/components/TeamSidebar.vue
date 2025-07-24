@@ -110,7 +110,7 @@ const emit = defineEmits(['select'])
 @media (min-width: 1280px) {
   #team-sidebar {
     padding: 0em;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .member-link {
     font-size: 1.5em;
@@ -133,16 +133,23 @@ const emit = defineEmits(['select'])
 /* DESKTOP 3 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
 @media (min-width: 1440px) {
   .member-link h3 {
-    font-size: 1.25em;
+    font-size: 1.25rem;
   }
   .member-link {
-    font-size: 1.75em;
+    font-size: 1.75rem;
+  }
+}
+/* DESKTOP 3 [GLOBAL] */
+@media (min-width: 1728px) {
+    .member-link h3 {
+    font-size: 3rem;
+    text-wrap: nowrap;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
 @media (min-width: 1920px) {
   .member-link h3 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
   .member-link {
     font-size: 2em;

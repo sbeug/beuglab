@@ -213,6 +213,19 @@ defineProps(['member'])
     font-size: 1em;
   }
 }
+/* DESKTOP 3 [GLOBAL] */
+@media (min-width: 1728px) {
+  .member-name {
+    font-size: 4rem;
+  }
+  .member-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .member-bio {
+    font-size: 1.5rem;
+  }
+}
 /* DESKTOP 4 (Standard pc Monitor) */
 @media (min-width: 1920px) {
   .member-name {

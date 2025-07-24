@@ -244,6 +244,12 @@ async function submitForm() {
   padding-right: 1.5em;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#submit:hover {
+  background-color: #16161685;
+  scale: .98;
 }
 #submit-container p {
   line-height: 1.5em;
