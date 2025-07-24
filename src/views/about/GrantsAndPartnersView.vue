@@ -36,7 +36,7 @@
           class="inst-logo"
         />
         <img
-          src="../../assets/content/icons/brainCancerCan-logo.png"
+          src="../../assets/content/icons/brainCancerCan-Logo.png"
           alt="Brain Cancer Canada Logo"
           class="inst-logo"
         />
