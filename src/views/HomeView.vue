@@ -296,7 +296,7 @@ onBeforeUnmount(() => {
 #team-members-section {
   position: relative;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   scrollbar-width: none;
   padding-top: 1em;
 }

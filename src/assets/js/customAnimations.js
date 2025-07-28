@@ -62,15 +62,6 @@ export function DropDownMenuAnimation() {
     },
     0,
   )
-  dropDownTimeline.set(
-    '#dropdown-menu-filter',
-    {
-      visibility: 'visible',
-      opacity: '100%',
-      xPercent: 0,
-    },
-    0,
-  )
   dropDownTimeline.to(
     '#line-one',
     {
@@ -93,15 +84,6 @@ export function DropDownMenuAnimation() {
   )
   dropDownTimeline.to(
     '#dropdown-menu',
-    {
-      xPercent: -100,
-      ease: Expo.easeInOut,
-      duration: 0.5,
-    },
-    0.15,
-  )
-  dropDownTimeline.to(
-    '#dropdown-menu-filter',
     {
       xPercent: -100,
       ease: Expo.easeInOut,

@@ -61,14 +61,10 @@ onUnmounted(() => {
 })
 
 const route = useRoute()
-// Handle route changes properly
 watch(
   () => route.path,
   async () => {
-    // Wait for DOM to update first
     await nextTick()
-
-    // Reset scroll position
     setTimeout(() => {
       window.scrollTo(0, 0)
       setTimeout(() => {
@@ -114,32 +110,6 @@ useHead({
     },
   ],
 })
-
-// TRANSITIONS
-const beforeEnter = (el) => {
-  gsap.set(el, {
-    opacity: 0,
-  })
-}
-
-const enter = (el, done) => {
-  gsap.to(el, {
-    opacity: 1,
-    duration: 1,
-    ease: 'power4.inOut',
-    onComplete: done,
-  })
-}
-
-const leave = (el, done) => {
-  gsap.to(el, {
-    opacity: 0,
-    duration: 1,
-    ease: 'power4.inOut',
-    filter: 'blur(1.5em)',
-    onComplete: done,
-  })
-}
 </script>
 <template>
   <VueLenis
@@ -167,13 +137,7 @@ const leave = (el, done) => {
         <NavBar> </NavBar>
       </header>
       <router-view v-slot="{ Component }">
-        <transition
-          :css="false"
-          mode="out-in"
-          @before-enter="beforeEnter"
-          @enter="enter"
-          @leave="leave"
-        >
+        <transition :css="true" mode="out-in" name="v">
           <component :is="Component" :key="$route.fullPath" />
         </transition>
       </router-view>
@@ -188,6 +152,21 @@ const leave = (el, done) => {
 </template>
 
 <style scoped>
+/* TRANSITIONS */
+.v-enter-from {
+  filter: blur(10px);
+  opacity: 0;
+}
+.v-leave-to {
+  filter: blur(10px);
+  opacity: 0;
+}
+.v-enter-active {
+  transition: all 1s ease-out;
+}
+.v-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
 header {
   z-index: 9;
 }

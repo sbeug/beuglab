@@ -32,7 +32,7 @@ import ContactButton from '@/components/ContactButton.vue'
       </div>
       <div id="column-3">
         <router-link to="/about/dr-beug">Dr. Beug</router-link>
-        <router-link to="/immuno-defender">Defender</router-link>
+        <router-link to="/gallery/immuno-defender">Defender</router-link>
       </div>
       <div id="credits">
         <p>© 2025 Beug Lab | All rights reserved</p>
