@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div id="main-content" class="main-content">
-    <div id="hero-section">
+    <div id="hero-section" class="clickable">
       <div class="hero-bg">
         <spline-viewer
           url="https://prod.spline.design/FCbn4L9mentHyEzd/scene.splinecode"
@@ -78,7 +78,11 @@ onBeforeUnmount(() => {
         <h3 id="mobile-heading">
           Advancing cancer research through - collaboration, curiosity, and scientific excellence.
         </h3>
-        <router-link id="hero-c2a" class="button" to="/about">Learn more</router-link>
+        <div id="hero-c2a">
+          <router-link to="/about">
+            <button class="button"><p>Learn more</p></button>
+          </router-link>
+        </div>
       </div>
     </div>
     <div id="obj-section" class="section df-pad">
@@ -229,7 +233,7 @@ onBeforeUnmount(() => {
   align-items: flex-start;
 }
 .section-heading h6 {
-  font-size: 2em;
+  font-size: 2rem;
   line-height: 1em;
   padding-left: 0.5em;
 }
@@ -256,7 +260,7 @@ onBeforeUnmount(() => {
   padding-top: 2em;
 }
 .section-statement h6 {
-  font-size: 2.75em;
+  font-size: 2rem;
   line-height: 1em;
 }
 #ourwork-statement h6,
@@ -312,7 +316,6 @@ onBeforeUnmount(() => {
   scroll-behavior: smooth;
   transition: all 0.1s ease;
   user-select: none;
-  overflow-x: visible;
   scrollbar-width: none;
 }
 .team-member {
@@ -349,6 +352,10 @@ onBeforeUnmount(() => {
   object-fit: cover;
   border-radius: 10px;
   pointer-events: none;
+}
+#hero-c2a {
+  position: relative;
+  z-index: 5;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
@@ -399,24 +406,24 @@ onBeforeUnmount(() => {
   }
   #mobile-heading {
     padding-top: 1.5em;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     width: 65%;
   }
   .section-heading h6 {
-    font-size: 2.5em;
+    font-size: 2.5rem;
     line-height: 1.2em;
   }
   .section-statement h6 {
-    font-size: 3.5em;
+    font-size: 3.5rem;
     line-height: 1.2em;
   }
   #ourwork-statement h6,
   #team-statement h6 {
-    font-size: 3em;
+    font-size: 3rem;
     line-height: 1.2em;
   }
   #team-description p {
-    font-size: 1.25em;
+    font-size: 1.25rem;
     width: 70%;
   }
 }
@@ -431,7 +438,7 @@ onBeforeUnmount(() => {
     padding: 0;
   }
   #hero-heading h1 {
-    font-size: 12em;
+    font-size: 12rem;
   }
   #mobile-heading {
     display: none !important;
@@ -446,14 +453,14 @@ onBeforeUnmount(() => {
     align-items: center;
   }
   .section-heading p {
-    font-size: 1em;
+    font-size: 1rem;
     line-height: 1em;
     height: 5em;
     width: 5em;
     transform: translateY(0);
   }
   .section-heading h6 {
-    font-size: 2em;
+    font-size: 2rem;
     padding-left: 3em;
   }
   .section-statement {
@@ -461,11 +468,11 @@ onBeforeUnmount(() => {
     padding-left: 8em;
   }
   .section-statement h6 {
-    font-size: 6.5em;
+    font-size: 6.5rem;
     width: 75%;
   }
   .description {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     line-height: 1.2em;
     width: 30%;
   }
@@ -474,14 +481,14 @@ onBeforeUnmount(() => {
   }
   #ourwork-statement h6,
   #team-statement h6 {
-    font-size: 5em;
+    font-size: 5rem;
   }
   #team-description {
     padding-top: 4em;
     padding-left: 7em;
   }
   #team-description p {
-    font-size: 1em;
+    font-size: 1rem;
     line-height: 1.25em;
     width: 100%;
   }
@@ -525,13 +532,13 @@ onBeforeUnmount(() => {
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
 @media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
   .section-statement h6 {
-    font-size: 7em;
+    font-size: 5rem;
     line-height: 1em;
     width: 80%;
   }
   #ourwork-statement h6,
   #team-statement h6 {
-    font-size: 5em;
+    font-size: 5rem;
   }
   .description {
     width: 40%;

@@ -61,7 +61,7 @@ p {
   pointer-events: auto;
 }
 .main-content .clickable {
-  pointer-events: visible;
+  pointer-events: auto;
 }
 .button {
   text-decoration: none;
@@ -69,10 +69,10 @@ p {
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   width: fit-content;
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 300;
@@ -80,6 +80,7 @@ p {
   backdrop-filter: blur(10px);
   background-color: var(--nero);
   color: var(--blanco);
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -87,6 +88,7 @@ p {
   scale: 0.98;
 }
 .button p {
+  font-size: 1.25rem;
   color: var(--blanco) !important;
 }
 .circle {

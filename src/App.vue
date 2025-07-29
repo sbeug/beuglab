@@ -134,7 +134,7 @@ useHead({
         ></spline-viewer>
       </div>
       <header>
-        <NavBar> </NavBar>
+        <NavBar />
       </header>
       <router-view v-slot="{ Component }">
         <transition :css="true" mode="out-in" name="v">

@@ -33,7 +33,7 @@ const router = createRouter({
     },
     {
       path: '/about/grants-and-partners',
-      name: 'grants&partners',
+      name: 'grantsandpartners',
       component: GrantsAndPartners,
     },
     {
