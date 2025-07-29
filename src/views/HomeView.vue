@@ -2,7 +2,8 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useTeamStore } from '@/stores/team.js'
 import { sanity } from '@/assets/js/sanity.js'
-import { homePageLoadAnimation, dragToScroll, textColorIn } from '@/assets/js/customAnimations'
+import { homePageLoadAnimation, dragToScroll } from '@/assets/js/customAnimations'
+import { gsap } from 'gsap'
 
 const teamStore = useTeamStore()
 
@@ -15,11 +16,12 @@ const teamDescription = ref('')
 
 // Add ref to track if component is still mounted
 const isMounted = ref(false)
+let dragToScrollCleanup = null
+let homePageAnimationCleanup = null
 
 onMounted(async () => {
   isMounted.value = true
-  homePageLoadAnimation()
-  textColorIn()
+  homePageAnimationCleanup = homePageLoadAnimation()
   try {
     const query = `*[_type == "homePage"][0] {
       sectionOneTitle,
@@ -41,12 +43,21 @@ onMounted(async () => {
   await teamStore.fetchTeamMembers()
   setTimeout(() => {
     if (isMounted.value) {
-      dragToScroll()
+      dragToScrollCleanup = dragToScroll()
     }
   }, 1000)
 })
+
 onBeforeUnmount(() => {
   isMounted.value = false
+
+  if (homePageAnimationCleanup) {
+    homePageAnimationCleanup()
+  }
+
+  if (dragToScrollCleanup) {
+    dragToScrollCleanup()
+  }
 
   if (window.dragToScrollTimeout) {
     clearTimeout(window.dragToScrollTimeout)
@@ -60,6 +71,9 @@ onBeforeUnmount(() => {
   if (window.animationFrameId) {
     cancelAnimationFrame(window.animationFrameId)
   }
+
+  // Kill all GSAP animations to prevent memory leaks
+  gsap.killTweensOf('*')
 })
 </script>
 
@@ -310,7 +324,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: fit-content;
+  max-width: 100%;
   will-change: transform;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;

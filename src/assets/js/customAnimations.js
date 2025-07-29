@@ -46,9 +46,17 @@ export function homePageLoadAnimation() {
     },
     1.25,
   )
+
+  // Return cleanup function
+  return () => {
+    homePageTimeline.kill()
+  }
 }
 
 export function DropDownMenuAnimation() {
+  // Store handlers for cleanup
+  const handlers = []
+
   const dropDownTimeline = new gsap.timeline({
     paused: true,
     duration: 1,
@@ -57,8 +65,6 @@ export function DropDownMenuAnimation() {
     '#dropdown-menu',
     {
       visibility: 'visible',
-      opacity: '100%',
-      xPercent: 0,
     },
     0,
   )
@@ -68,7 +74,7 @@ export function DropDownMenuAnimation() {
       y: 5,
       ease: 'power4.out',
       rotation: 45,
-      duration: 0.05,
+      duration: 0.01,
     },
     0.1,
   )
@@ -111,24 +117,45 @@ export function DropDownMenuAnimation() {
   )
   dropDownTimeline.reverse(1)
 
-  document.addEventListener('click', function (event) {
+  const menuButtonHandler = function (event) {
     if (event.target.matches('#menu-button')) {
       dropDownTimeline.reversed(!dropDownTimeline.reversed())
     }
-  })
-  document.addEventListener('click', function (event) {
+  }
+
+  const menuLinkHandler = function (event) {
     if (event.target.matches('.menu-link-2')) {
       dropDownTimeline.reversed(!dropDownTimeline.reversed())
     }
-  })
-  document.addEventListener('click', function (event) {
+  }
+
+  const subLinkHandler = function (event) {
     if (event.target.matches('.sub-link')) {
       dropDownTimeline.reversed(!dropDownTimeline.reversed())
     }
-  })
+  }
+
+  document.addEventListener('click', menuButtonHandler)
+  document.addEventListener('click', menuLinkHandler)
+  document.addEventListener('click', subLinkHandler)
+
+  handlers.push(
+    { type: 'click', handler: menuButtonHandler },
+    { type: 'click', handler: menuLinkHandler },
+    { type: 'click', handler: subLinkHandler },
+  )
+
+  // Return cleanup function
+  return () => {
+    handlers.forEach(({ type, handler }) => {
+      document.removeEventListener(type, handler)
+    })
+    dropDownTimeline.kill()
+  }
 }
 
 export function subMenuDrop() {
+  const handlers = []
   const toggles = document.querySelectorAll('.sub-toggle')
 
   toggles.forEach((toggle) => {
@@ -158,14 +185,18 @@ export function subMenuDrop() {
       },
       0,
     )
-    toggle.addEventListener('click', () => {
+
+    const clickHandler = () => {
       if (isOpen) {
         subMenuTl.reverse()
       } else {
         subMenuTl.play()
       }
       isOpen = !isOpen
-    })
+    }
+
+    toggle.addEventListener('click', clickHandler)
+    handlers.push({ element: toggle, type: 'click', handler: clickHandler, timeline: subMenuTl })
   })
 
   const aboutFlair = new gsap.timeline({
@@ -220,7 +251,7 @@ export function subMenuDrop() {
 
   const aboutToggle = document.getElementById('about')
   let isAboutOpen = false
-  aboutToggle.addEventListener('click', () => {
+  const aboutHandler = () => {
     if (isAboutOpen === false) {
       aboutFlair.play()
       isAboutOpen = true
@@ -228,10 +259,21 @@ export function subMenuDrop() {
       aboutFlair.reverse()
       isAboutOpen = false
     }
-  })
+  }
+
+  if (aboutToggle) {
+    aboutToggle.addEventListener('click', aboutHandler)
+    handlers.push({
+      element: aboutToggle,
+      type: 'click',
+      handler: aboutHandler,
+      timeline: aboutFlair,
+    })
+  }
+
   const galleryToggle = document.getElementById('gallery')
   let isGalleryOpen = false
-  galleryToggle.addEventListener('click', () => {
+  const galleryHandler = () => {
     if (isGalleryOpen === false) {
       galleryFlair.play()
       isGalleryOpen = true
@@ -239,10 +281,21 @@ export function subMenuDrop() {
       galleryFlair.reverse()
       isGalleryOpen = false
     }
-  })
+  }
+
+  if (galleryToggle) {
+    galleryToggle.addEventListener('click', galleryHandler)
+    handlers.push({
+      element: galleryToggle,
+      type: 'click',
+      handler: galleryHandler,
+      timeline: galleryFlair,
+    })
+  }
+
   const contactToggle = document.getElementById('contact')
   let isContactOpen = false
-  contactToggle.addEventListener('click', () => {
+  const contactHandler = () => {
     if (isContactOpen === false) {
       contactFlair.play()
       isContactOpen = true
@@ -250,7 +303,27 @@ export function subMenuDrop() {
       contactFlair.reverse()
       isContactOpen = false
     }
-  })
+  }
+
+  if (contactToggle) {
+    contactToggle.addEventListener('click', contactHandler)
+    handlers.push({
+      element: contactToggle,
+      type: 'click',
+      handler: contactHandler,
+      timeline: contactFlair,
+    })
+  }
+
+  // Return cleanup function
+  return () => {
+    handlers.forEach(({ element, type, handler, timeline }) => {
+      element.removeEventListener(type, handler)
+      if (timeline) {
+        timeline.kill()
+      }
+    })
+  }
 }
 
 export function DesktopSubmenuAnimation() {
@@ -316,6 +389,11 @@ export function DesktopSubmenuAnimation() {
         }
       }, 150)
     })
+  }
+
+  // Return cleanup function - for now return empty function since this needs more complex refactoring
+  return () => {
+    // TODO: Implement proper cleanup for DesktopSubmenuAnimation
   }
 }
 
@@ -393,10 +471,17 @@ export function subMenuHover(menuSelector = '.sub-drop') {
       }
     })
   })
+
+  // Return cleanup function - minimal for now
+  return () => {
+    // TODO: Add proper cleanup for subMenuHover
+  }
 }
 
 export function menuUnderline() {
+  const handlers = []
   const underLineWrapper = document.querySelectorAll('#menu li')
+
   underLineWrapper.forEach((el) => {
     const thisUnderline = el.querySelector('.menu-underline')
 
@@ -424,8 +509,20 @@ export function menuUnderline() {
       }
       el.addEventListener('mouseenter', mouseEnter)
       el.addEventListener('mouseleave', mouseLeave)
+
+      handlers.push(
+        { element: el, type: 'mouseenter', handler: mouseEnter },
+        { element: el, type: 'mouseleave', handler: mouseLeave },
+      )
     }
   })
+
+  // Return cleanup function
+  return () => {
+    handlers.forEach(({ element, type, handler }) => {
+      element.removeEventListener(type, handler)
+    })
+  }
 }
 
 export function dragToScroll() {
@@ -518,6 +615,17 @@ export function dragToScroll() {
   container.addEventListener('touchstart', onStart)
   container.addEventListener('touchmove', onMove)
   container.addEventListener('touchend', onEnd)
+
+  // Return cleanup function
+  return () => {
+    container.removeEventListener('mousedown', onStart)
+    window.removeEventListener('mousemove', onMove)
+    window.removeEventListener('mouseup', onEnd)
+    container.removeEventListener('touchstart', onStart)
+    container.removeEventListener('touchmove', onMove)
+    container.removeEventListener('touchend', onEnd)
+    dragStart.kill()
+  }
 }
 
 export function teamViewAnimations() {
@@ -604,9 +712,15 @@ export function teamViewAnimations() {
       ease: 'power4.out',
     })
   }
+
+  // Return cleanup function - minimal for now
+  return () => {
+    // TODO: Add proper cleanup for teamViewAnimations
+  }
 }
 
 export function ContactForm() {
+  const handlers = []
   const contactOpen = document.querySelectorAll('.contact-open')
   const contactContainer = document.querySelector('#contact-container')
   const contactWrapper = document.querySelector('#contact-wrapper')
@@ -691,52 +805,39 @@ export function ContactForm() {
 
   // Handle existing .contact-open elements
   contactOpen.forEach((el) => {
-    el.addEventListener('click', () => {
+    const openHandler = () => {
       contactTimeline.play()
       contactContainer.style.pointerEvents = 'auto'
-    })
+    }
+    el.addEventListener('click', openHandler)
+    handlers.push({ element: el, type: 'click', handler: openHandler })
   })
 
   // Use event delegation to handle both .open-contact and any future .contact-open elements
-  document.addEventListener('click', (e) => {
+  const delegateHandler = (e) => {
     if (e.target.closest('.open-contact') || e.target.closest('.contact-open')) {
       contactTimeline.play()
       contactContainer.style.pointerEvents = 'auto'
     }
-  })
+  }
+  document.addEventListener('click', delegateHandler)
+  handlers.push({ element: document, type: 'click', handler: delegateHandler })
 
-  contactClose.addEventListener('click', () => {
+  const closeHandler = () => {
     contactTimeline.reverse()
     contactContainer.style.pointerEvents = 'none'
-  })
-}
+  }
 
-export function textColorIn() {
-  const splitTypes = document.querySelectorAll('split-type')
+  if (contactClose) {
+    contactClose.addEventListener('click', closeHandler)
+    handlers.push({ element: contactClose, type: 'click', handler: closeHandler })
+  }
 
-  splitTypes.forEach((char) => {
-    const bg = char.dataset.bgColor
-    const fg = char.dataset.fgColor
-
-    const text = new SplitType(char, { types: 'words chars' })
-
-    gsap.fromTo(
-      text.chars,
-      {
-        color: bg,
-      },
-      {
-        color: fg,
-        duration: 0.3,
-        stagger: 0.02,
-        scrollTrigger: {
-          trigger: char,
-          start: 'top 90%',
-          end: 'top 25%',
-          scrub: true,
-          toggleActions: 'play play reverse reverse',
-        },
-      },
-    )
-  })
+  // Return cleanup function
+  return () => {
+    handlers.forEach(({ element, type, handler }) => {
+      element.removeEventListener(type, handler)
+    })
+    contactTimeline.kill()
+  }
 }

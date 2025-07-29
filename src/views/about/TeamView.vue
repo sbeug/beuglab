@@ -12,6 +12,7 @@ const selectedMember = ref(teamStore.members[0])
 
 const alumniStore = useAlumniStore()
 const isAlumniSelected = ref(false)
+let teamViewAnimationsCleanup = null
 
 const selectMember = (member) => {
   if (member.type === 'alumni') {
@@ -24,7 +25,7 @@ const selectMember = (member) => {
 }
 
 onMounted(() => {
-  teamViewAnimations()
+  teamViewAnimationsCleanup = teamViewAnimations()
   teamStore.fetchTeamMembers().then(() => {
     const defaultMember = teamStore.members.find((member) => member.id === 1)
     if (defaultMember) {
@@ -34,7 +35,11 @@ onMounted(() => {
   alumniStore.fetchAlumni()
 })
 
-onBeforeUnmount(() => {})
+onBeforeUnmount(() => {
+  if (teamViewAnimationsCleanup) {
+    teamViewAnimationsCleanup()
+  }
+})
 </script>
 <template>
   <div id="main-content" class="main-content">

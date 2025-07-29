@@ -15,6 +15,9 @@ import { watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useHead } from '@vueuse/head'
 // Stores ticker function for proper cleanup
 let rafCallback = null
+let resizeObserver = null
+let contactFormCleanup = null
+
 // Global Animations
 import { ContactForm } from './assets/js/customAnimations'
 // Global Utils
@@ -28,6 +31,11 @@ function updateLenis() {
   lenis.value?.resize()
 }
 
+const resizeHandler = () => {
+  updateLenis()
+  ScrollTrigger.refresh()
+}
+
 onMounted(() => {
   lenis.value.on('scroll', ScrollTrigger.update())
 
@@ -35,19 +43,12 @@ onMounted(() => {
     lenis.value?.raf(time * 1000)
   }
 
-  const resizeObserver = new ResizeObserver(() => {
-    updateLenis()
-    ScrollTrigger.refresh()
-  })
-
+  resizeObserver = new ResizeObserver(resizeHandler)
   resizeObserver.observe(document.body)
 
-  window.addEventListener('resize', () => {
-    updateLenis()
-    ScrollTrigger.refresh()
-  })
+  window.addEventListener('resize', resizeHandler)
 
-  ContactForm()
+  contactFormCleanup = ContactForm()
 })
 
 // Cleanup function
@@ -58,6 +59,13 @@ onUnmounted(() => {
   if (rafCallback) {
     gsap.ticker.remove(rafCallback)
   }
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+  if (contactFormCleanup) {
+    contactFormCleanup()
+  }
+  window.removeEventListener('resize', resizeHandler)
 })
 
 const route = useRoute()

@@ -8,11 +8,16 @@ import {
 } from '@/assets/js/customAnimations'
 import { gsap } from 'gsap'
 
+// Store cleanup functions
+let cleanupFunctions = []
+
 onMounted(() => {
-  DropDownMenuAnimation()
-  subMenuDrop()
-  DesktopSubmenuAnimation()
-  menuUnderline()
+  // Store cleanup functions returned by animation functions
+  cleanupFunctions.push(DropDownMenuAnimation())
+  cleanupFunctions.push(subMenuDrop())
+  cleanupFunctions.push(DesktopSubmenuAnimation())
+  cleanupFunctions.push(menuUnderline())
+
   gsap.set('#dropdown-menu', {
     visibility: 'hidden',
     xPercent: 100,
@@ -35,7 +40,14 @@ onMounted(() => {
     ease: 'power2.inOut',
   })
 })
+
 onBeforeUnmount(() => {
+  // Clean up all animations and event listeners
+  cleanupFunctions.forEach((cleanup) => {
+    if (typeof cleanup === 'function') {
+      cleanup()
+    }
+  })
   gsap.killTweensOf('*')
 })
 </script>

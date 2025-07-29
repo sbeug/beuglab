@@ -14,6 +14,15 @@ export function immunoDefender() {
   const POWERUP_SPAWN_CHANCE = 0.005 // Chance per frame
   const IMMUNITY_TIME = 1500 // Immunity time after getting hit (ms)
 
+  // Cleanup tracking
+  let gameRunning = true
+  let animationFrameId = null
+
+  // Event handlers for cleanup
+  const keyDownHandler = (e) => (keys[e.key] = true)
+  const keyUpHandler = (e) => (keys[e.key] = false)
+  const loadHandler = init
+
   // Colors - Modern palette
   const COLORS = {
     player: {
@@ -78,14 +87,14 @@ export function immunoDefender() {
     createBackgroundParticles()
 
     // Event listeners
-    window.addEventListener('keydown', (e) => (keys[e.key] = true))
-    window.addEventListener('keyup', (e) => (keys[e.key] = false))
+    window.addEventListener('keydown', keyDownHandler)
+    window.addEventListener('keyup', keyUpHandler)
 
     startButton.addEventListener('click', startGame)
     restartButton.addEventListener('click', restartGame)
 
     // Game loop setup (but don't start it yet)
-    window.requestAnimationFrame(gameLoop)
+    animationFrameId = window.requestAnimationFrame(gameLoop)
   }
   function resetPlayer() {
     player = {
@@ -306,6 +315,8 @@ export function immunoDefender() {
   }
   // Game Loop
   function gameLoop(timestamp) {
+    if (!gameRunning) return
+
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
 
     // Draw background
@@ -318,7 +329,7 @@ export function immunoDefender() {
     // Always draw game elements for smoother transitions
     draw()
 
-    window.requestAnimationFrame(gameLoop)
+    animationFrameId = window.requestAnimationFrame(gameLoop)
   }
   function update(timestamp) {
     // Handle input
@@ -387,7 +398,7 @@ export function immunoDefender() {
     player.x = Math.max(player.radius, Math.min(GAME_WIDTH - player.radius, player.x))
     player.y = Math.max(player.radius, Math.min(GAME_HEIGHT - player.radius, player.y))
   }
-  function updatePlayer(timestamp) {
+  function updatePlayer(_timestamp) {
     // Update immunity status
     if (player.immune) {
       if (Date.now() - player.immuneTime > IMMUNITY_TIME) {
@@ -638,7 +649,7 @@ export function immunoDefender() {
         break
     }
   }
-  function regenerateLifeAndAmmo(timestamp) {
+  function regenerateLifeAndAmmo(_timestamp) {
     const now = Date.now()
 
     // Regenerate lives
@@ -953,6 +964,39 @@ export function immunoDefender() {
     }
   }
 
+  // Cleanup function
+  function cleanup() {
+    gameRunning = false
+
+    if (animationFrameId) {
+      window.cancelAnimationFrame(animationFrameId)
+      animationFrameId = null
+    }
+
+    // Remove event listeners
+    window.removeEventListener('keydown', keyDownHandler)
+    window.removeEventListener('keyup', keyUpHandler)
+    window.removeEventListener('load', loadHandler)
+
+    if (startButton) {
+      startButton.removeEventListener('click', startGame)
+    }
+    if (restartButton) {
+      restartButton.removeEventListener('click', restartGame)
+    }
+
+    // Clear game state
+    antibodies = []
+    cancerCells = []
+    powerUps = []
+    particles = []
+    backgroundParticles = []
+    keys = {}
+  }
+
   // Start the game
-  window.addEventListener('load', init)
+  window.addEventListener('load', loadHandler)
+
+  // Return cleanup function
+  return cleanup
 }

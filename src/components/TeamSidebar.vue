@@ -141,7 +141,7 @@ const emit = defineEmits(['select'])
 }
 /* DESKTOP 3 [GLOBAL] */
 @media (min-width: 1728px) {
-    .member-link h3 {
+  .member-link h3 {
     font-size: 3rem;
     text-wrap: nowrap;
   }
@@ -149,7 +149,7 @@ const emit = defineEmits(['select'])
 /* DESKTOP 4 (Standard pc Monitor) -------------------------------------------------------------------------------------------*/
 @media (min-width: 1920px) {
   .member-link h3 {
-    font-size: 1.5rem;
+    font-size: 3rem;
   }
   .member-link {
     font-size: 2em;
