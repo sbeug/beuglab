@@ -231,26 +231,14 @@ onBeforeUnmount(() => {
   position: fixed;
   left: 0;
   top: 0;
-  transform: translateX(100%);
-  will-change: transform, opacity, visibility;
+  will-change: transform;
   background: transparent;
   opacity: 0%;
   visibility: hidden;
   background-color: #e9e9e98a;
   backdrop-filter: blur(15px);
-}
-#dropdown-menu-filter {
-  z-index: 8;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translateX(100%);
-  background-color: #e9e9e98a;
-  backdrop-filter: blur(15px);
-  opacity: 0%;
-  visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 #menu-button {
   z-index: 10;
@@ -263,6 +251,7 @@ onBeforeUnmount(() => {
   cursor: pointer;
   width: 100%;
   height: 3em;
+  -webkit-tap-highlight-color: transparent;
 }
 #menu-button :nth-child(2) {
   margin-bottom: 0 !important;
@@ -272,7 +261,7 @@ onBeforeUnmount(() => {
   height: 2px;
   background-color: var(--nero);
   margin-bottom: 0.5em;
-  transition: all 0.3s ease-in-out;
+  will-change: transform;
 }
 #menu {
   display: none;
@@ -351,6 +340,7 @@ a {
   align-items: flex-start;
   width: 100%;
   margin-bottom: 1em;
+  -webkit-tap-highlight-color: transparent;
 }
 .menu-link-wrapper {
   width: 100%;
@@ -416,6 +406,7 @@ a {
   width: 1.1em;
   height: 1.1em;
   opacity: 50%;
+  transform: rotate(180deg);
 }
 #about,
 #gallery {

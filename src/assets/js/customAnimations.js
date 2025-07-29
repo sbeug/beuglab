@@ -1,5 +1,4 @@
 import gsap from 'gsap'
-import Expo from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SplitType from 'split-type'
 
@@ -54,102 +53,159 @@ export function homePageLoadAnimation() {
 }
 
 export function DropDownMenuAnimation() {
-  // Store handlers for cleanup
   const handlers = []
+
+  const dropdownMenu = document.querySelector('#dropdown-menu')
+  const lineOne = document.querySelector('#line-one')
+  const lineTwo = document.querySelector('#line-two')
+  const menuItems = document.querySelectorAll('#menu-list ul li')
+  const menuButton = document.querySelector('#menu-button')
+
+  if (!dropdownMenu || !lineOne || !lineTwo || !menuButton) {
+    console.warn('Dropdown menu elements not found')
+    return () => {}
+  }
+
+  gsap.set([lineOne, lineTwo], {
+    transformOrigin: 'center center',
+    force3D: true,
+  })
+
+  gsap.set(dropdownMenu, {
+    visibility: 'hidden',
+    xPercent: 100,
+    opacity: 0,
+    force3D: true,
+  })
+
+  gsap.set(menuItems, {
+    y: 50,
+    opacity: 0,
+    force3D: true,
+  })
 
   const dropDownTimeline = new gsap.timeline({
     paused: true,
     duration: 1,
+    onStart: () => {
+      // Prevent body scroll on mobile when menu opens
+      document.body.style.overflow = 'hidden'
+    },
+    onReverseComplete: () => {
+      // Re-enable body scroll when menu closes
+      document.body.style.overflow = ''
+      // Hide the menu completely when animation is done
+      gsap.set(dropdownMenu, { visibility: 'hidden' })
+    },
   })
-  dropDownTimeline.set(
-    '#dropdown-menu',
-    {
-      visibility: 'visible',
-    },
-    0,
-  )
-  dropDownTimeline.to(
-    '#line-one',
-    {
-      y: 5,
-      ease: 'power4.out',
-      rotation: 45,
-      duration: 0.01,
-    },
-    0.1,
-  )
-  dropDownTimeline.to(
-    '#line-two',
-    {
-      y: -5,
-      ease: 'power4.out',
-      rotation: -45,
-      duration: 0.01,
-    },
-    0.1,
-  )
-  dropDownTimeline.to(
-    '#dropdown-menu',
-    {
-      xPercent: -100,
-      ease: Expo.easeInOut,
-      duration: 0.5,
-    },
-    0.15,
-  )
-  dropDownTimeline.set(
-    '#menu-list ul li',
-    {
-      y: 75,
-      opacity: '0%',
-    },
-    0,
-  )
-  dropDownTimeline.to(
-    '#menu-list ul li',
-    {
-      y: 0,
-      opacity: '100%',
-      stagger: 0.05,
-      ease: Expo.easeInOut,
-    },
-    0.5,
-  )
-  dropDownTimeline.reverse(1)
+  dropDownTimeline
+    .set(
+      dropdownMenu,
+      {
+        visibility: 'visible',
+      },
+      0,
+    )
+    .to(
+      dropdownMenu,
+      {
+        opacity: 1,
+        duration: 0.1,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    .to(
+      [lineOne, lineTwo],
+      {
+        duration: 0.3,
+        ease: 'power2.out',
+        transformOrigin: 'center center',
+      },
+      0,
+    )
+    .to(
+      lineOne,
+      {
+        rotation: 45,
+        y: 6,
+        duration: 0.3,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    .to(
+      lineTwo,
+      {
+        rotation: -45,
+        y: -6,
+        duration: 0.3,
+        ease: 'power2.out',
+      },
+      0,
+    )
+    .to(
+      dropdownMenu,
+      {
+        xPercent: 0,
+        ease: 'power3.inOut',
+        duration: 0.6,
+      },
+      0.1,
+    )
+    .to(
+      menuItems,
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        ease: 'power2.out',
+        duration: 0.4,
+      },
+      0.5,
+    )
 
-  const menuButtonHandler = function (event) {
-    if (event.target.matches('#menu-button')) {
+  dropDownTimeline.reverse()
+
+  // Use event delegation for better performance
+  const handleClick = function (event) {
+    const target = event.target
+
+    // Check if click is on menu button or its children
+    if (target.closest('#menu-button')) {
+      event.preventDefault()
       dropDownTimeline.reversed(!dropDownTimeline.reversed())
+      return
+    }
+
+    // Check if click is on menu links
+    if (target.matches('.menu-link-2') || target.matches('.sub-link')) {
+      dropDownTimeline.reversed(!dropDownTimeline.reversed())
+      return
     }
   }
 
-  const menuLinkHandler = function (event) {
-    if (event.target.matches('.menu-link-2')) {
-      dropDownTimeline.reversed(!dropDownTimeline.reversed())
+  // Prevent touch scrolling on mobile when menu is open
+  const handleTouchMove = function (event) {
+    if (!dropDownTimeline.reversed()) {
+      event.preventDefault()
     }
   }
 
-  const subLinkHandler = function (event) {
-    if (event.target.matches('.sub-link')) {
-      dropDownTimeline.reversed(!dropDownTimeline.reversed())
-    }
-  }
-
-  document.addEventListener('click', menuButtonHandler)
-  document.addEventListener('click', menuLinkHandler)
-  document.addEventListener('click', subLinkHandler)
-
+  // Add single event listener with delegation
+  document.addEventListener('click', handleClick, { passive: false })
+  document.addEventListener('touchmove', handleTouchMove, { passive: false })
   handlers.push(
-    { type: 'click', handler: menuButtonHandler },
-    { type: 'click', handler: menuLinkHandler },
-    { type: 'click', handler: subLinkHandler },
+    { type: 'click', handler: handleClick },
+    { type: 'touchmove', handler: handleTouchMove },
   )
 
-  // Return cleanup function
   return () => {
     handlers.forEach(({ type, handler }) => {
       document.removeEventListener(type, handler)
     })
+    // Ensure body scroll is re-enabled on cleanup
+    document.body.style.overflow = ''
     dropDownTimeline.kill()
   }
 }
@@ -161,32 +217,79 @@ export function subMenuDrop() {
   toggles.forEach((toggle) => {
     let isOpen = false
     const subMenu = toggle.querySelector('.sub-list')
+    const arrow = toggle.querySelector('.nav-arrow')
+
+    if (!subMenu) return
+
+    // Set initial state with hardware acceleration
+    gsap.set(subMenu, {
+      height: 0,
+      opacity: 0,
+      overflow: 'hidden',
+      display: 'none',
+      force3D: true,
+    })
+
+    if (arrow) {
+      gsap.set(arrow, {
+        rotation: 0,
+        transformOrigin: 'center center',
+        force3D: true,
+      })
+    }
 
     const subMenuTl = new gsap.timeline({
       paused: true,
-      duration: 1,
+      onReverseComplete: () => {
+        // Hide the submenu completely when reverse animation completes
+        gsap.set(subMenu, { display: 'none' })
+      },
     })
-    subMenuTl.fromTo(
-      subMenu,
-      { height: 0, opacity: 0, overflow: 'visible' },
-      {
-        height: 'auto',
-        opacity: 1,
-        ease: 'power2.out',
-      },
-      0,
-    )
-    subMenuTl.to(
-      '.circle-arrow',
-      {
-        rotation: 135,
-        ease: 'power2.out',
-        duration: 0.5,
-      },
-      0,
-    )
 
-    const clickHandler = () => {
+    // Optimized animation with better performance
+    subMenuTl
+      .set(
+        subMenu,
+        {
+          display: 'flex',
+        },
+        0,
+      )
+      .to(
+        subMenu,
+        {
+          height: 'auto',
+          duration: 0.4,
+          ease: 'power2.out',
+        },
+        0,
+      )
+      .to(
+        subMenu,
+        {
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out',
+        },
+        0.1,
+      )
+
+    if (arrow) {
+      subMenuTl.to(
+        arrow,
+        {
+          rotation: 90,
+          duration: 0.4,
+          ease: 'power2.out',
+        },
+        0,
+      )
+    }
+
+    const clickHandler = (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+
       if (isOpen) {
         subMenuTl.reverse()
       } else {
@@ -195,125 +298,9 @@ export function subMenuDrop() {
       isOpen = !isOpen
     }
 
-    toggle.addEventListener('click', clickHandler)
+    toggle.addEventListener('click', clickHandler, { passive: false })
     handlers.push({ element: toggle, type: 'click', handler: clickHandler, timeline: subMenuTl })
   })
-
-  const aboutFlair = new gsap.timeline({
-    paused: true,
-    duration: 0.5,
-  })
-  const galleryFlair = new gsap.timeline({
-    paused: true,
-    duration: 0.5,
-  })
-  const contactFlair = new gsap.timeline({
-    paused: true,
-    duration: 0.5,
-  })
-  aboutFlair.to(
-    '#nav-arrow-about',
-    {
-      rotation: 90,
-      ease: 'power2.out',
-      duration: 0.5,
-    },
-    0,
-  )
-  galleryFlair.to(
-    '#nav-arrow-gallery',
-    {
-      rotation: 90,
-      ease: 'power2.out',
-      duration: 0.5,
-    },
-    0,
-  )
-  contactFlair.to(
-    '#nav-arrow-contact',
-    {
-      rotation: 90,
-      ease: 'power2.out',
-      duration: 0.5,
-    },
-    0,
-  )
-  aboutFlair.from(
-    '#sub-list-about li',
-    {
-      x: 50,
-      opacity: 0,
-      ease: 'power2.out',
-      stagger: 0.05,
-    },
-    0,
-  )
-
-  const aboutToggle = document.getElementById('about')
-  let isAboutOpen = false
-  const aboutHandler = () => {
-    if (isAboutOpen === false) {
-      aboutFlair.play()
-      isAboutOpen = true
-    } else if (isAboutOpen === true) {
-      aboutFlair.reverse()
-      isAboutOpen = false
-    }
-  }
-
-  if (aboutToggle) {
-    aboutToggle.addEventListener('click', aboutHandler)
-    handlers.push({
-      element: aboutToggle,
-      type: 'click',
-      handler: aboutHandler,
-      timeline: aboutFlair,
-    })
-  }
-
-  const galleryToggle = document.getElementById('gallery')
-  let isGalleryOpen = false
-  const galleryHandler = () => {
-    if (isGalleryOpen === false) {
-      galleryFlair.play()
-      isGalleryOpen = true
-    } else if (isGalleryOpen === true) {
-      galleryFlair.reverse()
-      isGalleryOpen = false
-    }
-  }
-
-  if (galleryToggle) {
-    galleryToggle.addEventListener('click', galleryHandler)
-    handlers.push({
-      element: galleryToggle,
-      type: 'click',
-      handler: galleryHandler,
-      timeline: galleryFlair,
-    })
-  }
-
-  const contactToggle = document.getElementById('contact')
-  let isContactOpen = false
-  const contactHandler = () => {
-    if (isContactOpen === false) {
-      contactFlair.play()
-      isContactOpen = true
-    } else if (isContactOpen === true) {
-      contactFlair.reverse()
-      isContactOpen = false
-    }
-  }
-
-  if (contactToggle) {
-    contactToggle.addEventListener('click', contactHandler)
-    handlers.push({
-      element: contactToggle,
-      type: 'click',
-      handler: contactHandler,
-      timeline: contactFlair,
-    })
-  }
 
   // Return cleanup function
   return () => {
@@ -639,42 +626,26 @@ export function teamViewAnimations() {
       paused: true,
       duration: 0.5,
     })
-    memberMenuTimeline.to(
-      sidebar,
-      {
-        ease: Expo.easeInOut,
-        duration: 0.5,
-        left: '0%',
-      },
-      0,
-    )
-    memberMenuTimeline.to(
-      arrow,
-      {
-        ease: Expo.easeInOut,
-        duration: 0.1,
-        opacity: 0,
-      },
-      0,
-    )
-    memberMenuTimeline.to(
-      arrow,
-      {
-        ease: Expo.easeInOut,
-        duration: 0.1,
-        transform: 'scaleX(-1)',
-      },
-      0.1,
-    )
-    memberMenuTimeline.to(
-      arrow,
-      {
-        ease: Expo.easeInOut,
-        duration: 0.25,
-        opacity: 1,
-      },
-      0.2,
-    )
+    memberMenuTimeline.to(sidebar, sidebar, {
+      ease: 'expo.inOut',
+      duration: 0.5,
+      left: '0%',
+    })
+    memberMenuTimeline.to(arrow, arrow, {
+      ease: 'expo.inOut',
+      duration: 0.1,
+      opacity: 0,
+    })
+    memberMenuTimeline.to(arrow, arrow, {
+      ease: 'expo.inOut',
+      duration: 0.1,
+      transform: 'scaleX(-1)',
+    })
+    memberMenuTimeline.to(arrow, arrow, {
+      ease: 'expo.inOut',
+      duration: 0.25,
+      opacity: 1,
+    })
     let isMenuOpen = false
     if (mobileButton) {
       mobileButton.addEventListener('click', () => {
