@@ -569,6 +569,9 @@ onBeforeUnmount(() => {
 }
 /* DESKTOP 4 (Standard pc Monitor) */
 @media only screen and (min-width: 1920px) {
+  .section-statement h6 {
+    font-size: 5rem;
+  }
   .description {
     width: 30%;
   }

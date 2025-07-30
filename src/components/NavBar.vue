@@ -8,11 +8,9 @@ import {
 } from '@/assets/js/customAnimations'
 import { gsap } from 'gsap'
 
-// Store cleanup functions
 let cleanupFunctions = []
 
 onMounted(() => {
-  // Store cleanup functions returned by animation functions
   cleanupFunctions.push(DropDownMenuAnimation())
   cleanupFunctions.push(subMenuDrop())
   cleanupFunctions.push(DesktopSubmenuAnimation())
@@ -42,7 +40,6 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  // Clean up all animations and event listeners
   cleanupFunctions.forEach((cleanup) => {
     if (typeof cleanup === 'function') {
       cleanup()

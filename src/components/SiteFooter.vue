@@ -94,20 +94,20 @@ import ContactButton from '@/components/ContactButton.vue'
   align-items: center;
 }
 #footer-title h6 {
-  font-size: 2.5em;
+  font-size: 2.5rrem;
   color: var(--font-color-main);
   line-height: 1.1em;
   text-align: center;
   width: 90%;
 }
 #contact h6 {
-  font-size: 1.75em;
+  font-size: 1.5rem;
   color: var(--font-color-main);
   font-family: akzidenz-grotesk-next-pro, sans-serif;
   font-weight: 300;
 }
 #socials {
-  margin-top: 1em;
+  margin-top: 0em;
 }
 #contact a,
 #column-1 a,
@@ -171,7 +171,7 @@ import ContactButton from '@/components/ContactButton.vue'
 /* TABLET 2 [GLOBAL] */
 @media (min-width: 1000px) {
   #footer-title h6 {
-    font-size: 3.5em;
+    font-size: 3.5rem;
     width: 80%;
   }
 }
@@ -187,7 +187,7 @@ import ContactButton from '@/components/ContactButton.vue'
     grid-row: 3 / span 3;
   }
   #footer-title h6 {
-    font-size: 4em;
+    font-size: 4rem;
     text-align: center;
     width: 60%;
   }
@@ -247,7 +247,7 @@ import ContactButton from '@/components/ContactButton.vue'
 /* DESKTOP 4 (Standard pc Monitor) */
 @media (min-width: 1920px) {
   #footer-title h6 {
-    font-size: 6em;
+    font-size: 6rem;
   }
 }
 </style>
