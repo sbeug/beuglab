@@ -395,7 +395,7 @@ function scrollRight() {
   padding-right: 2rem;
 }
 .scroll-btn {
-  background: rgba(0, 0, 0, 0.1);
+  background: #2222226b;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -406,7 +406,7 @@ function scrollRight() {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #161616;
+  color: var(--blanco);
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
