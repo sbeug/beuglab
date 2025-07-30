@@ -2,7 +2,7 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useTeamStore } from '@/stores/team.js'
 import { sanity } from '@/assets/js/sanity.js'
-import { homePageLoadAnimation, dragToScroll } from '@/assets/js/customAnimations'
+import { homePageLoadAnimation } from '@/assets/js/customAnimations'
 import { gsap } from 'gsap'
 
 const teamStore = useTeamStore()
@@ -16,12 +16,15 @@ const teamDescription = ref('')
 
 // Add ref to track if component is still mounted
 const isMounted = ref(false)
-let dragToScrollCleanup = null
 let homePageAnimationCleanup = null
 
 onMounted(async () => {
   isMounted.value = true
   homePageAnimationCleanup = homePageLoadAnimation()
+
+  // Fetch team members
+  await teamStore.fetchTeamMembers()
+
   try {
     const query = `*[_type == "homePage"][0] {
       sectionOneTitle,
@@ -40,12 +43,6 @@ onMounted(async () => {
     console.error('Sanity fetch failed:', error.message)
     error.value = 'Failed to load live content. Showing default info.'
   }
-  await teamStore.fetchTeamMembers()
-  setTimeout(() => {
-    if (isMounted.value) {
-      dragToScrollCleanup = dragToScroll()
-    }
-  }, 1000)
 })
 
 onBeforeUnmount(() => {
@@ -53,10 +50,6 @@ onBeforeUnmount(() => {
 
   if (homePageAnimationCleanup) {
     homePageAnimationCleanup()
-  }
-
-  if (dragToScrollCleanup) {
-    dragToScrollCleanup()
   }
 
   if (window.dragToScrollTimeout) {
@@ -75,6 +68,26 @@ onBeforeUnmount(() => {
   // Kill all GSAP animations to prevent memory leaks
   gsap.killTweensOf('*')
 })
+
+const scrollContainer = ref(null)
+
+function scrollLeft() {
+  const cardWidth = scrollContainer.value?.querySelector('.team-member')?.offsetWidth || 0
+  const gap = 32 // 2rem gap
+  scrollContainer.value?.scrollBy({
+    left: -(cardWidth + gap),
+    behavior: 'smooth',
+  })
+}
+
+function scrollRight() {
+  const cardWidth = scrollContainer.value?.querySelector('.team-member')?.offsetWidth || 0
+  const gap = 32 // 2rem gap
+  scrollContainer.value?.scrollBy({
+    left: cardWidth + gap,
+    behavior: 'smooth',
+  })
+}
 </script>
 
 <template>
@@ -159,7 +172,7 @@ onBeforeUnmount(() => {
             <p>Meet the Team</p>
           </router-link>
         </div>
-        <div id="team-members-section">
+        <div id="team-members-section" ref="scrollContainer">
           <div id="members-track" class="clickable">
             <div
               v-for="member in teamStore.members.slice().sort((a, b) => a.id - b.id)"
@@ -173,6 +186,10 @@ onBeforeUnmount(() => {
               <p>{{ member.title }}</p>
             </div>
           </div>
+        </div>
+        <div class="buttons clickable">
+          <button class="scroll-btn left" @click="scrollLeft">‹</button>
+          <button class="scroll-btn right" @click="scrollRight">›</button>
         </div>
       </div>
     </div>
@@ -314,23 +331,22 @@ onBeforeUnmount(() => {
 #team-members-section {
   position: relative;
   width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
   padding-top: 1em;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#team-members-section::-webkit-scrollbar {
+  display: none;
 }
 #members-track {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
-  max-width: 100%;
-  will-change: transform;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  transition: all 0.1s ease;
-  user-select: none;
-  scrollbar-width: none;
+  gap: 2rem;
 }
 .team-member {
   display: flex;
@@ -338,7 +354,6 @@ onBeforeUnmount(() => {
   align-items: flex-start;
   width: fit-content;
   height: fit-content;
-  margin-right: 2em;
 }
 .team-member h3 {
   font-size: 1.5em;
@@ -370,6 +385,28 @@ onBeforeUnmount(() => {
 #hero-c2a {
   position: relative;
   z-index: 5;
+}
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-right: 2rem;
+}
+.scroll-btn {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #161616;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
@@ -498,15 +535,17 @@ onBeforeUnmount(() => {
     font-size: 5rem;
   }
   #team-description {
-    padding-top: 4em;
-    padding-left: 7em;
+    margin-left: 7em;
+    width: 50%;
   }
   #team-description p {
-    font-size: 1rem;
+    font-size: 1.25rem;
     line-height: 1.25em;
     width: 100%;
   }
   #team-c2a {
+    grid-column: 1;
+    grid-row: 2;
     padding-top: 4em;
     padding-left: 8em;
   }
@@ -520,27 +559,34 @@ onBeforeUnmount(() => {
   }
   #team-content {
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  #team-description {
+    grid-column: 1;
   }
   #team-members-section {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    overflow-x: visible;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    white-space: nowrap;
-    cursor: grab;
+    position: relative;
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    margin-top: 3rem;
   }
-  .team-member {
-    margin-right: 4em;
-    margin-top: 6em;
+  #members-track {
+    position: relative;
+    overflow-y: visible;
   }
   .team-member h3 {
-    padding: 0;
-    font-size: 2em;
+    padding-top: 1rem;
+    font-size: 1.75rem;
   }
   .team-member p {
-    font-size: 1.25em;
+    font-size: 1.25rem;
+  }
+  .buttons {
+    z-index: 4;
+    grid-column: 2;
+    grid-row: 5;
+    justify-content: flex-start;
   }
 }
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
@@ -557,11 +603,6 @@ onBeforeUnmount(() => {
   .description {
     width: 40%;
   }
-  #team-members-section {
-    padding: 0;
-    top: -0%;
-    left: 50%;
-  }
   .member-photo {
     width: 25em;
     height: 30em;
@@ -574,9 +615,6 @@ onBeforeUnmount(() => {
   }
   .description {
     width: 30%;
-  }
-  #team-members-section {
-    left: 50%;
   }
   .member-photo {
     width: 22.5em;
