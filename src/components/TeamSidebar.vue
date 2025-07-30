@@ -106,6 +106,18 @@ const emit = defineEmits(['select'])
 #alumni a {
   text-decoration: none;
 }
+/* TABLET 1 [GLOBAL] */
+@media (min-width: 768px) {
+  .member-link h3 {
+    font-size: 1.25rem;
+  }
+}
+/* TABLET 2 [GLOBAL] */
+@media (min-width: 1000px) {
+  .member-link h3 {
+    font-size: 2rem;
+  }
+}
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
   #team-sidebar {
@@ -133,7 +145,7 @@ const emit = defineEmits(['select'])
 /* DESKTOP 3 (Macbook Pro 15-Inch -------------------------------------------------------------------------------------------*/
 @media (min-width: 1440px) {
   .member-link h3 {
-    font-size: 1.25rem;
+    font-size: 2.5rem;
   }
   .member-link {
     font-size: 1.75rem;

@@ -213,11 +213,11 @@ onBeforeUnmount(() => {
 .img-container img {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  object-fit: cover;
+  object-fit: contain;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
@@ -229,6 +229,11 @@ onBeforeUnmount(() => {
 @media (min-width: 1000px) {
   .experience-heading h1 {
     font-size: 8em;
+  }
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 /* DESKTOP 1 [GLOBAL] */

@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
   }
 }
 /* TABLET 2 [GLOBAL] */
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   #mobile-btn {
     display: none;
   }
@@ -184,8 +184,8 @@ onBeforeUnmount(() => {
     transition: all 0.5s ease;
   }
   #side-bar {
-    position: fixed;
-    top: -10%;
+    position: absolute;
+    top: 0px;
     left: 60%;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
@@ -215,14 +215,12 @@ onBeforeUnmount(() => {
     display: none;
   }
   #side-bar {
-    position: relative;
-    grid-column: 9 / span 12;
-    grid-row: 1 / span 10;
-    top: 0%;
-    left: 0%;
+    position: absolute;
+    top: 50px;
+    right: 0%;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
-    transform: translateY(-10%);
+    transform: translate(2%, -6%);
     padding-top: 9em;
     min-height: 100vh;
     max-height: 100vh;
@@ -254,14 +252,11 @@ onBeforeUnmount(() => {
   .alumni-heading {
     font-size: 6em;
   }
-  #side-bar {
-    transform: translateY(-6%);
-  }
 }
 /* DESKTOP 3 [GLOBAL] */
 @media (min-width: 1728px) {
   #side-bar {
-    transform: translate(-5%, -4%);
+    transform: translate(2%, -4%);
   }
   .alumni-heading {
     font-size: 8em;
