@@ -61,7 +61,7 @@ p {
   pointer-events: auto;
 }
 .main-content .clickable {
-  pointer-events: auto;
+  pointer-events: auto!important;
 }
 .button {
   text-decoration: none;
