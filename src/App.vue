@@ -118,6 +118,9 @@ useHead({
     },
   ],
 })
+
+const isDesktop = window.innerWidth >= 1280
+const isMobile = window.innerWidth < 1280
 </script>
 <template>
   <VueLenis
@@ -138,7 +141,12 @@ useHead({
     <div id="app">
       <div id="spline" v-if="route.path !== '/'">
         <spline-viewer
+          v-if="isDesktop"
           url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
+        ></spline-viewer>
+        <spline-viewer
+          v-if="isMobile"
+          url="https://prod.spline.design/5juh0jQl2H6O6EIE/scene.splinecode"
         ></spline-viewer>
       </div>
       <header>

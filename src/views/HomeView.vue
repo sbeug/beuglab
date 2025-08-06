@@ -492,10 +492,8 @@ function scrollRight() {
     font-size: 12rem;
   }
   #mobile-heading {
-    display: none !important;
-  }
-  #hero-c2a {
-    display: none !important;
+    font-size: 1.5rem;
+    width: 80%;
   }
   .section {
     padding-bottom: 24em;

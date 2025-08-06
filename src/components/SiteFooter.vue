@@ -1,5 +1,6 @@
 <script setup>
 import ContactButton from '@/components/ContactButton.vue'
+import CheoLogo from '@/components/icons/CheoRILogo.vue'
 </script>
 <template>
   <div id="footer">
@@ -39,7 +40,7 @@ import ContactButton from '@/components/ContactButton.vue'
         <p>Website by — <a href="https://www.982studios.ca/">982studios®</a></p>
       </div>
       <div id="logos">
-        <img src="../assets/content/icons/Cheo-logo-black.png" alt="Cheo Logo" id="cheo-logo" />
+        <CheoLogo id="cheo-logo" />
       </div>
     </div>
   </div>
@@ -84,11 +85,15 @@ import ContactButton from '@/components/ContactButton.vue'
   display: flex;
   justify-content: center;
 }
+#footer-title h6 {
+  font-size: 2.5rem;
+  line-height: 1.2em;
+}
 #button {
   z-index: 1;
   position: relative;
   grid-column: 1 / span 4;
-  grid-row: 8;
+  grid-row: 9;
   display: flex;
   justify-content: center;
   align-items: center;

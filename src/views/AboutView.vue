@@ -6,17 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
-  gsap.from('#about-us', {
-    opacity: 0,
-    ease: 'power2.inOut',
-    delay: 0.5,
-    duration: 2,
-  })
   const experienceContainerTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#experience-container',
       start: 'top 0%',
-      end: '+=500%',
+      end: '+=400%',
       pin: true,
       pinSpacing: true,
       scrub: true,
@@ -95,7 +89,7 @@ onBeforeUnmount(() => {
     <div id="section-1">
       <div id="experience-container">
         <video id="experience-video" autoplay muted playsinline loop preload="auto">
-          <source src="../assets/content/video/BeugLab-ShowreelPreview.mp4" type="video/mp4" />
+          <source src="../assets/content/video/BeugLabShowreel.mp4" type="video/mp4" />
         </video>
         <div id="about-us">
           <h6>About us.</h6>

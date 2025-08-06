@@ -1,3 +1,6 @@
+<script setup>
+import CheoLogo from '@/components/icons/CheoRILogo.vue'
+</script>
 <template>
   <div id="main-content" class="main-content df-pad">
     <div id="affiliations-section">
@@ -19,11 +22,7 @@
     <div id="support-section">
       <h2>Supported By</h2>
       <div id="logos-container">
-        <img
-          src="../../assets/content/icons/Cheo-logo-black.png"
-          alt="Cheo Logo"
-          class="inst-logo"
-        />
+        <CheoLogo class="cheo-logo" />
         <img
           src="../../assets/content/icons/SickKids-logo.png"
           alt="SickKids Logo"
@@ -53,6 +52,12 @@
   flex-direction: column;
   align-items: flex-start;
 }
+#affiliation-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
 #affiliation-links a {
   color: var(--font-color-main);
   text-decoration: none;
@@ -60,12 +65,17 @@
   font-weight: 300;
   font-style: normal;
   transition: all 0.5s ease;
+  text-align: center;
+}
+#affiliation-links :nth-child(1) {
+  padding-top: 1rem;
 }
 #affiliation-links a:hover {
   color: var(--font-color-hover);
 }
 h2 {
   font-size: 2.5em;
+  text-transform: uppercase;
 }
 #logos-container {
   padding-top: 2em;
@@ -75,6 +85,11 @@ h2 {
   gap: 2.5em;
 }
 .inst-logo {
+  width: 10em;
+  height: auto;
+  place-self: center;
+}
+.cheo-logo {
   width: 10em;
   height: auto;
   place-self: center;
@@ -153,6 +168,9 @@ h2 {
     padding-top: 4em;
   }
   .inst-logo {
+    width: 18em;
+  }
+  .cheo-logo {
     width: 18em;
   }
 }

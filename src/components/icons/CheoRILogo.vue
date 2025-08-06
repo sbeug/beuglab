@@ -52,7 +52,7 @@
 </template>
 <style scoped>
 .cls-1 {
-  fill: #292929;
+  fill: var(--nero);
   stroke-width: 0px;
 }
 </style>

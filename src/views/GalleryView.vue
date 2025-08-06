@@ -487,7 +487,7 @@ onUnmounted(() => {
 /* Responsive Design */
 @media (max-width: 768px) {
   .gallery-header {
-    padding-top: 1rem;
+    padding-top: 4rem;
     padding-bottom: 1rem;
   }
 
