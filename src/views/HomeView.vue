@@ -13,6 +13,7 @@ const sectionOneText = ref('')
 const sectionTwoTitle = ref('')
 const sectionTwoText = ref('')
 const teamDescription = ref('')
+const error = ref(false)
 
 // Add ref to track if component is still mounted
 const isMounted = ref(false)
@@ -40,8 +41,7 @@ onMounted(async () => {
     sectionTwoText.value = data.sectionTwoText
     teamDescription.value = data.teamDescription
   } catch (error) {
-    console.error('Sanity fetch failed:', error.message)
-    error.value = 'Failed to load live content. Showing default info.'
+    error.value = true
   }
 })
 

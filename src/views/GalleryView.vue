@@ -42,14 +42,14 @@ const galleryImageNames = [
   'Team Photo 2022.jpg',
   'Team getting organized.jpg',
   'Tommy and Shawn Secret Service.jpg',
-  'Volleyball Winning Party.jpg'
+  'Volleyball Winning Party.jpg',
 ]
 
 const images = galleryImageNames.map((filename, index) => ({
   id: index + 1,
   src: new URL(`../assets/content/images/gallery/${filename}`, import.meta.url).href,
   alt: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' '),
-  title: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' ')
+  title: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' '),
 }))
 
 // Navigation functions
@@ -68,9 +68,7 @@ const nextImage = () => {
 }
 
 const prevImage = () => {
-  const prevIndex = currentImageIndex.value === 0
-    ? images.length - 1
-    : currentImageIndex.value - 1
+  const prevIndex = currentImageIndex.value === 0 ? images.length - 1 : currentImageIndex.value - 1
   goToImage(prevIndex)
 }
 
@@ -147,11 +145,7 @@ onUnmounted(() => {
       <p>Beug Lab is more than just a lab; it's a community of innovators and friends!</p>
     </div>
     <div class="carousel-wrapper clickable">
-      <div
-        class="carousel-container"
-        @touchstart="handleTouchStart"
-        @touchend="handleTouchEnd"
-      >
+      <div class="carousel-container" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
         <button
           class="nav-button nav-prev"
           @click="prevImage"
@@ -159,7 +153,7 @@ onUnmounted(() => {
           aria-label="Previous image"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
           </svg>
         </button>
 
@@ -170,19 +164,15 @@ onUnmounted(() => {
           aria-label="Next image"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
           </svg>
         </button>
         <div class="image-container">
           <div
             class="image-track"
-            :style="{ transform: `translateX(-${currentImageIndex * (100/34)}%)` }"
+            :style="{ transform: `translateX(-${currentImageIndex * (100 / 34)}%)` }"
           >
-            <div
-              v-for="(image, index) in images"
-              :key="image.id"
-              class="image-slide"
-            >
+            <div v-for="(image, index) in images" :key="image.id" class="image-slide">
               <img
                 :src="image.src"
                 :alt="image.alt"
@@ -202,11 +192,7 @@ onUnmounted(() => {
           </div>
 
           <div class="control-buttons">
-            <button
-              class="control-btn"
-              @click="toggleAutoPlay"
-              :class="{ active: autoPlay }"
-            >
+            <button class="control-btn" @click="toggleAutoPlay" :class="{ active: autoPlay }">
               {{ autoPlay ? 'Pause' : 'Play' }}
             </button>
           </div>
@@ -223,11 +209,7 @@ onUnmounted(() => {
             :class="{ active: index === currentImageIndex }"
             @click="goToImage(index)"
           >
-            <img
-              :src="image.src"
-              :alt="`Thumbnail ${index + 1}`"
-              loading="lazy"
-            />
+            <img :src="image.src" :alt="`Thumbnail ${index + 1}`" loading="lazy" />
           </button>
         </div>
       </div>
@@ -313,7 +295,7 @@ onUnmounted(() => {
 .gallery-image {
   width: 100%;
   height: 100%;
-  object-fit:contain;
+  object-fit: contain;
   display: block;
 }
 
@@ -359,7 +341,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: 5;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }

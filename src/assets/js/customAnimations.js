@@ -458,11 +458,6 @@ export function subMenuHover(menuSelector = '.sub-drop') {
       }
     })
   })
-
-  // Return cleanup function - minimal for now
-  return () => {
-    // TODO: Add proper cleanup for subMenuHover
-  }
 }
 
 export function menuUnderline() {

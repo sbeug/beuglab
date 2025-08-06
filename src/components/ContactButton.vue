@@ -1,10 +1,8 @@
 <template>
   <div id="contact-button-wrapper">
-    <router-link to="/contact" id="contact-button">
-      <p>Contact us</p>
-      <div class="circle"></div>
-      <div class="dot"></div>
-    </router-link>
+    <p>Contact us</p>
+    <div class="circle"></div>
+    <div class="dot"></div>
   </div>
 </template>
 <style scoped>
