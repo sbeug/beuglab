@@ -16,20 +16,37 @@ const name = ref('')
 const number = ref('')
 const email = ref('')
 const message = ref('')
+const isSubmitting = ref(false)
+const isSubmitted = ref(false)
 
-async function submitForm() {
-  const res = await fetch('/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: name.value, email: email.value, message: message.value }),
-  })
+const handleSubmit = async (event) => {
+  event.preventDefault()
+  isSubmitting.value = true
 
-  const result = await res.json()
-  if (res.ok) {
-    alert('Message sent!')
-    name.value = email.value = message.value = ''
-  } else {
-    alert(result.error || 'Error submitting form')
+  try {
+    const formData = new FormData(event.target)
+    const response = await fetch('https://formsubmit.co/sashadieryckxmgmt@gmail.com', {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (response.ok) {
+      isSubmitted.value = true
+      // Reset form after success
+      name.value = ''
+      number.value = ''
+      email.value = ''
+      message.value = ''
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        isSubmitted.value = false
+      }, 5000)
+    }
+  } catch (error) {
+    console.error('Form submission error:', error)
+  } finally {
+    isSubmitting.value = false
   }
 }
 </script>
@@ -61,7 +78,16 @@ async function submitForm() {
     </div>
     <div id="divider"></div>
     <div id="form-container">
-      <form id="contact-form">
+      <!-- Success Message -->
+      <div v-if="isSubmitted" id="success-message" class="success-indicator">
+        <div class="success-content">
+          <div class="success-icon">✓</div>
+          <h3>Message sent successfully!</h3>
+          <p>Thank you for reaching out. We'll get back to you soon.</p>
+        </div>
+      </div>
+
+      <form id="contact-form" @submit="handleSubmit" :class="{ 'form-hidden': isSubmitted }">
         <div id="name-container" class="form-field">
           <input
             type="text"
@@ -94,6 +120,7 @@ async function submitForm() {
               v-model="email"
               placeholder="Email"
             />
+            <input type="text" name="_honey" style="display: none" />
           </div>
         </div>
         <div id="message-container" class="form-field">
@@ -109,7 +136,10 @@ async function submitForm() {
           </textarea>
         </div>
         <div id="submit-container">
-          <button id="submit" @click.prevent="submitForm">Send message</button>
+          <button id="submit" type="submit" :disabled="isSubmitting">
+            <span v-if="isSubmitting">Sending...</span>
+            <span v-else>Send message</span>
+          </button>
           <p>
             By submitting this form, you consent to Beug Lab storing your information for the
             purpose of responding to your inquiry. We do not offer medical advice or consultations.
@@ -249,12 +279,61 @@ async function submitForm() {
 }
 #submit:hover {
   background-color: #16161685;
-  scale: .98;
+  scale: 0.98;
+}
+#submit:disabled {
+  background-color: #16161685;
+  cursor: not-allowed;
+  scale: 1;
 }
 #submit-container p {
   line-height: 1.5em;
   color: #22222272;
   padding-top: 1.5em;
+}
+/* Success Indicator Styles */
+.success-indicator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
+}
+.success-content {
+  text-align: center;
+  color: var(--font-color-dark);
+}
+.success-icon {
+  font-size: 3em;
+  color: #22c55e;
+  margin-bottom: 0.5em;
+  display: block;
+}
+.success-content h3 {
+  font-size: 1.5em;
+  margin: 0 0 0.5em 0;
+  color: var(--font-color-dark);
+}
+.success-content p {
+  font-size: 1em;
+  margin: 0;
+  color: #22222272;
+  line-height: 1.4em;
+}
+.form-hidden {
+  display: none;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 #divider {
   width: 100%;
@@ -312,6 +391,15 @@ async function submitForm() {
     width: 100%;
     padding-left: 3em;
     padding-right: 3em;
+  }
+  .success-indicator {
+    padding: 3em;
+  }
+  .success-content h3 {
+    font-size: 1.75em;
+  }
+  .success-content p {
+    font-size: 1.1em;
   }
 }
 /* DESKTOP 1 [GLOBAL] */
@@ -399,6 +487,18 @@ async function submitForm() {
   }
   #divider {
     display: none;
+  }
+  .success-indicator {
+    padding: 4em;
+  }
+  .success-icon {
+    font-size: 4em;
+  }
+  .success-content h3 {
+    font-size: 2em;
+  }
+  .success-content p {
+    font-size: 1.2em;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */
