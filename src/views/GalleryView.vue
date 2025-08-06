@@ -7,12 +7,49 @@ const isTransitioning = ref(false)
 const touchStartX = ref(0)
 const touchEndX = ref(0)
 
-// Generate 30 placeholder images
-const images = Array.from({ length: 30 }, (_, index) => ({
+// Actual gallery images from the gallery folder
+const galleryImageNames = [
+  '20220507_190127.jpg',
+  'BioCanRx Conference.jpg',
+  'Bob K, Shawn, Stephen.jpeg',
+  'Bruno Pires Goodbye Party.jpeg',
+  'CHEO Golf Day Team.jpg',
+  'CHEO sign.jpg',
+  'CN Cycle 2022 Group Shot.jpeg',
+  'Christmas Party 2024.jpg',
+  'Daniel Spike.jpg',
+  'First time golfing_.jpg',
+  'Halloween 2021.jpg',
+  'Kyle bad swing technique.jpg',
+  'Lab Christmas Party 2022.jpg',
+  'Lab during COVID.jpeg',
+  'Lab outing.jpg',
+  'Lab photo at Tommys.jpg',
+  'Melanie Pushups.jpg',
+  'Nathalie and Shawn COVID XMAS.jpg',
+  'Noah Science Olympics.jpg',
+  'Noah and Kyle monkeying around.jpg',
+  'Noah, Shawn.jpeg',
+  'Ofosu, Zachary , Noah, Jordan.jpeg',
+  'RI Goes to a Sens Game.jpg',
+  'Shawn Bday Prank Culprits.jpg',
+  'Shawn Bday Prank Selfie.jpg',
+  'Shawn and Bob 2.jpg',
+  'Shawn and Bob 2018.jpg',
+  'Shawn teaching kids.jpg',
+  'Shawn_s New Lab Space.jpg',
+  'Shawn_s Office Prank.jpg',
+  'Team Photo 2022.jpg',
+  'Team getting organized.jpg',
+  'Tommy and Shawn Secret Service.jpg',
+  'Volleyball Winning Party.jpg'
+]
+
+const images = galleryImageNames.map((filename, index) => ({
   id: index + 1,
-  src: `https://picsum.photos/800/600?random=${index + 1}`,
-  alt: `Gallery Image ${index + 1}`,
-  title: `Research Image ${index + 1}`
+  src: new URL(`../assets/content/images/gallery/${filename}`, import.meta.url).href,
+  alt: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' '),
+  title: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' ')
 }))
 
 // Navigation functions
@@ -107,7 +144,7 @@ onUnmounted(() => {
   <div class="gallery-container main-content clickable">
     <div class="gallery-header df-pad">
       <h1>Gallery</h1>
-      <p>Explore our laboratory work and research discoveries</p>
+      <p>Beug Lab is more than just a lab; it's a community of innovators and friends!</p>
     </div>
     <div class="carousel-wrapper clickable">
       <div
@@ -139,7 +176,7 @@ onUnmounted(() => {
         <div class="image-container">
           <div
             class="image-track"
-            :style="{ transform: `translateX(-${currentImageIndex * 3.3333}%)` }"
+            :style="{ transform: `translateX(-${currentImageIndex * (100/34)}%)` }"
           >
             <div
               v-for="(image, index) in images"
@@ -262,13 +299,13 @@ onUnmounted(() => {
 
 .image-track {
   display: flex;
-  width: 3000%; /* 30 images × 100% each */
+  width: 3400%; /* 34 images × 100% each */
   height: 100%;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .image-slide {
-  flex: 0 0 calc(100% / 30); /* Each slide takes 1/30 of track width */
+  flex: 0 0 calc(100% / 34); /* Each slide takes 1/34 of track width */
   position: relative;
   height: 100%;
 }
@@ -276,7 +313,7 @@ onUnmounted(() => {
 .gallery-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit:contain;
   display: block;
 }
 
