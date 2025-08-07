@@ -188,7 +188,7 @@ onUnmounted(() => {
         </div>
         <div class="gallery-controls">
           <div class="image-counter">
-            <span>{{ currentImageIndex + 1 }} / {{ images.length }}</span>
+            <p>{{ currentImageIndex + 1 }} / {{ images.length }}</p>
           </div>
 
           <div class="control-buttons">
@@ -232,7 +232,6 @@ onUnmounted(() => {
 <style scoped>
 .gallery-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding-bottom: 2rem;
 }
 
@@ -541,8 +540,8 @@ onUnmounted(() => {
   }
 
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
   }
 }
 
