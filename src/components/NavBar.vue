@@ -82,26 +82,6 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-  // Clean up all registered cleanup functions
-  cleanupFunctions.forEach((cleanup) => {
-    if (typeof cleanup === 'function') {
-      try {
-        cleanup()
-      } catch (error) {
-        console.warn('Error during cleanup:', error)
-      }
-    }
-  })
-  cleanupFunctions = []
-
-  // Kill navbar-specific animations
-  if (animationTimeline) {
-    animationTimeline.kill()
-    animationTimeline = null
-  }
-
-  // Kill any remaining tweens on navbar elements
-  gsap.killTweensOf(['#dropdown-menu', '#logo img', '#logo h3', '#menu-button', '#navbar *'])
 })
 </script>
 

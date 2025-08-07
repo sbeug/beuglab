@@ -23,6 +23,7 @@ const sectionHeadingOne = ref('')
 const sectionTextOne = ref('')
 const sectionHeadingTwo = ref('')
 const sectionTextTwo = ref('')
+const error = ref(false)
 
 onMounted(async () => {
   try {
@@ -64,8 +65,7 @@ onMounted(async () => {
     sectionHeadingTwo.value = data.sectionHeadingTwo
     sectionTextTwo.value = data.sectionTextTwo
   } catch (error) {
-    console.error('Error fetching Dr. Beug data:', error)
-    error.value = 'Failed to load data'
+    error.value = true
   }
 })
 </script>
