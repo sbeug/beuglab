@@ -51,11 +51,6 @@ const handleSubmit = async (event) => {
 }
 </script>
 <template>
-  <div id="contact-spline">
-    <spline-viewer
-      url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
-    ></spline-viewer>
-  </div>
   <div id="contact" class="clickable df-pad">
     <div class="contact-close">
       <h2>Close</h2>

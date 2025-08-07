@@ -4,6 +4,7 @@ import { useTeamStore } from '@/stores/team.js'
 import { sanity } from '@/assets/js/sanity.js'
 import { homePageLoadAnimation } from '@/assets/js/customAnimations'
 import { gsap } from 'gsap'
+import { homeSpline, cleanupHomeSpline } from '../assets/js/spline.js'
 
 const teamStore = useTeamStore()
 
@@ -43,6 +44,8 @@ onMounted(async () => {
   } catch (error) {
     error.value = true
   }
+
+  homeSpline()
 })
 
 onBeforeUnmount(() => {
@@ -52,13 +55,11 @@ onBeforeUnmount(() => {
     homePageAnimationCleanup()
   }
 
+  // Clean up Spline WebGL resources
+  cleanupHomeSpline()
+
   if (window.dragToScrollTimeout) {
     clearTimeout(window.dragToScrollTimeout)
-  }
-
-  const splineViewer = document.getElementById('hero-spline')
-  if (splineViewer) {
-    splineViewer.remove()
   }
 
   if (window.animationFrameId) {
@@ -92,6 +93,12 @@ function scrollRight() {
 
 <template>
   <div id="main-content" class="main-content">
+    <div id="hero-spline">
+      <canvas
+        id="home-spline"
+        class="clickable"
+      ></canvas>
+    </div>
     <div id="hero-section">
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
@@ -213,7 +220,7 @@ function scrollRight() {
 }
 #hero-spline {
   z-index: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;

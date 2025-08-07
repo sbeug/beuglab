@@ -2,13 +2,14 @@
 import NavBar from './components/NavBar.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import Contact from './components/ContactForm.vue'
-import '@splinetool/viewer'
+import { appSpline, cleanupAppSpline } from './assets/js/spline.js'
 // Gsap
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 // Lenis Smooth Scroll Configuration
 import { VueLenis, useLenis } from 'lenis/vue'
+// Vue
 import { useRoute } from 'vue-router'
 import { watch, nextTick, onMounted, onUnmounted } from 'vue'
 // Meta Head
@@ -49,6 +50,8 @@ onMounted(() => {
   window.addEventListener('resize', resizeHandler)
 
   contactFormCleanup = ContactForm()
+
+  appSpline()
 })
 
 // Cleanup function
@@ -65,6 +68,9 @@ onUnmounted(() => {
   if (contactFormCleanup) {
     contactFormCleanup()
   }
+  // Clean up Spline WebGL resources
+  cleanupAppSpline()
+
   window.removeEventListener('resize', resizeHandler)
 })
 
@@ -124,7 +130,7 @@ useHead({
   ],
 })
 
-const isDesktop = window.innerWidth >= 1280
+// const isDesktop = window.innerWidth >= 1280
 const isMobile = window.innerWidth < 1280
 </script>
 <template>
@@ -145,19 +151,12 @@ const isMobile = window.innerWidth < 1280
   >
     <div id="app">
       <div id="spline">
-        <spline-viewer
-          v-if="isDesktop && route.path !== '/'"
-          url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
-        ></spline-viewer>
-        <spline-viewer
+        <canvas
+          id="app-spline"
+        ></canvas>
+        <canvas
           v-if="isMobile && route.path !== '/'"
-          url="https://prod.spline.design/5juh0jQl2H6O6EIE/scene.splinecode"
-        ></spline-viewer>
-        <spline-viewer
-          v-if="route.path === '/'"
-          url="https://prod.spline.design/FCbn4L9mentHyEzd/scene.splinecode"
-          id="hero-spline"
-        ></spline-viewer>
+        ></canvas>
       </div>
       <header>
         <NavBar />
