@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeUnmount, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { gsap } from 'gsap'
 
@@ -12,6 +12,7 @@ let aboutSubmenuTimeline = null
 let eventHandlers = []
 let subMenuTimelines = new Map()
 let isInitialized = false
+let hasPlayedEntranceAnimation = false
 
 // Utility function to safely add event listeners
 function addEventHandler(element, event, handler, options = {}) {
@@ -22,63 +23,92 @@ function addEventHandler(element, event, handler, options = {}) {
 }
 
 // Cleanup function
-function cleanupAnimations() {
-  // Remove all event listeners
-  eventHandlers.forEach(({ element, event, handler }) => {
-    try {
-      if (element && typeof element.removeEventListener === 'function') {
-        element.removeEventListener(event, handler)
+function cleanupAnimations(allowDropdownReverse = false) {
+  return new Promise((resolve) => {
+    // If dropdown is open and we want to allow it to reverse, do that first
+    if (allowDropdownReverse && dropdownTimeline && !dropdownTimeline.reversed()) {
+      // Set up a one-time complete handler
+      const handleComplete = () => {
+        dropdownTimeline.eventCallback('onReverseComplete', null)
+        performCleanup()
+        resolve()
       }
-    } catch (error) {
-      console.warn('Error removing event listener:', error)
+
+      dropdownTimeline.eventCallback('onReverseComplete', handleComplete)
+      dropdownTimeline.reverse()
+    } else {
+      performCleanup()
+      resolve()
+    }
+
+    function performCleanup() {
+      // Remove all event listeners
+      eventHandlers.forEach(({ element, event, handler }) => {
+        try {
+          if (element && typeof element.removeEventListener === 'function') {
+            element.removeEventListener(event, handler)
+          }
+        } catch (error) {
+          console.warn('Error removing event listener:', error)
+        }
+      })
+      eventHandlers = []
+
+      // Kill all timelines
+      if (animationTimeline) {
+        animationTimeline.kill()
+        animationTimeline = null
+      }
+      if (dropdownTimeline) {
+        dropdownTimeline.kill()
+        dropdownTimeline = null
+      }
+      if (aboutSubmenuTimeline) {
+        aboutSubmenuTimeline.kill()
+        aboutSubmenuTimeline = null
+      }
+
+      // Kill submenu timelines
+      subMenuTimelines.forEach((timeline) => timeline.kill())
+      subMenuTimelines.clear()
+
+      // Kill any remaining tweens on navbar elements specifically
+      gsap.killTweensOf([
+        '#dropdown-menu',
+        '#logo img',
+        '#logo h3',
+        '#menu-button',
+        '.line',
+        '.menu-underline',
+      ])
+
+      isInitialized = false
     }
   })
-  eventHandlers = []
-
-  // Kill all timelines
-  if (animationTimeline) {
-    animationTimeline.kill()
-    animationTimeline = null
-  }
-  if (dropdownTimeline) {
-    dropdownTimeline.kill()
-    dropdownTimeline = null
-  }
-  if (aboutSubmenuTimeline) {
-    aboutSubmenuTimeline.kill()
-    aboutSubmenuTimeline = null
-  }
-
-  // Kill submenu timelines
-  subMenuTimelines.forEach((timeline) => timeline.kill())
-  subMenuTimelines.clear()
-
-  // Kill any remaining tweens on navbar elements specifically
-  gsap.killTweensOf([
-    '#dropdown-menu',
-    '#logo img',
-    '#logo h3',
-    '#menu-button',
-    '.line',
-    '.menu-underline',
-  ])
-
-  isInitialized = false
 }
 
 // Initialize all animations
-function initializeAnimations() {
+async function initializeAnimations(isFirstLoad = false) {
   if (isInitialized) {
-    cleanupAnimations()
+    await cleanupAnimations(true) // Allow dropdown to reverse before cleanup
   }
 
   try {
-    // Initialize navbar animations only
+    // Initialize navbar animations
     initDropdownMenu()
     initMobileSubmenus()
     initDesktopSubmenu()
     initMenuUnderlines()
+
+    // Always call initEntranceAnimation to ensure elements are visible
+    // It will only play the animation on first load
     initEntranceAnimation()
+
+    // Mark entrance animation as played on first load
+    if (isFirstLoad) {
+      hasPlayedEntranceAnimation = true
+    }
+
     isInitialized = true
   } catch (error) {
     console.warn('Error initializing navbar animations:', error)
@@ -168,13 +198,13 @@ function initDropdownMenu() {
       return // Let the button handler manage this
     }
 
-    // Check if click is on menu links (close menu when navigating)
+    // Check if click is on menu links (DON'T close menu here - let route watcher handle it)
     if (
       (target.matches('.menu-link-2') || target.matches('.sub-link')) &&
       dropdownTimeline &&
       !dropdownTimeline.reversed()
     ) {
-      dropdownTimeline.reverse()
+      // Don't reverse here - let the route watcher handle the graceful cleanup
       return
     }
 
@@ -344,51 +374,65 @@ function initEntranceAnimation() {
   const logoH3 = document.querySelector('#logo h3')
   const menuButton = document.querySelector('#menu-button')
 
-  animationTimeline = gsap.timeline()
-
+  // First ensure elements are visible by default
   if (logoImg) {
-    animationTimeline.from(
-      logoImg,
-      {
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.inOut',
-      },
-      0,
-    )
+    gsap.set(logoImg, { opacity: 1 })
   }
-
   if (logoH3) {
-    animationTimeline.from(
-      logoH3,
-      {
-        opacity: 0,
-        duration: 1,
-        delay: 0.25,
-        ease: 'power2.inOut',
-      },
-      0,
-    )
+    gsap.set(logoH3, { opacity: 1 })
+  }
+  if (menuButton) {
+    gsap.set(menuButton, { opacity: 1 })
   }
 
-  if (menuButton) {
-    animationTimeline.from(
-      menuButton,
-      {
-        opacity: 0,
-        duration: 1,
-        delay: 1,
-        ease: 'power2.inOut',
-      },
-      0,
-    )
+  // Only play entrance animation if we haven't played it yet
+  if (!hasPlayedEntranceAnimation) {
+    animationTimeline = gsap.timeline()
+
+    if (logoImg) {
+      animationTimeline.from(
+        logoImg,
+        {
+          opacity: 0,
+          duration: 1,
+          ease: 'power2.inOut',
+        },
+        0,
+      )
+    }
+
+    if (logoH3) {
+      animationTimeline.from(
+        logoH3,
+        {
+          opacity: 0,
+          duration: 1,
+          delay: 0.25,
+          ease: 'power2.inOut',
+        },
+        0,
+      )
+    }
+
+    if (menuButton) {
+      animationTimeline.from(
+        menuButton,
+        {
+          opacity: 0,
+          duration: 1,
+          delay: 1,
+          ease: 'power2.inOut',
+        },
+        0,
+      )
+    }
   }
 }
 
 onMounted(() => {
   // Small delay to ensure all elements are rendered
-  setTimeout(() => {
-    initializeAnimations()
+  setTimeout(async () => {
+    await initializeAnimations(true) // Pass true for first load
   }, 100)
 })
 
@@ -397,11 +441,11 @@ watch(
   () => route.path,
   () => {
     // Reinitialize after a small delay to let the new route render
-    setTimeout(() => {
+    setTimeout(async () => {
       if (isInitialized) {
-        // Refresh navbar animations if needed
+        // Refresh navbar animations if needed (but not entrance animation)
         try {
-          initializeAnimations()
+          await initializeAnimations(false) // Pass false for route changes
         } catch (error) {
           console.warn('Error reinitializing navbar on route change:', error)
         }
@@ -409,10 +453,6 @@ watch(
     }, 100)
   },
 )
-
-onBeforeUnmount(() => {
-  cleanupAnimations()
-})
 </script>
 
 <template>
