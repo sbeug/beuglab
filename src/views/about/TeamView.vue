@@ -256,7 +256,7 @@ onBeforeUnmount(() => {
 /* DESKTOP 3 [GLOBAL] */
 @media (min-width: 1728px) {
   #side-bar {
-    transform: translate(2%, -4%);
+    transform: translate(2%, -8%);
   }
   .alumni-heading {
     font-size: 8em;
