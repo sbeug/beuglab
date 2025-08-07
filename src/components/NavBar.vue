@@ -1,87 +1,417 @@
 <script setup>
-import { onMounted, onBeforeUnmount, nextTick } from 'vue'
-import {
-  DropDownMenuAnimation,
-  subMenuDrop,
-  DesktopSubmenuAnimation,
-  menuUnderline,
-} from '@/assets/js/customAnimations'
+import { onMounted, onBeforeUnmount, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { gsap } from 'gsap'
 
-let cleanupFunctions = []
+const route = useRoute()
+
+// Store timelines and handlers for proper cleanup
 let animationTimeline = null
+let dropdownTimeline = null
+let aboutSubmenuTimeline = null
+let eventHandlers = []
+let subMenuTimelines = new Map()
+let isInitialized = false
 
-onMounted(async () => {
-  // Wait for DOM elements to be available
-  await nextTick()
+// Utility function to safely add event listeners
+function addEventHandler(element, event, handler, options = {}) {
+  if (element && typeof handler === 'function') {
+    element.addEventListener(event, handler, options)
+    eventHandlers.push({ element, event, handler })
+  }
+}
 
-  // Small delay to ensure all elements are rendered
-  setTimeout(() => {
-    // Kill any existing animations on navbar elements first
-    gsap.killTweensOf(['#dropdown-menu', '#logo img', '#logo h3', '#menu-button'])
-
-    // Initialize animations with proper error handling
+// Cleanup function
+function cleanupAnimations() {
+  // Remove all event listeners
+  eventHandlers.forEach(({ element, event, handler }) => {
     try {
-      const dropdownCleanup = DropDownMenuAnimation()
-      if (dropdownCleanup) cleanupFunctions.push(dropdownCleanup)
-
-      const subMenuCleanup = subMenuDrop()
-      if (subMenuCleanup) cleanupFunctions.push(subMenuCleanup)
-
-      const desktopSubmenuCleanup = DesktopSubmenuAnimation()
-      if (desktopSubmenuCleanup) cleanupFunctions.push(desktopSubmenuCleanup)
-
-      const underlineCleanup = menuUnderline()
-      if (underlineCleanup) cleanupFunctions.push(underlineCleanup)
+      if (element && typeof element.removeEventListener === 'function') {
+        element.removeEventListener(event, handler)
+      }
     } catch (error) {
-      console.warn('Error initializing navbar animations:', error)
+      console.warn('Error removing event listener:', error)
+    }
+  })
+  eventHandlers = []
+
+  // Kill all timelines
+  if (animationTimeline) {
+    animationTimeline.kill()
+    animationTimeline = null
+  }
+  if (dropdownTimeline) {
+    dropdownTimeline.kill()
+    dropdownTimeline = null
+  }
+  if (aboutSubmenuTimeline) {
+    aboutSubmenuTimeline.kill()
+    aboutSubmenuTimeline = null
+  }
+
+  // Kill submenu timelines
+  subMenuTimelines.forEach((timeline) => timeline.kill())
+  subMenuTimelines.clear()
+
+  // Kill any remaining tweens on navbar elements specifically
+  gsap.killTweensOf([
+    '#dropdown-menu',
+    '#logo img',
+    '#logo h3',
+    '#menu-button',
+    '.line',
+    '.menu-underline',
+  ])
+
+  isInitialized = false
+}
+
+// Initialize all animations
+function initializeAnimations() {
+  if (isInitialized) {
+    cleanupAnimations()
+  }
+
+  try {
+    // Initialize navbar animations only
+    initDropdownMenu()
+    initMobileSubmenus()
+    initDesktopSubmenu()
+    initMenuUnderlines()
+    initEntranceAnimation()
+    isInitialized = true
+  } catch (error) {
+    console.warn('Error initializing navbar animations:', error)
+  }
+}
+
+// Initialize dropdown menu animation
+function initDropdownMenu() {
+  const dropdownMenu = document.querySelector('#dropdown-menu')
+  const lineOne = document.querySelector('#line-one')
+  const lineTwo = document.querySelector('#line-two')
+  const menuItems = document.querySelectorAll('#menu-list ul li')
+  const menuButton = document.querySelector('#menu-button')
+
+  if (!dropdownMenu || !lineOne || !lineTwo || !menuButton) {
+    console.warn('Dropdown menu elements not found, skipping initialization')
+    return
+  }
+
+  // Set initial states
+  gsap.set([lineOne, lineTwo], {
+    transformOrigin: 'center center',
+    force3D: true,
+  })
+
+  gsap.set(dropdownMenu, {
+    visibility: 'hidden',
+    xPercent: 100,
+    opacity: 0,
+    force3D: true,
+  })
+
+  if (menuItems.length > 0) {
+    gsap.set(menuItems, {
+      y: 50,
+      opacity: 0,
+      force3D: true,
+    })
+  }
+
+  // Create dropdown timeline
+  dropdownTimeline = gsap.timeline({
+    paused: true,
+    onStart: () => {
+      document.body.style.overflow = 'hidden'
+    },
+    onReverseComplete: () => {
+      document.body.style.overflow = ''
+      const menu = document.querySelector('#dropdown-menu')
+      if (menu) gsap.set(menu, { visibility: 'hidden' })
+    },
+  })
+
+  dropdownTimeline
+    .set(dropdownMenu, { visibility: 'visible' }, 0)
+    .to(dropdownMenu, { opacity: 1, duration: 0.1, ease: 'power2.out' }, 0)
+    .to([lineOne, lineTwo], { duration: 0.3, ease: 'power2.out' }, 0)
+    .to(lineOne, { rotation: 45, y: 6, duration: 0.3, ease: 'power2.out' }, 0)
+    .to(lineTwo, { rotation: -45, y: -6, duration: 0.3, ease: 'power2.out' }, 0)
+    .to(dropdownMenu, { xPercent: 0, ease: 'power3.inOut', duration: 0.6 }, 0.1)
+
+  if (menuItems.length > 0) {
+    dropdownTimeline.to(
+      menuItems,
+      { y: 0, opacity: 1, stagger: 0.08, ease: 'power2.out', duration: 0.4 },
+      0.5,
+    )
+  }
+
+  dropdownTimeline.reverse()
+
+  // Menu button click handler
+  const handleMenuButtonClick = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    if (dropdownTimeline) {
+      dropdownTimeline.reversed(!dropdownTimeline.reversed())
+    }
+  }
+
+  // Document click handler for closing menu and handling navigation
+  const handleDocumentClick = (event) => {
+    const target = event.target
+
+    // Check if click is on menu button or its children - let the button handler handle this
+    if (target.closest('#menu-button')) {
+      return // Let the button handler manage this
     }
 
-    // Set initial states with error handling
-    const dropdownMenu = document.querySelector('#dropdown-menu')
-    if (dropdownMenu) {
-      gsap.set(dropdownMenu, {
-        visibility: 'hidden',
-        xPercent: 100,
+    // Check if click is on menu links (close menu when navigating)
+    if (
+      (target.matches('.menu-link-2') || target.matches('.sub-link')) &&
+      dropdownTimeline &&
+      !dropdownTimeline.reversed()
+    ) {
+      dropdownTimeline.reverse()
+      return
+    }
+
+    // Close menu if clicking outside when open
+    if (dropdownTimeline && !dropdownTimeline.reversed() && !target.closest('#dropdown-menu')) {
+      dropdownTimeline.reverse()
+    }
+  }
+
+  addEventHandler(menuButton, 'click', handleMenuButtonClick)
+  addEventHandler(document, 'click', handleDocumentClick)
+}
+
+// Initialize mobile submenus
+function initMobileSubmenus() {
+  const toggles = document.querySelectorAll('.sub-toggle')
+
+  toggles.forEach((toggle) => {
+    const subMenu = toggle.querySelector('.sub-list')
+    const arrow = toggle.querySelector('.nav-arrow')
+
+    if (!subMenu) return
+
+    // Set initial state
+    gsap.set(subMenu, {
+      height: 0,
+      opacity: 0,
+      overflow: 'hidden',
+      display: 'none',
+      force3D: true,
+    })
+
+    if (arrow) {
+      gsap.set(arrow, {
+        rotation: 0,
+        transformOrigin: 'center center',
+        force3D: true,
       })
     }
 
-    // Create entrance animation timeline
-    animationTimeline = gsap.timeline()
+    // Create timeline
+    const subMenuTl = gsap.timeline({ paused: true })
 
-    const logoImg = document.querySelector('#logo img')
-    const logoH3 = document.querySelector('#logo h3')
-    const menuButton = document.querySelector('#menu-button')
+    subMenuTl
+      .set(subMenu, { display: 'flex' }, 0)
+      .to(subMenu, { height: 'auto', duration: 0.4, ease: 'power2.out' }, 0)
+      .to(subMenu, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.1)
 
-    if (logoImg) {
-      animationTimeline.from(logoImg, {
+    if (arrow) {
+      subMenuTl.to(arrow, { rotation: 90, duration: 0.4, ease: 'power2.out' }, 0)
+    }
+
+    subMenuTl.reverse()
+    subMenuTimelines.set(toggle, subMenuTl)
+
+    const clickHandler = (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+      subMenuTl.reversed() ? subMenuTl.play() : subMenuTl.reverse()
+    }
+
+    addEventHandler(toggle, 'click', clickHandler)
+  })
+}
+
+// Initialize desktop submenu
+function initDesktopSubmenu() {
+  const aboutLinkElement = document.querySelector('#menu-link-about')
+  const aboutSubmenu = document.querySelector('.sub-menu-about')
+
+  if (!aboutLinkElement || !aboutSubmenu) {
+    return
+  }
+
+  gsap.set(aboutSubmenu, {
+    opacity: 0,
+    visibility: 'hidden',
+    y: -10,
+    display: 'flex',
+  })
+
+  aboutSubmenuTimeline = gsap.timeline({ paused: true })
+
+  aboutSubmenuTimeline
+    .to(aboutSubmenu, {
+      opacity: 1,
+      visibility: 'visible',
+      y: 0,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
+    .to(
+      aboutSubmenu.querySelectorAll('li'),
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      '-=0.15',
+    )
+
+  let hoverTimeout = null
+
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      hoverTimeout = null
+    }
+    aboutSubmenuTimeline.play()
+  }
+
+  const handleMouseLeave = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout)
+    hoverTimeout = setTimeout(() => {
+      aboutSubmenuTimeline.reverse()
+    }, 150)
+  }
+
+  addEventHandler(aboutLinkElement, 'mouseenter', handleMouseEnter)
+  addEventHandler(aboutLinkElement, 'mouseleave', handleMouseLeave)
+  addEventHandler(aboutSubmenu, 'mouseenter', handleMouseEnter)
+  addEventHandler(aboutSubmenu, 'mouseleave', handleMouseLeave)
+}
+
+// Initialize menu underlines
+function initMenuUnderlines() {
+  const underLineWrappers = document.querySelectorAll('#menu li')
+
+  underLineWrappers.forEach((el) => {
+    const underline = el.querySelector('.menu-underline')
+
+    if (underline) {
+      const mouseEnter = () => {
+        gsap.to(underline, {
+          width: '100%',
+          duration: 0.5,
+          ease: 'power4.out',
+        })
+      }
+
+      const mouseLeave = () => {
+        gsap.to(underline, {
+          width: '100%',
+          duration: 0.5,
+          x: '110%',
+          ease: 'power4.out',
+          onComplete: () => {
+            gsap.set(underline, {
+              x: '0%',
+              width: '0%',
+            })
+          },
+        })
+      }
+
+      addEventHandler(el, 'mouseenter', mouseEnter)
+      addEventHandler(el, 'mouseleave', mouseLeave)
+    }
+  })
+}
+
+// Initialize entrance animation
+function initEntranceAnimation() {
+  const logoImg = document.querySelector('#logo img')
+  const logoH3 = document.querySelector('#logo h3')
+  const menuButton = document.querySelector('#menu-button')
+
+  animationTimeline = gsap.timeline()
+
+  if (logoImg) {
+    animationTimeline.from(
+      logoImg,
+      {
         opacity: 0,
         duration: 1,
         ease: 'power2.inOut',
-      }, 0)
-    }
+      },
+      0,
+    )
+  }
 
-    if (logoH3) {
-      animationTimeline.from(logoH3, {
+  if (logoH3) {
+    animationTimeline.from(
+      logoH3,
+      {
         opacity: 0,
         duration: 1,
         delay: 0.25,
         ease: 'power2.inOut',
-      }, 0)
-    }
+      },
+      0,
+    )
+  }
 
-    if (menuButton) {
-      animationTimeline.from(menuButton, {
+  if (menuButton) {
+    animationTimeline.from(
+      menuButton,
+      {
         opacity: 0,
         duration: 1,
         delay: 1,
         ease: 'power2.inOut',
-      }, 0)
-    }
+      },
+      0,
+    )
+  }
+}
+
+onMounted(() => {
+  // Small delay to ensure all elements are rendered
+  setTimeout(() => {
+    initializeAnimations()
   }, 100)
 })
 
+// Watch for route changes and reinitialize if needed
+watch(
+  () => route.path,
+  () => {
+    // Reinitialize after a small delay to let the new route render
+    setTimeout(() => {
+      if (isInitialized) {
+        // Refresh navbar animations if needed
+        try {
+          initializeAnimations()
+        } catch (error) {
+          console.warn('Error reinitializing navbar on route change:', error)
+        }
+      }
+    }, 100)
+  },
+)
+
 onBeforeUnmount(() => {
+  cleanupAnimations()
 })
 </script>
 
@@ -471,7 +801,7 @@ a {
     justify-content: space-between;
     align-items: center;
   }
-   #menu li {
+  #menu li {
     margin: 0;
     text-align: center;
   }

@@ -193,12 +193,7 @@ export function DropDownMenuAnimation() {
     }
   }
 
-  // Prevent touch scrolling only on the dropdown menu when it's open
   const handleTouchMove = function (event) {
-    // Only prevent default if:
-    // 1. The dropdown menu is open (!dropDownTimeline.reversed())
-    // 2. The touch is happening within the dropdown menu OR
-    // 3. The touch is on the body (to prevent background scrolling)
     const isDropdownOpen = !dropDownTimeline.reversed()
     const isOnDropdown = event.target.closest('#dropdown-menu')
     const isOnBody = event.target === document.body || event.target === document.documentElement
@@ -208,7 +203,6 @@ export function DropDownMenuAnimation() {
     }
   }
 
-  // Add single event listener with delegation
   document.addEventListener('click', handleClick, { passive: false })
   document.addEventListener('touchmove', handleTouchMove, { passive: false })
 
@@ -216,34 +210,21 @@ export function DropDownMenuAnimation() {
     { type: 'click', handler: handleClick },
     { type: 'touchmove', handler: handleTouchMove },
   )
-
-  return () => {
-    handlers.forEach(({ type, handler }) => {
-      document.removeEventListener(type, handler)
-    })
-    // Ensure body scroll is re-enabled on cleanup
-    document.body.style.overflow = ''
-    if (dropDownTimeline) {
-      dropDownTimeline.kill()
-    }
-  }
 }
 
 export function subMenuDrop() {
-  const handlers = []
   const toggles = document.querySelectorAll('.sub-toggle')
 
   toggles.forEach((toggle) => {
-    let isOpen = false
     const subMenu = toggle.querySelector('.sub-list')
     const arrow = toggle.querySelector('.nav-arrow')
 
     if (!subMenu) return
 
-    // Kill any existing tweens on these elements
+    // Kill any existing tweens
     gsap.killTweensOf([subMenu, arrow])
 
-    // Set initial state with hardware acceleration
+    // Set initial state
     gsap.set(subMenu, {
       height: 0,
       opacity: 0,
@@ -260,23 +241,11 @@ export function subMenuDrop() {
       })
     }
 
-    const subMenuTl = gsap.timeline({
-      paused: true,
-      onReverseComplete: () => {
-        // Hide the submenu completely when reverse animation completes
-        gsap.set(subMenu, { display: 'none' })
-      },
-    })
+    // Create timeline
+    const subMenuTl = gsap.timeline({ paused: true })
 
-    // Optimized animation with better performance
     subMenuTl
-      .set(
-        subMenu,
-        {
-          display: 'flex',
-        },
-        0,
-      )
+      .set(subMenu, { display: 'flex' }, 0)
       .to(
         subMenu,
         {
@@ -308,53 +277,52 @@ export function subMenuDrop() {
       )
     }
 
+    // Initialize timeline in reversed state (closed)
+    subMenuTl.reverse()
+
+    // Simple click handler - just toggle the timeline
     const clickHandler = (event) => {
       event.preventDefault()
       event.stopPropagation()
 
-      if (isOpen) {
-        subMenuTl.reverse()
-      } else {
+      // Toggle the timeline direction
+      if (subMenuTl.reversed()) {
         subMenuTl.play()
+      } else {
+        subMenuTl.reverse()
       }
-      isOpen = !isOpen
     }
 
-    // Remove any existing listeners first
-    toggle.removeEventListener('click', clickHandler)
-    toggle.addEventListener('click', clickHandler, { passive: false })
+    // Store timeline on element for access
+    toggle._timeline = subMenuTl
 
-    handlers.push({
-      element: toggle,
-      type: 'click',
-      handler: clickHandler,
-      timeline: subMenuTl
-    })
+    // Add event listener
+    toggle.addEventListener('click', clickHandler, { passive: false })
   })
 
-  // Return cleanup function
-  return () => {
-    handlers.forEach(({ element, type, handler, timeline }) => {
-      if (element && handler) {
-        element.removeEventListener(type, handler)
-      }
-      if (timeline) {
-        timeline.kill()
-      }
-    })
-  }
+  // No cleanup function returned since nav is always mounted
 }
 
 export function DesktopSubmenuAnimation() {
-  const handlers = []
-  let aboutSubmenuTimeline = null
-
   // For the About submenu in desktop nav
   const aboutLinkElement = document.querySelector('#menu-link-about')
   const aboutSubmenu = document.querySelector('.sub-menu-about')
 
   if (!aboutLinkElement || !aboutSubmenu) {
-    return () => {} // Return empty cleanup if elements don't exist
+    return // Exit early if elements don't exist
+  }
+
+  // Clear any existing event listeners to prevent duplicates
+  const existingHandlers = aboutLinkElement._desktopSubmenuHandlers
+  if (existingHandlers) {
+    existingHandlers.forEach(({ element, type, handler }) => {
+      element.removeEventListener(type, handler)
+    })
+  }
+
+  // Kill any existing timeline
+  if (aboutLinkElement._aboutTimeline) {
+    aboutLinkElement._aboutTimeline.kill()
   }
 
   gsap.set(aboutSubmenu, {
@@ -364,7 +332,7 @@ export function DesktopSubmenuAnimation() {
     display: 'flex',
   })
 
-  aboutSubmenuTimeline = gsap.timeline({ paused: true })
+  const aboutSubmenuTimeline = gsap.timeline({ paused: true })
 
   aboutSubmenuTimeline
     .to(aboutSubmenu, {
@@ -386,12 +354,10 @@ export function DesktopSubmenuAnimation() {
       '-=0.15',
     )
 
-  // Create a flag to track if we're hovering over either element
-  let isMenuHovered = false
+  // Simple hover handlers
   let hoverTimeout = null
 
   const handleMouseEnter = () => {
-    isMenuHovered = true
     if (hoverTimeout) {
       clearTimeout(hoverTimeout)
       hoverTimeout = null
@@ -400,17 +366,13 @@ export function DesktopSubmenuAnimation() {
   }
 
   const handleMouseLeave = () => {
-    isMenuHovered = false
     if (hoverTimeout) clearTimeout(hoverTimeout)
     hoverTimeout = setTimeout(() => {
-      if (!isMenuHovered) {
-        aboutSubmenuTimeline.reverse()
-      }
+      aboutSubmenuTimeline.reverse()
     }, 150)
   }
 
   const handleSubmenuEnter = () => {
-    isMenuHovered = true
     if (hoverTimeout) {
       clearTimeout(hoverTimeout)
       hoverTimeout = null
@@ -418,41 +380,28 @@ export function DesktopSubmenuAnimation() {
   }
 
   const handleSubmenuLeave = () => {
-    isMenuHovered = false
     if (hoverTimeout) clearTimeout(hoverTimeout)
     hoverTimeout = setTimeout(() => {
-      if (!isMenuHovered) {
-        aboutSubmenuTimeline.reverse()
-      }
+      aboutSubmenuTimeline.reverse()
     }, 150)
   }
 
+  // Add event listeners
   aboutLinkElement.addEventListener('mouseenter', handleMouseEnter)
   aboutLinkElement.addEventListener('mouseleave', handleMouseLeave)
   aboutSubmenu.addEventListener('mouseenter', handleSubmenuEnter)
   aboutSubmenu.addEventListener('mouseleave', handleSubmenuLeave)
 
-  handlers.push(
+  // Store handlers and timeline for cleanup on next initialization
+  aboutLinkElement._desktopSubmenuHandlers = [
     { element: aboutLinkElement, type: 'mouseenter', handler: handleMouseEnter },
     { element: aboutLinkElement, type: 'mouseleave', handler: handleMouseLeave },
     { element: aboutSubmenu, type: 'mouseenter', handler: handleSubmenuEnter },
-    { element: aboutSubmenu, type: 'mouseleave', handler: handleSubmenuLeave }
-  )
+    { element: aboutSubmenu, type: 'mouseleave', handler: handleSubmenuLeave },
+  ]
+  aboutLinkElement._aboutTimeline = aboutSubmenuTimeline
 
-  // Return proper cleanup function
-  return () => {
-    handlers.forEach(({ element, type, handler }) => {
-      if (element && handler) {
-        element.removeEventListener(type, handler)
-      }
-    })
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout)
-    }
-    if (aboutSubmenuTimeline) {
-      aboutSubmenuTimeline.kill()
-    }
-  }
+  // No cleanup function returned since nav is always mounted
 }
 
 export function subMenuHover(menuSelector = '.sub-drop') {
@@ -570,12 +519,7 @@ export function menuUnderline() {
     }
   })
 
-  // Return cleanup function
-  return () => {
-    handlers.forEach(({ element, type, handler }) => {
-      element.removeEventListener(type, handler)
-    })
-  }
+  // No cleanup function returned since nav is always mounted
 }
 
 export function teamViewAnimations() {
@@ -684,124 +628,124 @@ export function teamViewAnimations() {
 }
 
 export function ContactForm() {
-  const handlers = []
-  const contactOpen = document.querySelectorAll('.contact-open')
   const contactContainer = document.querySelector('#contact-container')
   const contactWrapper = document.querySelector('#contact-wrapper')
-  const contactClose = document.querySelector('.contact-close')
 
-  const contactTimeline = new gsap.timeline({
-    paused: true,
-    duration: 1,
-  })
-  contactTimeline.set(
-    contactWrapper,
-    {
-      visibility: 'visible',
-    },
-    0,
-  )
-  contactTimeline.to(
-    contactWrapper,
-    {
-      height: '100vh',
-      ease: 'power4.out',
-      duration: 1.5,
-    },
-    0,
-  )
-  contactTimeline.to(
-    '#contact-spline',
-    {
-      opacity: '100%',
-      ease: 'power1.out',
-      duration: 1,
-    },
-    0.25,
-  )
-  contactTimeline.to(
-    '.contact-close',
-    {
-      opacity: '100%',
-      yPercent: 0,
-      ease: 'power3.out',
-      duration: 0.5,
-    },
-    0.25,
-  )
-  contactTimeline.to(
-    '#contact-form-header',
-    {
-      opacity: '100%',
-      yPercent: 0,
-      ease: 'power3.out',
-      duration: 1,
-    },
-    0.5,
-  )
-  contactTimeline.to(
-    '#description',
-    {
-      opacity: '100%',
-      ease: 'power3.out',
-      duration: 1,
-    },
-    0.75,
-  )
-  contactTimeline.to(
-    '#local',
-    {
-      opacity: '100%',
-      ease: 'power3.out',
-      duration: 1,
-    },
-    1,
-  )
-  contactTimeline.to(
-    '#contact-form',
-    {
-      opacity: '100%',
-      ease: 'power3.out',
-      duration: 1,
-    },
-    1.25,
-  )
-
-  // Handle existing .contact-open elements
-  contactOpen.forEach((el) => {
-    const openHandler = () => {
-      contactTimeline.play()
-      contactContainer.style.pointerEvents = 'auto'
-    }
-    el.addEventListener('click', openHandler)
-    handlers.push({ element: el, type: 'click', handler: openHandler })
-  })
-
-  // Use event delegation to handle both .open-contact and any future .contact-open elements
-  const delegateHandler = (e) => {
-    if (e.target.closest('.open-contact') || e.target.closest('.contact-open')) {
-      contactTimeline.play()
-      contactContainer.style.pointerEvents = 'auto'
-    }
-  }
-  document.addEventListener('click', delegateHandler)
-  handlers.push({ element: document, type: 'click', handler: delegateHandler })
-
-  const closeHandler = () => {
-    contactTimeline.reverse()
-    contactContainer.style.pointerEvents = 'none'
+  if (!contactContainer || !contactWrapper) {
+    return // Exit early if elements don't exist
   }
 
-  if (contactClose) {
-    contactClose.addEventListener('click', closeHandler)
-    handlers.push({ element: contactClose, type: 'click', handler: closeHandler })
-  }
-
-  // Return cleanup function
-  return () => {
-    handlers.forEach(({ element, type, handler }) => {
+  // Clear any existing event listeners to prevent duplicates
+  const existingHandlers = document._contactHandlers
+  if (existingHandlers) {
+    existingHandlers.forEach(({ element, type, handler }) => {
       element.removeEventListener(type, handler)
     })
-    contactTimeline.kill()
   }
+
+  // Kill any existing timeline
+  if (document._contactTimeline) {
+    document._contactTimeline.kill()
+  }
+
+  // Reset contact container to initial state
+  gsap.set(contactContainer, {
+    pointerEvents: 'none',
+  })
+
+  gsap.set(contactWrapper, {
+    visibility: 'hidden',
+    height: '0vh',
+  })
+
+  const contactTimeline = gsap.timeline({ paused: true })
+
+  contactTimeline
+    .set(contactWrapper, { visibility: 'visible' }, 0)
+    .to(
+      contactWrapper,
+      {
+        height: '100vh',
+        ease: 'power4.out',
+        duration: 1.5,
+      },
+      0,
+    )
+    .to(
+      '.contact-close',
+      {
+        opacity: '100%',
+        yPercent: 0,
+        ease: 'power3.out',
+        duration: 0.5,
+      },
+      0.25,
+    )
+    .to(
+      '#contact-form-header',
+      {
+        opacity: '100%',
+        yPercent: 0,
+        ease: 'power3.out',
+        duration: 1,
+      },
+      0.5,
+    )
+    .to(
+      '#description',
+      {
+        opacity: '100%',
+        ease: 'power3.out',
+        duration: 1,
+      },
+      0.75,
+    )
+    .to(
+      '#local',
+      {
+        opacity: '100%',
+        ease: 'power3.out',
+        duration: 1,
+      },
+      1,
+    )
+    .to(
+      '#contact-form',
+      {
+        opacity: '100%',
+        ease: 'power3.out',
+        duration: 1,
+      },
+      1.25,
+    )
+
+  const clickHandler = (e) => {
+    // Check if clicking on close button
+    if (e.target.closest('.contact-close')) {
+      e.preventDefault()
+      e.stopPropagation()
+      contactTimeline.reverse()
+      contactContainer.style.pointerEvents = 'none'
+      return
+    }
+
+    // Check if clicking on contact open button
+    const contactTrigger = e.target.closest('.contact-open') || e.target.closest('.open-contact')
+    if (contactTrigger) {
+      e.preventDefault()
+      e.stopPropagation()
+      contactTimeline.play()
+      contactContainer.style.pointerEvents = 'auto'
+      return
+    }
+  }
+
+  // Single event listener for all contact interactions
+  document.addEventListener('click', clickHandler, { passive: false })
+
+  // Store handlers and timeline for cleanup on next initialization
+  document._contactHandlers = [{ element: document, type: 'click', handler: clickHandler }]
+  document._contactTimeline = contactTimeline
+
+  // No cleanup function returned since nav is always mounted
 }

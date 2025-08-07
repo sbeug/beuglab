@@ -49,6 +49,7 @@ onMounted(() => {
 
   window.addEventListener('resize', resizeHandler)
 
+  // Initialize contact form animation
   contactFormCleanup = ContactForm()
 
   appSpline()
@@ -151,12 +152,8 @@ const isMobile = window.innerWidth < 1280
   >
     <div id="app">
       <div id="spline">
-        <canvas
-          id="app-spline"
-        ></canvas>
-        <canvas
-          v-if="isMobile && route.path !== '/'"
-        ></canvas>
+        <canvas id="app-spline"></canvas>
+        <canvas v-if="isMobile && route.path !== '/'"></canvas>
       </div>
       <header>
         <NavBar />
