@@ -71,22 +71,27 @@ onUnmounted(() => {
 const route = useRoute()
 watch(
   () => route.path,
-  async () => {
+  async (newPath, oldPath) => {
     await nextTick()
-    setTimeout(() => {
-      window.scrollTo(0, 0)
+
+    // Only scroll to top if it's actually a different route
+    if (newPath !== oldPath) {
+      // Use a shorter timeout to reduce the delay
       setTimeout(() => {
+        window.scrollTo(0, 0)
+
         if (lenis.value) {
           lenis.value.resize()
           lenis.value.scrollTo(0, { immediate: true })
 
+          // Shorter timeout for ScrollTrigger refresh
           setTimeout(() => {
             ScrollTrigger.refresh(true)
             lenis.value.resize()
-          }, 100)
+          }, 50)
         }
-      }, 50)
-    }, 1000)
+      }, 100) // Reduced from 1000ms to 100ms
+    }
   },
 )
 

@@ -74,10 +74,14 @@ const prevImage = () => {
 
 // Touch/swipe support
 const handleTouchStart = (e) => {
+  // Prevent conflicts with navigation touch events
+  e.stopPropagation()
   touchStartX.value = e.touches[0].clientX
 }
 
 const handleTouchEnd = (e) => {
+  // Prevent conflicts with navigation touch events
+  e.stopPropagation()
   touchEndX.value = e.changedTouches[0].clientX
   handleSwipe()
 }
@@ -97,8 +101,24 @@ const handleSwipe = () => {
 
 // Keyboard navigation
 const handleKeyPress = (e) => {
-  if (e.key === 'ArrowRight') nextImage()
-  if (e.key === 'ArrowLeft') prevImage()
+  // Only handle keys when focus is within the gallery or no specific element is focused
+  const activeElement = document.activeElement
+  const isInGallery = activeElement && (
+    activeElement.closest('.gallery-container') ||
+    activeElement.tagName === 'BODY' ||
+    activeElement.tagName === 'HTML'
+  )
+
+  if (!isInGallery) return
+
+  if (e.key === 'ArrowRight') {
+    e.preventDefault()
+    nextImage()
+  }
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault()
+    prevImage()
+  }
   if (e.key === 'Escape') return // Could add fullscreen exit logic
 }
 
@@ -129,17 +149,21 @@ const toggleAutoPlay = () => {
 
 // Lifecycle
 onMounted(() => {
-  document.addEventListener('keydown', handleKeyPress)
+  // Add keyboard listener with a small delay to avoid conflicts with navigation
+  setTimeout(() => {
+    document.addEventListener('keydown', handleKeyPress, { passive: false })
+  }, 100)
 })
 
 onUnmounted(() => {
+  // Clean up event listeners
   document.removeEventListener('keydown', handleKeyPress)
   stopAutoPlay()
 })
 </script>
 
 <template>
-  <div class="gallery-container main-content clickable">
+  <div class="gallery-container main-content">
     <div class="gallery-header df-pad">
       <h1>Gallery</h1>
       <p>Beug Lab is more than just a lab; it's a community of innovators and friends!</p>

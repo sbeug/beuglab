@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, nextTick } from 'vue'
 import {
   DropDownMenuAnimation,
   subMenuDrop,
@@ -9,43 +9,99 @@ import {
 import { gsap } from 'gsap'
 
 let cleanupFunctions = []
+let animationTimeline = null
 
-onMounted(() => {
-  cleanupFunctions.push(DropDownMenuAnimation())
-  cleanupFunctions.push(subMenuDrop())
-  cleanupFunctions.push(DesktopSubmenuAnimation())
-  cleanupFunctions.push(menuUnderline())
+onMounted(async () => {
+  // Wait for DOM elements to be available
+  await nextTick()
 
-  gsap.set('#dropdown-menu', {
-    visibility: 'hidden',
-    xPercent: 100,
-  })
-  gsap.from('#logo img', {
-    opacity: 0,
-    duration: 1,
-    ease: 'power2.inOut',
-  })
-  gsap.from('#logo h3', {
-    opacity: 0,
-    duration: 1,
-    delay: 0.25,
-    ease: 'power2.inOut',
-  })
-  gsap.from('#menu-button', {
-    opacity: 0,
-    duration: 1,
-    delay: 1,
-    ease: 'power2.inOut',
-  })
+  // Small delay to ensure all elements are rendered
+  setTimeout(() => {
+    // Kill any existing animations on navbar elements first
+    gsap.killTweensOf(['#dropdown-menu', '#logo img', '#logo h3', '#menu-button'])
+
+    // Initialize animations with proper error handling
+    try {
+      const dropdownCleanup = DropDownMenuAnimation()
+      if (dropdownCleanup) cleanupFunctions.push(dropdownCleanup)
+
+      const subMenuCleanup = subMenuDrop()
+      if (subMenuCleanup) cleanupFunctions.push(subMenuCleanup)
+
+      const desktopSubmenuCleanup = DesktopSubmenuAnimation()
+      if (desktopSubmenuCleanup) cleanupFunctions.push(desktopSubmenuCleanup)
+
+      const underlineCleanup = menuUnderline()
+      if (underlineCleanup) cleanupFunctions.push(underlineCleanup)
+    } catch (error) {
+      console.warn('Error initializing navbar animations:', error)
+    }
+
+    // Set initial states with error handling
+    const dropdownMenu = document.querySelector('#dropdown-menu')
+    if (dropdownMenu) {
+      gsap.set(dropdownMenu, {
+        visibility: 'hidden',
+        xPercent: 100,
+      })
+    }
+
+    // Create entrance animation timeline
+    animationTimeline = gsap.timeline()
+
+    const logoImg = document.querySelector('#logo img')
+    const logoH3 = document.querySelector('#logo h3')
+    const menuButton = document.querySelector('#menu-button')
+
+    if (logoImg) {
+      animationTimeline.from(logoImg, {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.inOut',
+      }, 0)
+    }
+
+    if (logoH3) {
+      animationTimeline.from(logoH3, {
+        opacity: 0,
+        duration: 1,
+        delay: 0.25,
+        ease: 'power2.inOut',
+      }, 0)
+    }
+
+    if (menuButton) {
+      animationTimeline.from(menuButton, {
+        opacity: 0,
+        duration: 1,
+        delay: 1,
+        ease: 'power2.inOut',
+      }, 0)
+    }
+  }, 100)
 })
 
 onBeforeUnmount(() => {
+  // Clean up all registered cleanup functions
   cleanupFunctions.forEach((cleanup) => {
     if (typeof cleanup === 'function') {
-      cleanup()
+      try {
+        cleanup()
+      } catch (error) {
+        console.warn('Error during cleanup:', error)
+      }
     }
   })
-  gsap.killTweensOf('*')
+  cleanupFunctions = []
+
+  // Kill navbar-specific animations
+  if (animationTimeline) {
+    animationTimeline.kill()
+    animationTimeline = null
+  }
+
+  // Kill any remaining tweens on navbar elements
+  gsap.killTweensOf(['#dropdown-menu', '#logo img', '#logo h3', '#menu-button', '#navbar *'])
 })
 </script>
 

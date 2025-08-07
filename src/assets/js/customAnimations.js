@@ -66,6 +66,9 @@ export function DropDownMenuAnimation() {
     return () => {}
   }
 
+  // Kill any existing tweens on these elements first
+  gsap.killTweensOf([lineOne, lineTwo, dropdownMenu, menuItems])
+
   gsap.set([lineOne, lineTwo], {
     transformOrigin: 'center center',
     force3D: true,
@@ -84,7 +87,7 @@ export function DropDownMenuAnimation() {
     force3D: true,
   })
 
-  const dropDownTimeline = new gsap.timeline({
+  const dropDownTimeline = gsap.timeline({
     paused: true,
     duration: 1,
     onStart: () => {
@@ -98,6 +101,7 @@ export function DropDownMenuAnimation() {
       gsap.set(dropdownMenu, { visibility: 'hidden' })
     },
   })
+
   dropDownTimeline
     .set(
       dropdownMenu,
@@ -167,27 +171,39 @@ export function DropDownMenuAnimation() {
 
   dropDownTimeline.reverse()
 
-  // Use event delegation for better performance
+  // Use event delegation for better performance and to avoid duplicate listeners
   const handleClick = function (event) {
     const target = event.target
 
     // Check if click is on menu button or its children
     if (target.closest('#menu-button')) {
       event.preventDefault()
+      event.stopPropagation()
       dropDownTimeline.reversed(!dropDownTimeline.reversed())
       return
     }
 
-    // Check if click is on menu links
+    // Check if click is on menu links (close menu when navigating)
     if (target.matches('.menu-link-2') || target.matches('.sub-link')) {
-      dropDownTimeline.reversed(!dropDownTimeline.reversed())
+      // Only close if menu is open
+      if (!dropDownTimeline.reversed()) {
+        dropDownTimeline.reverse()
+      }
       return
     }
   }
 
-  // Prevent touch scrolling on mobile when menu is open
+  // Prevent touch scrolling only on the dropdown menu when it's open
   const handleTouchMove = function (event) {
-    if (!dropDownTimeline.reversed()) {
+    // Only prevent default if:
+    // 1. The dropdown menu is open (!dropDownTimeline.reversed())
+    // 2. The touch is happening within the dropdown menu OR
+    // 3. The touch is on the body (to prevent background scrolling)
+    const isDropdownOpen = !dropDownTimeline.reversed()
+    const isOnDropdown = event.target.closest('#dropdown-menu')
+    const isOnBody = event.target === document.body || event.target === document.documentElement
+
+    if (isDropdownOpen && (isOnDropdown || isOnBody)) {
       event.preventDefault()
     }
   }
@@ -195,6 +211,7 @@ export function DropDownMenuAnimation() {
   // Add single event listener with delegation
   document.addEventListener('click', handleClick, { passive: false })
   document.addEventListener('touchmove', handleTouchMove, { passive: false })
+
   handlers.push(
     { type: 'click', handler: handleClick },
     { type: 'touchmove', handler: handleTouchMove },
@@ -206,7 +223,9 @@ export function DropDownMenuAnimation() {
     })
     // Ensure body scroll is re-enabled on cleanup
     document.body.style.overflow = ''
-    dropDownTimeline.kill()
+    if (dropDownTimeline) {
+      dropDownTimeline.kill()
+    }
   }
 }
 
@@ -220,6 +239,9 @@ export function subMenuDrop() {
     const arrow = toggle.querySelector('.nav-arrow')
 
     if (!subMenu) return
+
+    // Kill any existing tweens on these elements
+    gsap.killTweensOf([subMenu, arrow])
 
     // Set initial state with hardware acceleration
     gsap.set(subMenu, {
@@ -238,7 +260,7 @@ export function subMenuDrop() {
       })
     }
 
-    const subMenuTl = new gsap.timeline({
+    const subMenuTl = gsap.timeline({
       paused: true,
       onReverseComplete: () => {
         // Hide the submenu completely when reverse animation completes
@@ -298,14 +320,24 @@ export function subMenuDrop() {
       isOpen = !isOpen
     }
 
+    // Remove any existing listeners first
+    toggle.removeEventListener('click', clickHandler)
     toggle.addEventListener('click', clickHandler, { passive: false })
-    handlers.push({ element: toggle, type: 'click', handler: clickHandler, timeline: subMenuTl })
+
+    handlers.push({
+      element: toggle,
+      type: 'click',
+      handler: clickHandler,
+      timeline: subMenuTl
+    })
   })
 
   // Return cleanup function
   return () => {
     handlers.forEach(({ element, type, handler, timeline }) => {
-      element.removeEventListener(type, handler)
+      if (element && handler) {
+        element.removeEventListener(type, handler)
+      }
       if (timeline) {
         timeline.kill()
       }
@@ -314,73 +346,112 @@ export function subMenuDrop() {
 }
 
 export function DesktopSubmenuAnimation() {
+  const handlers = []
+  let aboutSubmenuTimeline = null
+
   // For the About submenu in desktop nav
   const aboutLinkElement = document.querySelector('#menu-link-about')
   const aboutSubmenu = document.querySelector('.sub-menu-about')
 
-  if (aboutLinkElement && aboutSubmenu) {
-    gsap.set(aboutSubmenu, {
-      opacity: 0,
-      visibility: 'hidden',
-      y: -10,
-      display: 'flex',
-    })
-
-    const aboutSubmenuTimeline = gsap.timeline({ paused: true })
-
-    aboutSubmenuTimeline
-      .to(aboutSubmenu, {
-        opacity: 1,
-        visibility: 'visible',
-        y: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-      .to(
-        aboutSubmenu.querySelectorAll('li'),
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.05,
-          duration: 0.5,
-          ease: 'power2.out',
-        },
-        '-=0.15',
-      )
-    // Create a flag to track if we're hovering over either element
-    let isMenuHovered = false
-
-    aboutLinkElement.addEventListener('mouseenter', () => {
-      isMenuHovered = true
-      aboutSubmenuTimeline.play()
-    })
-
-    aboutSubmenu.addEventListener('mouseenter', () => {
-      isMenuHovered = true
-    })
-
-    aboutLinkElement.addEventListener('mouseleave', () => {
-      isMenuHovered = false
-      setTimeout(() => {
-        if (!isMenuHovered) {
-          aboutSubmenuTimeline.reverse()
-        }
-      }, 150)
-    })
-
-    aboutSubmenu.addEventListener('mouseleave', () => {
-      isMenuHovered = false
-      setTimeout(() => {
-        if (!isMenuHovered) {
-          aboutSubmenuTimeline.reverse()
-        }
-      }, 150)
-    })
+  if (!aboutLinkElement || !aboutSubmenu) {
+    return () => {} // Return empty cleanup if elements don't exist
   }
 
-  // Return cleanup function - for now return empty function since this needs more complex refactoring
+  gsap.set(aboutSubmenu, {
+    opacity: 0,
+    visibility: 'hidden',
+    y: -10,
+    display: 'flex',
+  })
+
+  aboutSubmenuTimeline = gsap.timeline({ paused: true })
+
+  aboutSubmenuTimeline
+    .to(aboutSubmenu, {
+      opacity: 1,
+      visibility: 'visible',
+      y: 0,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
+    .to(
+      aboutSubmenu.querySelectorAll('li'),
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      '-=0.15',
+    )
+
+  // Create a flag to track if we're hovering over either element
+  let isMenuHovered = false
+  let hoverTimeout = null
+
+  const handleMouseEnter = () => {
+    isMenuHovered = true
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      hoverTimeout = null
+    }
+    aboutSubmenuTimeline.play()
+  }
+
+  const handleMouseLeave = () => {
+    isMenuHovered = false
+    if (hoverTimeout) clearTimeout(hoverTimeout)
+    hoverTimeout = setTimeout(() => {
+      if (!isMenuHovered) {
+        aboutSubmenuTimeline.reverse()
+      }
+    }, 150)
+  }
+
+  const handleSubmenuEnter = () => {
+    isMenuHovered = true
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      hoverTimeout = null
+    }
+  }
+
+  const handleSubmenuLeave = () => {
+    isMenuHovered = false
+    if (hoverTimeout) clearTimeout(hoverTimeout)
+    hoverTimeout = setTimeout(() => {
+      if (!isMenuHovered) {
+        aboutSubmenuTimeline.reverse()
+      }
+    }, 150)
+  }
+
+  aboutLinkElement.addEventListener('mouseenter', handleMouseEnter)
+  aboutLinkElement.addEventListener('mouseleave', handleMouseLeave)
+  aboutSubmenu.addEventListener('mouseenter', handleSubmenuEnter)
+  aboutSubmenu.addEventListener('mouseleave', handleSubmenuLeave)
+
+  handlers.push(
+    { element: aboutLinkElement, type: 'mouseenter', handler: handleMouseEnter },
+    { element: aboutLinkElement, type: 'mouseleave', handler: handleMouseLeave },
+    { element: aboutSubmenu, type: 'mouseenter', handler: handleSubmenuEnter },
+    { element: aboutSubmenu, type: 'mouseleave', handler: handleSubmenuLeave }
+  )
+
+  // Return proper cleanup function
   return () => {
-    // TODO: Implement proper cleanup for DesktopSubmenuAnimation
+    handlers.forEach(({ element, type, handler }) => {
+      if (element && handler) {
+        element.removeEventListener(type, handler)
+      }
+    })
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+    }
+    if (aboutSubmenuTimeline) {
+      aboutSubmenuTimeline.kill()
+    }
   }
 }
 
@@ -508,77 +579,107 @@ export function menuUnderline() {
 }
 
 export function teamViewAnimations() {
+  const handlers = []
+  let memberMenuTimeline = null
+
   const sidebar = document.querySelector('#side-bar')
   const mobileButton = document.querySelector('#mobile-btn')
   const footer = document.querySelector('#footer')
   const arrow = document.querySelector('#arrow')
 
   if (window.innerWidth < 768) {
-    const memberMenuTimeline = new gsap.timeline({
+    if (!sidebar || !mobileButton || !arrow) {
+      return () => {} // Return empty cleanup if required elements don't exist
+    }
+
+    memberMenuTimeline = new gsap.timeline({
       paused: true,
       duration: 0.5,
     })
-    memberMenuTimeline.to(sidebar, sidebar, {
+
+    memberMenuTimeline.to(sidebar, {
       ease: 'expo.inOut',
       duration: 0.5,
       left: '0%',
     })
-    memberMenuTimeline.to(arrow, arrow, {
+    memberMenuTimeline.to(arrow, {
       ease: 'expo.inOut',
       duration: 0.1,
       opacity: 0,
     })
-    memberMenuTimeline.to(arrow, arrow, {
+    memberMenuTimeline.to(arrow, {
       ease: 'expo.inOut',
       duration: 0.1,
       transform: 'scaleX(-1)',
     })
-    memberMenuTimeline.to(arrow, arrow, {
+    memberMenuTimeline.to(arrow, {
       ease: 'expo.inOut',
       duration: 0.25,
       opacity: 1,
     })
+
     let isMenuOpen = false
-    if (mobileButton) {
-      mobileButton.addEventListener('click', () => {
-        console.log('clicked')
-        if (isMenuOpen) {
-          memberMenuTimeline.reverse()
-        } else {
-          memberMenuTimeline.play()
-        }
-        isMenuOpen = !isMenuOpen
-      })
-    }
-    const memberLinks = document.querySelectorAll('.member-link')
-    memberLinks.forEach((member) => {
-      member.addEventListener('click', () => {
+
+    const mobileButtonHandler = () => {
+      console.log('clicked')
+      if (isMenuOpen) {
         memberMenuTimeline.reverse()
-        isMenuOpen = false
-      })
+      } else {
+        memberMenuTimeline.play()
+      }
+      isMenuOpen = !isMenuOpen
+    }
+
+    mobileButton.addEventListener('click', mobileButtonHandler)
+    handlers.push({ element: mobileButton, type: 'click', handler: mobileButtonHandler })
+
+    const memberLinks = document.querySelectorAll('.member-link')
+    const memberLinkHandler = () => {
+      memberMenuTimeline.reverse()
+      isMenuOpen = false
+    }
+
+    memberLinks.forEach((member) => {
+      member.addEventListener('click', memberLinkHandler)
+      handlers.push({ element: member, type: 'click', handler: memberLinkHandler })
     })
   }
+
   if (window.innerWidth > 768) {
-    if (!sidebar || !footer) return
+    if (sidebar && footer) {
+      gsap.registerPlugin(ScrollTrigger)
 
-    gsap.registerPlugin(ScrollTrigger)
+      const scrollTriggerInstance = gsap.to(sidebar, {
+        scrollTrigger: {
+          trigger: footer,
+          start: 'top 100%',
+          end: 'top 10%',
+          scrub: true,
+        },
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power4.out',
+      })
 
-    gsap.to(sidebar, {
-      scrollTrigger: {
-        trigger: footer,
-        start: 'top 100%',
-        end: 'top 10%',
-        scrub: true,
-      },
-      opacity: 0,
-      duration: 0.25,
-      ease: 'power4.out',
-    })
+      // Store ScrollTrigger for cleanup
+      handlers.push({ scrollTrigger: scrollTriggerInstance })
+    }
   }
 
-  // Return cleanup function - minimal for now
+  // Return proper cleanup function
   return () => {
-    // TODO: Add proper cleanup for teamViewAnimations
+    handlers.forEach(({ element, type, handler, scrollTrigger }) => {
+      if (element && type && handler) {
+        element.removeEventListener(type, handler)
+      }
+      if (scrollTrigger && scrollTrigger.scrollTrigger) {
+        scrollTrigger.scrollTrigger.kill()
+      }
+    })
+
+    if (memberMenuTimeline) {
+      memberMenuTimeline.kill()
+    }
   }
 }
 
