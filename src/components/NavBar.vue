@@ -420,6 +420,8 @@ a {
 @media (min-width: 1000px) {
   #navbar {
     z-index: 9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     padding-left: 4em;
     padding-right: 4em;
   }
@@ -429,6 +431,13 @@ a {
   }
   #menu {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+   #menu li {
+    margin: 0;
+    text-align: center;
   }
   .line {
     width: 2.5em;
@@ -474,6 +483,9 @@ a {
     position: relative;
     overflow: hidden;
   }
+  #menu-button {
+    place-self: center end;
+  }
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
@@ -490,21 +502,11 @@ a {
     will-change: width;
   }
   #navbar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     padding-left: 4em;
     padding-right: 4em;
   }
   #menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
-  }
-  #menu li {
-    margin: 0;
-    text-align: center;
   }
   .menu-link {
     font-size: 1.25em;
@@ -528,9 +530,6 @@ a {
   }
   .sub-link {
     font-size: 1.75em !important;
-  }
-  #menu-button {
-    place-self: center end;
   }
 }
 /* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
