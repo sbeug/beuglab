@@ -205,13 +205,6 @@ function scrollRight() {
   align-items: center;
   justify-content: center;
 }
-.hero-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
 .hero-img {
   position: relative;
   object-fit: cover;
@@ -219,8 +212,8 @@ function scrollRight() {
   height: 100%;
 }
 #hero-spline {
-  z-index: 0;
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100vw;
