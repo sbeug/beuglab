@@ -99,7 +99,7 @@ import CheoLogo from '@/components/icons/CheoRILogo.vue'
   align-items: center;
 }
 #footer-title h6 {
-  font-size: 2.5rrem;
+  font-size: 2.5rem;
   color: var(--font-color-main);
   line-height: 1.1em;
   text-align: center;

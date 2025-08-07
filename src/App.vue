@@ -144,14 +144,19 @@ const isMobile = window.innerWidth < 1280
     }"
   >
     <div id="app">
-      <div id="spline" v-if="route.path !== '/'">
+      <div id="spline">
         <spline-viewer
-          v-if="isDesktop"
+          v-if="isDesktop && route.path !== '/'"
           url="https://prod.spline.design/zgZj9HR7euKqCYFg/scene.splinecode"
         ></spline-viewer>
         <spline-viewer
-          v-if="isMobile"
+          v-if="isMobile && route.path !== '/'"
           url="https://prod.spline.design/5juh0jQl2H6O6EIE/scene.splinecode"
+        ></spline-viewer>
+        <spline-viewer
+          v-if="route.path === '/'"
+          url="https://prod.spline.design/FCbn4L9mentHyEzd/scene.splinecode"
+          id="hero-spline"
         ></spline-viewer>
       </div>
       <header>

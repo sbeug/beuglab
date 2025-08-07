@@ -92,20 +92,13 @@ function scrollRight() {
 
 <template>
   <div id="main-content" class="main-content">
-    <div id="hero-section" class="clickable">
-      <div class="hero-bg">
-        <spline-viewer
-          url="https://prod.spline.design/FCbn4L9mentHyEzd/scene.splinecode"
-          id="hero-spline"
-        >
-        </spline-viewer>
-      </div>
+    <div id="hero-section">
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
         <h3 id="mobile-heading">
           Advancing cancer research through - collaboration, curiosity, and scientific excellence.
         </h3>
-        <div id="hero-c2a">
+        <div id="hero-c2a" class="clickable">
           <router-link to="/about">
             <button class="button"><p>Learn more</p></button>
           </router-link>
@@ -492,8 +485,12 @@ function scrollRight() {
     font-size: 12rem;
   }
   #mobile-heading {
+    display: none!important;
     font-size: 1.5rem;
     width: 80%;
+  }
+  #hero-c2a {
+    display: none!important;
   }
   .section {
     padding-bottom: 24em;
