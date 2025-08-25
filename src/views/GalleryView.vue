@@ -53,12 +53,22 @@ const images = galleryImageNames.map((filename, index) => ({
 }))
 
 // Navigation functions
+// Store timeout IDs for cleanup
+let transitionTimeoutId = null
+
 const goToImage = (index) => {
   if (isTransitioning.value) return
   isTransitioning.value = true
   currentImageIndex.value = index
-  setTimeout(() => {
+  
+  // Clear existing timeout
+  if (transitionTimeoutId) {
+    clearTimeout(transitionTimeoutId)
+  }
+  
+  transitionTimeoutId = setTimeout(() => {
     isTransitioning.value = false
+    transitionTimeoutId = null
   }, 300)
 }
 
@@ -159,6 +169,12 @@ onUnmounted(() => {
   // Clean up event listeners
   document.removeEventListener('keydown', handleKeyPress)
   stopAutoPlay()
+  
+  // Clean up transition timeout
+  if (transitionTimeoutId) {
+    clearTimeout(transitionTimeoutId)
+    transitionTimeoutId = null
+  }
 })
 </script>
 

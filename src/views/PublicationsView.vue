@@ -19,6 +19,7 @@ import PubmedPublications from '@/components/PubmedPublications.vue'
   font-size: 2.5em;
   padding-top: 1.5em;
   text-align: center;
+  text-transform: uppercase;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {

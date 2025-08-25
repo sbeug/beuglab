@@ -62,12 +62,15 @@ onUnmounted(() => {
   }
   if (rafCallback) {
     gsap.ticker.remove(rafCallback)
+    rafCallback = null
   }
   if (resizeObserver) {
     resizeObserver.disconnect()
+    resizeObserver = null
   }
   if (contactFormCleanup) {
     contactFormCleanup()
+    contactFormCleanup = null
   }
   // Clean up Spline WebGL resources
   cleanupAppSpline()

@@ -210,6 +210,16 @@ export function DropDownMenuAnimation() {
     { type: 'click', handler: handleClick },
     { type: 'touchmove', handler: handleTouchMove },
   )
+
+  // Return cleanup function
+  return () => {
+    handlers.forEach(({ type, handler }) => {
+      document.removeEventListener(type, handler)
+    })
+    if (dropDownTimeline) {
+      dropDownTimeline.kill()
+    }
+  }
 }
 
 export function subMenuDrop() {
@@ -293,14 +303,27 @@ export function subMenuDrop() {
       }
     }
 
-    // Store timeline on element for access
+    // Store timeline and handler on element for access
     toggle._timeline = subMenuTl
+    toggle._clickHandler = clickHandler
 
     // Add event listener
     toggle.addEventListener('click', clickHandler, { passive: false })
   })
 
-  // No cleanup function returned since nav is always mounted
+  // Return cleanup function
+  return () => {
+    toggles.forEach((toggle) => {
+      const clickHandler = toggle._clickHandler
+      if (clickHandler) {
+        toggle.removeEventListener('click', clickHandler)
+      }
+      if (toggle._timeline) {
+        toggle._timeline.kill()
+        toggle._timeline = null
+      }
+    })
+  }
 }
 
 export function DesktopSubmenuAnimation() {
@@ -401,7 +424,22 @@ export function DesktopSubmenuAnimation() {
   ]
   aboutLinkElement._aboutTimeline = aboutSubmenuTimeline
 
-  // No cleanup function returned since nav is always mounted
+  // Return cleanup function
+  return () => {
+    if (aboutLinkElement._desktopSubmenuHandlers) {
+      aboutLinkElement._desktopSubmenuHandlers.forEach(({ element, type, handler }) => {
+        element.removeEventListener(type, handler)
+      })
+    }
+    if (aboutLinkElement._aboutTimeline) {
+      aboutLinkElement._aboutTimeline.kill()
+      aboutLinkElement._aboutTimeline = null
+    }
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      hoverTimeout = null
+    }
+  }
 }
 
 export function subMenuHover(menuSelector = '.sub-drop') {
@@ -519,7 +557,14 @@ export function menuUnderline() {
     }
   })
 
-  // No cleanup function returned since nav is always mounted
+  // Return cleanup function
+  return () => {
+    handlers.forEach(({ element, type, handler }) => {
+      if (element && handler) {
+        element.removeEventListener(type, handler)
+      }
+    })
+  }
 }
 
 export function teamViewAnimations() {
@@ -747,5 +792,17 @@ export function ContactForm() {
   document._contactHandlers = [{ element: document, type: 'click', handler: clickHandler }]
   document._contactTimeline = contactTimeline
 
-  // No cleanup function returned since nav is always mounted
+  // Return cleanup function
+  return () => {
+    if (document._contactHandlers) {
+      document._contactHandlers.forEach(({ element, type, handler }) => {
+        element.removeEventListener(type, handler)
+      })
+      document._contactHandlers = null
+    }
+    if (document._contactTimeline) {
+      document._contactTimeline.kill()
+      document._contactTimeline = null
+    }
+  }
 }

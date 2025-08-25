@@ -1,14 +1,28 @@
 <script setup>
 import { updateLocalTime } from '@/assets/js/utils'
-import { onMounted, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
+
+let timeInterval = null
+let successTimeout = null
 
 onMounted(() => {
   updateLocalTime()
   const localTimeElement = document.getElementById('local-time')
   if (localTimeElement) {
-    setInterval(() => {
+    timeInterval = setInterval(() => {
       updateLocalTime()
     }, 1000)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (timeInterval) {
+    clearInterval(timeInterval)
+    timeInterval = null
+  }
+  if (successTimeout) {
+    clearTimeout(successTimeout)
+    successTimeout = null
   }
 })
 
@@ -39,8 +53,12 @@ const handleSubmit = async (event) => {
       message.value = ''
 
       // Hide success message after 5 seconds
-      setTimeout(() => {
+      if (successTimeout) {
+        clearTimeout(successTimeout)
+      }
+      successTimeout = setTimeout(() => {
         isSubmitted.value = false
+        successTimeout = null
       }, 5000)
     }
   } catch (error) {

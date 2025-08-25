@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-  <div id="main-content">
+  <div id="main-content" class="clickable">
     <div id="section-1">
       <div id="experience-container">
         <video id="experience-video" autoplay muted playsinline loop preload="auto">

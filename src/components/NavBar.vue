@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watch } from 'vue'
+import { onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { gsap } from 'gsap'
 
@@ -434,6 +434,11 @@ onMounted(() => {
   setTimeout(async () => {
     await initializeAnimations(true) // Pass true for first load
   }, 100)
+})
+
+onBeforeUnmount(async () => {
+  // Cleanup all animations and event listeners
+  await cleanupAnimations(false)
 })
 
 // Watch for route changes and reinitialize if needed

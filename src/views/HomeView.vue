@@ -92,12 +92,9 @@ function scrollRight() {
 </script>
 
 <template>
-  <div id="main-content" class="main-content">
+  <div id="main-content" class="main-content clickable">
     <div id="hero-spline">
-      <canvas
-        id="home-spline"
-        class="clickable"
-      ></canvas>
+      <canvas id="home-spline" class="clickable"></canvas>
     </div>
     <div id="hero-section">
       <div id="hero-heading" class="df-pad">
@@ -485,12 +482,12 @@ function scrollRight() {
     font-size: 12rem;
   }
   #mobile-heading {
-    display: none!important;
+    display: none !important;
     font-size: 1.5rem;
     width: 80%;
   }
   #hero-c2a {
-    display: none!important;
+    display: none !important;
   }
   .section {
     padding-bottom: 24em;
