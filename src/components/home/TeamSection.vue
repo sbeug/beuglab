@@ -10,14 +10,14 @@ const scrollContainer = ref(null)
 
 onMounted(async () => {
   await teamStore.fetchTeamMembers()
-  
+
   try {
     const query = `*[_type == "homePage"][0] {
       teamDescription
     }`
     const data = await sanity.fetch(query)
     teamDescription.value = data.teamDescription
-  } catch (err) {
+  } catch (error) {
     error.value = true
   }
 })
@@ -42,35 +42,37 @@ function scrollRight() {
 </script>
 
 <template>
-  <div id="team-section" class="section df-pad">
-    <div class="section-heading">
-      <p>03</p>
-      <h6>Team</h6>
-    </div>
-    <div id="team-statement" class="section-statement">
-      <h6>Meet the Dedicated Team Driving Our Research Forward.</h6>
-    </div>
-    <div id="team-content">
-      <div id="team-description" class="description">
-        <p>{{ teamDescription }}</p>
-        <p v-if="error">
-          The Beug Lab is a collaborative team of trainees, postdocs, and associate scientists at
-          the Children's Hospital of Eastern Ontario Research Institute (CHEO RI). Our team is
-          interested in programmed cell death, inflammation, cancer immunology, and the
-          development of cancer immunotherapies
-        </p>
+  <div id="team-section" class="section">
+    <div class="df-pad">
+      <div class="section-heading">
+        <p>03</p>
+        <h6>Team</h6>
       </div>
-      <div id="team-c2a" class="clickable">
-        <router-link to="/about/team" class="button">
-          <iframe
-            id="beuglab-button"
-            src="https://my.spline.design/beuglabbutton-fWTez99a1IlaBHjtaJuxIuNU-dmJ/"
-            frameborder="0"
-            width="100%"
-            height="100%"
-          ></iframe>
-          <p>Meet the Team</p>
-        </router-link>
+      <div id="team-statement" class="section-statement">
+        <h6>Meet the Dedicated Team Driving Our Research Forward.</h6>
+      </div>
+      <div id="team-content">
+        <div id="team-description" class="description">
+          <p>{{ teamDescription }}</p>
+          <p v-if="error">
+            The Beug Lab is a collaborative team of trainees, postdocs, and associate scientists at
+            the Children's Hospital of Eastern Ontario Research Institute (CHEO RI). Our team is
+            interested in programmed cell death, inflammation, cancer immunology, and the
+            development of cancer immunotherapies
+          </p>
+        </div>
+        <div id="team-c2a" class="clickable">
+          <router-link to="/about/team" class="button">
+            <iframe
+              id="beuglab-button"
+              src="https://my.spline.design/beuglabbutton-fWTez99a1IlaBHjtaJuxIuNU-dmJ/"
+              frameborder="0"
+              width="100%"
+              height="100%"
+            ></iframe>
+            <p>Meet the Team</p>
+          </router-link>
+        </div>
       </div>
       <div id="team-members-section" ref="scrollContainer">
         <div id="members-track" class="clickable">
@@ -243,11 +245,15 @@ function scrollRight() {
   height: 50px;
   font-size: 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--blanco);
+}
+.scroll-btn:hover {
+  background-color: var(--nero);
+  transform: scale(1.03);
 }
 
 /* TABLET 1 [GLOBAL] */
@@ -324,11 +330,11 @@ function scrollRight() {
     width: 30%;
   }
   #team-statement h6 {
-    font-size: 5rem;
+    font-size: 3.5rem;
   }
   #team-description {
-    margin-left: 7em;
-    width: 50%;
+    margin-left: 6.5em;
+    width: 100%;
   }
   #team-description p {
     font-size: 1.25rem;
@@ -340,6 +346,7 @@ function scrollRight() {
     grid-row: 2;
     padding-top: 4em;
     padding-left: 8em;
+    cursor: pointer;
   }
   #beuglab-button {
     display: unset;
@@ -376,31 +383,27 @@ function scrollRight() {
   }
   .buttons {
     z-index: 4;
-    grid-column: 2;
-    grid-row: 5;
-    justify-content: flex-start;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+  .scroll-btn {
+    cursor: pointer !important;
   }
 }
-/* DESKTOP 2 (Macbook pro 13 inch display) */
-@media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
-  .section-statement h6 {
-    font-size: 5rem;
-    line-height: 1em;
-    width: 80%;
-  }
+/* DESKTOP 2 [GLOBAL] */
+@media (min-width: 1440px) {
   #team-statement h6 {
-    font-size: 5rem;
+    font-size: 4rem;
   }
-  .description {
-    width: 40%;
-  }
-  .member-photo {
-    width: 25em;
-    height: 30em;
+}
+/* DESKTOP 3 [GLOBAL] */
+@media (min-width: 1728px) {
+  #team-description p {
+    font-size: 1.5rem;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */
-@media only screen and (min-width: 1920px) {
+@media (min-width: 1920px) {
   .section-statement h6 {
     font-size: 5rem;
   }

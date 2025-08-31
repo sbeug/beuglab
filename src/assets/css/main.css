@@ -61,7 +61,7 @@ p {
   pointer-events: auto;
 }
 .main-content .clickable {
-  pointer-events: auto!important;
+  pointer-events: auto !important;
 }
 .button {
   text-decoration: none;
@@ -81,14 +81,15 @@ p {
   background-color: var(--nero);
   color: var(--blanco);
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
+  pointer-events: auto !important;
   transition: all 0.3s ease-in-out;
 }
 .button:hover {
   scale: 0.98;
   box-shadow:
-  0 2px 8px rgba(0, 0, 0, 0.3),
-  0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 .button p {
   font-size: 1.25rem;
@@ -108,8 +109,23 @@ p {
   border-radius: 50%;
   margin-left: 0.5em;
 }
+/* Button cursor fixes */
+button,
+.button,
+a.button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
 .contact-open,
 .open-contact {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Button hover states */
+button:hover,
+.button:hover,
+a.button:hover {
   cursor: pointer !important;
 }
 /* TABLET 1 [GLOBAL] */
@@ -131,6 +147,18 @@ p {
   .main-content {
     pointer-events: none !important;
   }
+  
+  /* Force cursor pointer on buttons even with pointer-events none on parent */
+  .main-content button,
+  .main-content .button,
+  .main-content a.button,
+  button,
+  .button,
+  a.button {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+  
   .df-pad {
     padding-left: 4em;
     padding-right: 4em;

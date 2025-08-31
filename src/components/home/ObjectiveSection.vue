@@ -15,7 +15,7 @@ onMounted(async () => {
     const data = await sanity.fetch(query)
     sectionOneTitle.value = data.sectionOneTitle
     sectionOneText.value = data.sectionOneText
-  } catch (err) {
+  } catch (error) {
     error.value = true
   }
 })
@@ -134,25 +134,26 @@ onMounted(async () => {
     padding-left: 8em;
   }
   .section-statement h6 {
-    font-size: 6.5rem;
+    font-size: 3.5rem;
     width: 75%;
   }
   #obj-section {
     padding-top: 10em;
   }
 }
-/* DESKTOP 2 (Macbook pro 13 inch display) */
-@media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+/* DESKTOP 2 [GLOBAL] */
+@media (min-width: 1440px) {
   .section-statement h6 {
-    font-size: 5rem;
-    line-height: 1em;
-    width: 80%;
+    font-size: 4rem;
   }
 }
-/* DESKTOP 4 (Standard pc Monitor) */
-@media only screen and (min-width: 1920px) {
+/* DESKTOP 3 [GLOBAL] */
+@media (min-width: 1728px) {
   .section-statement h6 {
     font-size: 5rem;
   }
+}
+/* DESKTOP 4 [GLOBAL] */
+@media (min-width: 1920px) {
 }
 </style>
