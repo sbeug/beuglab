@@ -920,7 +920,7 @@ a {
     width: 100%;
   }
   .menu-link {
-    font-size: 1.25em;
+    font-size: 1rem;
     text-align: center;
   }
   #menu-list ul {
@@ -943,25 +943,17 @@ a {
     font-size: 1.75em !important;
   }
 }
-/* DESKTOP 2 (Macbook pro 13 inch display) -----------------------------------------------------------------------------------*/
-@media screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
-  .menu-underline {
-    height: 1px;
-    bottom: -1px;
-  }
-  #navbar {
-    padding-left: 4em;
-    padding-right: 4em;
-  }
-}
 /* DESKTOP 3 (Macbook pro 15 inch display) -----------------------------------------------------------------------------------*/
-@media screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) {
+@media (min-width: 1440px) {
+  .menu-link {
+    font-size: 1.25rem;
+  }
   .menu-link-2 {
-    font-size: 6em;
+    font-size: 6rem;
   }
 }
 /* DESKTOP 4 (Standard pc Monitor) */
-@media only screen and (min-width: 1920px) {
+@media (min-width: 1920px) {
   #navbar {
     padding-left: 4em;
     padding-right: 4em;

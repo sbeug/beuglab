@@ -197,7 +197,7 @@ onBeforeUnmount(() => {
   justify-content: center;
 }
 .img-container {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -207,11 +207,13 @@ onBeforeUnmount(() => {
 .img-container img {
   position: absolute;
   width: 100%;
-  height: fit-content;
+  max-width: 1500px;
+  border-radius: 25px;
+  height: 100%;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  object-fit: contain;
+  object-fit: cover;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {

@@ -1,56 +1,47 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import sanity, { urlFor } from '../assets/js/sanity.js'
 
 // Gallery state
 const currentImageIndex = ref(0)
 const isTransitioning = ref(false)
 const touchStartX = ref(0)
 const touchEndX = ref(0)
+const images = ref([])
+const isLoading = ref(true)
 
-// Actual gallery images from the gallery folder
-const galleryImageNames = [
-  '20220507_190127.jpg',
-  'BioCanRx Conference.jpg',
-  'Bob K, Shawn, Stephen.jpeg',
-  'Bruno Pires Goodbye Party.jpeg',
-  'CHEO Golf Day Team.jpg',
-  'CHEO sign.jpg',
-  'CN Cycle 2022 Group Shot.jpeg',
-  'Christmas Party 2024.jpg',
-  'Daniel Spike.jpg',
-  'First time golfing_.jpg',
-  'Halloween 2021.jpg',
-  'Kyle bad swing technique.jpg',
-  'Lab Christmas Party 2022.jpg',
-  'Lab during COVID.jpeg',
-  'Lab outing.jpg',
-  'Lab photo at Tommys.jpg',
-  'Melanie Pushups.jpg',
-  'Nathalie and Shawn COVID XMAS.jpg',
-  'Noah Science Olympics.jpg',
-  'Noah and Kyle monkeying around.jpg',
-  'Noah, Shawn.jpeg',
-  'Ofosu, Zachary , Noah, Jordan.jpeg',
-  'RI Goes to a Sens Game.jpg',
-  'Shawn Bday Prank Culprits.jpg',
-  'Shawn Bday Prank Selfie.jpg',
-  'Shawn and Bob 2.jpg',
-  'Shawn and Bob 2018.jpg',
-  'Shawn teaching kids.jpg',
-  'Shawn_s New Lab Space.jpg',
-  'Shawn_s Office Prank.jpg',
-  'Team Photo 2022.jpg',
-  'Team getting organized.jpg',
-  'Tommy and Shawn Secret Service.jpg',
-  'Volleyball Winning Party.jpg',
-]
-
-const images = galleryImageNames.map((filename, index) => ({
-  id: index + 1,
-  src: new URL(`../assets/content/images/gallery/${filename}`, import.meta.url).href,
-  alt: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' '),
-  title: filename.replace(/\.(jpg|jpeg)$/i, '').replace(/_/g, ' '),
-}))
+// Fetch gallery images from Sanity
+const fetchGalleryImages = async () => {
+  try {
+    const query = `*[_type == "galleryImage"] | order(order asc) {
+      _id,
+      title,
+      description,
+      image,
+      order,
+      featured
+    }`
+    
+    const galleryData = await sanity.fetch(query)
+    
+    images.value = galleryData.map((item, index) => ({
+      id: item._id,
+      src: urlFor(item.image).width(1200).height(800).fit('max').auto('format').url(),
+      thumbnail: urlFor(item.image).width(200).height(150).fit('crop').auto('format').url(),
+      alt: item.image.alt || item.title || `Gallery image ${index + 1}`,
+      title: item.title || `Gallery image ${index + 1}`,
+      description: item.description || '',
+      order: item.order || index,
+      featured: item.featured || false
+    }))
+  } catch (error) {
+    console.error('Error fetching gallery images:', error)
+    // Fallback to empty array if fetch fails
+    images.value = []
+  } finally {
+    isLoading.value = false
+  }
+}
 
 // Navigation functions
 // Store timeout IDs for cleanup
@@ -60,12 +51,12 @@ const goToImage = (index) => {
   if (isTransitioning.value) return
   isTransitioning.value = true
   currentImageIndex.value = index
-  
+
   // Clear existing timeout
   if (transitionTimeoutId) {
     clearTimeout(transitionTimeoutId)
   }
-  
+
   transitionTimeoutId = setTimeout(() => {
     isTransitioning.value = false
     transitionTimeoutId = null
@@ -73,12 +64,14 @@ const goToImage = (index) => {
 }
 
 const nextImage = () => {
-  const nextIndex = (currentImageIndex.value + 1) % images.length
+  if (images.value.length === 0) return
+  const nextIndex = (currentImageIndex.value + 1) % images.value.length
   goToImage(nextIndex)
 }
 
 const prevImage = () => {
-  const prevIndex = currentImageIndex.value === 0 ? images.length - 1 : currentImageIndex.value - 1
+  if (images.value.length === 0) return
+  const prevIndex = currentImageIndex.value === 0 ? images.value.length - 1 : currentImageIndex.value - 1
   goToImage(prevIndex)
 }
 
@@ -113,11 +106,11 @@ const handleSwipe = () => {
 const handleKeyPress = (e) => {
   // Only handle keys when focus is within the gallery or no specific element is focused
   const activeElement = document.activeElement
-  const isInGallery = activeElement && (
-    activeElement.closest('.gallery-container') ||
-    activeElement.tagName === 'BODY' ||
-    activeElement.tagName === 'HTML'
-  )
+  const isInGallery =
+    activeElement &&
+    (activeElement.closest('.gallery-container') ||
+      activeElement.tagName === 'BODY' ||
+      activeElement.tagName === 'HTML')
 
   if (!isInGallery) return
 
@@ -159,6 +152,9 @@ const toggleAutoPlay = () => {
 
 // Lifecycle
 onMounted(() => {
+  // Fetch gallery images
+  fetchGalleryImages()
+  
   // Add keyboard listener with a small delay to avoid conflicts with navigation
   setTimeout(() => {
     document.addEventListener('keydown', handleKeyPress, { passive: false })
@@ -169,7 +165,7 @@ onUnmounted(() => {
   // Clean up event listeners
   document.removeEventListener('keydown', handleKeyPress)
   stopAutoPlay()
-  
+
   // Clean up transition timeout
   if (transitionTimeoutId) {
     clearTimeout(transitionTimeoutId)
@@ -184,12 +180,25 @@ onUnmounted(() => {
       <h1>Gallery</h1>
       <p>Beug Lab is more than just a lab; it's a community of innovators and friends!</p>
     </div>
-    <div class="carousel-wrapper clickable">
+    
+    <!-- Loading state -->
+    <div v-if="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Loading gallery images...</p>
+    </div>
+    
+    <!-- Empty state -->
+    <div v-else-if="images.length === 0" class="empty-container">
+      <p>No gallery images available at the moment.</p>
+    </div>
+    
+    <!-- Gallery content -->
+    <div v-else class="carousel-wrapper clickable">
       <div class="carousel-container" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
         <button
           class="nav-button nav-prev"
           @click="prevImage"
-          :disabled="isTransitioning"
+          :disabled="isTransitioning || isLoading || images.length === 0"
           aria-label="Previous image"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -200,7 +209,7 @@ onUnmounted(() => {
         <button
           class="nav-button nav-next"
           @click="nextImage"
-          :disabled="isTransitioning"
+          :disabled="isTransitioning || isLoading || images.length === 0"
           aria-label="Next image"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -210,19 +219,23 @@ onUnmounted(() => {
         <div class="image-container">
           <div
             class="image-track"
-            :style="{ transform: `translateX(-${currentImageIndex * (100 / 34)}%)` }"
+            :style="{ 
+              transform: `translateX(-${currentImageIndex * (100 / images.length)}%)`,
+              width: `${images.length * 100}%`
+            }"
           >
-            <div v-for="(image, index) in images" :key="image.id" class="image-slide">
+            <div 
+              v-for="(image, index) in images" 
+              :key="image.id" 
+              class="image-slide"
+              :style="{ width: `${100 / images.length}%` }"
+            >
               <img
                 :src="image.src"
                 :alt="image.alt"
                 :loading="Math.abs(index - currentImageIndex) <= 2 ? 'eager' : 'lazy'"
                 class="gallery-image"
               />
-              <div class="image-overlay">
-                <h3>{{ image.title }}</h3>
-                <p>{{ index + 1 }} of {{ images.length }}</p>
-              </div>
             </div>
           </div>
         </div>
@@ -249,7 +262,7 @@ onUnmounted(() => {
             :class="{ active: index === currentImageIndex }"
             @click="goToImage(index)"
           >
-            <img :src="image.src" :alt="`Thumbnail ${index + 1}`" loading="lazy" />
+            <img :src="image.thumbnail || image.src" :alt="`Thumbnail ${index + 1}`" loading="lazy" />
           </button>
         </div>
       </div>
@@ -295,6 +308,40 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
+/* Loading and empty states */
+.loading-container,
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--nero);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p,
+.empty-container p {
+  color: var(--font-color-hover);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
 .carousel-wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -320,15 +367,14 @@ onUnmounted(() => {
 
 .image-track {
   display: flex;
-  width: 3400%; /* 34 images × 100% each */
   height: 100%;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .image-slide {
-  flex: 0 0 calc(100% / 34); /* Each slide takes 1/34 of track width */
   position: relative;
   height: 100%;
+  flex-shrink: 0;
 }
 
 .gallery-image {
