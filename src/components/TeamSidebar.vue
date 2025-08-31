@@ -167,4 +167,69 @@ const emit = defineEmits(['select'])
     font-size: 2em;
   }
 }
+/* DESKTOP 5 (4k + Larger) */
+@media (min-width: 2160px) {
+  #team-sidebar {
+    padding: 0;
+    padding-left: 1em;
+    line-height: 5em;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .member-link {
+    font-size: 2rem;
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 1em;
+  }
+  .member-link h3 {
+    font-size: 1.75em;
+    height: auto;
+    line-height: 1.3em;
+    text-wrap: nowrap;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    transition: all 0.4s ease;
+  }
+  .member-link:hover h3 {
+    color: var(--font-color-main);
+    text-shadow: #e9e9e9 0px 0px 8px;
+    transform: translateX(5px);
+  }
+  .number {
+    display: flex;
+    width: 1.75em;
+    height: 1.75em;
+    border: 2px solid #f8f8f87c;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+  }
+  .number p {
+    font-size: 0.65em;
+    font-weight: 600;
+    transition: all 0.4s ease;
+  }
+  .activecircle {
+    border-color: var(--font-color-main) !important;
+    background-color: rgba(233, 233, 233, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .activenumber {
+    color: var(--font-color-main) !important;
+  }
+  .member-link:hover .number {
+    border-color: var(--font-color-main);
+    background-color: rgba(233, 233, 233, 0.15);
+    transform: scale(1.1);
+  }
+  .member-link:hover .number p {
+    color: var(--font-color-main);
+  }
+}
 </style>

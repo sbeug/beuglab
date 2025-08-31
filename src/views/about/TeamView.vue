@@ -262,4 +262,82 @@ onBeforeUnmount(() => {
     font-size: 8em;
   }
 }
+/* DESKTOP 5 (4k + Larger) */
+@media (min-width: 2160px) {
+  #main-content {
+    max-width: 2400px;
+    margin: 0 auto;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    padding-left: 4em;
+    padding-right: 4em;
+    padding-bottom: 8em;
+  }
+  #side-bar {
+    position: absolute;
+    top: 80px;
+    right: 0%;
+    transform: translate(0%, -10%);
+    padding-top: 12em;
+    padding-right: 2em;
+    min-height: 100vh;
+    max-height: 100vh;
+    width: 35%;
+  }
+  #team-member-container {
+    grid-column: 1 / span 8;
+    grid-row: 2 / span 10;
+    padding-right: 6em;
+  }
+  #alumni-list-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3em;
+    padding-top: 4em;
+  }
+  .alumni-heading {
+    font-size: 6.5em;
+    line-height: 1.1em;
+    grid-column: 1 / span 2;
+    padding-bottom: 1em;
+    text-transform: uppercase;
+  }
+  .alumni-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 1 / span 2;
+    gap: 2.5em;
+  }
+  .alumni-item {
+    background-color: #f8f8f820;
+    border: 1px solid #22222220;
+    border-radius: 25px;
+    padding: 2.5em;
+    transition: all 0.3s ease;
+  }
+  .alumni-item:hover {
+    background-color: #f8f8f840;
+    border-color: #22222240;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  .alumni-name {
+    font-size: 2.25em;
+    line-height: 1.2em;
+    margin-bottom: 0.75em;
+    color: var(--font-color-main);
+  }
+  .alumni-role {
+    font-size: 1.5em;
+    line-height: 1.4em;
+    color: #22222280;
+    font-style: italic;
+  }
+  .member-fade-enter-active {
+    transition: all 0.8s ease-out;
+  }
+  .member-fade-leave-active {
+    transition: all 0.6s ease-in;
+  }
+}
 </style>
