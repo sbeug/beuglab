@@ -154,4 +154,10 @@ onBeforeUnmount(() => {
     font-size: 14rem;
   }
 }
+/* DESKTOP 5 [GLOBAL] */
+@media (min-width: 2160px) {
+  #hero-heading h1 {
+    font-size: 18rem;
+  }
+}
 </style>

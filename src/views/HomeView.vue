@@ -44,5 +44,4 @@ onBeforeUnmount(() => {
     <TeamSection />
   </div>
 </template>
-<style scoped>
-</style>
+<style scoped></style>

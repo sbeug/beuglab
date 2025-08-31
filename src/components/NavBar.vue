@@ -643,7 +643,7 @@ watch(
   background: transparent;
   opacity: 0%;
   visibility: hidden;
-  background-color: #e9e9e98a;
+  background-color: #e9e9e9be;
   backdrop-filter: blur(15px);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -1005,15 +1005,15 @@ a {
     height: 4px;
   }
   .sub-link {
-    font-size: 2rem;
+    font-size: 2.5rem !important;
   }
   .nav-arrow {
     width: 2.5em;
     height: 2.5em;
   }
   .circle-arrow {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1em;
+    height: 1em;
   }
   #menu-list ul {
     padding-left: 6em;

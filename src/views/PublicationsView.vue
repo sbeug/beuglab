@@ -1,5 +1,20 @@
 <script setup>
 import PubmedPublications from '@/components/PubmedPublications.vue'
+
+// Meta Head
+import { useHead } from '@vueuse/head'
+useHead({
+  title: 'Beug Lab | Publications',
+  meta: [
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Beug Lab | Driven by Curiosity, Guided by Science' },
+    {
+      property: 'og:description',
+      content:
+        'The Beug Lab investigates the molecular mechanisms underlying human disease to identify new therapeutic strategies. Led by Dr. Shawn Beug, the lab bridges fundamental research with clinical application to improve health outcomes.',
+    },
+  ],
+})
 </script>
 <template>
   <div id="main-content" class="main-content df-pad">

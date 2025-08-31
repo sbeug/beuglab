@@ -7,9 +7,16 @@ gsap.registerPlugin(ScrollTrigger)
 export function homePageLoadAnimation() {
   new SplitType('#hero-heading', { types: 'chars' })
 
+  // Check if this is the first load of the app
+  const isFirstLoad = !sessionStorage.getItem('hasLoadedBefore')
+  if (isFirstLoad) {
+    sessionStorage.setItem('hasLoadedBefore', 'true')
+  }
+
   const homePageTimeline = new gsap.timeline({
     paused: false,
     duration: 2,
+    delay: isFirstLoad ? 2 : 0, // Add 2s delay only on first load
   })
   homePageTimeline.from(
     '#hero-heading h1 div',

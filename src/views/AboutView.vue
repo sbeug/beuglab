@@ -83,6 +83,21 @@ onMounted(() => {
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
 })
+
+// Meta Head
+import { useHead } from '@vueuse/head'
+useHead({
+  title: 'Beug Lab | About',
+  meta: [
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Beug Lab | Driven by Curiosity, Guided by Science' },
+    {
+      property: 'og:description',
+      content:
+        'The Beug Lab investigates the molecular mechanisms underlying human disease to identify new therapeutic strategies. Led by Dr. Shawn Beug, the lab bridges fundamental research with clinical application to improve health outcomes.',
+    },
+  ],
+})
 </script>
 <template>
   <div id="main-content" class="clickable">
@@ -273,6 +288,137 @@ onBeforeUnmount(() => {
   .experience-heading h1 {
     font-size: 13em;
     line-height: 2em;
+  }
+}
+/* DESKTOP 5 (4k + Larger) */
+@media (min-width: 2160px) {
+  #main-content {
+    margin: 0 auto;
+    overflow: visible;
+  }
+  #section-1 {
+    width: 100%;
+    height: 500vh;
+    margin: 0 auto;
+  }
+  #experience-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    border-radius: 0;
+    overflow: hidden;
+  }
+  #experience-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 65%;
+    scale: 1.02;
+  }
+  #about-us {
+    width: 100%;
+    max-width: 60%;
+    padding: 4em;
+  }
+  #about-us :nth-child(1) {
+    font-size: 4em;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+    letter-spacing: -0.02em;
+  }
+  #about-us h6 {
+    font-size: 2.75em;
+    line-height: 1.5em;
+    font-weight: 300;
+    text-align: justify;
+    color: rgba(255, 255, 255, 0.95);
+  }
+  .experience-heading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--blanco);
+  }
+  .experience-heading h1 {
+    font-size: 16em;
+    line-height: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+  #h-top {
+    top: 22%;
+    left: 3%;
+    position: absolute;
+  }
+  #h-bottom {
+    bottom: 22%;
+    right: 3%;
+    position: absolute;
+  }
+  #section-2 {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      rgba(233, 233, 233, 0.05) 0%,
+      rgba(233, 233, 233, 0.15) 100%
+    );
+  }
+  .img-container {
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+  .img-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(233, 233, 233, 0.1) 0%,
+      transparent 50%,
+      rgba(233, 233, 233, 0.1) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 40px;
+  }
+  .img-container img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    border-radius: 40px;
+    object-fit: cover;
+    object-position: center;
+    top: auto;
+    left: auto;
+    transform: none;
+    transition: transform 0.3s ease;
+  }
+  .img-container:hover img {
+    transform: scale(1.02);
   }
 }
 </style>

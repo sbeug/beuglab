@@ -415,4 +415,14 @@ function scrollRight() {
     height: 30em;
   }
 }
+/* DESKTOP 4 (4k) */
+@media (min-width: 2160px) {
+  #team-statement h6 {
+    font-size: 5rem;
+    width: 50%;
+  }
+  #team-description p {
+    width: 75%;
+  }
+}
 </style>

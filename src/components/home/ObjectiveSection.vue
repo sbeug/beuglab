@@ -156,4 +156,10 @@ onMounted(async () => {
 /* DESKTOP 4 [GLOBAL] */
 @media (min-width: 1920px) {
 }
+/* DESKTOP 5 [GLOBAL] */
+@media (min-width: 2160px) {
+  .section-statement h6 {
+    font-size: 6rem;
+  }
+}
 </style>

@@ -53,6 +53,43 @@ onMounted(() => {
   contactFormCleanup = ContactForm()
 
   appSpline()
+
+  const loaderTimeline = gsap.timeline({
+    ease: 'power2.inOut',
+    onComplete: () => {
+      document.getElementById('loader').style.display = 'none'
+    },
+  })
+  loaderTimeline.from(
+    '#logomark-wrapper',
+    {
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    },
+    0,
+  )
+  loaderTimeline.to(
+    '#logomark-wrapper',
+    {
+      opacity: 0,
+      scale: 1.2,
+      duration: 0.5,
+      filter: 'blur(10px)',
+      ease: 'power2.inOut',
+    },
+    1,
+  )
+  loaderTimeline.to(
+    '#loader',
+    {
+      duration: 1,
+      y: '-100%',
+      ease: 'power2.inOut',
+    },
+    1.5,
+  )
 })
 
 // Cleanup function
@@ -154,6 +191,11 @@ const isMobile = window.innerWidth < 1280
     }"
   >
     <div id="app">
+      <div id="loader">
+        <div id="logomark-wrapper">
+          <h6>Welcome.</h6>
+        </div>
+      </div>
       <div id="spline">
         <canvas id="app-spline"></canvas>
         <canvas v-if="isMobile && route.path !== '/'"></canvas>
@@ -194,6 +236,26 @@ const isMobile = window.innerWidth < 1280
 }
 header {
   z-index: 9;
+}
+#loader {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e9e9e9;
+}
+#logomark-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+}
+#logomark-wrapper h6 {
+  color: #222222;
+  font-size: 2rem;
 }
 #app {
   margin: 0;

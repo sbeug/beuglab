@@ -21,9 +21,9 @@ const fetchGalleryImages = async () => {
       order,
       featured
     }`
-    
+
     const galleryData = await sanity.fetch(query)
-    
+
     images.value = galleryData.map((item, index) => ({
       id: item._id,
       src: urlFor(item.image).width(1200).height(800).fit('max').auto('format').url(),
@@ -32,7 +32,7 @@ const fetchGalleryImages = async () => {
       title: item.title || `Gallery image ${index + 1}`,
       description: item.description || '',
       order: item.order || index,
-      featured: item.featured || false
+      featured: item.featured || false,
     }))
   } catch (error) {
     console.error('Error fetching gallery images:', error)
@@ -71,7 +71,8 @@ const nextImage = () => {
 
 const prevImage = () => {
   if (images.value.length === 0) return
-  const prevIndex = currentImageIndex.value === 0 ? images.value.length - 1 : currentImageIndex.value - 1
+  const prevIndex =
+    currentImageIndex.value === 0 ? images.value.length - 1 : currentImageIndex.value - 1
   goToImage(prevIndex)
 }
 
@@ -154,7 +155,7 @@ const toggleAutoPlay = () => {
 onMounted(() => {
   // Fetch gallery images
   fetchGalleryImages()
-  
+
   // Add keyboard listener with a small delay to avoid conflicts with navigation
   setTimeout(() => {
     document.addEventListener('keydown', handleKeyPress, { passive: false })
@@ -172,6 +173,21 @@ onUnmounted(() => {
     transitionTimeoutId = null
   }
 })
+
+// Meta Head
+import { useHead } from '@vueuse/head'
+useHead({
+  title: 'Beug Lab | Gallery',
+  meta: [
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Beug Lab | Driven by Curiosity, Guided by Science' },
+    {
+      property: 'og:description',
+      content:
+        'The Beug Lab investigates the molecular mechanisms underlying human disease to identify new therapeutic strategies. Led by Dr. Shawn Beug, the lab bridges fundamental research with clinical application to improve health outcomes.',
+    },
+  ],
+})
 </script>
 
 <template>
@@ -180,18 +196,18 @@ onUnmounted(() => {
       <h1>Gallery</h1>
       <p>Beug Lab is more than just a lab; it's a community of innovators and friends!</p>
     </div>
-    
+
     <!-- Loading state -->
     <div v-if="isLoading" class="loading-container">
       <div class="loading-spinner"></div>
       <p>Loading gallery images...</p>
     </div>
-    
+
     <!-- Empty state -->
     <div v-else-if="images.length === 0" class="empty-container">
       <p>No gallery images available at the moment.</p>
     </div>
-    
+
     <!-- Gallery content -->
     <div v-else class="carousel-wrapper clickable">
       <div class="carousel-container" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
@@ -219,14 +235,14 @@ onUnmounted(() => {
         <div class="image-container">
           <div
             class="image-track"
-            :style="{ 
+            :style="{
               transform: `translateX(-${currentImageIndex * (100 / images.length)}%)`,
-              width: `${images.length * 100}%`
+              width: `${images.length * 100}%`,
             }"
           >
-            <div 
-              v-for="(image, index) in images" 
-              :key="image.id" 
+            <div
+              v-for="(image, index) in images"
+              :key="image.id"
               class="image-slide"
               :style="{ width: `${100 / images.length}%` }"
             >
@@ -262,7 +278,11 @@ onUnmounted(() => {
             :class="{ active: index === currentImageIndex }"
             @click="goToImage(index)"
           >
-            <img :src="image.thumbnail || image.src" :alt="`Thumbnail ${index + 1}`" loading="lazy" />
+            <img
+              :src="image.thumbnail || image.src"
+              :alt="`Thumbnail ${index + 1}`"
+              loading="lazy"
+            />
           </button>
         </div>
       </div>
@@ -331,8 +351,12 @@ onUnmounted(() => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-container p,
