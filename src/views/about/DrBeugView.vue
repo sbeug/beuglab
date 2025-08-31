@@ -85,7 +85,7 @@ useHead({
 })
 </script>
 <template>
-  <div id="main-content" class="main-content">
+  <div id="main-content" class="main-content clickable">
     <div id="introduction" class="section">
       <div id="intro-txt" class="df-pad">
         <h1 id="name">Dr. Shawn Beug</h1>
@@ -325,8 +325,8 @@ useHead({
   padding-bottom: 0.5em;
 }
 .pos-icon {
-  width: 5em;
-  height: 5em;
+  width: 3.5em;
+  height: 3.5em;
   margin-bottom: 1em;
 }
 #research {

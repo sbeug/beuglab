@@ -228,7 +228,7 @@ useHead({
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  object-fit: cover;
+  object-fit: contain;
 }
 /* TABLET 1 [GLOBAL] */
 @media (min-width: 768px) {
