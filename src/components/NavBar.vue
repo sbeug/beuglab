@@ -977,24 +977,17 @@ a {
   }
 }
 /* DESKTOP 5 (4k + Larger) */
-@media (min-width: 3840px) {
+@media (min-width: 2160px) {
   #navbar {
     padding-left: 6em;
     padding-right: 6em;
-    height: 8vh;
-  }
-  #navbar-blur {
-    height: 8vh;
-  }
-  #logo {
-    margin-right: 8em;
   }
   #logo img {
     width: 3em;
     height: 3em;
   }
   #logo h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-left: 2.5em;
   }
   .menu-link {

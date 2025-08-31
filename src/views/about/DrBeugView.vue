@@ -733,4 +733,170 @@ onMounted(async () => {
     font-size: 4em;
   }
 }
+/* DESKTOP 5 (4k + Larger) */
+@media (min-width: 2160px) {
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .section {
+    max-width: 2400px;
+    width: 100%;
+  }
+  #introduction {
+    padding-top: 6em;
+    padding-left: 6em;
+    padding-right: 6em;
+  }
+  #name {
+    font-size: 7em !important;
+    line-height: 1em !important;
+    padding-bottom: 0.75em !important;
+  }
+  #intro-txt h6 {
+    font-size: 1.75em;
+    line-height: 1.6em;
+    padding-bottom: 2.5em;
+    width: 85%;
+  }
+  .button {
+    padding: 1.25em 2.5em;
+  }
+  .button p {
+    font-size: 1.5em;
+  }
+  #connect {
+    padding-top: 5em;
+  }
+  #connect a {
+    font-size: 1.75em;
+    margin-right: 2em;
+  }
+  #pfp-circle {
+    padding: 3em;
+  }
+  #positions {
+    gap: 6em;
+    padding: 6em;
+  }
+  .position {
+    padding: 4em;
+    border-radius: 60px;
+  }
+  .position h3 {
+    font-size: 2.25em;
+    padding-bottom: 1em;
+  }
+  .position p {
+    font-size: 1.5em;
+    line-height: 1.4em;
+  }
+  .pos-icon {
+    width: 8em;
+    height: 8em;
+    margin-bottom: 2.5em;
+  }
+  #research {
+    padding-top: 10em;
+    padding-bottom: 10em;
+    padding-left: 6em;
+    padding-right: 6em;
+  }
+  #research-txt :nth-child(1) {
+    font-size: 6.5em;
+    padding-bottom: 0.75em;
+  }
+  #research-txt h6 {
+    font-size: 1.75em;
+    line-height: 1.6em;
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+    padding-right: 10em;
+    width: 60%;
+  }
+  #research-txt :nth-child(3) {
+    font-size: 3em;
+    padding-top: 2em;
+    padding-bottom: 1.5em;
+  }
+  #areas {
+    gap: 3em;
+    padding-bottom: 6em;
+  }
+  .area {
+    width: 30em;
+    height: 22em;
+    padding: 3em;
+    border-radius: 30px;
+  }
+  .area h6 {
+    font-size: 2.5em;
+    line-height: 1.3em;
+  }
+  #goal {
+    padding: 10em;
+  }
+  #goal h3 {
+    font-size: 3.75em;
+    line-height: 1.4em;
+    width: 80%;
+  }
+  .section-txt {
+    padding-top: 6em;
+    padding-bottom: 6em;
+  }
+  .section-txt :nth-child(1) {
+    font-size: 4.5em;
+    padding-bottom: 1em;
+  }
+  .section-txt h6 {
+    font-size: 1.75em;
+    line-height: 1.6em;
+    padding-top: 2.5em;
+  }
+  #education,
+  #collab {
+    padding-top: 16em;
+    padding-left: 6em;
+    padding-right: 6em;
+  }
+  #education .section-txt {
+    padding-right: 12em;
+  }
+  #collab .section-txt {
+    padding-left: 12em;
+  }
+  #education img {
+    margin-right: 12em;
+    border-radius: 35px;
+  }
+  #collab img {
+    margin-left: 12em;
+    border-radius: 35px;
+  }
+  #recognition {
+    padding-top: 18em;
+    padding-bottom: 18em;
+    padding-left: 6em;
+    padding-right: 6em;
+  }
+  #recognition :nth-child(2) {
+    font-size: 4.5em;
+    padding-bottom: 1.5em;
+  }
+  .rec {
+    width: 70%;
+    padding-top: 3em;
+  }
+  .rec h6 {
+    font-size: 2.25em;
+    line-height: 1.5em;
+  }
+  .divider {
+    margin-bottom: 12em;
+    height: 3px;
+  }
+}
 </style>
