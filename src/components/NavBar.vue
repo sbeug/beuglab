@@ -961,22 +961,70 @@ a {
   #logo {
     margin-right: 6em;
   }
-  #logo h1 {
-    font-size: 1.5em;
+  #logo h3 {
+    font-size: 1.5rem;
   }
   #menu-button {
     top: 1em;
     right: 8em;
   }
   .menu-link-2 {
-    font-size: 6em;
+    font-size: 6rem;
     margin-right: 3em;
   }
   .sub-link {
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
 }
 /* DESKTOP 5 (4k + Larger) */
 @media (min-width: 3840px) {
+  #navbar {
+    padding-left: 6em;
+    padding-right: 6em;
+    height: 8vh;
+  }
+  #navbar-blur {
+    height: 8vh;
+  }
+  #logo {
+    margin-right: 8em;
+  }
+  #logo img {
+    width: 3em;
+    height: 3em;
+  }
+  #logo h3 {
+    font-size: 2rem;
+    margin-left: 2.5em;
+  }
+  .menu-link {
+    font-size: 1.5rem;
+  }
+  .menu-link-2 {
+    font-size: 8rem;
+  }
+  #menu-button {
+    top: 1.5em;
+    right: 10em;
+  }
+  .line {
+    width: 3em;
+    height: 4px;
+  }
+  .sub-link {
+    font-size: 2rem;
+  }
+  .nav-arrow {
+    width: 2.5em;
+    height: 2.5em;
+  }
+  .circle-arrow {
+    width: 1.5em;
+    height: 1.5em;
+  }
+  #menu-list ul {
+    padding-left: 6em;
+    padding-top: 7em;
+  }
 }
 </style>

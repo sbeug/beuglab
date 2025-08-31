@@ -19,6 +19,6 @@ app.use(pinia)
 app.use(router)
 app.use(head)
 app.use(LenisVue)
-app.use(VueReCaptcha, { siteKey: '6LfYhqIqAAAAAIqBRKGvfJUgqK15QA5P-U_VqAEc' })
+app.use(VueReCaptcha, { siteKey: '6LerlLkrAAAAAI6z8Ro2F9k4r8vXzzJn8lVd1b_n' })
 
 app.mount('#app')
