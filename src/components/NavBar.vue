@@ -976,4 +976,7 @@ a {
     font-size: 1.5em;
   }
 }
+/* DESKTOP 5 (4k + Larger) */
+@media (min-width: 3840px) {
+}
 </style>

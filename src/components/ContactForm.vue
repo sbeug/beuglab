@@ -1,6 +1,7 @@
 <script setup>
 import { updateLocalTime } from '@/assets/js/utils'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { useReCaptcha } from 'vue-recaptcha-v3'
 
 let timeInterval = null
 let successTimeout = null
@@ -33,12 +34,29 @@ const message = ref('')
 const isSubmitting = ref(false)
 const isSubmitted = ref(false)
 
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
+
 const handleSubmit = async (event) => {
   event.preventDefault()
-  isSubmitting.value = true
-
+  
   try {
+    // Wait for reCAPTCHA to be ready
+    await recaptchaLoaded()
+    
+    // Execute reCAPTCHA
+    const token = await executeRecaptcha('contact_form')
+    
+    if (!token) {
+      alert('reCAPTCHA verification failed. Please try again.')
+      return
+    }
+    
+    isSubmitting.value = true
+    
     const formData = new FormData(event.target)
+    // Add reCAPTCHA token to form data
+    formData.append('g-recaptcha-response', token)
+    
     const response = await fetch('https://formsubmit.co/shawn@arc.cheo.ca', {
       method: 'POST',
       body: formData,
@@ -457,6 +475,7 @@ const handleSubmit = async (event) => {
     grid-column: 1 / span 3;
     grid-row: 8 / span 2;
     padding-left: 1em;
+    opacity: 1 !important;
   }
   #local {
     line-height: 2.5em;
