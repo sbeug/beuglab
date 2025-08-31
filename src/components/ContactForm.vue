@@ -39,7 +39,7 @@ const handleSubmit = async (event) => {
 
   try {
     const formData = new FormData(event.target)
-    const response = await fetch('https://formsubmit.co/sashadieryckxmgmt@gmail.com', {
+    const response = await fetch('https://formsubmit.co/shawn@arc.cheo.ca', {
       method: 'POST',
       body: formData,
     })
