@@ -207,9 +207,15 @@ const handleSubmit = async (event) => {
   position: absolute;
   top: 0.5em;
   right: 1em;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  user-select: none;
 }
-.contact-close h2 {
+.contact-close h2,
+.contact-close #x {
   font-size: 1.25em;
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 #links {
   display: none;
