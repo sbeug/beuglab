@@ -8,7 +8,7 @@ import TeamMember from '@/components/TeamMember.vue'
 import { teamViewAnimations } from '@/assets/js/customAnimations'
 
 const teamStore = useTeamStore()
-const selectedMember = ref(teamStore.members[0])
+const selectedMember = ref(null)
 
 const alumniStore = useAlumniStore()
 const isAlumniSelected = ref(false)
@@ -27,9 +27,10 @@ const selectMember = (member) => {
 onMounted(() => {
   teamViewAnimationsCleanup = teamViewAnimations()
   teamStore.fetchTeamMembers().then(() => {
-    const defaultMember = teamStore.members.find((member) => member.id === 1)
-    if (defaultMember) {
-      selectedMember.value = defaultMember
+    // Get the first member from the sorted list (same sorting as sidebar)
+    const sortedMembers = teamStore.members.slice().sort((a, b) => a.id - b.id)
+    if (sortedMembers.length > 0) {
+      selectedMember.value = sortedMembers[0]
     }
   })
   alumniStore.fetchAlumni()
@@ -73,11 +74,11 @@ useHead({
     <div id="team-member-container">
       <transition name="member-fade" mode="out-in">
         <TeamMember
-          v-if="!isAlumniSelected"
-          :key="selectedMember?.id || 'team-member'"
+          v-if="!isAlumniSelected && selectedMember"
+          :key="selectedMember.id"
           :member="selectedMember"
         />
-        <div v-else id="alumni-list-container" :key="'alumni-list'" class="df-pad">
+        <div v-else-if="isAlumniSelected" id="alumni-list-container" :key="'alumni-list'" class="df-pad">
           <h1 class="alumni-heading">Beug Lab Alumni</h1>
           <ul class="alumni-list">
             <li v-for="alumnus in alumniStore.alumni" :key="alumnus.id" class="alumni-item">

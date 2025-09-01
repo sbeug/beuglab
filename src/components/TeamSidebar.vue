@@ -16,7 +16,7 @@ const emit = defineEmits(['select'])
     >
       <h3
         :class="{
-          active: (selected && selected.id === member.id) || (!selected && member.id === 1),
+          active: selected && selected.id === member.id,
         }"
       >
         {{ member.name }}
@@ -24,12 +24,12 @@ const emit = defineEmits(['select'])
       <div
         class="number"
         :class="{
-          activecircle: (selected && selected.id === member.id) || (!selected && member.id === 1),
+          activecircle: selected && selected.id === member.id,
         }"
       >
         <p
           :class="{
-            activenumber: (selected && selected.id === member.id) || (!selected && member.id === 1),
+            activenumber: selected && selected.id === member.id,
           }"
         >
           {{ member.id }}
