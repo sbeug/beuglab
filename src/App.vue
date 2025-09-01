@@ -182,8 +182,9 @@ const isMobile = window.innerWidth < 1280
       lerp: 1.25,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       wheelMultiplier: 1,
-      touchMultiplier: 1,
+      touchMultiplier: 2,
       smoothWheel: true,
+      smoothTouch: true,
       autoResize: true,
       autoRaf: true,
       anchors: false,
@@ -272,6 +273,13 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
+  pointer-events: none;
+  touch-action: none;
+}
+
+#spline canvas {
+  pointer-events: none;
+  touch-action: none;
 }
 #contact-container {
   position: fixed;

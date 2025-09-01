@@ -16,7 +16,7 @@ export function homePageLoadAnimation() {
   const homePageTimeline = new gsap.timeline({
     paused: false,
     duration: 2,
-    delay: isFirstLoad ? 2 : 0, // Add 2s delay only on first load
+    delay: isFirstLoad ? 2 : 0,
   })
   homePageTimeline.from(
     '#hero-heading h1 div',
@@ -202,7 +202,9 @@ export function DropDownMenuAnimation() {
     const isOnDropdown = event.target.closest('#dropdown-menu')
     const isOnBody = event.target === document.body || event.target === document.documentElement
 
-    if (isDropdownOpen && (isOnDropdown || isOnBody)) {
+    // Only prevent default for body scrolling when dropdown is open
+    // Allow normal touch interactions within the dropdown
+    if (isDropdownOpen && isOnBody && !isOnDropdown) {
       event.preventDefault()
     }
   }

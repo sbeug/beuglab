@@ -143,6 +143,17 @@ a.button:hover {
   }
 }
 
+/* Ensure touch works on all devices */
+* {
+  touch-action: manipulation;
+}
+
+/* Allow scrolling and touch interactions */
+body, html {
+  touch-action: pan-y pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (min-width: 1280px) {
   .main-content {
     pointer-events: none !important;
@@ -158,7 +169,31 @@ a.button:hover {
     cursor: pointer !important;
     pointer-events: auto !important;
   }
+}
 
+/* Ensure touch interactions work on mobile and tablet */
+@media (max-width: 1279px) {
+  .main-content {
+    pointer-events: auto !important;
+    touch-action: pan-y pan-x;
+  }
+  
+  /* Ensure all clickable elements work */
+  button,
+  .button,
+  a.button,
+  .clickable,
+  .contact-open,
+  .open-contact,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    pointer-events: auto !important;
+    touch-action: manipulation;
+  }
+}
+
+@media (min-width: 1280px) {
   .df-pad {
     padding-left: 4em;
     padding-right: 4em;
