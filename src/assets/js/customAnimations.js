@@ -204,7 +204,7 @@ export function DropDownMenuAnimation() {
     if (!dropDownTimeline || !document.querySelector('#dropdown-menu')) {
       return
     }
-    
+
     const isDropdownOpen = !dropDownTimeline.reversed()
     const isOnDropdown = event.target.closest('#dropdown-menu')
     const isOnBody = event.target === document.body || event.target === document.documentElement
@@ -719,6 +719,11 @@ export function ContactForm() {
 
   const contactTimeline = gsap.timeline({
     paused: true,
+    onStart: () => {
+      // Allow scrolling within contact wrapper on mobile
+      contactWrapper.style.overflow = 'auto'
+      contactWrapper.style.webkitOverflowScrolling = 'touch'
+    },
     onReverseComplete: () => {
       contactWrapper.classList.remove('active')
     }
@@ -766,7 +771,16 @@ export function ContactForm() {
       0.75,
     )
     .to(
-      '#local',
+      '#local-time',
+      {
+        opacity: '100%',
+        ease: 'power3.out',
+        duration: 1,
+      },
+      1,
+    )
+    .to(
+      '#local-title',
       {
         opacity: '100%',
         ease: 'power3.out',
@@ -791,6 +805,8 @@ export function ContactForm() {
       e.stopPropagation()
       contactTimeline.reverse()
       contactContainer.style.pointerEvents = 'none'
+      // Re-enable body scroll on close
+      document.body.style.overflow = ''
       return
     }
 
@@ -801,6 +817,8 @@ export function ContactForm() {
       e.stopPropagation()
       contactTimeline.play()
       contactContainer.style.pointerEvents = 'auto'
+      // Prevent body scroll but allow contact wrapper scroll
+      document.body.style.overflow = 'hidden'
       return
     }
   }

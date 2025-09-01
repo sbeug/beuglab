@@ -21,7 +21,7 @@ useHead({
     <div id="affiliations-section">
       <h2>Affiliations</h2>
       <div id="affiliation-links" class="clickable">
-        <a href="https://www.cheoresearch.ca/">Cheo Research Institute</a>
+        <a href="https://www.cheoresearch.ca/">CHEO Research Institute</a>
         <a href="https://www.uottawa.ca/faculty-medicine/biochemistry-microbiology-immunology"
           >University of Ottawa Faculty of Medicine</a
         >

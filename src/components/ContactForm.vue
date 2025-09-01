@@ -38,27 +38,27 @@ const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 
 const handleSubmit = async (event) => {
   event.preventDefault()
-  
+
   try {
     // Wait for reCAPTCHA to be ready
     await recaptchaLoaded()
-    
+
     // Execute reCAPTCHA
     const token = await executeRecaptcha('contact_form')
-    
+
     if (!token) {
       console.warn('reCAPTCHA verification failed')
       // In production, you might want to show a user-friendly message
       // instead of an alert
       return
     }
-    
+
     isSubmitting.value = true
-    
+
     const formData = new FormData(event.target)
     // Add reCAPTCHA token to form data
     formData.append('g-recaptcha-response', token)
-    
+
     const response = await fetch('https://formsubmit.co/shawn@arc.cheo.ca', {
       method: 'POST',
       body: formData,
@@ -109,7 +109,7 @@ const handleSubmit = async (event) => {
       <h2>shawn@arc.cheo.ca</h2>
     </div>
     <div id="local">
-      <h3>Ottawa ON, Canada</h3>
+      <h3 id="local-title">Ottawa ON, Canada</h3>
       <h1 id="local-time"></h1>
     </div>
     <div id="divider"></div>
@@ -200,11 +200,13 @@ const handleSubmit = async (event) => {
   position: relative;
   color: var(--font-color-dark);
   height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .contact-close {
   cursor: pointer;
   z-index: 2;
-  position: absolute;
+  position: fixed;
   top: 0.5em;
   right: 1em;
   pointer-events: auto !important;
@@ -256,7 +258,9 @@ const handleSubmit = async (event) => {
 #local {
   padding-top: 2em;
 }
-#local h1 {
+#local-time,
+#local-title {
+  opacity: 0;
   height: fit-content;
 }
 #form-container {
@@ -383,6 +387,16 @@ const handleSubmit = async (event) => {
   background-color: #22222254;
   margin-top: 3em;
   margin-bottom: 4em;
+}
+/* Mobile Scrolling Styles */
+@media (max-width: 999px) {
+  #contact {
+    padding-bottom: 4em;
+    min-height: 100vh;
+  }
+  #form-container {
+    padding-bottom: 2em;
+  }
 }
 /* TABLET 2 [GLOBAL] */
 @media (min-width: 1000px) {

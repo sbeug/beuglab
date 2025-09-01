@@ -75,7 +75,8 @@ onBeforeUnmount(() => {
   padding-bottom: 2em;
   font-size: 1.25em;
   line-height: 1.5em;
-  text-wrap: wrap;
+  text-wrap: auto;
+  word-wrap: break-word;
 }
 #hero-c2a {
   position: relative;

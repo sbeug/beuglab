@@ -302,10 +302,14 @@ header {
   background-color: #e9e9e9;
   visibility: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   pointer-events: none;
+  position: relative;
 }
 
 #contact-wrapper.active {
   pointer-events: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 </style>
