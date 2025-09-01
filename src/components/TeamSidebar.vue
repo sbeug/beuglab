@@ -12,7 +12,7 @@ const emit = defineEmits(['select'])
       v-for="member in members.slice().sort((a, b) => a.id - b.id)"
       :key="member.id"
       @click="emit('select', member)"
-      class="member-link clickable"
+      class="member-link"
     >
       <h3
         :class="{
@@ -67,6 +67,7 @@ const emit = defineEmits(['select'])
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  pointer-events: auto!important;
 }
 .member-link h3 {
   font-size: 1.75em;
