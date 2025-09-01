@@ -23,7 +23,7 @@ jobs:
 
       - name: Add client repository as remote
         run: |
-          git remote add mirror git@github.com:sbeug/beuglab.com.git 
+          git remote add mirror git@github.com:sbeug/beuglab.com.git
 
       - name: Push to client repository
         run: |
