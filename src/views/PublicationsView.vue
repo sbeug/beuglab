@@ -31,8 +31,8 @@ useHead({
 #main-content h1 {
   position: relative;
   color: var(--font-color-main);
-  font-size: 2.5em;
-  padding-top: 1.5em;
+  font-size: 2rem;
+  padding-top: 2em;
   text-align: center;
   text-transform: uppercase;
 }

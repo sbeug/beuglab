@@ -63,6 +63,10 @@ const emit = defineEmits(['select'])
   display: flex;
   align-items: flex-start;
   color: var(--font-color-main);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 .member-link h3 {
   font-size: 1.75em;
@@ -70,8 +74,9 @@ const emit = defineEmits(['select'])
   padding: 0;
   transition: 0.5s ease;
   color: #2222224f;
-  transition: 0.5s ease;
   height: 1.5em;
+  cursor: pointer;
+  pointer-events: auto;
 }
 .member-link h3:hover {
   color: var(--font-color-main);
