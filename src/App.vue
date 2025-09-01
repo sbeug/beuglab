@@ -291,5 +291,10 @@ header {
   background-color: #e9e9e9;
   visibility: hidden;
   overflow-y: auto;
+  pointer-events: none;
+}
+
+#contact-wrapper.active {
+  pointer-events: auto;
 }
 </style>

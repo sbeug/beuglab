@@ -47,7 +47,9 @@ const handleSubmit = async (event) => {
     const token = await executeRecaptcha('contact_form')
     
     if (!token) {
-      alert('reCAPTCHA verification failed. Please try again.')
+      console.warn('reCAPTCHA verification failed')
+      // In production, you might want to show a user-friendly message
+      // instead of an alert
       return
     }
     
@@ -78,9 +80,12 @@ const handleSubmit = async (event) => {
         isSubmitted.value = false
         successTimeout = null
       }, 5000)
+    } else {
+      console.error('Form submission failed:', response.status, response.statusText)
     }
   } catch (error) {
     console.error('Form submission error:', error)
+    // In production, you might want to show a user-friendly error message
   } finally {
     isSubmitting.value = false
   }

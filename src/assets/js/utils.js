@@ -6,7 +6,10 @@ export function updateLocalTime() {
     minute: '2-digit',
     hour12: false,
   })
-  document.getElementById('local-time').textContent = timeString
+  const localTimeElement = document.getElementById('local-time')
+  if (localTimeElement) {
+    localTimeElement.textContent = timeString
+  }
 }
 export function useReloadOnBreakpointChange() {
   const screenSize = ref(getSizeCategory())

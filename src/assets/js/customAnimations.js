@@ -684,7 +684,8 @@ export function ContactForm() {
   const contactWrapper = document.querySelector('#contact-wrapper')
 
   if (!contactContainer || !contactWrapper) {
-    return // Exit early if elements don't exist
+    console.warn('Contact form elements not found, skipping initialization')
+    return () => {} // Return empty cleanup function
   }
 
   // Clear any existing event listeners to prevent duplicates
@@ -710,10 +711,16 @@ export function ContactForm() {
     height: '0vh',
   })
 
-  const contactTimeline = gsap.timeline({ paused: true })
+  const contactTimeline = gsap.timeline({ 
+    paused: true,
+    onReverseComplete: () => {
+      contactWrapper.classList.remove('active')
+    }
+  })
 
   contactTimeline
     .set(contactWrapper, { visibility: 'visible' }, 0)
+    .set(contactWrapper, { className: '+=active' }, 0)
     .to(
       contactWrapper,
       {
