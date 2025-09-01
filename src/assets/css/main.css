@@ -57,11 +57,9 @@ p {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  pointer-events: auto;
-}
-.main-content .clickable {
+  overflow: visible;
   pointer-events: auto !important;
+  touch-action: pan-y pan-x;
 }
 .button {
   text-decoration: none;
@@ -157,6 +155,7 @@ body, html {
 @media (min-width: 1280px) {
   .main-content {
     pointer-events: none !important;
+    /* Only hide overflow on specific pages that need it */
   }
 
   /* Force cursor pointer on buttons even with pointer-events none on parent */
@@ -171,25 +170,30 @@ body, html {
   }
 }
 
-/* Ensure touch interactions work on mobile and tablet */
+/* Ensure touch interactions work on mobile and tablet - high specificity */
 @media (max-width: 1279px) {
+  body .main-content,
+  #app .main-content,
   .main-content {
+    overflow: visible !important;
     pointer-events: auto !important;
-    touch-action: pan-y pan-x;
+    touch-action: pan-y pan-x !important;
+    -webkit-overflow-scrolling: touch !important;
   }
-  
-  /* Ensure all clickable elements work */
-  button,
-  .button,
-  a.button,
-  .clickable,
-  .contact-open,
-  .open-contact,
-  [role="button"],
-  input[type="submit"],
-  input[type="button"] {
+
+  /* Ensure all clickable elements work with high specificity */
+  body button,
+  body .button,
+  body a.button,
+  body .clickable,
+  body .contact-open,
+  body .open-contact,
+  body [role="button"],
+  body input[type="submit"],
+  body input[type="button"] {
     pointer-events: auto !important;
-    touch-action: manipulation;
+    touch-action: manipulation !important;
+    cursor: pointer !important;
   }
 }
 

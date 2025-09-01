@@ -137,7 +137,14 @@ useHead({
 #main-content {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
+}
+
+/* Only hide overflow on desktop where ScrollTrigger pinning works properly */
+@media (min-width: 1280px) {
+  #main-content {
+    overflow: hidden;
+  }
 }
 #section-1 {
   position: relative;

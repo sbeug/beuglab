@@ -123,6 +123,9 @@ watch(
 
     // Only scroll to top if it's actually a different route
     if (newPath !== oldPath) {
+      // Reset body overflow in case mobile menu left it hidden
+      document.body.style.overflow = ''
+      
       // Use a shorter timeout to reduce the delay
       setTimeout(() => {
         window.scrollTo(0, 0)

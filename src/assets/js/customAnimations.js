@@ -193,18 +193,25 @@ export function DropDownMenuAnimation() {
       if (!dropDownTimeline.reversed()) {
         dropDownTimeline.reverse()
       }
+      // Ensure body overflow is reset immediately
+      document.body.style.overflow = ''
       return
     }
   }
 
   const handleTouchMove = function (event) {
+    // Check if dropdown elements still exist (might be removed after route change)
+    if (!dropDownTimeline || !document.querySelector('#dropdown-menu')) {
+      return
+    }
+    
     const isDropdownOpen = !dropDownTimeline.reversed()
     const isOnDropdown = event.target.closest('#dropdown-menu')
     const isOnBody = event.target === document.body || event.target === document.documentElement
 
-    // Only prevent default for body scrolling when dropdown is open
-    // Allow normal touch interactions within the dropdown
-    if (isDropdownOpen && isOnBody && !isOnDropdown) {
+    // Only prevent default for body scrolling when dropdown is open and visible
+    // Allow normal touch interactions within the dropdown and after route changes
+    if (isDropdownOpen && isOnBody && !isOnDropdown && document.querySelector('#dropdown-menu').style.visibility === 'visible') {
       event.preventDefault()
     }
   }
