@@ -121,31 +121,34 @@ watch(
   async (newPath, oldPath) => {
     await nextTick()
 
-    // Only scroll to top if it's actually a different route
     if (newPath !== oldPath) {
-      // Reset body overflow in case mobile menu left it hidden
       document.body.style.overflow = ''
-      
-      // Use a shorter timeout to reduce the delay
-      setTimeout(() => {
-        window.scrollTo(0, 0)
 
+      setTimeout(() => {
         if (lenis.value) {
           lenis.value.resize()
-          lenis.value.scrollTo(0, { immediate: true })
+          lenis.value.scrollTo(0, { 
+            duration: 0.8,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          })
 
-          // Shorter timeout for ScrollTrigger refresh
           setTimeout(() => {
             ScrollTrigger.refresh(true)
             lenis.value.resize()
           }, 50)
+        } else {
+          // Fallback smooth scroll for when Lenis isn't available
+          window.scrollTo({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+          })
         }
-      }, 100) // Reduced from 1000ms to 100ms
+      }, 100)
     }
   },
 )
 
-// METADATA
 useHead({
   title: 'Beug Lab | Innovative Research',
   meta: [
