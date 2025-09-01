@@ -749,7 +749,7 @@ export function ContactForm() {
         ease: 'power3.out',
         duration: 0.5,
       },
-      0.25,
+      1,
     )
     .to(
       '#contact-form-header',
