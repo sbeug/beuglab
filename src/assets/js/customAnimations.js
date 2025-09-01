@@ -26,7 +26,6 @@ export function homePageLoadAnimation() {
       ease: 'power3.out',
       stagger: 0.1,
       duration: 1.5,
-      filter: 'blur(10px)',
     },
     0,
   )
@@ -37,7 +36,6 @@ export function homePageLoadAnimation() {
       y: 50,
       ease: 'power3.out',
       duration: 1,
-      filter: 'blur(10px)',
     },
     1,
   )
@@ -48,7 +46,6 @@ export function homePageLoadAnimation() {
       y: 50,
       ease: 'power3.out',
       duration: 1,
-      filter: 'blur(10px)',
     },
     1.25,
   )
@@ -711,7 +708,7 @@ export function ContactForm() {
     height: '0vh',
   })
 
-  const contactTimeline = gsap.timeline({ 
+  const contactTimeline = gsap.timeline({
     paused: true,
     onReverseComplete: () => {
       contactWrapper.classList.remove('active')
