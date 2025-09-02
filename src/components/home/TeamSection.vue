@@ -191,7 +191,7 @@ function scrollRight() {
 #members-track {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 2rem;
 }
