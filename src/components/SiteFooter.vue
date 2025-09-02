@@ -5,7 +5,6 @@ import CheoLogo from '@/components/icons/CheoRILogo.vue'
 <template>
   <div id="footer">
     <div id="divider" class="df-pad"></div>
-    <img id="default-background" src="@/assets/content/images/defaultBackground.png" />
     <div id="footer-title">
       <h6>Understanding Cancer and Immunity to Inform Tomorrow's Therapies.</h6>
     </div>
