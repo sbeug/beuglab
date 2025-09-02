@@ -1,11 +1,50 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { sanity, urlFor } from '@/assets/js/sanity.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
-onMounted(() => {
+// Sanity data
+const aboutTitle = ref('About us.')
+const aboutDescription = ref('We are interested in cancer biology with respect to understanding cell death mechanisms and immunity. In particular, we focus on a group of proteins called the Inhibitors of Apoptosis. We investigate how this group of proteins shape cancer development and regulate immune responses.')
+const teamPhotoUrl = ref('../assets/content/images/teamPhoto.jpg')
+const teamPhotoAlt = ref('Team Photo')
+
+// Fetch data from Sanity
+const fetchAboutData = async () => {
+  try {
+    const query = `*[_type == "aboutPage"][0] {
+      aboutTitle,
+      aboutDescription,
+      teamPhoto {
+        asset,
+        alt
+      }
+    }`
+    const data = await sanity.fetch(query)
+    
+    if (data) {
+      if (data.aboutTitle) aboutTitle.value = data.aboutTitle
+      if (data.aboutDescription) aboutDescription.value = data.aboutDescription
+      if (data.teamPhoto) {
+        if (data.teamPhoto.asset) {
+          teamPhotoUrl.value = urlFor(data.teamPhoto.asset).url()
+        }
+        if (data.teamPhoto.alt) {
+          teamPhotoAlt.value = data.teamPhoto.alt
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching about data:', error)
+    // Keep default values if fetch fails
+  }
+}
+
+onMounted(async () => {
+  await fetchAboutData()
   const experienceContainerTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#experience-container',
@@ -107,12 +146,9 @@ useHead({
           <source src="../assets/content/video/BeugLabShowreel.mp4" type="video/mp4" />
         </video>
         <div id="about-us">
-          <h6>About us.</h6>
+          <h6>{{ aboutTitle }}</h6>
           <h6>
-            We are interested in cancer biology with respect to understanding cell death mechanisms
-            and immunity. In particular, we focus on a group of proteins called the Inhibitors of
-            Apoptosis. We investigate how this group of proteins shape cancer development and
-            regulate immune responses.
+            {{ aboutDescription }}
           </h6>
         </div>
         <div class="experience-heading">
@@ -127,7 +163,7 @@ useHead({
     </div>
     <div id="section-2">
       <div class="img-container">
-        <img src="../assets/content/images/teamPhoto.jpg" alt="Team Photo" />
+        <img :src="teamPhotoUrl" :alt="teamPhotoAlt" />
       </div>
     </div>
   </div>
