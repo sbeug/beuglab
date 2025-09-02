@@ -81,6 +81,8 @@ useHead({
   font-style: normal;
   transition: all 0.5s ease;
   text-align: center;
+  cursor: pointer;
+  pointer-events: auto;
 }
 #affiliation-links :nth-child(1) {
   padding-top: 1rem;

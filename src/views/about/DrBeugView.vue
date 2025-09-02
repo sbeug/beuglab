@@ -271,6 +271,10 @@ useHead({
 #connect {
   padding-top: 2em;
 }
+#connect a {
+  cursor: pointer;
+  pointer-events: auto;
+}
 #pfp-container {
   position: relative;
   z-index: 1;
