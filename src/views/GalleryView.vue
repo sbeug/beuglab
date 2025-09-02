@@ -78,14 +78,18 @@ const prevImage = () => {
 
 // Touch/swipe support
 const handleTouchStart = (e) => {
-  // Prevent conflicts with navigation touch events
-  e.stopPropagation()
+  // Only prevent propagation if not touching contact buttons
+  if (!e.target.closest('.contact-open')) {
+    e.stopPropagation()
+  }
   touchStartX.value = e.touches[0].clientX
 }
 
 const handleTouchEnd = (e) => {
-  // Prevent conflicts with navigation touch events
-  e.stopPropagation()
+  // Only prevent propagation if not touching contact buttons
+  if (!e.target.closest('.contact-open')) {
+    e.stopPropagation()
+  }
   touchEndX.value = e.changedTouches[0].clientX
   handleSwipe()
 }

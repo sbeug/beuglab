@@ -811,7 +811,7 @@ export function ContactForm() {
     }
 
     // Check if clicking on contact open button
-    const contactTrigger = e.target.closest('.contact-open') || e.target.closest('.open-contact')
+    const contactTrigger = e.target.closest('.contact-open')
     if (contactTrigger) {
       e.preventDefault()
       e.stopPropagation()

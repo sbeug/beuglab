@@ -98,7 +98,7 @@ useHead({
           difficult-to-treat cancers. He holds multiple academic and leadership roles across
           top-tier Canadian institutions.
         </h6>
-        <div class="button open-contact clickable">
+        <div class="button contact-open clickable">
           <p>Get in touch</p>
         </div>
         <div id="connect" class="clickable">
