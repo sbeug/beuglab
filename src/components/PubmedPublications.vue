@@ -105,6 +105,7 @@ a:hover {
   }
   .paper-title {
     font-size: 1.5em;
+    pointer-events: auto;
   }
   .paper-authors,
   .paper-journal {

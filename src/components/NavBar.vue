@@ -837,8 +837,8 @@ a {
     padding-right: 4em;
   }
   #logo img {
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.25em;
+    height: 2.25em;
   }
   #menu {
     display: flex;
@@ -900,6 +900,10 @@ a {
 }
 /* DESKTOP 1 [GLOBAL] */
 @media (min-width: 1280px) {
+  #logo img {
+    width: 2.5em;
+    height: 2.5em;
+  }
   #logo h3 {
     font-size: 1.25em;
     margin-left: 2em;
