@@ -46,7 +46,7 @@ function scrollRight() {
     <div class="df-pad">
       <div class="section-heading">
         <p>03</p>
-        <h6>Team</h6>
+        <h6>Our Team</h6>
       </div>
       <div id="team-statement" class="section-statement">
         <h6>Meet the Dedicated Team Driving Our Research Forward.</h6>
