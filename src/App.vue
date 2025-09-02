@@ -2,7 +2,7 @@
 import NavBar from './components/NavBar.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import Contact from './components/ContactForm.vue'
-import { appSpline, cleanupAppSpline } from './assets/js/spline.js'
+import { homeSpline, cleanupHomeSpline } from './assets/js/spline.js'
 // Gsap
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -52,7 +52,7 @@ onMounted(() => {
   // Initialize contact form animation
   contactFormCleanup = ContactForm()
 
-  appSpline()
+  homeSpline()
 
   const loaderTimeline = gsap.timeline({
     ease: 'power2.inOut',
@@ -110,7 +110,7 @@ onUnmounted(() => {
     contactFormCleanup = null
   }
   // Clean up Spline WebGL resources
-  cleanupAppSpline()
+  cleanupHomeSpline()
 
   window.removeEventListener('resize', resizeHandler)
 })
@@ -131,7 +131,7 @@ watch(
       setTimeout(() => {
         if (lenis.value) {
           lenis.value.resize()
-          lenis.value.scrollTo(0, { 
+          lenis.value.scrollTo(0, {
             duration: 0.8,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
           })
@@ -142,10 +142,10 @@ watch(
           }, 50)
         } else {
           // Fallback smooth scroll for when Lenis isn't available
-          window.scrollTo({ 
-            top: 0, 
-            left: 0, 
-            behavior: 'smooth' 
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
           })
         }
       }, 100)
@@ -180,9 +180,6 @@ useHead({
     },
   ],
 })
-
-// const isDesktop = window.innerWidth >= 1280
-const isMobile = window.innerWidth < 1280
 </script>
 <template>
   <VueLenis
@@ -208,8 +205,7 @@ const isMobile = window.innerWidth < 1280
         </div>
       </div>
       <div id="spline">
-        <canvas id="app-spline"></canvas>
-        <canvas v-if="isMobile && route.path !== '/'"></canvas>
+        <canvas id="home-spline"></canvas>
       </div>
       <header>
         <NavBar />
@@ -283,12 +279,12 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none;
+  pointer-events: auto;
   touch-action: none;
 }
 
 #spline canvas {
-  pointer-events: none;
+  pointer-events: auto;
   touch-action: none;
 }
 #contact-container {

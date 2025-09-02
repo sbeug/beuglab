@@ -1,21 +1,8 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
-import { homeSpline, cleanupHomeSpline } from '@/assets/js/spline.js'
-
-onMounted(() => {
-  homeSpline()
-})
-
-onBeforeUnmount(() => {
-  cleanupHomeSpline()
-})
 </script>
 
 <template>
   <div>
-    <div id="hero-spline">
-      <canvas id="home-spline" class="clickable"></canvas>
-    </div>
     <div id="hero-section">
       <div id="hero-heading" class="df-pad">
         <h1>Beug Lab</h1>
@@ -47,16 +34,6 @@ onBeforeUnmount(() => {
   object-fit: cover;
   width: 100%;
   height: 100%;
-}
-#hero-spline {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  opacity: 100%;
-  pointer-events: auto !important;
 }
 #hero-heading h1 {
   font-family: new-science-extended, sans-serif;
