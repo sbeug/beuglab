@@ -147,6 +147,8 @@ import CheoLogo from '@/components/icons/CheoRILogo.vue'
   font-weight: 300;
   font-style: normal;
   transition: all 0.5s ease;
+  cursor: pointer;
+  pointer-events: auto;
 }
 #credits a:hover,
 #bottom-bar a:hover {
