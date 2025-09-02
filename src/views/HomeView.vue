@@ -31,8 +31,7 @@ onBeforeUnmount(() => {
     cancelAnimationFrame(window.animationFrameId)
   }
 
-  // Kill all GSAP animations to prevent memory leaks
-  gsap.killTweensOf('*')
+  gsap.killTweensOf('#hero-heading h1 div, #mobile-heading, #hero-c2a')
 })
 </script>
 

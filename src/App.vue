@@ -122,7 +122,11 @@ watch(
     await nextTick()
 
     if (newPath !== oldPath) {
-      document.body.style.overflow = ''
+      // Only reset body overflow if contact form isn't active
+      const contactWrapper = document.querySelector('#contact-wrapper')
+      if (!contactWrapper || !contactWrapper.classList.contains('active')) {
+        document.body.style.overflow = ''
+      }
 
       setTimeout(() => {
         if (lenis.value) {

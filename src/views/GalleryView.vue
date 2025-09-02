@@ -78,18 +78,10 @@ const prevImage = () => {
 
 // Touch/swipe support
 const handleTouchStart = (e) => {
-  // Only prevent propagation if not touching contact buttons
-  if (!e.target.closest('.contact-open')) {
-    e.stopPropagation()
-  }
   touchStartX.value = e.touches[0].clientX
 }
 
 const handleTouchEnd = (e) => {
-  // Only prevent propagation if not touching contact buttons
-  if (!e.target.closest('.contact-open')) {
-    e.stopPropagation()
-  }
   touchEndX.value = e.changedTouches[0].clientX
   handleSwipe()
 }
@@ -107,28 +99,6 @@ const handleSwipe = () => {
   }
 }
 
-// Keyboard navigation
-const handleKeyPress = (e) => {
-  // Only handle keys when focus is within the gallery or no specific element is focused
-  const activeElement = document.activeElement
-  const isInGallery =
-    activeElement &&
-    (activeElement.closest('.gallery-container') ||
-      activeElement.tagName === 'BODY' ||
-      activeElement.tagName === 'HTML')
-
-  if (!isInGallery) return
-
-  if (e.key === 'ArrowRight') {
-    e.preventDefault()
-    nextImage()
-  }
-  if (e.key === 'ArrowLeft') {
-    e.preventDefault()
-    prevImage()
-  }
-  if (e.key === 'Escape') return // Could add fullscreen exit logic
-}
 
 // Auto-play functionality (optional)
 const autoPlay = ref(false)
@@ -159,16 +129,9 @@ const toggleAutoPlay = () => {
 onMounted(() => {
   // Fetch gallery images
   fetchGalleryImages()
-
-  // Add keyboard listener with a small delay to avoid conflicts with navigation
-  setTimeout(() => {
-    document.addEventListener('keydown', handleKeyPress, { passive: false })
-  }, 100)
 })
 
 onUnmounted(() => {
-  // Clean up event listeners
-  document.removeEventListener('keydown', handleKeyPress)
   stopAutoPlay()
 
   // Clean up transition timeout
@@ -214,7 +177,7 @@ useHead({
 
     <!-- Gallery content -->
     <div v-else class="carousel-wrapper clickable">
-      <div class="carousel-container" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+      <div class="carousel-container">
         <button
           class="nav-button nav-prev"
           @click="prevImage"
