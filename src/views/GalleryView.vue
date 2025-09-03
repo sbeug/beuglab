@@ -5,8 +5,6 @@ import sanity, { urlFor } from '../assets/js/sanity.js'
 // Gallery state
 const currentImageIndex = ref(0)
 const isTransitioning = ref(false)
-const touchStartX = ref(0)
-const touchEndX = ref(0)
 const images = ref([])
 const isLoading = ref(true)
 
@@ -76,28 +74,7 @@ const prevImage = () => {
   goToImage(prevIndex)
 }
 
-// Touch/swipe support
-const handleTouchStart = (e) => {
-  touchStartX.value = e.touches[0].clientX
-}
 
-const handleTouchEnd = (e) => {
-  touchEndX.value = e.changedTouches[0].clientX
-  handleSwipe()
-}
-
-const handleSwipe = () => {
-  const swipeThreshold = 50
-  const swipeDistance = touchStartX.value - touchEndX.value
-
-  if (Math.abs(swipeDistance) > swipeThreshold) {
-    if (swipeDistance > 0) {
-      nextImage()
-    } else {
-      prevImage()
-    }
-  }
-}
 
 
 // Auto-play functionality (optional)
@@ -161,7 +138,7 @@ useHead({
   <div class="gallery-container main-content">
     <div class="gallery-header df-pad">
       <h1>Gallery</h1>
-      <p>Beug Lab is more than just a lab; it's a community of innovators and friends!</p>
+      <p>Here is what we get up to outside the lab!</p>
     </div>
 
     <!-- Loading state -->
@@ -548,29 +525,23 @@ useHead({
     padding-top: 4rem;
     padding-bottom: 1rem;
   }
-
   .carousel-wrapper {
     padding: 0 0.5rem;
   }
-
   .image-container {
     height: 50vh;
     min-height: 300px;
   }
-
   .nav-button {
     width: 40px;
     height: 40px;
   }
-
   .nav-prev {
     left: 0.5rem;
   }
-
   .nav-next {
     right: 0.5rem;
   }
-
   .gallery-controls {
     padding: 0.75rem 1rem;
     flex-direction: column;
@@ -646,6 +617,9 @@ useHead({
 @media (min-width: 1280px) {
   .gallery-header {
     padding-top: 4rem;
+  }
+  .gallery-header p {
+    font-size: 1.5rem;
   }
   .gallery-header h1 {
     font-size: 4rem;

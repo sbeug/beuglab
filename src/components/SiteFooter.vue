@@ -11,7 +11,6 @@ import CheoLogo from '@/components/icons/CheoRILogo.vue'
     <ContactButton id="button" class="contact-open" />
     <div id="bottom-bar">
       <div id="contact">
-
         <h6>shawn@arc.cheo.ca</h6>
         <h6>45.4006474 - 75.6521784</h6>
       </div>
